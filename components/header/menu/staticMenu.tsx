@@ -209,8 +209,14 @@ export const brands = [
       {
         name: "სასაჩუქრე ვაუჩერი",
         nameEn: "Gift voucher",
-        subCategories: [],
-        slug: "gift-voucher",
+        subCategories: [
+          {
+            name: "სასაჩუქრე ვაუჩერი",
+            nameEn: "Gift voucher",
+            slug: "gift-voucher",
+            items: [],
+          },
+        ],
       },
     ],
   },
