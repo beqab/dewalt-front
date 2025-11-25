@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
-import { routing } from "@/i18n/routing";
+import { BucketIcon } from "@/components/icons/bucketIcon";
 
 export default async function Home({
   params,
@@ -14,13 +14,7 @@ export default async function Home({
   const t = await getTranslations({ locale });
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <LanguageSelector defaultValue={locale} label="Language">
-        {routing.locales.map((locale: string) => (
-          <option key={locale} value={locale}>
-            {locale.toUpperCase()}
-          </option>
-        ))}
-      </LanguageSelector>
+      <LanguageSelector />
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
@@ -31,9 +25,10 @@ export default async function Home({
           priority
         />
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-primary">
             {t("title")}
           </h1>
+          <BucketIcon />
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Looking for a starting point or more instructions? Head over to{" "}
             <a
