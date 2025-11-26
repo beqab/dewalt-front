@@ -12,6 +12,8 @@
   --dark-secundary-70:94 94 94;
   --text-secondary:94 94 94;
   --line-color: 210 210 210;
+  --discount-BG: 255 203 203;
+
 
 }
 
@@ -23,12 +25,15 @@
   --color-foreground: rgb(var(--foreground));
   --font-inter: var(--font-inter);
   --font-roboto: var(--font-roboto);
+  --font-bpg-web-002-caps: var(--font-bpg-web-002-caps);
   --color-neutral: rgb(250 250 250);
   --color-primary: rgb(255 186 0); /* FFBA00 */
   --color-dark-secundary-100: rgb(26 26 26);
   --color-dark-secundary-70: rgb(94 94 94);
   --color-text-secondary: rgb(94 94 94);
   --color-line-color: rgb(210 210 210);
+  --color-discount-BG: rgb(255 203 203);
+  --color-discount-text: rgb(180 0 0);
 }
 
 

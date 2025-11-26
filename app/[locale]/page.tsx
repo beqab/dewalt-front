@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import BannerCarusel from "@/features/bannerCarusel";
+import ProductSlider from "@/features/products/components/prductSlider";
 
 export default async function Home({
   params,
@@ -16,6 +17,7 @@ export default async function Home({
   return (
     <div className="">
       <BannerCarusel />
+      <ProductSlider />
     </div>
   );
 }

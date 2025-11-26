@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto, Inter } from "next/font/google";
+import localfont from "next/font/local";
+
 import "./globals.css";
 
 import { NextIntlClientProvider, hasLocale } from "next-intl";
@@ -11,6 +13,23 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
+
+const bpgWeb002Caps = localfont({
+  src: [
+    {
+      path: "../../public/fonts/bpg-web-002-caps-webfont.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/bpg-web-002-caps-webfont.woff",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-bpg-web-002-caps",
+  display: "swap",
+});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -43,7 +62,9 @@ export default async function RootLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
-      <body className={`${inter.variable} ${roboto.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
+      >
         <NextIntlClientProvider messages={messages}>
           <Header />
           {children}
