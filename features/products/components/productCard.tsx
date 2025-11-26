@@ -1,3 +1,4 @@
+import { BucketIcon } from "@/components/icons/bucketIcon";
 import Image from "next/image";
 
 interface Product {
@@ -29,27 +30,27 @@ export default function ProductCard({ product }: { product: Product }) {
       key={id}
       className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] md:flex-[0_0_calc(25%-0.75rem)]"
     >
-      <div className="relative flex h-full flex-col rounded-lg border border-line-color bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+      <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
         {/* Discount Badge */}
         {discount && (
-          <div className="absolute left-2 top-2 z-10 rounded bg-pink-500 px-2 py-1 text-xs font-bold text-white">
+          <div className="bg-discount-BG text-discount-text absolute top-2 left-2 z-10 rounded px-1 py-2 text-xs font-normal">
             {discount}%
           </div>
         )}
 
         {/* Compare Checkbox */}
-        <div className="absolute right-2 top-2 z-10">
-          <label className="flex cursor-pointer items-center gap-1 text-xs text-dark-secundary-70">
+        <div className="absolute top-2 right-2 z-10">
+          <label className="text-dark-secundary-70 flex cursor-pointer items-center gap-1 text-xs">
             <input
               type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+              className="text-primary focus:ring-primary h-4 w-4 rounded border-gray-300"
             />
             <span>შედარება</span>
           </label>
         </div>
 
         {/* Product Image */}
-        <div className="relative mb-3 aspect-square w-full overflow-hidden rounded-lg bg-gray-100">
+        <div className="relative mb-3 aspect-square w-full overflow-hidden rounded-lg">
           <Image
             src={image}
             alt={name}
@@ -61,19 +62,17 @@ export default function ProductCard({ product }: { product: Product }) {
 
         {/* Product Info */}
         <div className="flex flex-1 flex-col">
-          <h3 className="mb-1 text-sm font-semibold text-dark-secundary-100">
+          <h3 className="text-dark-secundary-100 mb-2 h-12 text-sm font-bold md:h-14 md:text-base">
             {name} {code}
           </h3>
-          <p className="mb-3 text-xs text-dark-secundary-70">{description}</p>
+          <p className="text-text-secondary mb-4 text-xs">{description}</p>
 
           {/* Price */}
-          <div className="mt-auto">
+          <div className="mt-auto xl:flex xl:items-center xl:justify-between">
             <div className="mb-2 flex items-center gap-2">
-              <span className="text-lg font-bold text-dark-secundary-100">
-                {price} GEL
-              </span>
+              <span className="text-dark-secundary-100">{price} GEL</span>
               {originalPrice && (
-                <span className="text-sm text-dark-secundary-70 line-through">
+                <span className="text-text-secondary text-xs line-through">
                   {product.originalPrice} GEL
                 </span>
               )}
@@ -82,9 +81,10 @@ export default function ProductCard({ product }: { product: Product }) {
             {/* Add to Cart Button */}
             <button
               type="button"
-              className="w-full rounded-sm bg-orange-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-orange-600"
+              className="bg-primary hover:bg-primary/90 text-dark-secundary-100 flex h-10 w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors xl:max-w-[98px]"
             >
-              კალათაში
+              <BucketIcon className="fill-dark-secundary-100 xl:hidden" />
+              <span>კალათაში</span>
             </button>
           </div>
         </div>

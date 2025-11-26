@@ -93,6 +93,7 @@ export default function ProductSlider() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     slidesToScroll: 1,
+    loop: true,
     breakpoints: {
       "(min-width: 768px)": { slidesToScroll: 1 },
     },
@@ -136,16 +137,16 @@ export default function ProductSlider() {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative w-full container mx-auto mt-18">
+    <div className="relative container mx-auto mt-18 w-full">
       {/* Header */}
-      <div className="mb-4 flex  items-center justify-between px-5 md:px-0">
-        <h2 className="text-xl font-bpg-web-002-caps  text-dark-secundary-100 md:text-2xl">
+      <div className="mb-4 flex items-center justify-between px-5 md:px-0">
+        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-xl md:text-2xl">
           პროდუქტები
         </h2>
         <div className="flex items-end gap-6">
           <button
             type="button"
-            className="flex h-10  items-center gap-2 rounded-sm bg-primary px-3 py-2 text-xs font-medium text-dark-secundary-100 transition-colors hover:bg-primary/90"
+            className="bg-primary text-dark-secundary-100 hover:bg-primary/90 flex h-10 items-center gap-2 rounded-sm px-3 py-2 text-xs font-medium transition-colors"
           >
             <CompearIcon />
             შედარება (3)
@@ -155,7 +156,7 @@ export default function ProductSlider() {
             aria-label="Messenger"
             className="rounded-lg bg-[#FAFAFA] p-1 shadow-[1px_1px_10.1px_0_rgba(0,0,0,0.25)]"
           >
-            <Image src={FbMessenger} alt="heart" className="w-10 h-10" />
+            <Image src={FbMessenger} alt="heart" className="h-10 w-10" />
           </button>
         </div>
       </div>
@@ -169,31 +170,40 @@ export default function ProductSlider() {
             ))}
           </div>
         </div>
-
-        {/* Navigation Arrows */}
+        -{/* Navigation Arrows */}
         <button
           type="button"
           onClick={scrollPrev}
           disabled={prevBtnDisabled}
           className={classNames(
-            "absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-all hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed",
+            "absolute top-1/2 left-[-24px] z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-50 **:disabled:cursor-not-allowed",
             {
-              "opacity-50 cursor-not-allowed": prevBtnDisabled,
+              "cursor-not-allowed opacity-50": prevBtnDisabled,
             }
           )}
           aria-label="Previous"
         >
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
+            <rect
+              x="40"
+              y="40"
+              width="40"
+              height="40"
+              rx="4"
+              transform="rotate(180 40 40)"
+              fill="#EEEEEE"
+            />
             <path
-              d="M15 18L9 12L15 6"
-              stroke="currentColor"
-              strokeWidth="2"
+              d="M23.75 10L15.712 18.2323C14.7627 19.2045 14.7627 20.7955 15.712 21.7677L23.75 30"
+              stroke="#1A1A1A"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
@@ -204,24 +214,26 @@ export default function ProductSlider() {
           onClick={scrollNext}
           disabled={nextBtnDisabled}
           className={classNames(
-            "absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 shadow-lg transition-all hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed",
+            "absolute top-1/2 right-[-24px] z-10 translate-x-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-50 **:disabled:cursor-not-allowed",
             {
-              "opacity-50 cursor-not-allowed": nextBtnDisabled,
+              "cursor-not-allowed opacity-50": nextBtnDisabled,
             }
           )}
           aria-label="Next"
         >
           <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
+            <rect width="40" height="40" rx="4" fill="#EEEEEE" />
             <path
-              d="M9 18L15 12L9 6"
-              stroke="currentColor"
-              strokeWidth="2"
+              d="M16.25 30L24.288 21.7677C25.2373 20.7955 25.2373 19.2045 24.288 18.2323L16.25 10"
+              stroke="#1A1A1A"
+              strokeWidth="1.5"
+              strokeMiterlimit="10"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
