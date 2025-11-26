@@ -10,8 +10,10 @@ import { routing } from "@/i18n/routing";
 
 export default function LanguageSelector({
   className,
+  children,
 }: {
   className?: string;
+  children?: React.ReactNode;
 }) {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
@@ -73,13 +75,13 @@ export default function LanguageSelector({
         aria-label="Select language"
         aria-expanded={isOpen}
       >
-        <LanguageIcon />
+        {children || <LanguageIcon />}
       </button>
 
       {/* Dropdown */}
       <div
         className={classNames(
-          "absolute right-0 top-full mt-2 w-32 bg-dark-secundary-100 rounded-lg shadow-lg overflow-hidden z-50 transition-all duration-300",
+          "absolute  md:right-0 right-auto  md top-full mt-2 w-32 bg-dark-secundary-100 rounded-lg shadow-lg overflow-hidden z-50 transition-all duration-300",
           isOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible -translate-y-2"

@@ -3,11 +3,12 @@ import Image from "next/image";
 import LanguageSelector from "../languageSelector/languageSelector";
 import MenuIcon from "../icons/menuIcon";
 import { useState } from "react";
-import CloseIcon from "../icons/closeIcont";
 import { BucketIcon } from "../icons/bucketIcon";
 import Search from "./search";
 import ProfileIcon from "../icons/profileIcon";
 import DesctopMenu from "./menu/desctopMenu/desctopMenu";
+import MobileMenu from "./mobileMenu";
+import CloseIcon from "../icons/closeIcont";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -26,7 +27,7 @@ export default function Header() {
 
           <LanguageSelector className="hidden md:block" />
           <BucketIcon />
-          <ProfileIcon className=" hidden " />
+          <ProfileIcon className=" hidden md:block " />
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="relative z-50 flex items-center justify-center transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer md:hidden"
@@ -56,6 +57,14 @@ export default function Header() {
         </div>
       </div>
       <DesctopMenu />
+      {openMenu && (
+        <MobileMenu
+          isOpen={openMenu}
+          onClose={() => {
+            setOpenMenu(false);
+          }}
+        />
+      )}
     </header>
   );
 }

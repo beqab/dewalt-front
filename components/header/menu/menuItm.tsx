@@ -10,13 +10,20 @@ interface MenuItemProps {
   onClick?: (index: string) => void;
   hasChildren?: boolean;
   href?: string;
+  className?: string;
 }
 
-export function MenuItemWithArrow({ isActive, label, onClick }: MenuItemProps) {
+export function MenuItemWithArrow({
+  isActive,
+  label,
+  onClick,
+  className,
+}: MenuItemProps) {
   return (
     <button
       className={classNames(
         "flex items-center cursor-pointer gap-1 py-3 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
+        className,
         {
           "text-black": isActive,
         }
@@ -71,7 +78,7 @@ export const MenuSubItem = ({
       onClick={() => onClick(parentId, id)}
       className="cursor-pointer transition-colors hover:bg-gray-50"
     >
-      <div className="flex items-center justify-between px-4 py-2">
+      <div className="flex items-start justify-between px-4 py-2">
         <span
           className={classNames("text-sm font-roboto text-dark-secundary-70", {
             "text-dark-secundary-100 font-bold": isActive,
@@ -81,7 +88,7 @@ export const MenuSubItem = ({
         </span>
         {hasSubCategories && (
           <MenuArrowRight
-            className={`text-dark-secundary-70 shrink-0 transition-transform duration-200 ${
+            className={`text-dark-secundary-70  mt-1.5 shrink-0 transition-transform duration-200 ${
               isActive ? "rotate-90" : ""
             }`}
           />
