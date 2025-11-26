@@ -8,15 +8,19 @@ import { useParams } from "next/navigation";
 import MobileMenuNav from "./mobileMenuNav";
 import ProfileIcon from "@/components/icons/profileIcon";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
+import { useBodyScrollLock } from "./useBodyScrollLock";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function MobileMenu({ onClose }: MobileMenuProps) {
+export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const params = useParams();
   const currentLocale = (params?.locale as Locale) || routing.defaultLocale;
+
+  // Reactively lock body scroll when menu is open
+  useBodyScrollLock(isOpen);
 
   return (
     <>

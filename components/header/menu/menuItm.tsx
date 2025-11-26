@@ -22,7 +22,7 @@ export function MenuItemWithArrow({
   return (
     <button
       className={classNames(
-        "flex items-center cursor-pointer gap-1 py-3 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
+        "flex items-center cursor-pointer gap-1 py-2 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
         className,
         {
           "text-black": isActive,
@@ -111,7 +111,7 @@ export default function MenuItem({
     <Link
       href={href}
       className={classNames(
-        "flex items-center gap-1 py-3 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
+        "flex items-center gap-1 py-2 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
         {
           "text-black": isActive,
         }

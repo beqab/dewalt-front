@@ -43,24 +43,30 @@ export default function NewDesctopMenu() {
   return (
     <nav className="hidden md:block bg-background">
       <div className="container flex items-center justify-between mx-auto px-5">
-        <div className="flex items-center gap-6 relative">
+        <div className="flex items-center relative">
           {brands.map((brand, brandIndex) => (
-            <ProductMenu
+            <div
               key={brandIndex}
-              onClose={() => handleBrandClose()}
-              isOpen={activeMainCategory === brandIndex}
-              productCategories={[brand]}
+              className={`border-r px-3 my-1 border-[#D2D2D2] ${
+                brandIndex === brands.length - 1 ? " border-r-0" : ""
+              }`}
             >
-              <MainMenuItem
+              <ProductMenu
+                onClose={() => handleBrandClose()}
                 isOpen={activeMainCategory === brandIndex}
-                onToggle={() => handleBrandToggle(brandIndex)}
-                label={brand.name}
-              />
-              <ProductMenu.Panel isOpen={activeMainCategory === brandIndex}>
-                <ProductMenu.Categories />
-                <ProductMenu.SubCategory />
-              </ProductMenu.Panel>
-            </ProductMenu>
+                productCategories={[brand]}
+              >
+                <MainMenuItem
+                  isOpen={activeMainCategory === brandIndex}
+                  onToggle={() => handleBrandToggle(brandIndex)}
+                  label={brand.name}
+                />
+                <ProductMenu.Panel isOpen={activeMainCategory === brandIndex}>
+                  <ProductMenu.Categories />
+                  <ProductMenu.SubCategory />
+                </ProductMenu.Panel>
+              </ProductMenu>
+            </div>
           ))}
         </div>
         <div className="flex items-center gap-6">
