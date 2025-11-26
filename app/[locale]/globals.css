@@ -11,6 +11,7 @@
   --dark-secundary-100:26 26 26;
   --dark-secundary-70:94 94 94;
   --text-secondary:94 94 94;
+  --line-color: 210 210 210;
 
 }
 
@@ -27,6 +28,7 @@
   --color-dark-secundary-100: rgb(26 26 26);
   --color-dark-secundary-70: rgb(94 94 94);
   --color-text-secondary: rgb(94 94 94);
+  --color-line-color: rgb(210 210 210);
 }
 
 
@@ -44,3 +46,7 @@
     border-radius: 0 !important;
   }
 
+
+  body {
+    font-family: var(--font-inter);
+  }

@@ -13,7 +13,7 @@ import CloseIcon from "../icons/closeIcont";
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <header className="relative">
+    <header className="relative z-10">
       <div className="flex items-center justify-between bg-dark-secundary-100 px-5 py-4">
         <Image
           src="/logo.png"
