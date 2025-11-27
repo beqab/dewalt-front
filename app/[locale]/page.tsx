@@ -7,6 +7,8 @@ import ProductSlider from "@/features/products/components/prductSlider";
 import MainPageAds from "@/features/ads/mainPageAds";
 import NewsSlider from "@/features/news/components/newsSlider";
 import AboutBanner from "@/features/about/aboutBanner";
+import Brands from "@/components/brands";
+import BenefitsList from "@/components/benefitsList";
 
 export default async function Home({
   params,
@@ -25,6 +27,8 @@ export default async function Home({
       <MainPageAds />
       <NewsSlider />
       <AboutBanner />
+      <Brands />
+      <BenefitsList />
     </div>
   );
 }

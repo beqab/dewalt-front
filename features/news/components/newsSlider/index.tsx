@@ -60,7 +60,7 @@ const news: News[] = [
 
 export default function NewsSlider() {
   return (
-    <div className="customContiner relative mt-18 w-full">
+    <div className="customContiner relative mt-18 mb-16 w-full md:mb-18">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between px-5 md:px-0">
         <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-xl md:text-2xl">
