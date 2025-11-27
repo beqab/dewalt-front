@@ -28,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
   return (
     <div
       key={id}
-      className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] md:flex-[0_0_calc(25%-0.75rem)]"
+      className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:flex-[0_0_calc(25%)]"
     >
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
         {/* Discount Badge */}
