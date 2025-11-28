@@ -8,6 +8,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 type Props = {
   children: React.ReactNode;
@@ -68,6 +69,7 @@ export default async function RootLayout({ children, params }: Props) {
         <NextIntlClientProvider messages={messages}>
           <Header />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>
