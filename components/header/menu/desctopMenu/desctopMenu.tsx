@@ -5,6 +5,7 @@ import { brands } from "../staticMenu";
 import MenuItem from "../menuItm";
 import ProductMenu from "./productMenu";
 import MainMenuItem from "./productMenu/mainMenuItem";
+import classNames from "classnames";
 
 export default function NewDesctopMenu() {
   const [activeMainCategory, setActiveMainCategory] = useState<number | null>(
@@ -41,15 +42,16 @@ export default function NewDesctopMenu() {
   // Close menu when clicking outside
 
   return (
-    <nav className="hidden md:block bg-background">
-      <div className="container flex items-center justify-between mx-auto px-5">
-        <div className="flex items-center relative">
+    <nav className="bg-background hidden md:block">
+      <div className="customContiner mx-auto flex items-center justify-between px-5">
+        <div className="relative flex items-center">
           {brands.map((brand, brandIndex) => (
             <div
               key={brandIndex}
-              className={`border-r px-3 my-1 border-[#D2D2D2] ${
-                brandIndex === brands.length - 1 ? " border-r-0" : ""
-              }`}
+              className={classNames("my-1 border-r border-[#D2D2D2] px-3", {
+                "border-r-0": brandIndex === brands.length - 1,
+                "pl-0": brandIndex === 0,
+              })}
             >
               <ProductMenu
                 onClose={() => handleBrandClose()}

@@ -1,19 +1,16 @@
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import Image from "next/image";
+import type { Product } from "./dummyProducts";
+import { cn } from "@/lib/utils";
+import classNames from "classnames";
 
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  code: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  discount?: number;
-  inStock?: boolean;
-}
-
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+  size = "md",
+}: {
+  product: Product;
+  size?: "sm" | "md";
+}) {
   const {
     image,
     name,
@@ -27,8 +24,11 @@ export default function ProductCard({ product }: { product: Product }) {
   } = product;
   return (
     <div
-      key={id}
-      className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:flex-[0_0_calc(25%)]"
+      className={classNames("relative", {
+        "min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:min-w-[240px] md:flex-[0_0_calc(25%)]":
+          size === "md",
+        "md:min-w-[240px]": size === "sm",
+      })}
     >
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-3 shadow-sm transition-shadow hover:shadow-md md:p-4">
         {/* Discount Badge */}
@@ -68,7 +68,13 @@ export default function ProductCard({ product }: { product: Product }) {
           <p className="text-text-secondary mb-4 text-xs">{description}</p>
 
           {/* Price */}
-          <div className="mt-auto xl:flex xl:items-center xl:justify-between">
+          <div
+            className={classNames({
+              "mt-auto xl:flex xl:items-center xl:justify-between":
+                size === "md",
+              "mt-auto": size === "sm",
+            })}
+          >
             <div className="mb-2 flex items-center gap-2">
               <span className="text-dark-secundary-100">{price} GEL</span>
               {originalPrice && (
@@ -81,10 +87,31 @@ export default function ProductCard({ product }: { product: Product }) {
             {/* Add to Cart Button */}
             <button
               type="button"
-              className="bg-primary hover:bg-primary/90 text-dark-secundary-100 flex h-10 w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors xl:max-w-[98px]"
+              className={classNames(
+                "bg-primary hover:bg-primary/90 text-dark-secundary-100 flex h-10 w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors xl:max-w-[98px]",
+                {
+                  "xl:max-w-[98px]": size === "md",
+                  "xl:max-w-full": size === "sm",
+                }
+              )}
             >
-              <BucketIcon className="fill-dark-secundary-100 xl:hidden" />
-              <span>კალათაში</span>
+              <BucketIcon
+                className={classNames(
+                  "md:fill-dark-secundary-100 fill-dark-secundary-100",
+                  {
+                    "xl:hidden": size === "md",
+                  }
+                )}
+              />
+              <span
+                className={classNames({
+                  "hidden xl:inline": size === "md",
+                  inline: size === "sm",
+                })}
+              >
+                დამატება
+              </span>
+              <span className="xl:hidden">კალათაში</span>
             </button>
           </div>
         </div>
