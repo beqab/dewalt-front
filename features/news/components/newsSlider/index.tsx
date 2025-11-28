@@ -60,10 +60,10 @@ const news: News[] = [
 
 export default function NewsSlider() {
   return (
-    <div className="customContiner relative mt-18 mb-16 w-full md:mb-18">
+    <div className="customContiner relative mt-18 mb-10 w-full md:mb-18">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between px-5 md:px-0">
-        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-xl md:text-2xl">
+        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-2xl md:text-2xl">
           სიახლეები
         </h2>
       </div>
@@ -74,9 +74,9 @@ export default function NewsSlider() {
         ))}
       </Carusel>
 
-      <div className="end mt-3 flex justify-end">
+      <div className="end flex justify-end md:mt-3">
         <Button variant="outline" asChild>
-          <Link href="/products">ყველას ნახვა</Link>
+          <Link href="/products">სრულად</Link>
         </Button>
       </div>
     </div>

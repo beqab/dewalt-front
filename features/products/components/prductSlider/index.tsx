@@ -94,7 +94,7 @@ export default function ProductSlider() {
     <div className="customContiner relative mt-18 w-full">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between px-5 md:px-0">
-        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-xl md:text-2xl">
+        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-2xl md:text-2xl">
           პროდუქტები
         </h2>
         <div className="flex items-end gap-6">

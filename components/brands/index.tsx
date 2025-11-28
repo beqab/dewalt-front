@@ -33,7 +33,7 @@ const brandsData = [
 export default function Brands() {
   return (
     <div className="customContiner bg-background px-5 pt-18 pb-10 md:bg-transparent md:px-0">
-      <h2 className="font-bpg-web-002-caps text-dark-secundary-100 mb-4 text-xl md:mb-6 md:text-2xl">
+      <h2 className="font-bpg-web-002-caps text-dark-secundary-100 mb-4 text-2xl md:mb-6 md:text-2xl">
         ბრენდები
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">

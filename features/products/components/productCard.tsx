@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
       key={id}
       className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:flex-[0_0_calc(25%)]"
     >
-      <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-4 shadow-sm transition-shadow hover:shadow-md">
+      <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-3 shadow-sm transition-shadow hover:shadow-md md:p-4">
         {/* Discount Badge */}
         {discount && (
           <div className="bg-discount-BG text-discount-text absolute top-2 left-2 z-10 rounded px-1 py-2 text-xs font-normal">

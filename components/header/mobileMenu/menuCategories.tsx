@@ -34,9 +34,9 @@ export default function MenuCategories({
 
   return (
     <div>
-      <div className="flex items-center gap-4 bg-background pl-5 mb-4">
+      <div className="bg-background mb-4 flex items-center gap-4 pl-5">
         <button
-          className="flex items-center gap-2 text-[12px] cursor-pointer hover:opacity-70 transition-opacity"
+          className="flex cursor-pointer items-center gap-2 text-[12px] transition-opacity hover:opacity-70"
           onClick={handleClose}
         >
           <svg
@@ -66,7 +66,7 @@ export default function MenuCategories({
       </div>
       <div>
         {selectedSubCategory === null && (
-          <ul className="flex flex-col gap-2 ml-1   ">
+          <ul className="ml-1 flex flex-col gap-2">
             {brands[category].categories.map((category, index) => (
               <MenuSubItem
                 key={index}
@@ -81,7 +81,7 @@ export default function MenuCategories({
           </ul>
         )}
         {selectedSubCategory !== null && (
-          <ul className="flex flex-col gap-2 ml-1">
+          <ul className="ml-5 flex flex-col gap-2">
             {brands[category].categories[selectedSubCategory].subCategories.map(
               (subCategory, index) => (
                 <MenuItem

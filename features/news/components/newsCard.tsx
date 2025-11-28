@@ -17,7 +17,7 @@ export default function NewsCard({ news }: { news: News }) {
   return (
     <div
       key={id}
-      className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] md:flex-[0_0_calc(33.333%)] md:p-3"
+      className="relative min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:flex-[0_0_calc(33.333%)] md:p-3"
     >
       <div className="border-line-color relative flex h-full flex-col rounded-lg bg-[#EEE] p-4 shadow-sm transition-shadow hover:shadow-md">
         {/* Product Image */}

@@ -13,8 +13,8 @@ import CloseIcon from "../icons/closeIcont";
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <header className="relative z-10">
-      <div className="flex items-center justify-between bg-dark-secundary-100 px-5 py-4">
+    <header className="relative z-40">
+      <div className="bg-dark-secundary-100 flex items-center justify-between px-5 py-4">
         <Image
           src="/logo.png"
           alt="Logo"
@@ -27,18 +27,18 @@ export default function Header() {
 
           <LanguageSelector className="hidden md:block" />
           <BucketIcon />
-          <ProfileIcon className=" hidden md:block " />
+          <ProfileIcon className="hidden md:block" />
           <button
             onClick={() => setOpenMenu(!openMenu)}
-            className="relative z-50 flex items-center justify-center transition-transform duration-300 hover:scale-110 active:scale-95 cursor-pointer md:hidden"
+            className="relative z-50 flex cursor-pointer items-center justify-center transition-transform duration-300 hover:scale-110 active:scale-95 md:hidden"
             aria-label="Toggle menu"
           >
-            <div className="relative w-6 h-6">
+            <div className="relative h-6 w-6">
               <div
                 className={`absolute inset-0 transition-all duration-300 ${
                   openMenu
-                    ? "opacity-0 rotate-90 scale-0"
-                    : "opacity-100 rotate-0 scale-100"
+                    ? "scale-0 rotate-90 opacity-0"
+                    : "scale-100 rotate-0 opacity-100"
                 }`}
               >
                 <MenuIcon />
@@ -46,8 +46,8 @@ export default function Header() {
               <div
                 className={`absolute inset-0 transition-all duration-300 ${
                   openMenu
-                    ? "opacity-100 rotate-0 scale-100"
-                    : "opacity-0 -rotate-90 scale-0"
+                    ? "scale-100 rotate-0 opacity-100"
+                    : "scale-0 -rotate-90 opacity-0"
                 }`}
               >
                 <CloseIcon />
