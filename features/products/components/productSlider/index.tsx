@@ -4,21 +4,10 @@ import Carusel from "@/components/carusel";
 import CompearIcon from "@/components/icons/compearIcon";
 import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Image from "next/image";
-import ProductCard from "../productCard";
+import ProductCard from "../../ui/productCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  code: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  discount?: number;
-  inStock?: boolean;
-}
+import type { Product } from "../../types";
 
 const products: Product[] = [
   {
@@ -141,3 +130,4 @@ export default function ProductSlider() {
     </div>
   );
 }
+

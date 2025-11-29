@@ -2,7 +2,7 @@
 
 import Filters from "./components/filters";
 import ProductGrid from "./components/productGrid";
-import { dummyProducts } from "./components/dummyProducts";
+import { dummyProducts } from "./data/dummyProducts";
 
 export default function ProductsPage() {
   return (

@@ -1,6 +1,6 @@
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import Image from "next/image";
-import type { Product } from "./dummyProducts";
+import type { Product } from "../../types";
 import { cn } from "@/lib/utils";
 import classNames from "classnames";
 
@@ -119,3 +119,4 @@ export default function ProductCard({
     </div>
   );
 }
+

@@ -3,7 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import BannerCarusel from "@/features/bannerCarusel";
-import ProductSlider from "@/features/products/components/prductSlider";
+import ProductSlider from "@/features/products/components/productSlider";
 import MainPageAds from "@/features/ads/mainPageAds";
 import NewsSlider from "@/features/news/components/newsSlider";
 import AboutBanner from "@/features/about/aboutBanner";

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BucketIcon } from "@/components/icons/bucketIcon";
-import { Checkbox } from "@/components/ui/checkbox";
 import CompearIcon from "@/components/icons/compearIcon";
 import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Rating from "@/components/rating";
@@ -31,7 +30,6 @@ export default function ProductInfo({
   brand = "Dewalt",
   code = "18554FX",
   category = "ელექტრო ხელსაწყოები",
-  inStock = true,
 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(3);
 

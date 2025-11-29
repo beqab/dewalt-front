@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import ProductCard from "./productCard";
-import Pagination from "./pagination";
-import type { Product } from "./dummyProducts";
+import ProductCard from "../../ui/productCard";
+import Pagination from "../pagination";
+import type { Product } from "../../types";
 
 interface ProductGridProps {
   products: Product[];
@@ -66,3 +66,4 @@ export default function ProductGrid({ products }: ProductGridProps) {
     </div>
   );
 }
+
