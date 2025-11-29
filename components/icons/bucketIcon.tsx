@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import classNames from "classnames";
 
 export const BucketIcon = ({
   className = "fill-neutral md:fill-primary",
@@ -13,7 +12,7 @@ export const BucketIcon = ({
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="min-w-6 cursor-pointer"
+      className="min-h-6 min-w-6 cursor-pointer"
     >
       <path
         className={cn("fill-dark-secundary-100 md:fill-primary", className)}

@@ -1,15 +1,19 @@
-import classNames from "classnames";
+import { cn } from "@/lib/utils";
 
 export default function CaruselArroButtons({
   scrollPrev,
   scrollNext,
   prevBtnDisabled,
   nextBtnDisabled,
+  nextBtnClass,
+  prevBtnClass,
 }: {
   scrollPrev: () => void;
   scrollNext: () => void;
   prevBtnDisabled: boolean;
   nextBtnDisabled: boolean;
+  nextBtnClass?: string;
+  prevBtnClass?: string;
 }) {
   return (
     <>
@@ -17,11 +21,13 @@ export default function CaruselArroButtons({
         type="button"
         onClick={scrollPrev}
         disabled={prevBtnDisabled}
-        className={classNames(
+        className={cn(
           "absolute top-1/2 left-[-24px] z-10 hidden -translate-x-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-50 **:disabled:cursor-not-allowed md:block",
+
           {
             "cursor-not-allowed opacity-50": prevBtnDisabled,
-          }
+          },
+          prevBtnClass
         )}
         aria-label="Previous"
       >
@@ -55,11 +61,13 @@ export default function CaruselArroButtons({
         type="button"
         onClick={scrollNext}
         disabled={nextBtnDisabled}
-        className={classNames(
+        className={cn(
           "absolute top-1/2 right-[-24px] z-10 hidden translate-x-1/2 -translate-y-1/2 cursor-pointer disabled:opacity-50 **:disabled:cursor-not-allowed md:block",
           {
             "cursor-not-allowed opacity-50": nextBtnDisabled,
-          }
+            nextBtnClass,
+          },
+          nextBtnClass
         )}
         aria-label="Next"
       >
