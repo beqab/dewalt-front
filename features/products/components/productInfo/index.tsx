@@ -9,7 +9,7 @@ import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Rating from "@/components/rating";
 import StockIcon from "@/components/icons/stockIcon";
 import ShieldIcon from "@/components/icons/shieldIcon";
-import LineIcon from "@/components/icons/linIcon";
+import ShareButton from "@/components/ui/ShareButton";
 
 interface ProductInfoProps {
   name?: string;
@@ -171,10 +171,7 @@ export default function ProductInfo({
           <ShieldIcon />
           <span className="text-dark-secondary-100 text-sm">გარანტია</span>
         </div>
-        <div className="bg-background-secondary flex h-8 cursor-pointer items-center gap-2 rounded p-2">
-          <LineIcon />
-          <span className="text-dark-secondary-100 text-sm">გაზიარება</span>
-        </div>
+        <ShareButton />
       </div>
     </div>
   );
