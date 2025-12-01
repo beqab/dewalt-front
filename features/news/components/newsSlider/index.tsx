@@ -4,59 +4,7 @@ import Carusel from "@/components/carousel";
 import NewsCard from "../newsCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
-interface News {
-  id: number;
-  image: string;
-  name: string;
-  date: string;
-  description: string;
-}
-
-const news: News[] = [
-  {
-    id: 1,
-    image: "/imgs/ad.jpg",
-    name: "DEWALT XR ® POWERSTACK ახალი თაობის ბატარეები.",
-    date: "2025-01-01",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები",
-  },
-  {
-    id: 2,
-    image: "/imgs/ad.jpg",
-    name: "DEWALT XR ® POWERSTACK ახალი თაობის ბატარეები.",
-    date: "2025-01-01",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები, ბარგალკა",
-  },
-  {
-    id: 3,
-    image: "/imgs/ad.jpg",
-    name: "DEWALT XR ® POWERSTACK ახალი თაობის ბატარეები.",
-    date: "2025-01-01",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები",
-  },
-  {
-    id: 4,
-    image: "/imgs/ad.jpg",
-    name: "DEWALT XR ® POWERSTACK ახალი თაობის ბატარეები.",
-    date: "2025-01-01",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები, ბარგალკა",
-  },
-  {
-    id: 5,
-    image: "/imgs/ad.jpg",
-    name: "DEWALT XR ® POWERSTACK ახალი თაობის ბატარეები.",
-    date: "2025-01-01",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები",
-  },
-  {
-    id: 6,
-    image: "/imgs/ad.jpg",
-    name: "DEWALT XR ® POWERSTACK ახალი თაობის ბატარეები.",
-    date: "2025-01-01",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები, ბარგალკა",
-  },
-];
+import { dummyNews } from "../../data/dummyNews";
 
 export default function NewsSlider() {
   return (
@@ -69,14 +17,18 @@ export default function NewsSlider() {
       </div>
 
       <Carusel>
-        {news.map((news) => (
-          <NewsCard key={news.id} news={news} />
+        {dummyNews.slice(0, 6).map((news) => (
+          <NewsCard
+            key={news.id}
+            news={news}
+            className="min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:flex-[0_0_calc(33.333%)] md:p-3"
+          />
         ))}
       </Carusel>
 
       <div className="end flex justify-end md:mt-3">
         <Button variant="outline" asChild>
-          <Link href="/products">სრულად</Link>
+          <Link href="/news">სრულად</Link>
         </Button>
       </div>
     </div>
