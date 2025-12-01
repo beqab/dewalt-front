@@ -49,7 +49,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="text-dark-secundary-100 hover:bg-dark-secundary-100 border-line-color flex h-10 w-10 cursor-pointer items-center justify-center rounded border transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+        className="text-dark-secondary-100 hover:bg-dark-secondary-100 border-line-color flex h-10 w-10 cursor-pointer items-center justify-center rounded border transition-colors disabled:cursor-not-allowed disabled:opacity-50"
         aria-label="Previous page"
       >
         <svg
@@ -75,8 +75,8 @@ export default function Pagination({
           disabled={page === "..."}
           className={`${
             currentPage === page
-              ? "bg-dark-secundary-100 font-bold text-white"
-              : "text-dark-secundary-100 hover:bg-dark-secundary-100 border-line-color border hover:text-white"
+              ? "bg-dark-secondary-100 font-bold text-white"
+              : "text-dark-secondary-100 hover:bg-dark-secondary-100 border-line-color border hover:text-white"
           } flex h-10 w-10 cursor-pointer items-center justify-center rounded transition-colors disabled:cursor-default`}
           aria-label={`Page ${page}`}
         >
@@ -87,7 +87,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="text-dark-secundary-100 hover:bg-dark-secundary-100 border-line-color flex h-10 w-10 cursor-pointer items-center justify-center rounded border transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+        className="text-dark-secondary-100 hover:bg-dark-secondary-100 border-line-color flex h-10 w-10 cursor-pointer items-center justify-center rounded border transition-colors disabled:cursor-not-allowed disabled:opacity-50"
         aria-label="Next page"
       >
         <svg
@@ -108,4 +108,3 @@ export default function Pagination({
     </div>
   );
 }
-

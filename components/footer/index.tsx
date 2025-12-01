@@ -9,9 +9,9 @@ import FbIcon from "../icons/fbIcon";
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-secundary-100 text-neutral">
+    <footer className="bg-dark-secondary-100 text-neutral">
       {/* Main Footer Content */}
-      <div className="customContiner px-5 py-12 lg:px-0">
+      <div className="customContainer px-5 py-12 lg:px-0">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-[1fr_120px_120px_310px] lg:gap-16">
           {/* Logo */}
           <div className="col-span-2 lg:col-span-1">
@@ -89,7 +89,7 @@ export default function Footer() {
           </div>
 
           {/* Contact Information */}
-          <div className="bg-dark-secundary-90 col-span-2 rounded-lg p-4 lg:col-span-1 lg:bg-transparent lg:p-0">
+          <div className="bg-dark-secondary-90 col-span-2 rounded-lg p-4 lg:col-span-1 lg:bg-transparent lg:p-0">
             <ul className="space-y-4">
               <li className="flex items-center gap-2">
                 <PhoneIcon />
@@ -133,20 +133,20 @@ export default function Footer() {
 
       {/* Yellow Bar - Copyright & Payment Methods */}
       <div className="bg-primary px-5 py-4 lg:px-0">
-        <div className="customContiner">
+        <div className="customContainer">
           <div className="lgitems-center flex flex-col justify-between gap-4 lg:flex-row">
             {/* Copyright */}
             <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-center">
-              <div className="text-dark-secundary-100 text-center text-xs lg:text-left">
+              <div className="text-dark-secondary-100 text-center text-xs lg:text-left">
                 <span>2020 - </span>
                 <span className="ml-2">ყველა უფლება დაცულია</span>
               </div>
 
               {/* Separator */}
-              <div className="bg-dark-secundary-100 mx-6 hidden h-6 w-px lg:block" />
+              <div className="bg-dark-secondary-100 mx-6 hidden h-6 w-px lg:block" />
 
               {/* Terms & Privacy */}
-              <div className="text-dark-secundary-100 flex flex-wrap items-center justify-center gap-2 text-xs lg:justify-start">
+              <div className="text-dark-secondary-100 flex flex-wrap items-center justify-center gap-2 text-xs lg:justify-start">
                 <Link
                   href="/terms"
                   className="transition-colors hover:underline"
@@ -165,10 +165,10 @@ export default function Footer() {
 
             {/* Payment Methods */}
             <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-end">
-              <span className="text-dark-secundary-100 text-xs font-semibold">
+              <span className="text-dark-secondary-100 text-xs font-semibold">
                 Mastercard
               </span>
-              <span className="text-dark-secundary-100 text-xs font-semibold">
+              <span className="text-dark-secondary-100 text-xs font-semibold">
                 VISA
               </span>
             </div>

@@ -28,7 +28,7 @@ export default function Filters() {
             {brands.map((brand) => (
               <label
                 key={brand.name}
-                className="text-dark-secundary-100 flex cursor-pointer items-center gap-2 text-sm"
+                className="text-dark-secondary-100 flex cursor-pointer items-center gap-2 text-sm"
               >
                 <Checkbox checked={true} />
                 <span className="text-text-secondary text-sm">

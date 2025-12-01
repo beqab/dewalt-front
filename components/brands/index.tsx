@@ -32,8 +32,8 @@ const brandsData = [
 
 export default function Brands() {
   return (
-    <div className="customContiner bg-background px-5 pt-18 pb-10 md:bg-transparent md:px-0">
-      <h2 className="font-bpg-web-002-caps text-dark-secundary-100 mb-4 text-2xl md:mb-6 md:text-2xl">
+    <div className="customContainer bg-background px-5 pt-18 pb-10 md:bg-transparent md:px-0">
+      <h2 className="font-bpg-web-002-caps text-dark-secondary-100 mb-4 text-2xl md:mb-6 md:text-2xl">
         ბრენდები
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -43,7 +43,7 @@ export default function Brands() {
             className="bg-primary flex flex-col gap-8 rounded p-12 shadow-md"
           >
             {/* Brand Logo/Name */}
-            <div className="border-dark-secundary-100">
+            <div className="border-dark-secondary-100">
               <Image
                 src={brand.src}
                 alt={brand.name}
@@ -57,7 +57,7 @@ export default function Brands() {
             </div>
 
             {/* Description */}
-            <p className="text-dark-secundary-100 flex-1 text-center text-sm leading-6">
+            <p className="text-dark-secondary-100 flex-1 text-center text-sm leading-6">
               შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და
               ტიპოგრაფიული ნაწარმის შემქმნელებს.
             </p>

@@ -70,13 +70,13 @@ export default function BannerCarusel() {
   );
 
   return (
-    <div className="relative w-full aspect-39/40  md:aspect-3/1  overflow-hidden mt-16 md:mt-0">
-      <div className="overflow-hidden h-full" ref={emblaRef}>
+    <div className="relative mt-16 aspect-39/40 w-full overflow-hidden md:mt-0 md:aspect-3/1">
+      <div className="h-full overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {slides.map((slide) => (
             <div
               key={slide.id}
-              className="relative min-w-0 flex-[0_0_100%] h-full"
+              className="relative h-full min-w-0 flex-[0_0_100%]"
             >
               {/* Background Image */}
               <div className="absolute inset-0">
@@ -95,11 +95,11 @@ export default function BannerCarusel() {
                   }}
                 />
                 {/* Overlay for better text readability */}
-                {/* <div className="absolute inset-0 bg-gradient-to-br from-dark-secundary-100/80 to-dark-secundary-100/60" /> */}
+                {/* <div className="absolute inset-0 bg-gradient-to-br from-dark-secondary-100/80 to-dark-secondary-100/60" /> */}
               </div>
 
               {/* Content Overlay */}
-              <div className="relative z-10 flex h-full flex-col items-center font-inter     justify-center px-5 text-center">
+              <div className="font-inter relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
                 <div className="space-y-4">
                   <div>
                     <h1 className="text-3xl font-bold text-white md:text-5xl lg:text-6xl">
@@ -111,7 +111,7 @@ export default function BannerCarusel() {
                   </div>
                   <a
                     href={slide.buttonLink}
-                    className="mt-2 inline-block rounded-sm bg-primary px-8 py-2 text-sm  text-dark-secundary-100 transition-all hover:bg-primary/90 hover:scale-102 md:px-12 md:py-3 md:text-xl md:w-[200px]"
+                    className="bg-primary text-dark-secondary-100 hover:bg-primary/90 mt-2 inline-block rounded-sm px-8 py-2 text-sm transition-all hover:scale-102 md:w-[200px] md:px-12 md:py-3 md:text-xl"
                   >
                     {slide.buttonText}
                   </a>

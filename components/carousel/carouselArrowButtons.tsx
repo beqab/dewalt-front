@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export default function CaruselArroButtons({
+export default function CarouselArrowButtons({
   scrollPrev,
   scrollNext,
   prevBtnDisabled,

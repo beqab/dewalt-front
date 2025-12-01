@@ -5,13 +5,13 @@ export const SearchWithoutWrapper = () => {
   const t = useTranslations();
 
   return (
-    <div className=" bg-background md:block md:bg-transparent">
-      <div className="flex gap-2 items-center border text-dark-secundary-70 md:text-primary md:border-primary h-8 border-dark-secundary-70  rounded-sm p-2 md:min-w-86">
+    <div className="bg-background md:block md:bg-transparent">
+      <div className="text-dark-secondary-70 md:text-primary md:border-primary border-dark-secondary-70 flex h-8 items-center gap-2 rounded-sm border p-2 md:min-w-86">
         <SearchIcon className="" />
         <input
           type="text"
           placeholder={t("search")}
-          className="w-full font-inter text-sm  dark-secundary-70"
+          className="font-inter dark-secundary-70 w-full text-sm"
         />
       </div>
     </div>
@@ -20,7 +20,7 @@ export const SearchWithoutWrapper = () => {
 
 export default function Search() {
   return (
-    <div className="bg-background  absolute left-0 w-full p-5 py-4 top-14 md:static md:p-0 md:w-auto md:bg-transparent md:top-auto">
+    <div className="bg-background absolute top-14 left-0 w-full p-5 py-4 md:static md:top-auto md:w-auto md:bg-transparent md:p-0">
       <SearchWithoutWrapper />
     </div>
   );

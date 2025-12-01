@@ -22,7 +22,7 @@ export function MenuItemWithArrow({
   return (
     <button
       className={classNames(
-        "flex items-center cursor-pointer gap-1 py-2 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
+        "text-dark-secondary-100 font-inter relative flex cursor-pointer items-center gap-1 py-2 text-sm transition-colors hover:text-black",
         className,
         {
           "text-black": isActive,
@@ -39,7 +39,7 @@ export function MenuItemWithArrow({
       />
 
       {isActive && (
-        <div className="absolute top-[44px] left-1/2 transform -translate-x-1/2">
+        <div className="absolute top-[44px] left-1/2 -translate-x-1/2 transform">
           <svg
             width="24"
             height="22"
@@ -80,15 +80,15 @@ export const MenuSubItem = ({
     >
       <div className="flex items-start justify-between px-4 py-2">
         <span
-          className={classNames("text-sm font-roboto text-dark-secundary-70", {
-            "text-dark-secundary-100 font-bold": isActive,
+          className={classNames("font-roboto text-dark-secondary-70 text-sm", {
+            "text-dark-secondary-100 font-bold": isActive,
           })}
         >
           {displayName}
         </span>
         {hasSubCategories && (
           <MenuArrowRight
-            className={`text-dark-secundary-70  mt-1.5 shrink-0 transition-transform duration-200 ${
+            className={`text-dark-secondary-70 mt-1.5 shrink-0 transition-transform duration-200 ${
               isActive ? "rotate-90" : ""
             }`}
           />
@@ -111,7 +111,7 @@ export default function MenuItem({
     <Link
       href={href}
       className={classNames(
-        "flex items-center gap-1 py-2 text-dark-secundary-100 font-inter text-sm hover:text-black transition-colors relative",
+        "text-dark-secondary-100 font-inter relative flex items-center gap-1 py-2 text-sm transition-colors hover:text-black",
         {
           "text-black": isActive,
         }

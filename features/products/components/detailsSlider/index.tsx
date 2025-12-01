@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
-import CaruselArroButtons from "@/components/carusel/caruselArroButtons";
+import CaruselArroButtons from "@/components/carousel/carouselArrowButtons";
 
 interface DetailsSliderProps {
   images?: string[];

@@ -6,15 +6,15 @@ import { useState } from "react";
 import { BucketIcon } from "../icons/bucketIcon";
 import Search from "./search";
 import ProfileIcon from "../icons/profileIcon";
-import DesctopMenu from "./menu/desctopMenu/desctopMenu";
+import DesktopMenu from "./menu/desktopMenu/desktopMenu";
 import MobileMenu from "./mobileMenu";
-import CloseIcon from "../icons/closeIcont";
+import CloseIcon from "../icons/closeIcon";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   return (
     <header className="relative z-40">
-      <div className="bg-dark-secundary-100 flex items-center justify-between px-5 py-4">
+      <div className="bg-dark-secondary-100 flex items-center justify-between px-5 py-4">
         <Image
           src="/logo.png"
           alt="Logo"
@@ -50,13 +50,13 @@ export default function Header() {
                     : "scale-0 -rotate-90 opacity-0"
                 }`}
               >
-                <CloseIcon />
+                <CloseIcon className="text-primary" />
               </div>
             </div>
           </button>
         </div>
       </div>
-      <DesctopMenu />
+      <DesktopMenu />
       {openMenu && (
         <MobileMenu
           isOpen={openMenu}

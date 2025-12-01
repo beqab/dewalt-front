@@ -7,7 +7,7 @@ import ProductMenu from "./productMenu";
 import MainMenuItem from "./productMenu/mainMenuItem";
 import classNames from "classnames";
 
-export default function NewDesctopMenu() {
+export default function DesktopMenu() {
   const [activeMainCategory, setActiveMainCategory] = useState<number | null>(
     null
   );
@@ -41,7 +41,7 @@ export default function NewDesctopMenu() {
 
   return (
     <nav className="bg-background hidden md:block">
-      <div className="customContiner mx-auto flex items-center justify-between px-5">
+      <div className="customContainer mx-auto flex items-center justify-between px-5">
         <div className="relative flex items-center">
           {brands.map((brand, brandIndex) => (
             <div

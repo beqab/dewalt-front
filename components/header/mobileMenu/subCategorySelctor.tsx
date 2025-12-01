@@ -35,13 +35,13 @@ export default function SubCategorySelector({
         type="button"
         onClick={() => setIsSelectOpen((prev) => !prev)}
         className={classNames(
-          "flex items-center justify-between gap-2 px-3 py-2 text-[16px] font-medium rounded-lg hover:border-gray-400 transition-all duration-200",
+          "flex items-center justify-between gap-2 rounded-lg px-3 py-2 text-[16px] font-medium transition-all duration-200 hover:border-gray-400",
           {
             "border-primary shadow-sm": isSelectOpen,
           }
         )}
       >
-        <span className="text-dark-secundary-100">
+        <span className="text-dark-secondary-100">
           {brands[selectedCategory].name}
         </span>
         <svg
@@ -50,7 +50,7 @@ export default function SubCategorySelector({
           viewBox="0 0 16 16"
           fill="none"
           className={classNames(
-            "transition-transform duration-200 text-dark-secundary-70",
+            "text-dark-secondary-70 transition-transform duration-200",
             {
               "rotate-180": isSelectOpen,
             }
@@ -69,10 +69,10 @@ export default function SubCategorySelector({
       {/* Dropdown Options */}
       <div
         className={classNames(
-          "absolute w-44 left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-10 overflow-hidden transition-all duration-200",
+          "absolute right-0 left-0 z-10 mt-1 w-44 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg transition-all duration-200",
           {
-            "opacity-100 visible translate-y-0": isSelectOpen,
-            "opacity-0 invisible -translate-y-2": !isSelectOpen,
+            "visible translate-y-0 opacity-100": isSelectOpen,
+            "invisible -translate-y-2 opacity-0": !isSelectOpen,
           }
         )}
         style={{ pointerEvents: isSelectOpen ? "auto" : "none" }}
@@ -87,11 +87,11 @@ export default function SubCategorySelector({
                 setIsSelectOpen(false);
               }}
               className={classNames(
-                "w-full text-left px-4 py-3 text-sm hover:bg-gray-50 transition-colors",
+                "w-full px-4 py-3 text-left text-sm transition-colors hover:bg-gray-50",
                 {
                   "bg-primary/10 text-primary font-medium":
                     index === selectedCategory,
-                  "text-dark-secundary-100": index !== selectedCategory,
+                  "text-dark-secondary-100": index !== selectedCategory,
                 }
               )}
             >

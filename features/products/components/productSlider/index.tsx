@@ -1,6 +1,6 @@
 "use client";
 
-import Carusel from "@/components/carusel";
+import Carousel from "@/components/carousel";
 import CompearIcon from "@/components/icons/compearIcon";
 import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Image from "next/image";
@@ -80,16 +80,16 @@ const products: Product[] = [
 
 export default function ProductSlider() {
   return (
-    <div className="customContiner relative mt-18 w-full">
+    <div className="customContainer relative mt-18 w-full">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between px-5 md:px-0">
-        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-2xl md:text-2xl">
+        <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-2xl md:text-2xl">
           პროდუქტები
         </h2>
         <div className="flex items-end gap-6">
           <button
             type="button"
-            className="bg-primary text-dark-secundary-100 hover:bg-primary/90 flex h-10 items-center gap-2 rounded-sm px-3 py-2 text-xs font-medium transition-colors"
+            className="bg-primary text-dark-secondary-100 hover:bg-primary/90 flex h-10 items-center gap-2 rounded-sm px-3 py-2 text-xs font-medium transition-colors"
           >
             <CompearIcon />
             შედარება (3)
@@ -104,23 +104,23 @@ export default function ProductSlider() {
         </div>
       </div>
 
-      <Carusel>
+      <Carousel>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </Carusel>
+      </Carousel>
 
-      <Carusel>
+      <Carousel>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </Carusel>
+      </Carousel>
 
-      <Carusel>
+      <Carousel>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
-      </Carusel>
+      </Carousel>
 
       <div className="end mt-3 flex justify-end">
         <Button variant="outline" asChild>
@@ -130,4 +130,3 @@ export default function ProductSlider() {
     </div>
   );
 }
-

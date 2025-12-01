@@ -69,7 +69,7 @@ export default function LanguageSelector({
         onClick={() => setIsOpen(!isOpen)}
         className={classNames(
           "relative z-10 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95",
-          isPending && "opacity-50 cursor-not-allowed"
+          isPending && "cursor-not-allowed opacity-50"
         )}
         disabled={isPending}
         aria-label="Select language"
@@ -81,10 +81,10 @@ export default function LanguageSelector({
       {/* Dropdown */}
       <div
         className={classNames(
-          "absolute  md:right-0 right-auto  md top-full mt-2 w-32 bg-dark-secundary-100 rounded-lg shadow-lg overflow-hidden z-50 transition-all duration-300",
+          "md bg-dark-secondary-100 absolute top-full right-auto z-50 mt-2 w-32 overflow-hidden rounded-lg shadow-lg transition-all duration-300 md:right-0",
           isOpen
-            ? "opacity-100 visible translate-y-0"
-            : "opacity-0 invisible -translate-y-2"
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-2 opacity-0"
         )}
       >
         <div className="py-2">
@@ -98,7 +98,7 @@ export default function LanguageSelector({
                   "w-full px-4 py-2 text-left text-sm font-medium transition-colors duration-200",
                   isActive
                     ? "text-primary bg-primary/10"
-                    : "text-white hover:text-primary hover:bg-white/5"
+                    : "hover:text-primary text-white hover:bg-white/5"
                 )}
                 disabled={isPending}
               >

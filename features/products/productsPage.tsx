@@ -7,7 +7,7 @@ import { dummyProducts } from "./data/dummyProducts";
 export default function ProductsPage() {
   return (
     <div className="min-h-screen py-10">
-      <div className="customContiner">
+      <div className="customContainer">
         <div className="mt-10 flex gap-6 md:mt-0">
           {/* Desktop Filters Sidebar */}
           <aside className="hidden md:block">

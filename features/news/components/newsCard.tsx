@@ -33,7 +33,7 @@ export default function NewsCard({ news }: { news: News }) {
 
         {/* Product Info */}
         <div className="flex flex-1 flex-col">
-          <h3 className="text-dark-secundary-100 mb-2 h-12 text-sm font-bold md:mb-4 md:h-14 md:text-base">
+          <h3 className="text-dark-secondary-100 mb-2 h-12 text-sm font-bold md:mb-4 md:h-14 md:text-base">
             {name}
           </h3>
           <div className="mb-4 flex items-center gap-2">

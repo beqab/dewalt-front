@@ -1,6 +1,6 @@
 "use client";
 
-import Carusel from "@/components/carusel";
+import Carusel from "@/components/carousel";
 import NewsCard from "../newsCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -60,10 +60,10 @@ const news: News[] = [
 
 export default function NewsSlider() {
   return (
-    <div className="customContiner relative mt-18 mb-10 w-full md:mb-18">
+    <div className="customContainer relative mt-18 mb-10 w-full md:mb-18">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between px-5 md:px-0">
-        <h2 className="font-bpg-web-002-caps text-dark-secundary-100 text-2xl md:text-2xl">
+        <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-2xl md:text-2xl">
           სიახლეები
         </h2>
       </div>

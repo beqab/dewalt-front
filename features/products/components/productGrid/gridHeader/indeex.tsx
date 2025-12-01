@@ -25,14 +25,14 @@ export default function GridHeader({
           id="sort"
           value={sortBy}
           onChange={handleSortBy}
-          className="text-dark-secundary-100 focus:ring-primary rounded border border-transparent bg-white px-3 text-sm focus:ring-2 focus:outline-none"
+          className="text-dark-secondary-100 focus:ring-primary rounded border border-transparent bg-white px-3 text-sm focus:ring-2 focus:outline-none"
         >
           <option value="price-desc">ფასი: კლებადობით</option>
           <option value="price-asc">ფასი: ზრდადობით</option>
         </select>
       </div>
 
-      <div className="text-dark-secundary-100 text-sm">
+      <div className="text-dark-secondary-100 text-sm">
         <span className="text-text-secondary"> მოიძებნა </span> {productsCount}{" "}
         პროდუქტი
       </div>

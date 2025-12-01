@@ -51,7 +51,7 @@ export default function ProductInfo({
   return (
     <div className="m-auto w-full max-w-[410px] space-y-4 md:max-w-none">
       {/* Product Title */}
-      <h1 className="text-dark-secundary-100 text-2xl font-bold md:text-3xl">
+      <h1 className="text-dark-secondary-100 text-2xl font-bold md:text-3xl">
         {name}
       </h1>
 
@@ -63,7 +63,7 @@ export default function ProductInfo({
 
       {/* Price and Checkbox */}
       <div className="flex items-center gap-4 md:mb-6">
-        <span className="text-dark-secundary-100 text-2xl">{price} GEL</span>
+        <span className="text-dark-secondary-100 text-2xl">{price} GEL</span>
         <Button variant="default" size="sm" className="flex items-center gap-2">
           <CompearIcon />
           <span>შედარება (13)</span>
@@ -79,22 +79,22 @@ export default function ProductInfo({
 
       {/* Product Details */}
       <div className="space-y-2 md:mb-6">
-        <div className="text-dark-secundary-100 text-sm">
+        <div className="text-dark-secondary-100 text-sm">
           <span className="text-text-secondary text-sm">ბრენდი: </span>
           {brand}
         </div>
-        <div className="text-dark-secundary-100 text-sm">
+        <div className="text-dark-secondary-100 text-sm">
           <span className="text-text-secondary text-sm">პროდუქტის კოდი: </span>
           {code}
         </div>
-        <div className="text-dark-secundary-100 text-sm">
+        <div className="text-dark-secondary-100 text-sm">
           <span className="text-text-secondary text-sm">კატეგორია: </span>
           {category}
         </div>
       </div>
 
       {/* Quantity Selector and Add to Cart */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
+      <div className="flex flex-row items-end gap-4">
         {/* Quantity Selector */}
         <div className="flex flex-col items-start gap-2">
           <label htmlFor="quantity" className="text-text-secondary text-[10px]">
@@ -156,24 +156,24 @@ export default function ProductInfo({
 
         {/* Add to Cart Button */}
         <Button size="md" className="w-full flex-1 sm:flex-initial md:w-auto">
-          <BucketIcon className="fill-dark-secundary-100 h-6 w-6" />
+          <BucketIcon className="fill-dark-secondary-100 text-dark-secondary-100 h-6 w-6" />
           <span>კალათაში დამატება</span>
         </Button>
       </div>
 
       {/* Additional Information */}
-      <div className="border-line-color flex flex-wrap gap-6 space-y-3 border-t pt-4">
+      <div className="border-line-color flex flex-wrap gap-2 space-y-3 border-t pt-4 md:gap-4">
         <div className="bg-background-secondary flex h-8 items-center gap-2 rounded p-2">
           <StockIcon />
-          <span className="text-dark-secundary-100 text-sm">მიწოდება</span>
+          <span className="text-dark-secondary-100 text-sm">მიწოდება</span>
         </div>
         <div className="bg-background-secondary flex h-8 items-center gap-2 rounded p-2">
           <ShieldIcon />
-          <span className="text-dark-secundary-100 text-sm">გარანტია</span>
+          <span className="text-dark-secondary-100 text-sm">გარანტია</span>
         </div>
         <div className="bg-background-secondary flex h-8 cursor-pointer items-center gap-2 rounded p-2">
           <LineIcon />
-          <span className="text-dark-secundary-100 text-sm">გაზიარება</span>
+          <span className="text-dark-secondary-100 text-sm">გაზიარება</span>
         </div>
       </div>
     </div>

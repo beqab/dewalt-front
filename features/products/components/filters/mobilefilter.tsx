@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import FilterIcon from "@/components/icons/filterIcon";
-import CloseIcon from "@/components/icons/closeIcont";
+import CloseIcon from "@/components/icons/closeIcon";
 import SearchIcon from "@/components/icons/searchIcon";
 import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { Button } from "@/components/ui/button";

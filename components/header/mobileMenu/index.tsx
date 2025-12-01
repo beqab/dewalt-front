@@ -41,14 +41,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             <div className="border-text-secondary flex h-12 items-center gap-2 rounded-sm border px-4 py-2 transition-colors hover:bg-gray-50">
               <LanguageIcon className="stroke-text-secondary" />
 
-              <span className="font-inter text-dark-secundary-70 text-sm font-medium uppercase">
+              <span className="font-inter text-dark-secondary-70 text-sm font-medium uppercase">
                 {currentLocale === "en" ? "ENG" : "GEO"}
               </span>
             </div>
           </LanguageSelector>
           <Link
             href="/auth"
-            className="bg-primary text-dark-secundary-100 hover:bg-primary/90 flex h-12 flex-1 items-center justify-center gap-2.5 rounded-sm px-4 py-2 transition-colors"
+            className="bg-primary text-dark-secondary-100 hover:bg-primary/90 flex h-12 flex-1 items-center justify-center gap-2.5 rounded-sm px-4 py-2 transition-colors"
           >
             <ProfileIcon className="" />
             <span className="text-sm font-medium">ავტორიზაცია</span>

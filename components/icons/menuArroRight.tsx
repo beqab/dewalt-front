@@ -5,7 +5,7 @@ export default function MenuArrowRight({ className }: { className: string }) {
       height="10"
       viewBox="0 0 6 10"
       fill="none"
-      className={`text-dark-secundary-70 shrink-0 transition-transform duration-200 , ${className}`}
+      className={`text-dark-secondary-70 , shrink-0 transition-transform duration-200 ${className}`}
     >
       <path
         d="M1 1L5 5L1 9"

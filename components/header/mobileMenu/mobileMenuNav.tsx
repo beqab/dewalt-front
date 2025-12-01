@@ -21,12 +21,12 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <nav className="py-2 pl-5 ">
+    <nav className="py-2 pl-5">
       {/* Home */}
       <Link
         href="/"
         onClick={() => onClose()}
-        className="block font-inter  py-3 text-dark-secundary-100 hover:bg-gray-100 transition-colors font-medium"
+        className="font-inter text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
         მთავარი
       </Link>
@@ -53,7 +53,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       <Link
         href="/news"
         onClick={() => onClose()}
-        className="block  py-3 text-dark-secundary-100 hover:bg-gray-100 transition-colors font-medium"
+        className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
         სიახლეები
       </Link>
@@ -62,7 +62,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       <Link
         href="/service-center"
         onClick={() => onClose()}
-        className="block  py-3 text-dark-secundary-100 hover:bg-gray-100 transition-colors font-medium"
+        className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
         სერვის ცენტრი
       </Link>
@@ -71,7 +71,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       <Link
         href="/contact"
         onClick={() => onClose()}
-        className="block  py-3 text-dark-secundary-100 hover:bg-gray-100 transition-colors font-medium"
+        className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
         კონტაქტი
       </Link>

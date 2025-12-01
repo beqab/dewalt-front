@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import CaruselArroButtons from "./caruselArroButtons";
+import CarouselArrowButtons from "./carouselArrowButtons";
 
-export default function Carusel({ children }: { children: React.ReactNode }) {
+export default function Carousel({ children }: { children: React.ReactNode }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     slidesToScroll: 1,
@@ -59,7 +59,7 @@ export default function Carusel({ children }: { children: React.ReactNode }) {
           <div className="flex justify-around">{children}</div>
         </div>
         -{/* Navigation Arrows */}
-        <CaruselArroButtons
+        <CarouselArrowButtons
           scrollPrev={scrollPrev}
           scrollNext={scrollNext}
           prevBtnDisabled={prevBtnDisabled}

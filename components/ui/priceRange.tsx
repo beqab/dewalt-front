@@ -174,14 +174,14 @@ export default function PriceRange({
 
       {/* Input Fields */}
       <div className="flex items-center gap-6">
-        <div className="border-line-color text-dark-secundary-100 relative flex h-8 flex-1 items-center justify-center rounded border text-xs">
+        <div className="border-line-color text-dark-secondary-100 relative flex h-8 flex-1 items-center justify-center rounded border text-xs">
           {focusedInput === "min" ? (
             <input
               type="text"
               value={inputValues.min}
               onChange={handleMinInputChange}
               onBlur={handleMinBlur}
-              className="text-dark-secundary-100 w-full bg-transparent text-center text-xs focus:outline-none"
+              className="text-dark-secondary-100 w-full bg-transparent text-center text-xs focus:outline-none"
               autoFocus
             />
           ) : (
@@ -190,20 +190,20 @@ export default function PriceRange({
                 setFocusedInput("min");
                 setInputValues((prev) => ({ ...prev, min: String(values[0]) }));
               }}
-              className="text-dark-secundary-100 w-full cursor-text text-center text-xs"
+              className="text-dark-secondary-100 w-full cursor-text text-center text-xs"
             >
               {values[0]} GEL
             </div>
           )}
         </div>
-        <div className="border-line-color text-dark-secundary-100 relative flex h-8 flex-1 items-center justify-center rounded border text-xs">
+        <div className="border-line-color text-dark-secondary-100 relative flex h-8 flex-1 items-center justify-center rounded border text-xs">
           {focusedInput === "max" ? (
             <input
               type="text"
               value={inputValues.max}
               onChange={handleMaxInputChange}
               onBlur={handleMaxBlur}
-              className="text-dark-secundary-100 w-full bg-transparent text-center text-xs focus:outline-none"
+              className="text-dark-secondary-100 w-full bg-transparent text-center text-xs focus:outline-none"
               autoFocus
             />
           ) : (
@@ -212,7 +212,7 @@ export default function PriceRange({
                 setFocusedInput("max");
                 setInputValues((prev) => ({ ...prev, max: String(values[1]) }));
               }}
-              className="text-dark-secundary-100 w-full cursor-text text-center text-xs"
+              className="text-dark-secondary-100 w-full cursor-text text-center text-xs"
             >
               {values[1]} GEL
             </div>

@@ -196,7 +196,7 @@ const benefits: Benefit[] = [
 
 export default function BenefitsList() {
   return (
-    <div className="customContiner mt-12 w-full px-5 pb-10 md:px-0 md:pb-18">
+    <div className="customContainer mt-12 w-full px-5 pb-10 md:px-0 md:pb-18">
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {benefits.map((benefit, index) => (
           <div
@@ -206,7 +206,7 @@ export default function BenefitsList() {
             <div className="mb-4 flex items-center justify-center">
               {benefit.icon}
             </div>
-            <p className="text-dark-secundary-100 text-sm leading-5 font-medium">
+            <p className="text-dark-secondary-100 text-sm leading-5 font-medium">
               {benefit.title}
             </p>
           </div>
