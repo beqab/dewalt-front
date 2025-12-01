@@ -4,11 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BucketIcon } from "@/components/icons/bucketIcon";
-import CompearIcon from "@/components/icons/compearIcon";
+import CompareIcon from "@/components/icons/compareIcon";
 import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Rating from "@/components/rating";
 import StockIcon from "@/components/icons/stockIcon";
-import ShieldIcon from "@/components/icons/shildIcon";
+import ShieldIcon from "@/components/icons/shieldIcon";
 import LineIcon from "@/components/icons/linIcon";
 
 interface ProductInfoProps {
@@ -65,7 +65,7 @@ export default function ProductInfo({
       <div className="flex items-center gap-4 md:mb-6">
         <span className="text-dark-secondary-100 text-2xl">{price} GEL</span>
         <Button variant="default" size="sm" className="flex items-center gap-2">
-          <CompearIcon />
+          <CompareIcon />
           <span>შედარება (13)</span>
         </Button>
         <button

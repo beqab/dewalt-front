@@ -1,4 +1,4 @@
-export default function CompearIcon() {
+export default function CompareIcon() {
   return (
     <svg
       width="24"

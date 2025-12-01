@@ -1,7 +1,7 @@
 "use client";
 
 import Carousel from "@/components/carousel";
-import CompearIcon from "@/components/icons/compearIcon";
+import CompareIcon from "@/components/icons/compareIcon";
 import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Image from "next/image";
 import ProductCard from "../../ui/productCard";
@@ -91,7 +91,7 @@ export default function ProductSlider() {
             type="button"
             className="bg-primary text-dark-secondary-100 hover:bg-primary/90 flex h-10 items-center gap-2 rounded-sm px-3 py-2 text-xs font-medium transition-colors"
           >
-            <CompearIcon />
+            <CompareIcon />
             შედარება (3)
           </button>
           <button
