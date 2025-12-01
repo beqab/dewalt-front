@@ -11,10 +11,10 @@ export default function Filters() {
 
   return (
     <div className="w-full shrink-0 md:w-56">
-      <div className="space-y-6 border-r border-[#D2D2D2] pr-6 md:mr-0">
+      <div className="space-y-6 border-[#D2D2D2] md:mr-0 md:border-r md:pr-6">
         {/* Price Filter */}
         <div>
-          <h3 className="text-text-secondary mb-4 text-sm">ფასით გაფილტვრა</h3>
+          <h3 className="text-text-secondary mb-6 text-sm">ფასით გაფილტვრა</h3>
           <PriceRange
             values={priceRange}
             onChange={(values) => setPriceRange(values)}
@@ -41,7 +41,7 @@ export default function Filters() {
 
         {/* Promotional Banners */}
       </div>
-      <div className="space-y-4 pr-6">
+      <div className="hidden space-y-4 pr-6 md:block">
         <div className="bg-background-secondary relative mt-18 overflow-hidden rounded-lg">
           <div className="relative w-full cursor-pointer">
             <Image

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export interface CheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,12 +13,21 @@ export interface CheckboxProps
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, checked, label, labelClassName, ...props }, ref) => {
+    const [isChecked, setIsChecked] = useState(checked);
+    const handleChange = () => {
+      setIsChecked(!isChecked);
+    };
+
+    React.useEffect(() => {
+      setIsChecked(checked);
+    }, [checked]);
     return (
       <label className="relative inline-flex cursor-pointer items-center">
         <input
           type="checkbox"
           ref={ref}
           checked={checked}
+          onChange={handleChange}
           className="peer sr-only"
           {...props}
         />

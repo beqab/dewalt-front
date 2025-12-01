@@ -16,6 +16,7 @@ export default function PriceRange({
   values: controlledValues,
   onChange,
 }: PriceRangeProps) {
+  const [mounted, setMounted] = useState(false);
   const [internalValues, setInternalValues] = useState<[number, number]>([
     min,
     max,
@@ -27,6 +28,11 @@ export default function PriceRange({
   });
 
   const values = controlledValues || internalValues;
+
+  // Ensure component only renders Range on client side
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Sync input values when actual values change (e.g., from slider)
   // Only update when input is not focused to avoid interfering with user typing
@@ -113,44 +119,57 @@ export default function PriceRange({
     <div className="space-y-4">
       {/* Slider */}
       <div className="px-2">
-        <Range
-          step={1}
-          min={min}
-          max={max}
-          values={values}
-          onChange={handleChange}
-          renderTrack={({ props, children }) => (
-            <div
-              {...props}
-              className="relative h-1 w-full rounded-full"
-              style={{
-                ...props.style,
-              }}
-            >
-              {/* Inactive track background */}
-              <div className="absolute h-full w-full rounded-full bg-gray-200" />
-              {/* Active track (yellow) */}
+        {mounted ? (
+          <Range
+            step={1}
+            min={min}
+            max={max}
+            values={values}
+            onChange={handleChange}
+            renderTrack={({ props, children }) => (
               <div
-                className="bg-primary absolute h-full rounded-full"
+                {...props}
+                className="relative h-1 w-full rounded-full"
                 style={{
-                  left: `${trackLeft}%`,
-                  width: `${trackWidth}%`,
+                  ...props.style,
+                }}
+              >
+                {/* Inactive track background */}
+                <div className="absolute h-full w-full rounded-full bg-gray-200" />
+                {/* Active track (yellow) */}
+                <div
+                  className="bg-primary absolute h-full rounded-full"
+                  style={{
+                    left: `${trackLeft}%`,
+                    width: `${trackWidth}%`,
+                  }}
+                />
+                {children}
+              </div>
+            )}
+            renderThumb={({ props }) => (
+              <div
+                {...props}
+                key={props.key}
+                className="bg-primary h-4 w-4 rounded-full shadow-md"
+                style={{
+                  ...props.style,
+                  outline: "none",
                 }}
               />
-              {children}
-            </div>
-          )}
-          renderThumb={({ props }) => (
+            )}
+          />
+        ) : (
+          <div className="relative h-1 w-full rounded-full bg-gray-200">
             <div
-              {...props}
-              className="bg-primary h-4 w-4 rounded-full shadow-md"
+              className="bg-primary absolute h-full rounded-full"
               style={{
-                ...props.style,
-                outline: "none",
+                left: `${trackLeft}%`,
+                width: `${trackWidth}%`,
               }}
             />
-          )}
-        />
+          </div>
+        )}
       </div>
 
       {/* Input Fields */}
