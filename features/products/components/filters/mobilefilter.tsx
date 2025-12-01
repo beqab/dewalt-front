@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import FilterIcon from "@/components/icons/filterIcon";
 import CloseIcon from "@/components/icons/closeIcont";
@@ -7,11 +7,9 @@ import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { Button } from "@/components/ui/button";
 import Filters from ".";
 import { cn } from "@/lib/utils";
-import useOnclicOutside from "@/hooks/useOnclicOutside";
 
 export default function MobileFilter() {
   const [isOpen, setIsOpen] = useState(false);
-  const filterRef = useRef<HTMLDivElement>(null!);
 
   const handleClose = () => {
     setIsOpen(false);
@@ -23,8 +21,6 @@ export default function MobileFilter() {
     }
   };
 
-  // Close when clicking outside the drawer panel
-  useOnclicOutside(filterRef, handleClose);
   useBodyScrollLock(isOpen);
   return (
     <div className="relative z-20 md:hidden">
@@ -33,6 +29,7 @@ export default function MobileFilter() {
       </Button>
       {/* Animated mobile drawer */}
       <div
+        onClick={handleClose}
         className={cn(
           "fixed inset-0 top-30 left-0 z-30 flex justify-end bg-black/40 transition-opacity duration-300 ease-out",
           isOpen
@@ -45,7 +42,7 @@ export default function MobileFilter() {
             "relative h-full w-full max-w-xs translate-x-full bg-white pt-6 pr-4 pb-10 pl-4 shadow-xl transition-transform duration-300 ease-out",
             isOpen ? "translate-x-0" : "translate-x-full"
           )}
-          ref={filterRef}
+          onClick={(e) => e.stopPropagation()}
         >
           <CloseIcon
             onClick={handleClose}
