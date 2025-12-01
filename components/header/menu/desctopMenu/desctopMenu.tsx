@@ -39,8 +39,6 @@ export default function NewDesctopMenu() {
     setActiveProductsMenu(false);
   };
 
-  // Close menu when clicking outside
-
   return (
     <nav className="bg-background hidden md:block">
       <div className="customContiner mx-auto flex items-center justify-between px-5">
