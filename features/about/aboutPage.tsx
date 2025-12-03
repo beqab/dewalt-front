@@ -1,7 +1,5 @@
 import Breadcrumb from "@/components/ui/breadcrumb";
 import Image from "next/image";
-import Vector3 from "@/public/imgs/Vector3.png";
-import Vector2 from "@/public/imgs/Vector2.png";
 
 const breadcrumbItems = [
   { label: "მთავარი", href: "/" },
