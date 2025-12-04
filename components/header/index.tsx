@@ -3,13 +3,13 @@ import Image from "next/image";
 import LanguageSelector from "../languageSelector/languageSelector";
 import MenuIcon from "../icons/menuIcon";
 import { useState } from "react";
-import { BucketIcon } from "../icons/bucketIcon";
 import Search from "./search";
 import ProfileIcon from "../icons/profileIcon";
 import DesktopMenu from "./menu/desktopMenu/desktopMenu";
 import MobileMenu from "./mobileMenu";
 import CloseIcon from "../icons/closeIcon";
 import { Link } from "@/i18n/navigation";
+import CartPreview from "@/features/products/cart/components/cartPreview";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -29,7 +29,7 @@ export default function Header() {
           <Search />
 
           <LanguageSelector className="hidden md:block" />
-          <BucketIcon className="text-primary" />
+          <CartPreview />
           <ProfileIcon className="hidden md:block" />
           <button
             onClick={() => setOpenMenu(!openMenu)}

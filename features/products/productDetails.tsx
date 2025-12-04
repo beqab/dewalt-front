@@ -5,6 +5,7 @@ import ProductInfo from "./components/productInfo";
 import ProductInfoTab from "./components/productInfoTab";
 import ProductCard from "./ui/productCard";
 import { dummyProducts } from "./data/dummyProducts";
+import { Product } from "./types";
 const breadcrumbItems = [
   { label: "მთავარი", href: "/" },
   { label: "პროდუქტები", href: "/products" },
@@ -12,7 +13,7 @@ const breadcrumbItems = [
   { label: "კუთხსახეხი - DW 1464131" },
 ];
 
-export default function ProductDetails() {
+export default function ProductDetails({ product }: { product: Product }) {
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
@@ -20,7 +21,7 @@ export default function ProductDetails() {
         <div className="mx-auto max-w-[1070px] px-[15px] py-8 pt-0 md:pt-8">
           <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[410px_1fr]">
             <DetailsSlider />
-            <ProductInfo />
+            <ProductInfo product={product} />
           </div>
         </div>
       </div>

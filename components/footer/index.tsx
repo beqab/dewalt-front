@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { brands } from "@/components/header/menu/staticMenu";
 import Image from "next/image";
 import footerImg from "@/public/imgs/footerImg.jpg";
@@ -24,7 +24,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  className="text-neutral hover:text-primary text-xs transition-colors"
+                  className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   მთავარი
                 </Link>
@@ -32,7 +32,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/news"
-                  className="text-neutral hover:text-primary text-xs transition-colors"
+                  className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   სიახლეები
                 </Link>
@@ -40,7 +40,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-neutral hover:text-primary text-xs transition-colors"
+                  className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   ჩვენს შესახებ
                 </Link>
@@ -48,7 +48,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/service-center"
-                  className="text-neutral hover:text-primary text-xs transition-colors"
+                  className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   სერვის ცენტრი
                 </Link>
@@ -56,7 +56,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  className="text-neutral hover:text-primary text-xs transition-colors"
+                  className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   კონტაქტი
                 </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
               {brands.map((brand, index) => (
                 <li key={index}>
                   <Link
-                    href={`/brands/${brand.name.toLowerCase()}`}
+                    href={`/products?brand=${brand.name.toLowerCase()}`}
                     className="text-neutral hover:text-primary text-xs transition-colors"
                   >
                     {brand.name}

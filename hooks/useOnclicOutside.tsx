@@ -4,7 +4,7 @@ import { useEffect, type RefObject } from "react";
 
 // Generic hook to detect clicks / touches outside the given element
 export default function useOnclicOutside(
-  ref: RefObject<HTMLDivElement>,
+  ref: RefObject<HTMLDivElement | null>,
   callback: () => void
 ) {
   useEffect(() => {

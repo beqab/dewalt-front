@@ -13,6 +13,10 @@ export interface Product {
   originalPrice?: number;
   discount?: number;
   inStock?: boolean;
+  rating: number;
+  reviewCount: number;
+  category: string;
+  brand: string;
   _id: string;
   specs: ProductSpec[];
 }

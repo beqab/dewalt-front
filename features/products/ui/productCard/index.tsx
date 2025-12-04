@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Product } from "../../types";
 import { cn } from "@/lib/utils";
 import { CompareButton } from "@/features/products/compare/components/compareButton";
+import { AddSingleItemToCart } from "../../cart/components/addToCart";
 
 export default function ProductCard({
   product,
@@ -89,34 +90,7 @@ export default function ProductCard({
             </div>
 
             {/* Add to Cart Button */}
-            <button
-              type="button"
-              className={cn(
-                "bg-primary hover:bg-primary/90 text-dark-secondary-100 flex h-10 w-full items-center justify-center gap-2 rounded px-4 py-2 text-sm font-medium transition-colors xl:max-w-[98px]",
-                {
-                  "xl:max-w-[98px]": size === "md",
-                  "xl:max-w-full": size === "sm",
-                }
-              )}
-            >
-              <BucketIcon
-                className={cn(
-                  "md:fill-dark-secondary-100 fill-dark-secondary-100",
-                  {
-                    "xl:hidden": size === "md",
-                  }
-                )}
-              />
-              <span
-                className={cn({
-                  "hidden xl:inline": size === "md",
-                  inline: size === "sm",
-                })}
-              >
-                დამატება
-              </span>
-              <span className="xl:hidden">კალათაში</span>
-            </button>
+            <AddSingleItemToCart product={product} size={size} />
           </div>
         </div>
       </div>

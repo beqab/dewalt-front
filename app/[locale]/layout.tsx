@@ -12,6 +12,7 @@ import Footer from "@/components/footer";
 import { Toaster } from "sonner";
 import CompareProductProvider from "@/features/products/compare/compareContext/CompareProductProvider";
 import CompareLinkButton from "@/features/products/compare/components/compareLinkButton";
+import CartProvider from "@/features/products/cart/cartContext/CartProvider";
 
 type Props = {
   children: React.ReactNode;
@@ -70,15 +71,17 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Toaster />
+          <Toaster position="top-right" richColors closeButton />
 
-          <Header />
-          <CompareProductProvider>
-            <>
-              {children}
-              <CompareLinkButton />
-            </>
-          </CompareProductProvider>
+          <CartProvider>
+            <Header />
+            <CompareProductProvider>
+              <>
+                {children}
+                <CompareLinkButton />
+              </>
+            </CompareProductProvider>
+          </CartProvider>
           <Footer />
         </NextIntlClientProvider>
       </body>

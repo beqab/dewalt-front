@@ -12,6 +12,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 2399,
     discount: 21,
     inStock: true,
+    rating: 4.5,
+    reviewCount: 526,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Makita",
     specs: [
       { label: "მწარმოებელი", value: "Makita" },
       { label: "სიმძლავრე", value: 720, unit: "W" },
@@ -32,6 +36,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 2610,
     discount: 17,
     inStock: false,
+    rating: 4.2,
+    reviewCount: 342,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Bosch",
     specs: [
       { label: "მწარმოებელი", value: "Bosch" },
       { label: "სიმძლავრე", value: 650, unit: "W" },
@@ -52,6 +60,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 1980,
     discount: 17,
     inStock: true,
+    rating: 4.3,
+    reviewCount: 289,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Makita",
     specs: [
       { label: "მწარმოებელი", value: "Makita" },
       { label: "სიმძლავრე", value: 800, unit: "W" },
@@ -72,6 +84,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 3350,
     discount: 12,
     inStock: true,
+    rating: 4.6,
+    reviewCount: 412,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Hikoki",
     specs: [
       { label: "მწარმოებელი", value: "Hikoki" },
       { label: "სიმძლავრე", value: 1600, unit: "W" },
@@ -92,6 +108,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 1750,
     discount: 13,
     inStock: false,
+    rating: 4.1,
+    reviewCount: 198,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Metabo",
     specs: [
       { label: "მწარმოებელი", value: "Metabo" },
       { label: "სიმძლავრე", value: 680, unit: "W" },
@@ -112,6 +132,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 4000,
     discount: 15,
     inStock: true,
+    rating: 4.7,
+    reviewCount: 523,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "DeWalt",
     specs: [
       { label: "მწარმოებელი", value: "DeWalt" },
       { label: "სიმძლავრე", value: 950, unit: "W" },
@@ -132,6 +156,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 2210,
     discount: 18,
     inStock: false,
+    rating: 4.0,
+    reviewCount: 156,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Makita",
     specs: [
       { label: "მწარმოებელი", value: "Makita" },
       { label: "სიმძლავრე", value: 700, unit: "W" },
@@ -152,6 +180,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 2880,
     discount: 16,
     inStock: true,
+    rating: 4.4,
+    reviewCount: 387,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "DeWalt",
     specs: [
       { label: "მწარმოებელი", value: "DeWalt" },
       { label: "სიმძლავრე", value: 600, unit: "W" },
@@ -172,6 +204,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 2390,
     discount: 14,
     inStock: true,
+    rating: 4.3,
+    reviewCount: 271,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Bosch",
     specs: [
       { label: "მწარმოებელი", value: "Bosch" },
       { label: "სიმძლავრე", value: 450, unit: "W" },
@@ -192,6 +228,10 @@ export const dummyProducts: Product[] = [
     originalPrice: 4780,
     discount: 12,
     inStock: true,
+    rating: 4.8,
+    reviewCount: 645,
+    category: "ელექტრო ხელსაწყოები",
+    brand: "Metabo",
     specs: [
       { label: "მწარმოებელი", value: "Metabo" },
       { label: "სიმძლავრე", value: 1300, unit: "W" },
@@ -217,17 +257,25 @@ export const dummyProducts: Product[] = [
       "მულტი-ფუნქციური ხელსაწყო",
       "დარტყმითი ინსტრუმენტი",
     ];
+    const categories = [
+      "ელექტრო ხელსაწყოები",
+      "სამშენებლო ხელსაწყოები",
+      "სახელოსნო ხელსაწყოები",
+    ];
     const random = (min: number, max: number) =>
       Math.floor(Math.random() * (max - min + 1)) + min;
     const pick = <T>(arr: T[]) => arr[random(0, arr.length - 1)];
     const brand = pick(brands);
     const name = pick(names);
+    const category = pick(categories);
 
     const power = random(400, 1800);
     const chuckDiameter = random(8, 20);
     const speed = random(1000, 8500);
     const impactFreq = random(0, 1) ? `0-${random(35000, 60000)}` : "-";
     const weight = (Math.random() * 6 + 0.5).toFixed(2);
+    const rating = (Math.random() * 1.5 + 3.5).toFixed(1); // Rating between 3.5 and 5.0
+    const reviewCount = random(50, 800);
 
     return {
       id,
@@ -241,6 +289,10 @@ export const dummyProducts: Product[] = [
       originalPrice: random(1500, 5500),
       discount: random(10, 25),
       inStock: Math.random() > 0.22,
+      rating: parseFloat(rating),
+      reviewCount,
+      category,
+      brand,
       specs: [
         { label: "მწარმოებელი", value: brand },
         { label: "სიმძლავრე", value: power, unit: "W" },
