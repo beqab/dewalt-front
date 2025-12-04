@@ -6,7 +6,7 @@ import ProductSpecsForMobile from "./compare/components/productSpecs/productSpec
 import ProductSpecsForDesktop from "./compare/components/productSpecs/productSpecsForDesktop";
 import { useCompareContext } from "./compare/compareContext";
 import { dummyProducts } from "./data/dummyProducts";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 const breadcrumbItems = [
   { label: "მთავარი", href: "/" },

@@ -1,5 +1,6 @@
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import Image from "next/image";
+import Link from "next/link";
 import type { Product } from "../../types";
 import { cn } from "@/lib/utils";
 import { CompareButton } from "@/features/products/compare/components/compareButton";
@@ -48,21 +49,26 @@ export default function ProductCard({
         </div>
 
         {/* Product Image */}
-        <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
-          <Image
-            src={image}
-            alt={name}
-            fill
-            className="object-contain p-2"
-            sizes="(max-width: 768px) 66.666vw, 25vw"
-          />
-        </div>
+        <Link href={`/products/${_id}`} className="block">
+          <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
+            <Image
+              src={image}
+              alt={name}
+              fill
+              className="object-contain p-2 transition-transform hover:scale-105"
+              sizes="(max-width: 768px) 66.666vw, 25vw"
+            />
+          </div>
+        </Link>
 
         {/* Product Info */}
         <div className="flex flex-1 flex-col">
-          <h3 className="text-dark-secondary-100 mb-2 h-12 text-sm font-bold md:h-14 md:text-base">
+          <Link
+            href={`/products/${_id}`}
+            className="text-dark-secondary-100 hover:text-primary mb-2 h-12 text-sm font-bold transition-colors md:h-14 md:text-base"
+          >
             {name} {code}
-          </h3>
+          </Link>
           <p className="text-text-secondary mb-4 text-xs">{description}</p>
 
           {/* Price */}

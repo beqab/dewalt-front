@@ -3,7 +3,7 @@
 import Carousel from "@/components/carousel";
 import ProductCard from "../../ui/productCard";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { dummyProducts } from "../../data/dummyProducts";
 
 export default function ProductSlider() {

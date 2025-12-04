@@ -2,7 +2,7 @@
 import CompareIcon from "@/components/icons/compareIcon";
 import { Button } from "@/components/ui/button";
 import { useCompareContext } from "../compareContext";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 export default function CompareLinkButton() {
   const { productIds } = useCompareContext();

@@ -4,8 +4,8 @@ import { useState } from "react";
 import ProductCard from "../../ui/productCard";
 import Pagination from "../pagination";
 import type { Product } from "../../types";
-import MobileFilter from "../filters/mobilefilter";
-import GridHeader from "./gridHeader/indeex";
+import MobileFilter from "../filters/mobileFilter";
+import GridHeader from "./gridHeader";
 
 interface ProductGridProps {
   products: Product[];

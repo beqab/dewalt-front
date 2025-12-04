@@ -9,19 +9,22 @@ import ProfileIcon from "../icons/profileIcon";
 import DesktopMenu from "./menu/desktopMenu/desktopMenu";
 import MobileMenu from "./mobileMenu";
 import CloseIcon from "../icons/closeIcon";
+import { Link } from "@/i18n/navigation";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   return (
     <header className="relative z-40">
       <div className="bg-dark-secondary-100 flex items-center justify-between px-5 py-4">
-        <Image
-          src="/logo.png"
-          alt="Logo"
-          width={100}
-          height={100}
-          className="h-6 md:h-8"
-        />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="h-6 md:h-8"
+          />
+        </Link>
         <div className="flex items-center gap-4 md:gap-6">
           <Search />
 

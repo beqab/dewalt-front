@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import MenuItem, { MenuItemWithArrow } from "../menu/menuItm";
 import { brands } from "../menu/staticMenu";
 import { useState } from "react";

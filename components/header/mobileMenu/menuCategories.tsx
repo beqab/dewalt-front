@@ -1,8 +1,7 @@
-import { brands } from "../menu/staticMenu";
+import { useState } from "react";
 import MenuItem, { MenuSubItem } from "../menu/menuItm";
-import { useState, useRef, useEffect } from "react";
-import classNames from "classnames";
-import SubCategorySelector from "./subCategorySelctor";
+import { brands } from "../menu/staticMenu";
+import SubCategorySelector from "./subCategorySelector";
 
 export default function MenuCategories({
   category,
@@ -87,7 +86,7 @@ export default function MenuCategories({
                 <MenuItem
                   key={index}
                   label={subCategory.name}
-                  href={subCategory.slug}
+                  href={`/products?category=${subCategory.slug}`}
                 />
               )
             )}

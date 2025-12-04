@@ -1,8 +1,7 @@
 import MenuArrow from "@/components/icons/menuArrow";
 import MenuArrowRight from "@/components/icons/menuArroRight";
 import classNames from "classnames";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 interface MenuItemProps {
   isActive: boolean;

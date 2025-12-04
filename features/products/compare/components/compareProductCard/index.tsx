@@ -15,7 +15,7 @@ interface CompareProductCardProps {
 export default function CompareProductCard({
   product,
 }: CompareProductCardProps) {
-  const { id, image, name, code, price, originalPrice, _id } = product;
+  const { image, name, code, price, originalPrice, _id } = product;
 
   return (
     <div className="relative min-w-[220px] shrink-0 md:min-w-[240px]">
@@ -24,20 +24,22 @@ export default function CompareProductCard({
         <DeleteProductByIdButton id={_id} />
 
         {/* Product Image */}
-        <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
-          <Image
-            src={image}
-            alt={name}
-            fill
-            className="object-contain p-2"
-            sizes="(max-width: 768px) 280px, 240px"
-          />
-        </div>
+        <Link href={`/products/${_id}`} className="block">
+          <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
+            <Image
+              src={image}
+              alt={name}
+              fill
+              className="object-contain p-2 transition-transform hover:scale-105"
+              sizes="(max-width: 768px) 280px, 240px"
+            />
+          </div>
+        </Link>
 
         {/* Product Info */}
         <div className="flex flex-1 flex-col">
           <Link
-            href={`/products/${id}`}
+            href={`/products/${_id}`}
             className="text-dark-secondary-100 hover:text-primary mb-2 h-12 text-sm font-bold transition-colors"
           >
             {name} {code}

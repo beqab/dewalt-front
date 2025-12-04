@@ -1,7 +1,7 @@
 import { DateIcon } from "@/components/icons/date";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { News } from "../types";
 
