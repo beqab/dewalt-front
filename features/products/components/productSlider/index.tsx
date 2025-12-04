@@ -1,84 +1,13 @@
 "use client";
 
 import Carousel from "@/components/carousel";
-import CompareIcon from "@/components/icons/compareIcon";
-import FbMessenger from "@/public/icons/fbmessenger.svg";
-import Image from "next/image";
 import ProductCard from "../../ui/productCard";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import type { Product } from "../../types";
-
-const products: Product[] = [
-  {
-    id: 1,
-    image: "/imgs/product.png",
-    name: "კუთხსახეხი",
-    code: "DWP849k",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები",
-    price: 1290,
-    originalPrice: 1830,
-    discount: 23,
-    inStock: true,
-  },
-  {
-    id: 2,
-    image: "/imgs/product.png",
-    name: "კუთხსახეხი",
-    code: "DEW-86511 55",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები, ბარგალკა",
-    price: 1950,
-    originalPrice: 2360,
-    discount: 23,
-    inStock: true,
-  },
-  {
-    id: 3,
-    image: "/imgs/product.png",
-    name: "კუთხსახეხი",
-    code: "DWP849k",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები",
-    price: 1290,
-    originalPrice: 1830,
-    discount: 23,
-    inStock: true,
-  },
-  {
-    id: 4,
-    image: "/imgs/product.png",
-    name: "კუთხსახეხი",
-    code: "DEW-86511 55",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები, ბარგალკა",
-    price: 1950,
-    originalPrice: 2360,
-    discount: 23,
-    inStock: true,
-  },
-  {
-    id: 5,
-    image: "/imgs/product.png",
-    name: "კუთხსახეხი",
-    code: "DWP849k",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები",
-    price: 1290,
-    originalPrice: 1830,
-    discount: 23,
-    inStock: true,
-  },
-  {
-    id: 6,
-    image: "/imgs/product.png",
-    name: "კუთხსახეხი",
-    code: "DEW-86511 55",
-    description: "სახეხი და საპრიალებელი ხელსაწყოები, ბარგალკა",
-    price: 1950,
-    originalPrice: 2360,
-    discount: 23,
-    inStock: true,
-  },
-];
+import { dummyProducts } from "../../data/dummyProducts";
 
 export default function ProductSlider() {
+  const products = dummyProducts.slice(0, 10);
   return (
     <div className="customContainer relative mt-18 w-full">
       {/* Header */}
@@ -86,7 +15,7 @@ export default function ProductSlider() {
         <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-2xl md:text-2xl">
           პროდუქტები
         </h2>
-        <div className="flex items-end gap-6">
+        {/* <div className="flex items-end gap-6">
           <button
             type="button"
             className="bg-primary text-dark-secondary-100 hover:bg-primary/90 flex h-10 items-center gap-2 rounded-sm px-3 py-2 text-xs font-medium transition-colors"
@@ -101,7 +30,23 @@ export default function ProductSlider() {
           >
             <Image src={FbMessenger} alt="heart" className="h-10 w-10" />
           </button>
-        </div>
+        </div> */}
+      </div>
+
+      <div className="mb-4 md:mb-4">
+        <Carousel>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </Carousel>
+      </div>
+
+      <div className="mb-4 md:mb-4">
+        <Carousel>
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </Carousel>
       </div>
 
       <Carousel>
@@ -110,19 +55,7 @@ export default function ProductSlider() {
         ))}
       </Carousel>
 
-      <Carousel>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </Carousel>
-
-      <Carousel>
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </Carousel>
-
-      <div className="end mt-3 flex justify-end">
+      <div className="end mt-3 flex justify-end md:mt-6">
         <Button variant="outline" asChild>
           <Link href="/products">ყველას ნახვა</Link>
         </Button>

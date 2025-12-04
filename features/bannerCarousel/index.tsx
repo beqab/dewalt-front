@@ -43,7 +43,7 @@ const slides: Slide[] = [
   },
 ];
 
-export default function BannerCarusel() {
+export default function BannerCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [
     Autoplay({ delay: 5000, stopOnInteraction: false }),
   ]);

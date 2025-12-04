@@ -3,6 +3,7 @@ import type { CompareProductWithSpecs } from "../types";
 export const dummyCompareProducts: CompareProductWithSpecs[] = [
   {
     id: 1,
+    _id: "1",
     image: "/imgs/product.png",
     name: "კუთსახეხი",
     code: "DEW-86511 55 31321321641684 SRG-982",
@@ -22,6 +23,7 @@ export const dummyCompareProducts: CompareProductWithSpecs[] = [
   },
   {
     id: 2,
+    _id: "2",
     image: "/imgs/product.png",
     name: "კუთსახეხი",
     code: "DEW-86511 55 31321321641684 SRG-982",
@@ -49,6 +51,7 @@ export const dummyCompareProducts: CompareProductWithSpecs[] = [
     originalPrice: 2380,
     discount: 23,
     inStock: true,
+    _id: "3",
     specs: [
       { label: "მწარმოებელი", value: "DeWalt" },
       { label: "სიმძლავრე", value: 701, unit: "W" },

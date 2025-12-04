@@ -9,6 +9,9 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
+import { Toaster } from "sonner";
+import CompareProductProvider from "@/features/products/compare/compareContext/CompareProductProvider";
+import CompareLinkButton from "@/features/products/compare/components/compareLinkButton";
 
 type Props = {
   children: React.ReactNode;
@@ -67,8 +70,15 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
+          <Toaster />
+
           <Header />
-          {children}
+          <CompareProductProvider>
+            <>
+              {children}
+              <CompareLinkButton />
+            </>
+          </CompareProductProvider>
           <Footer />
         </NextIntlClientProvider>
       </body>

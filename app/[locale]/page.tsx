@@ -2,7 +2,7 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { BucketIcon } from "@/components/icons/bucketIcon";
-import BannerCarusel from "@/features/bannerCarusel";
+import BannerCarousel from "@/features/bannerCarousel";
 import ProductSlider from "@/features/products/components/productSlider";
 import MainPageAds from "@/features/ads/mainPageAds";
 import NewsSlider from "@/features/news/components/newsSlider";
@@ -21,7 +21,7 @@ export default async function Home({
   const t = await getTranslations({ locale });
   return (
     <div className="">
-      <BannerCarusel />
+      <BannerCarousel />
 
       <ProductSlider />
       <MainPageAds />

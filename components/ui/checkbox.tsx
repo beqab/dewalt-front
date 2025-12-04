@@ -17,7 +17,6 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const handleChange = () => {
       setIsChecked(!isChecked);
     };
-
     React.useEffect(() => {
       setIsChecked(checked);
     }, [checked]);
@@ -33,24 +32,41 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         />
         <div
           className={cn(
-            "flex h-4 w-4 items-center justify-center rounded border-2 border-gray-300 transition-all",
-            checked && "border-primary bg-primary",
+            "flex h-4 w-4 items-center justify-center",
             "peer-focus-visible:ring-primary/50 peer-focus-visible:ring-2 peer-focus-visible:outline-none",
             "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
             className
           )}
         >
-          {checked && (
+          {checked ? (
             <svg
-              width="8"
-              height="6"
-              viewBox="0 0 8 6"
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
+              <rect width="16" height="16" rx="2" fill="#FFBA00" />
               <path
-                d="M7.79321 0.175358C7.8566 0.232882 7.90748 0.301737 7.94293 0.37799C7.97837 0.454242 7.9977 0.536398 7.99981 0.619766C8.00191 0.703134 7.98675 0.78608 7.95519 0.863867C7.92363 0.941654 7.87629 1.01276 7.81588 1.07312L2.88934 6L0.184087 3.29529C0.0620908 3.17338 -0.00405781 3.01031 0.000192895 2.84194C0.0044436 2.67358 0.0787454 2.51372 0.206753 2.39753C0.334761 2.28135 0.505988 2.21835 0.682768 2.2224C0.859547 2.22644 1.0274 2.29721 1.14939 2.41912L2.88934 4.15877L6.85057 0.196945C6.91097 0.13657 6.98326 0.0881179 7.06333 0.0543571C7.14339 0.0205963 7.22966 0.00218808 7.31719 0.000183477C7.40473 -0.00182113 7.49182 0.0126172 7.5735 0.0426741C7.65517 0.0727309 7.72983 0.117817 7.79321 0.175358Z"
+                d="M11.7932 5.17524C11.8566 5.23276 11.9075 5.30162 11.9429 5.37787C11.9784 5.45412 11.9977 5.53628 11.9998 5.61964C12.0019 5.70301 11.9868 5.78596 11.9552 5.86375C11.9236 5.94153 11.8763 6.01264 11.8159 6.073L6.88934 10.9999L4.18409 8.29517C4.06209 8.17326 3.99594 8.01018 4.00019 7.84182C4.00444 7.67346 4.07875 7.5136 4.20675 7.39741C4.33476 7.28122 4.50599 7.21823 4.68277 7.22227C4.85955 7.22632 5.0274 7.29709 5.14939 7.419L6.88934 9.15865L10.8506 5.19682C10.911 5.13645 10.9833 5.088 11.0633 5.05424C11.1434 5.02047 11.2297 5.00207 11.3172 5.00006C11.4047 4.99806 11.4918 5.0125 11.5735 5.04255C11.6552 5.07261 11.7298 5.1177 11.7932 5.17524Z"
                 fill="#1A1A1A"
+              />
+            </svg>
+          ) : (
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect
+                x="0.5"
+                y="0.5"
+                width="15"
+                height="15"
+                rx="1.5"
+                stroke="#1A1A1A"
               />
             </svg>
           )}

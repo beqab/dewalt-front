@@ -10,6 +10,7 @@ import Rating from "@/components/rating";
 import StockIcon from "@/components/icons/stockIcon";
 import ShieldIcon from "@/components/icons/shieldIcon";
 import ShareButton from "@/components/ui/ShareButton";
+import { CompareButton } from "../../compare/components/compareButton";
 
 interface ProductInfoProps {
   name?: string;
@@ -20,6 +21,7 @@ interface ProductInfoProps {
   code?: string;
   category?: string;
   inStock?: boolean;
+  _id?: string;
 }
 
 export default function ProductInfo({
@@ -30,6 +32,7 @@ export default function ProductInfo({
   brand = "Dewalt",
   code = "18554FX",
   category = "ელექტრო ხელსაწყოები",
+  _id = "1234567890",
 }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(3);
 
@@ -64,17 +67,7 @@ export default function ProductInfo({
       {/* Price and Checkbox */}
       <div className="flex items-center gap-4 md:mb-6">
         <span className="text-dark-secondary-100 text-2xl">{price} GEL</span>
-        <Button variant="default" size="sm" className="flex items-center gap-2">
-          <CompareIcon />
-          <span>შედარება (13)</span>
-        </Button>
-        <button
-          type="button"
-          aria-label="Messenger"
-          className="rounded-lg bg-[#FAFAFA] p-2 shadow-[1px_1px_10.1px_0_rgba(0,0,0,0.25)]"
-        >
-          <Image src={FbMessenger} alt="Messenger" className="h-8 w-8" />
-        </button>
+        <CompareButton productId={_id} />
       </div>
 
       {/* Product Details */}

@@ -1,3 +1,8 @@
+export interface ProductSpec {
+  label: string;
+  value: string | number;
+  unit?: string;
+}
 export interface Product {
   id: number;
   image: string;
@@ -8,5 +13,6 @@ export interface Product {
   originalPrice?: number;
   discount?: number;
   inStock?: boolean;
+  _id: string;
+  specs: ProductSpec[];
 }
-

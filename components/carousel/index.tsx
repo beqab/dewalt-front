@@ -54,11 +54,11 @@ export default function Carousel({ children }: { children: React.ReactNode }) {
   return (
     <div className="">
       {/* Carousel */}
-      <div className="relative">
+      <div className="relative md:mr-[-6px] md:ml-[-6px]">
         <div className="overflow-hidden px-3 md:px-0" ref={emblaRef}>
           <div className="flex justify-around">{children}</div>
         </div>
-        -{/* Navigation Arrows */}
+
         <CarouselArrowButtons
           scrollPrev={scrollPrev}
           scrollNext={scrollNext}

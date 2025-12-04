@@ -26,7 +26,7 @@ export default function Header() {
           <Search />
 
           <LanguageSelector className="hidden md:block" />
-          <BucketIcon />
+          <BucketIcon className="text-primary" />
           <ProfileIcon className="hidden md:block" />
           <button
             onClick={() => setOpenMenu(!openMenu)}

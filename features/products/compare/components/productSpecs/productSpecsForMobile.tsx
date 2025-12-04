@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
 import { CompareProductWithSpecs } from "../../types";
-import TrashIcon from "@/components/icons/trashIcon";
+
 import CompareProductCard from "../compareProductCard";
+import ClearAllProductsButton from "../clearAllProductsButton";
 
 export default function ProductSpecsForMobile({
   products,
@@ -15,9 +15,10 @@ export default function ProductSpecsForMobile({
           <div className="text-text-secondary text-sm">პროდუქტი</div>
 
           <div>
-            <Button variant="outline" className="border text-sm">
+            {/* <Button variant="outline" className="border text-sm">
               გასუფთავება
-            </Button>
+            </Button> */}
+            <ClearAllProductsButton />
           </div>
         </div>
       </div>
@@ -26,11 +27,13 @@ export default function ProductSpecsForMobile({
           <div className="flex">
             {products.map((product) => (
               <div key={product.id} className="mr-4">
-                <CompareProductCard product={product} onDelete={() => {}} />
+                <CompareProductCard product={product} />
               </div>
             ))}
           </div>
-          <div className="text-text-secondary py-6 text-sm">დეტალები</div>
+          <div className="text-text-secondary py-6 text-sm md:hidden">
+            დეტალები
+          </div>
           <div className="flex">
             {products.map((product) => (
               <div

@@ -1,6 +1,7 @@
 "use client";
 
 import type { CompareProductWithSpecs } from "../../types";
+import ClearAllProductsButton from "../clearAllProductsButton";
 import CompareProductCard from "../compareProductCard";
 import TrashIcon from "@/components/icons/trashIcon";
 import { Button } from "@/components/ui/button";
@@ -21,7 +22,7 @@ export default function ProductSpecsForDesktop({
 
   return (
     <div className="w-full">
-      <h3 className="text-text-secondary mb-6 text-sm">დეტალები</h3>
+      {/* <h3 className="text-text-secondary mb-6 text-sm">დეტალები</h3> */}
 
       {/* Scrollable container synchronized with products */}
       <div className="overflow-visible">
@@ -33,13 +34,11 @@ export default function ProductSpecsForDesktop({
           }}
         >
           {/* Label Column - პროდუქტი */}
-          <div className="flex items-center justify-between bg-white p-4">
+          <div className="flex items-center justify-between bg-white p-4 pt-0">
             <div className="flex w-full flex-col items-center justify-center gap-6">
               <div className="text-text-secondary text-sm">პროდუქტი</div>
               <div>
-                <Button variant="outline" className="text-sm">
-                  <TrashIcon /> გასუფთავება
-                </Button>
+                <ClearAllProductsButton />
               </div>
             </div>
           </div>
@@ -51,13 +50,10 @@ export default function ProductSpecsForDesktop({
                 key={
                   product ? `product-${product.id}` : `empty-product-${index}`
                 }
-                className="bg-white p-4"
+                className="bg-white p-4 pt-0"
               >
                 {product ? (
-                  <CompareProductCard
-                    product={product}
-                    onDelete={onDelete || (() => {})}
-                  />
+                  <CompareProductCard product={product} />
                 ) : (
                   <div className="min-h-[200px]"></div>
                 )}

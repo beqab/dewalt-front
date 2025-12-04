@@ -2,6 +2,7 @@ import { BucketIcon } from "@/components/icons/bucketIcon";
 import Image from "next/image";
 import type { Product } from "../../types";
 import { cn } from "@/lib/utils";
+import { CompareButton } from "@/features/products/compare/components/compareButton";
 
 export default function ProductCard({
   product,
@@ -20,8 +21,8 @@ export default function ProductCard({
     price,
     originalPrice,
     discount,
-    inStock,
-    id,
+
+    _id,
   } = product;
   return (
     <div
@@ -42,18 +43,12 @@ export default function ProductCard({
         )}
 
         {/* Compare Checkbox */}
-        <div className="absolute top-2 right-2 z-10">
-          <label className="text-dark-secondary-70 flex cursor-pointer items-center gap-1 text-xs">
-            <input
-              type="checkbox"
-              className="text-primary focus:ring-primary h-4 w-4 rounded border-gray-300"
-            />
-            <span>შედარება</span>
-          </label>
+        <div className="absolute top-[150px] right-2 z-10">
+          <CompareButton productId={_id} />
         </div>
 
         {/* Product Image */}
-        <div className="relative mb-3 aspect-square w-full overflow-hidden rounded-lg">
+        <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
           <Image
             src={image}
             alt={name}

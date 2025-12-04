@@ -7,11 +7,11 @@ export const SearchWithoutWrapper = () => {
   return (
     <div className="bg-background md:block md:bg-transparent">
       <div className="text-dark-secondary-70 md:text-primary md:border-primary border-dark-secondary-70 flex h-8 items-center gap-2 rounded-sm border p-2 md:min-w-86">
-        <SearchIcon className="" />
+        <SearchIcon className="max-h-4 min-h-4 max-w-4 min-w-4" />
         <input
           type="text"
           placeholder={t("search")}
-          className="font-inter dark-secundary-70 w-full text-sm"
+          className="font-inter dark-secondary-70 placeholder:text-primary w-full text-sm"
         />
       </div>
     </div>

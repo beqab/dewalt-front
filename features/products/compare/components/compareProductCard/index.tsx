@@ -5,31 +5,23 @@ import Link from "next/link";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import { Button } from "@/components/ui/button";
 import type { CompareProductWithSpecs } from "../../types";
-import TrashIcon from "@/components/icons/trashIcon";
+
+import DeleteProductByIdButton from "../deleteProductByIdButton";
 
 interface CompareProductCardProps {
   product: CompareProductWithSpecs;
-  onDelete: (id: number) => void;
 }
 
 export default function CompareProductCard({
   product,
-  onDelete,
 }: CompareProductCardProps) {
-  const { id, image, name, code, price, originalPrice } = product;
+  const { id, image, name, code, price, originalPrice, _id } = product;
 
   return (
     <div className="relative min-w-[220px] flex-shrink-0 md:min-w-[240px]">
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-4 shadow-sm">
         {/* Delete Button */}
-        <button
-          type="button"
-          onClick={() => onDelete(id)}
-          className="text-text-secondary bg-background h:6.5 hover:text-dark-secondary-100/50 absolute top-[140px] right-2 z-10 flex items-center gap-1 rounded-sm px-2 py-1 text-xs transition-colors md:h-8"
-        >
-          <TrashIcon />
-          <span className="">წაშლა</span>
-        </button>
+        <DeleteProductByIdButton id={_id} />
 
         {/* Product Image */}
         <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
