@@ -17,7 +17,7 @@ export default function OrderSummary() {
   );
 
   return (
-    <div className="border-line-color bg-white rounded-lg border p-4 md:p-6">
+    <div className="border-line-color rounded-lg border bg-white p-4 md:p-6">
       <h3 className="text-dark-secondary-100 mb-4 text-lg font-bold">
         შეკვეთის დეტალები
       </h3>
@@ -45,7 +45,7 @@ export default function OrderSummary() {
 
         <Button
           variant="default"
-          size="lg"
+          size="md"
           className="bg-primary hover:bg-primary/90 text-dark-secondary-100 w-full"
           disabled={selectedItems.length === 0}
         >
@@ -56,4 +56,3 @@ export default function OrderSummary() {
     </div>
   );
 }
-
