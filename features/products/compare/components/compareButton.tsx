@@ -9,7 +9,7 @@ export function CompareButton({ productId }: { productId: string }) {
       <Checkbox
         type="checkbox"
         checked={productIds.includes(productId)}
-        onChange={(e) => setProductIds(productId)}
+        onChange={() => setProductIds(productId)}
         className="text-primary focus:ring-primary h-4 w-4 rounded border-gray-300"
       />
       <span>შედარება</span>

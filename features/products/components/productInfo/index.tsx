@@ -1,11 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { BucketIcon } from "@/components/icons/bucketIcon";
-import CompareIcon from "@/components/icons/compareIcon";
-import FbMessenger from "@/public/icons/fbmessenger.svg";
 import Rating from "@/components/rating";
 import StockIcon from "@/components/icons/stockIcon";
 import ShieldIcon from "@/components/icons/shieldIcon";

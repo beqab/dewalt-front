@@ -47,7 +47,6 @@ export default function CompareProductProvider({
     // If product exists, remove it (toggle off)
     if (exist) {
       setProductIds((prev) => {
-        console.log(prev);
         return prev.filter((productId) => productId !== id);
       });
       return;

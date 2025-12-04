@@ -20,19 +20,6 @@ export default function ProductComparisonPage() {
     productIds.includes(product._id)
   );
 
-  // Synchronize scrolling between products and specs
-
-  // if (products.length === 0) {
-  //   return (
-  //     <div>
-  //       <Breadcrumb items={breadcrumbItems} />
-  //       <div className="customContainer py-10 text-center">
-  //         <p className="text-text-secondary text-lg">შედარების სია ცარიელია</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
@@ -51,12 +38,7 @@ export default function ProductComparisonPage() {
               </div>
             </div>
           )}
-          {/* Product Cards - 2 rows × 4 columns */}
-          <div className="mb-8 overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] md:overflow-visible [&::-webkit-scrollbar]:hidden">
-            <div className="flex flex-col gap-4 md:grid md:grid-cols-4 md:grid-rows-2"></div>
-          </div>
 
-          {/* Product Specifications - Synchronized Scroll */}
           <div className="md:hidden">
             <ProductSpecsForMobile products={products} />
           </div>

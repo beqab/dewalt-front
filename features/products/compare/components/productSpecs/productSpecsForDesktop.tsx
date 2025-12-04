@@ -3,19 +3,13 @@
 import type { CompareProductWithSpecs } from "../../types";
 import ClearAllProductsButton from "../clearAllProductsButton";
 import CompareProductCard from "../compareProductCard";
-import TrashIcon from "@/components/icons/trashIcon";
-import { Button } from "@/components/ui/button";
 
 interface ProductSpecsProps {
   products: CompareProductWithSpecs[];
-
-  onDelete?: (id: number) => void;
 }
 
 export default function ProductSpecsForDesktop({
   products,
-
-  onDelete,
 }: ProductSpecsProps) {
   // Get all unique spec labels from all products
   const allSpecLabels = products[0]?.specs.map((spec) => spec.label) || [];

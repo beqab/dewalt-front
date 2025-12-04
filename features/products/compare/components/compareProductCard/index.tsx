@@ -18,7 +18,7 @@ export default function CompareProductCard({
   const { id, image, name, code, price, originalPrice, _id } = product;
 
   return (
-    <div className="relative min-w-[220px] flex-shrink-0 md:min-w-[240px]">
+    <div className="relative min-w-[220px] shrink-0 md:min-w-[240px]">
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-4 shadow-sm">
         {/* Delete Button */}
         <DeleteProductByIdButton id={_id} />
