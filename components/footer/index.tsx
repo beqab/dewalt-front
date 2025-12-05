@@ -2,7 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { brands } from "@/components/header/menu/staticMenu";
 import Image from "next/image";
 import footerImg from "@/public/imgs/footerImg.jpg";
-import PhoneIcon from "../icons/phoneicon";
+import PhoneIcon from "../icons/phoneIcon";
 import EnvelopIcon from "../icons/envelopIcon";
 import LocationIcon from "../icons/locationIcon";
 import FbIcon from "../icons/fbIcon";

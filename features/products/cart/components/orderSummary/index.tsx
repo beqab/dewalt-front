@@ -5,7 +5,7 @@ import { BucketIcon } from "@/components/icons/bucketIcon";
 import { useCartContext } from "../../cartContext";
 
 export default function OrderSummary() {
-  const { getTotalItems, getTotalPrice, getSelectedItems } = useCartContext();
+  const { getSelectedItems } = useCartContext();
   const selectedItems = getSelectedItems();
   const totalItems = selectedItems.reduce(
     (total, item) => total + item.quantity,
