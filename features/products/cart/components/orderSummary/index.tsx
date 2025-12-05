@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { BucketIcon } from "@/components/icons/bucketIcon";
 import { useCartContext } from "../../cartContext";
 import { useTranslations } from "next-intl";
+import PayIcon from "@/components/icons/payIcon";
 
 export default function OrderSummary() {
   const t = useTranslations();
@@ -20,27 +20,25 @@ export default function OrderSummary() {
 
   return (
     <div className="border-line-color rounded-lg border bg-white p-4 md:p-6">
-      <h3 className="text-dark-secondary-100 mb-4 text-lg font-bold">
+      <h3 className="text-dark-secondary-100 mb-4 text-sm">
         {t("cart.orderDetails")}
       </h3>
 
-      <div className="space-y-3 border-b border-gray-200 pb-4">
+      <div className="space-y-2 pb-4">
         <div className="flex items-center justify-between">
-          <span className="text-text-secondary text-sm">
+          <span className="text-dark-secondary-100 text-xs">
             {t("cart.itemsCount")}
           </span>
-          <span className="text-dark-secondary-100 font-semibold">
-            {totalItems}
-          </span>
+          <span className="text-dark-secondary-100 text-xs">{totalItems}</span>
         </div>
       </div>
 
-      <div className="mt-4">
-        <div className="mb-4 flex items-center justify-between">
-          <span className="text-dark-secondary-100 text-base font-semibold md:text-lg">
+      <div className="">
+        <div className="mb-4 flex items-center justify-between border-b border-gray-200 pb-4 md:pb-6">
+          <span className="text-dark-secondary-100 text-sm font-semibold md:text-sm">
             {t("cart.total")}
           </span>
-          <span className="text-dark-secondary-100 text-lg font-bold md:text-xl">
+          <span className="text-dark-secondary-100 text-sm font-semibold md:text-sm">
             {totalPrice.toLocaleString("ka-GE")} GEL
           </span>
         </div>
@@ -51,7 +49,7 @@ export default function OrderSummary() {
           className="bg-primary hover:bg-primary/90 text-dark-secondary-100 w-full"
           disabled={selectedItems.length === 0}
         >
-          <BucketIcon className="fill-dark-secondary-100" />
+          <PayIcon />
           <span>{t("cart.buy")}</span>
         </Button>
       </div>

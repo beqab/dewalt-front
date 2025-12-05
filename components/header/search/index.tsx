@@ -11,7 +11,7 @@ export const SearchWithoutWrapper = () => {
         <input
           type="text"
           placeholder={t("search")}
-          className="font-inter dark-secondary-70 placeholder:text-primary w-full text-sm"
+          className="font-inter dark-secondary-70 md:placeholder:text-primary w-full text-sm"
         />
       </div>
     </div>

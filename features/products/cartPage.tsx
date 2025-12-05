@@ -36,18 +36,20 @@ export default function CartPage() {
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
-      <div className="bg-neutral md:bg-background">
-        <div className="customContainer py-6 md:py-8">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_400px]">
+      <div className="bg-neutral md:bg-white">
+        <div className="mx-auto max-w-[1070px] px-[15px] py-6 md:py-8">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
             {/* Main Cart Content */}
             <div>
               {/* Header with Select All and Delete */}
-              <div className="mb-4 flex items-center justify-between rounded-lg border border-gray-200 bg-white p-4">
-                <div className="flex items-center gap-3">
+              <div className="mb-4 flex items-center justify-between rounded-lg md:px-6">
+                <div className="bg-line-color/50 flex h-8 items-center gap-3 rounded p-2">
                   <Checkbox
                     checked={allSelected}
                     onChange={() => toggleSelectAll()}
                     label={t("cart.selectAll")}
+                    className="text-dark-secondary-100 mr-2 text-xs"
+                    labelClassName="text-dark-secondary-100 text-xs"
                   />
                 </div>
                 {hasSelectedItems && (
@@ -55,10 +57,10 @@ export default function CartPage() {
                     variant="outline"
                     size="sm"
                     onClick={removeSelected}
-                    className="text-text-secondary hover:text-dark-secondary-100 flex items-center gap-2"
+                    className="text-text-secondary bg-line-color/50 border-line-color hover:text-dark-secondary-100 flex h-8 items-center gap-2 rounded border p-2 text-xs"
                   >
                     <TrashIcon />
-                    <span>{t("cart.delete")}</span>
+                    <span className="text-xs">{t("cart.delete")}</span>
                   </Button>
                 )}
               </div>

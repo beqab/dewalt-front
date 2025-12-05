@@ -7,6 +7,7 @@ import TrashIcon from "@/components/icons/trashIcon";
 import type { CartItem as CartItemType } from "../../types";
 import { useCartContext } from "../../cartContext";
 import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 
 interface CartItemProps {
   item: CartItemType;
@@ -31,45 +32,47 @@ export default function CartItem({ item }: CartItemProps) {
   };
 
   return (
-    <div className="border-line-color flex gap-4 border-b pb-4 pt-4 last:border-0">
+    <div className="border-line-color flex gap-4 border-b pt-4 pb-4 last:border-0 md:py-6">
       {/* Checkbox */}
-      <div className="flex items-start pt-2">
-        <Checkbox
-          checked={selected}
-          onChange={() => toggleSelect(product._id)}
-        />
-      </div>
-
-      {/* Product Image */}
-      <Link href={`/products/${product._id}`} className="shrink-0">
-        <div className="relative h-24 w-24 overflow-hidden rounded-lg border border-gray-200 md:h-32 md:w-32">
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            className="object-contain p-2"
-            sizes="(max-width: 768px) 96px, 128px"
+      <div className="relative">
+        <div className="absolute top-0 left-0 z-10 flex items-start pt-2">
+          <Checkbox
+            checked={selected}
+            onChange={() => toggleSelect(product._id)}
           />
         </div>
-      </Link>
+
+        {/* Product Image */}
+        <Link href={`/products/${product._id}`} className="shrink-0">
+          <div className="relative h-24 w-24 overflow-hidden rounded-lg md:h-40 md:w-40">
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              className="object-contain p-2"
+              sizes="(max-width: 768px) 96px, 160px"
+            />
+          </div>
+        </Link>
+      </div>
 
       {/* Product Info */}
-      <div className="flex flex-1 flex-col gap-2 md:flex-row md:items-center md:justify-between">
-        <div className="flex-1">
+      <div className="flex flex-1 flex-col gap-2 md:flex-col md:items-start md:justify-between md:py-2">
+        <div className="w-full flex-1 md:flex md:flex-row md:justify-between">
           <Link
             href={`/products/${product._id}`}
-            className="text-dark-secondary-100 hover:text-primary mb-1 block text-sm font-bold transition-colors md:text-base"
+            className="text-dark-secondary-100 hover:text-primary mb-1 block text-sm font-bold transition-colors md:max-w-[200px] md:text-sm"
           >
             {product.name} {product.code}
           </Link>
 
           {/* Price */}
-          <div className="flex items-center gap-2">
-            <span className="text-dark-secondary-100 text-base font-semibold md:text-lg">
+          <div className="flex items-center gap-2 md:flex-col">
+            <span className="text-dark-secondary-100 text-sm font-bold md:text-sm">
               {product.price} GEL
             </span>
             {product.originalPrice && (
-              <span className="text-text-secondary text-sm line-through">
+              <span className="text-text-secondary text-xs line-through">
                 {product.originalPrice} GEL
               </span>
             )}
@@ -77,7 +80,7 @@ export default function CartItem({ item }: CartItemProps) {
         </div>
 
         {/* Quantity and Delete */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-4 md:w-full">
           {/* Quantity Selector */}
           <div className="border-line-color flex items-center rounded border">
             <button
@@ -132,18 +135,19 @@ export default function CartItem({ item }: CartItemProps) {
           </div>
 
           {/* Delete Button */}
-          <button
-            type="button"
-            onClick={() => removeItem(product._id)}
-            className="text-text-secondary hover:text-dark-secondary-100 flex items-center gap-1 rounded px-2 py-1 text-xs transition-colors"
+
+          <Button
+            variant="outline"
             aria-label="Delete item"
+            size="sm"
+            onClick={() => removeItem(product._id)}
+            className="text-text-secondary bg-background-secondary border-line-color hover:text-dark-secondary-100 flex h-8 items-center gap-2 rounded border p-2 text-xs"
           >
-            <TrashIcon />
-            <span className="hidden md:inline">{t("cart.delete")}</span>
-          </button>
+            <TrashIcon className="text-text-secondary" />
+            <span className="text-xs">{t("cart.delete")}</span>
+          </Button>
         </div>
       </div>
     </div>
   );
 }
-
