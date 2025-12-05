@@ -25,6 +25,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       {/* Home */}
       <Link
         href="/"
+        prefetch={true}
         onClick={() => onClose()}
         className="font-inter text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
@@ -52,6 +53,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       {/* News */}
       <Link
         href="/news"
+        prefetch={true}
         onClick={() => onClose()}
         className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
@@ -61,6 +63,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       {/* Service Center */}
       <Link
         href="/service-center"
+        prefetch={true}
         onClick={() => onClose()}
         className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
@@ -70,6 +73,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
       {/* Contact */}
       <Link
         href="/contact"
+        prefetch={true}
         onClick={() => onClose()}
         className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >

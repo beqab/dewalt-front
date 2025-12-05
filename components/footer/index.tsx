@@ -24,6 +24,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
+                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   მთავარი
@@ -32,6 +33,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/news"
+                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   სიახლეები
@@ -40,6 +42,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
+                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   ჩვენს შესახებ
@@ -48,6 +51,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/service-center"
+                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   სერვის ცენტრი
@@ -56,6 +60,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
+                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   კონტაქტი
@@ -70,6 +75,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/products"
+                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs transition-colors"
                 >
                   პროდუქტები
@@ -79,6 +85,7 @@ export default function Footer() {
                 <li key={index}>
                   <Link
                     href={`/products?brand=${brand.name.toLowerCase()}`}
+                    prefetch={true}
                     className="text-neutral hover:text-primary text-xs transition-colors"
                   >
                     {brand.name}
@@ -149,6 +156,7 @@ export default function Footer() {
               <div className="text-dark-secondary-100 flex flex-wrap items-center justify-center gap-2 text-xs lg:justify-start">
                 <Link
                   href="/terms"
+                  prefetch={true}
                   className="transition-colors hover:underline"
                 >
                   წესები და პირობები
@@ -156,6 +164,7 @@ export default function Footer() {
 
                 <Link
                   href="/privacy"
+                  prefetch={true}
                   className="transition-colors hover:underline"
                 >
                   კონფიდენციალურობის პოლიტიკა

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useProductMenuContext } from "../context";
 
 export default function DropDownMenuSubcategories() {
@@ -27,6 +27,7 @@ export default function DropDownMenuSubcategories() {
           >
             <Link
               href={`/products?category=${subCategory.slug}`}
+              prefetch={true}
               className="block px-4 leading-8 hover:font-bold"
             >
               <span className="text-sm text-[#1E1E1E]">{subCategory.name}</span>

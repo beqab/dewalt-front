@@ -16,7 +16,7 @@ export default function Header() {
   return (
     <header className="relative z-40">
       <div className="bg-dark-secondary-100 flex items-center justify-between px-5 py-4">
-        <Link href="/">
+        <Link href="/" prefetch={true}>
           <Image
             src="/logo.png"
             alt="Logo"

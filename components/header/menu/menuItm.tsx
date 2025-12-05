@@ -109,6 +109,7 @@ export default function MenuItem({
   return (
     <Link
       href={href}
+      prefetch={true}
       className={classNames(
         "text-dark-secondary-100 font-inter relative flex items-center gap-1 py-2 text-sm transition-colors hover:text-black",
         {
