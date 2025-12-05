@@ -1,0 +1,125 @@
+import LocationIcon from "@/components/icons/locationIcon";
+import PhoneIcon from "@/components/icons/phoneIcon";
+import EnvelopIcon from "@/components/icons/envelopIcon";
+import FbIcon from "@/components/icons/fbIcon";
+import Breadcrumb from "@/components/ui/breadcrumb";
+
+const breadcrumbItems = [
+  { label: "მთავარი", href: "/" },
+  { label: "კონტაქტი" },
+];
+
+export default function ContactPage() {
+  return (
+    <div>
+      <Breadcrumb items={breadcrumbItems} />
+
+      {/* Header Section */}
+      <div className="bg-background mb-8 py-8 text-center md:mb-12 md:py-12">
+        <div className="mx-auto max-w-[1080px] px-5">
+          <h1 className="text-dark-secondary-100 text-2xl font-semibold md:text-4xl">
+            კონტაქტი
+          </h1>
+          <p className="text-dark-secondary-70 mt-4 text-sm md:text-base">
+            დაგვიკავშირდით ნებისმიერ დროს - ჩვენ მზად ვართ დაგეხმაროთ
+          </p>
+        </div>
+      </div>
+
+      {/* Contact Information Cards */}
+      <div className="mx-auto max-w-[1080px] px-5 pb-12">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {/* Location Card */}
+          <div className="bg-background group hover:border-primary rounded-lg border border-gray-200 p-6 transition-all hover:shadow-lg">
+            <div className="bg-primary/10 group-hover:bg-primary/20 mb-4 flex h-12 w-12 items-center justify-center rounded-full transition-colors">
+              <LocationIcon className="text-primary" />
+            </div>
+            <h3 className="text-dark-secondary-100 mb-2 text-lg font-semibold">
+              მისამართი
+            </h3>
+            <p className="text-dark-secondary-70 text-sm leading-relaxed">
+              ქსნის ქუჩა 36 თბილისი 0141
+            </p>
+          </div>
+
+          {/* Phone Card */}
+          <div className="bg-background group hover:border-primary rounded-lg border border-gray-200 p-6 transition-all hover:shadow-lg">
+            <div className="bg-primary/10 group-hover:bg-primary/20 mb-4 flex h-12 w-12 items-center justify-center rounded-full transition-colors">
+              <PhoneIcon className="text-primary" />
+            </div>
+            <h3 className="text-dark-secondary-100 mb-2 text-lg font-semibold">
+              ტელეფონი
+            </h3>
+            <a
+              href="tel:+995577955582"
+              className="text-dark-secondary-70 hover:text-primary text-sm transition-colors"
+            >
+              +995 577 95 55 82
+            </a>
+          </div>
+
+          {/* Email Card */}
+          <div className="bg-background group hover:border-primary rounded-lg border border-gray-200 p-6 transition-all hover:shadow-lg md:col-span-2 lg:col-span-1">
+            <div className="bg-primary/10 group-hover:bg-primary/20 mb-4 flex h-12 w-12 items-center justify-center rounded-full transition-colors">
+              <div className="text-primary">
+                <EnvelopIcon />
+              </div>
+            </div>
+            <h3 className="text-dark-secondary-100 mb-2 text-lg font-semibold">
+              ელ.ფოსტა
+            </h3>
+            <a
+              href="mailto:ksanisale@dewaltgeorgia.com"
+              className="text-dark-secondary-70 hover:text-primary text-sm break-all transition-colors"
+            >
+              ksanisale@dewaltgeorgia.com
+            </a>
+          </div>
+        </div>
+
+        {/* Social Media Section */}
+        <div className="mt-12 text-center">
+          <h2 className="text-dark-secondary-100 mb-6 text-xl font-semibold">
+            გამოგვყევით სოციალურ ქსელებში
+          </h2>
+          <div className="flex justify-center">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-background hover:border-primary flex items-center gap-3 rounded-lg border border-gray-200 px-6 py-4 transition-all hover:shadow-lg"
+            >
+              <FbIcon />
+              <span className="text-dark-secondary-100 group-hover:text-primary font-medium">
+                Facebook
+              </span>
+            </a>
+          </div>
+        </div>
+
+        {/* Map Section */}
+        <div className="mt-12">
+          <h2 className="text-dark-secondary-100 mb-6 text-xl font-semibold">
+            ჩვენი მდებარეობა
+          </h2>
+          <div className="overflow-hidden rounded-lg border border-gray-200">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2978.5!2d44.8271!3d41.7151!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDQyJzU0LjQiTiA0NMKwNDknMzcuNiJF!5e0!3m2!1ska!2sge!4v1234567890123!5m2!1ska!2sge"
+              width="100%"
+              height="450"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="h-[400px] w-full md:h-[500px]"
+              title="Dewalt Georgia Location"
+            ></iframe>
+          </div>
+          <p className="text-dark-secondary-70 mt-4 text-center text-sm">
+            ქსნის ქუჩა 36, თბილისი 0141, საქართველო
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
