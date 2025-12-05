@@ -3,7 +3,11 @@
 import { Link } from "@/i18n/navigation";
 import { useProductMenuContext } from "../context";
 
-export default function DropDownMenuSubcategories() {
+export default function DropDownMenuSubcategories({
+  onClose,
+}: {
+  onClose: () => void;
+}) {
   const { categories, activeCategory, activeMainCategory } =
     useProductMenuContext();
 
@@ -27,6 +31,7 @@ export default function DropDownMenuSubcategories() {
           >
             <Link
               href={`/products?category=${subCategory.slug}`}
+              onClick={onClose}
               prefetch={true}
               className="block px-4 leading-8 hover:font-bold"
             >

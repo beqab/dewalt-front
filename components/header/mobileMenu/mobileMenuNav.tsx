@@ -18,6 +18,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
   if (openMenuCategory !== null) {
     return (
       <MenuCategories
+        onClose={onClose}
         category={openMenuCategory}
         onchangeCategory={handleOpenMenuCategory}
       />

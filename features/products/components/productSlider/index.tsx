@@ -9,9 +9,9 @@ import { dummyProducts } from "../../data/dummyProducts";
 export default function ProductSlider() {
   const products = dummyProducts.slice(0, 10);
   return (
-    <div className="customContainer relative mt-18 w-full">
+    <div className="relative mx-auto mt-18 w-full max-w-[1300px] pr-[15px] pl-2 md:px-[15px] md:py-[15px]">
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between px-5 md:px-0">
+      <div className="mb-4 flex items-center justify-between px-2 md:px-0">
         <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-2xl md:text-2xl">
           პროდუქტები
         </h2>

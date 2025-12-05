@@ -33,15 +33,16 @@ export default function ProductDetails({ product }: { product: Product }) {
       <div className="mx-auto max-w-[1070px] px-[15px] py-8">
         <ProductInfoTab />
 
-        <div className="text-dark-secondary-100 pt-10 pb-6">
+        <div className="text-dark-secondary-100 pt-10 pb-6 text-sm">
           {t("products.similarProducts")}
         </div>
-
-        <Carousel>
-          {dummyProducts.map((product) => (
-            <ProductCard size="sm" key={product.id} product={product} />
-          ))}
-        </Carousel>
+        <div className="ml-[-10px] md:ml-[-5px]">
+          <Carousel>
+            {dummyProducts.map((product) => (
+              <ProductCard size="sm" key={product.id} product={product} />
+            ))}
+          </Carousel>
+        </div>
       </div>
     </div>
   );

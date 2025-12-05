@@ -5,9 +5,11 @@ import SubCategorySelector from "./subCategorySelector";
 
 export default function MenuCategories({
   category,
+  onClose,
   onchangeCategory,
 }: {
   category: number;
+  onClose: () => void;
   onchangeCategory: (category: number | null) => void;
 }) {
   const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(
@@ -87,6 +89,11 @@ export default function MenuCategories({
                   key={index}
                   label={subCategory.name}
                   href={`/products?category=${subCategory.slug}`}
+                  onClick={() => {
+                    onClose();
+                    onchangeCategory(null);
+                    setSelectedSubCategory(null);
+                  }}
                 />
               )
             )}

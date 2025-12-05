@@ -100,9 +100,11 @@ export const MenuSubItem = ({
 export default function MenuItem({
   label,
   href = "#",
+  onClick,
 }: {
   label: string;
   href: string;
+  onClick?: () => void;
 }) {
   const pathname = usePathname();
   const isActive = pathname === href;
@@ -110,6 +112,7 @@ export default function MenuItem({
     <Link
       href={href}
       prefetch={true}
+      onClick={onClick ? () => onClick() : undefined}
       className={classNames(
         "text-dark-secondary-100 font-inter relative flex items-center gap-1 py-2 text-sm transition-colors hover:text-black",
         {
