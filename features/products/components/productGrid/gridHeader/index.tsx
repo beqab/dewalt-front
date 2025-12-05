@@ -1,10 +1,14 @@
+"use client";
+
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 export default function GridHeader({
   productsCount,
 }: {
   productsCount: number;
 }) {
+  const t = useTranslations();
   const [sortBy, setSortBy] = useState("price-desc");
 
   const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -19,7 +23,7 @@ export default function GridHeader({
           htmlFor="sort"
           className="text-text-secondary text-sm font-medium"
         >
-          დალაგება
+          {t("products.sortBy")}
         </label>
         <select
           id="sort"
@@ -27,14 +31,14 @@ export default function GridHeader({
           onChange={handleSortBy}
           className="text-dark-secondary-100 focus:ring-primary rounded border border-transparent bg-white px-3 text-sm focus:ring-2 focus:outline-none"
         >
-          <option value="price-desc">ფასი: კლებადობით</option>
-          <option value="price-asc">ფასი: ზრდადობით</option>
+          <option value="price-desc">{t("products.priceDesc")}</option>
+          <option value="price-asc">{t("products.priceAsc")}</option>
         </select>
       </div>
 
       <div className="text-dark-secondary-100 text-sm">
-        <span className="text-text-secondary"> მოიძებნა </span> {productsCount}{" "}
-        პროდუქტი
+        <span className="text-text-secondary"> {t("products.found")} </span>{" "}
+        {productsCount} {t("products.products")}
       </div>
     </div>
   );

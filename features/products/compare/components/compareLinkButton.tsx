@@ -3,8 +3,10 @@ import CompareIcon from "@/components/icons/compareIcon";
 import { Button } from "@/components/ui/button";
 import { useCompareContext } from "../compareContext";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export default function CompareLinkButton() {
+  const t = useTranslations();
   const { productIds } = useCompareContext();
 
   return (
@@ -16,7 +18,8 @@ export default function CompareLinkButton() {
     >
       <Link href="/compare">
         <CompareIcon />
-        <span className="hidden md:inline">შედარება</span> ({productIds.length})
+        <span className="hidden md:inline">{t("breadcrumb.comparison")}</span> (
+        {productIds.length})
       </Link>
     </Button>
   );

@@ -1,7 +1,91 @@
 {
-    "title": "Dewalt",
-    "search": "Search",
-    "description": "Description",
-    "details": "Details",
-    "comments": "Comments"
+  "title": "Dewalt",
+  "search": "Search",
+  "description": "Description",
+  "details": "Details",
+  "comments": "Comments",
+  "navigation": {
+    "home": "Home",
+    "products": "Products",
+    "news": "News",
+    "about": "About Us",
+    "serviceCenter": "Service Center",
+    "contact": "Contact"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Contact us anytime - we are ready to help you",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "followUs": "Follow us on social networks",
+    "ourLocation": "Our Location"
+  },
+  "cart": {
+    "title": "My Cart",
+    "empty": "Cart is empty",
+    "selectAll": "Select All",
+    "delete": "Delete",
+    "orderDetails": "Order Details",
+    "itemsCount": "Items Count",
+    "total": "Total",
+    "buy": "Buy",
+    "addToCart": "Add to Cart",
+    "add": "Add",
+    "toCart": "To Cart",
+    "addedToCart": "Product successfully added to cart"
+  },
+  "product": {
+    "brand": "Brand",
+    "productCode": "Product Code",
+    "category": "Category",
+    "delivery": "Delivery",
+    "warranty": "Warranty",
+    "quantity": "Quantity"
+  },
+  "banner": {
+    "newYearSale": "New Year",
+    "discount": "Discount",
+    "newCollection": "New Collection",
+    "professionalTools": "Professional Tools",
+    "specialOffer": "Special Offer",
+    "bigDiscounts": "Big Discounts",
+    "viewAll": "View All"
+  },
+  "about": {
+    "officialPartner": "Official Partner of DEWALT in Georgia",
+    "viewAll": "View All"
+  },
+  "benefits": {
+    "installmentPayment": "Installment Payment",
+    "discountsAndPromotions": "Discounts and Promotions",
+    "countrywideDelivery": "Countrywide Delivery",
+    "fullSupport": "Full Support"
+  },
+  "footer": {
+    "followUs": "Follow Us",
+    "allRightsReserved": "All rights reserved",
+    "termsAndConditions": "Terms and Conditions",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "products": {
+    "sortBy": "Sort By",
+    "priceDesc": "Price: Descending",
+    "priceAsc": "Price: Ascending",
+    "found": "Found",
+    "products": "products",
+    "similarProducts": "Similar Products",
+    "selectToCompare": "Select products to compare",
+    "clearAll": "Clear All"
+  },
+  "breadcrumb": {
+    "home": "Home",
+    "products": "Products",
+    "news": "News",
+    "contact": "Contact",
+    "about": "About",
+    "serviceCenter": "Service Center",
+    "comparison": "Comparison",
+    "cart": "My Cart"
+  }
 }

@@ -1,7 +1,11 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function AboutBanner() {
+  const t = useTranslations();
   return (
     <div className="lg:col h-[500px] bg-[url('/imgs/VectorMob.png')] bg-cover bg-center md:mt-0 md:h-[300px] md:bg-[url('/imgs/Vector.png')]">
       <div className="customContainer flex h-full items-center justify-center lg:justify-start">
@@ -10,10 +14,10 @@ export default function AboutBanner() {
             &quot;EAGLE POWER TOOLS&quot;{" "}
           </h1>
           <h2 className="mx-auto mt-2 mb-8 max-w-[272px] leading-8 text-white lg:max-w-full">
-            DEWALT-ის ოფიციალური პარტნიორი საქართველოში
+            {t("about.officialPartner")}
           </h2>
           <Button variant="default" className="w-[190px]" asChild>
-            <Link href="/about">სრულად</Link>
+            <Link href="/about">{t("about.viewAll")}</Link>
           </Button>
         </div>
       </div>

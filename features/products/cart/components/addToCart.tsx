@@ -7,8 +7,10 @@ import { useState } from "react";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { useTranslations } from "next-intl";
 
 export default function AddToCart({ product }: { product: Product }) {
+  const t = useTranslations();
   const { addItem } = useCartContext();
 
   const [quantity, setQuantity] = useState(1);
@@ -32,7 +34,7 @@ export default function AddToCart({ product }: { product: Product }) {
       {/* Quantity Selector */}
       <div className="flex flex-col items-start gap-2">
         <label htmlFor="quantity" className="text-text-secondary text-[10px]">
-          რაოდენობა:
+          {t("product.quantity")}:
         </label>
         <div className="border-line-color flex items-center rounded border">
           <button
@@ -94,7 +96,7 @@ export default function AddToCart({ product }: { product: Product }) {
         className="w-full flex-1 sm:flex-initial md:w-auto"
         onClick={() => {
           addItem(product, quantity);
-          toast.success("პროდუქტი წარმატებით დაემატა კალათაში", {
+          toast.success(t("cart.addedToCart"), {
             style: {
               background: "#FFBA00",
               color: "#1A1A1A",
@@ -105,7 +107,7 @@ export default function AddToCart({ product }: { product: Product }) {
         }}
       >
         <BucketIcon className="fill-dark-secondary-100 text-dark-secondary-100 h-6 w-6" />
-        <span>კალათაში დამატება</span>
+        <span>{t("cart.addToCart")}</span>
       </Button>
     </div>
   );
@@ -118,11 +120,12 @@ export const AddSingleItemToCart = ({
   product: Product;
   size: "sm" | "md";
 }) => {
+  const t = useTranslations();
   const { addItem } = useCartContext();
 
   const handleClick = () => {
     addItem(product, 1);
-    toast.success("პროდუქტი წარმატებით დაემატა კალათაში", {
+    toast.success(t("cart.addedToCart"), {
       style: {
         background: "#FFBA00",
         color: "#1A1A1A",
@@ -148,8 +151,8 @@ export const AddSingleItemToCart = ({
           "xl:hidden": size === "md",
         })}
       />
-      <span className={"hidden lg:inline"}>დამატება</span>
-      <span className="xl:hidden">კალათაში</span>
+      <span className={"hidden lg:inline"}>{t("cart.add")}</span>
+      <span className="xl:hidden">{t("cart.toCart")}</span>
     </button>
   );
 };

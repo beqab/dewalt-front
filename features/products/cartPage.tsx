@@ -7,13 +7,15 @@ import TrashIcon from "@/components/icons/trashIcon";
 import { useCartContext } from "./cart/cartContext";
 import CartItem from "./cart/components/cartItem";
 import OrderSummary from "./cart/components/orderSummary";
-
-const breadcrumbItems = [
-  { label: "მთავარი", href: "/" },
-  { label: "ჩემი კალათა" },
-];
+import { useTranslations } from "next-intl";
 
 export default function CartPage() {
+  const t = useTranslations();
+
+  const breadcrumbItems = [
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.cart") },
+  ];
   const { items, toggleSelectAll, removeSelected, getSelectedItems } =
     useCartContext();
 
@@ -25,7 +27,7 @@ export default function CartPage() {
       <div>
         <Breadcrumb items={breadcrumbItems} />
         <div className="customContainer py-10 text-center">
-          <p className="text-text-secondary text-lg">კალათა ცარიელია</p>
+          <p className="text-text-secondary text-lg">{t("cart.empty")}</p>
         </div>
       </div>
     );
@@ -45,7 +47,7 @@ export default function CartPage() {
                   <Checkbox
                     checked={allSelected}
                     onChange={() => toggleSelectAll()}
-                    label="ყველას მონიშვნა"
+                    label={t("cart.selectAll")}
                   />
                 </div>
                 {hasSelectedItems && (
@@ -56,7 +58,7 @@ export default function CartPage() {
                     className="text-text-secondary hover:text-dark-secondary-100 flex items-center gap-2"
                   >
                     <TrashIcon />
-                    <span>წაშლა</span>
+                    <span>{t("cart.delete")}</span>
                   </Button>
                 )}
               </div>

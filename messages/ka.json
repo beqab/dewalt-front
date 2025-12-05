@@ -1,7 +1,91 @@
 {
-    "title": "დეულატი",
-    "search": "ძებნა",
-    "description": "აღწერა",
-    "details": "დეტალები",
-    "comments": "კომენტარები"
+  "title": "დეულატი",
+  "search": "ძებნა",
+  "description": "აღწერა",
+  "details": "დეტალები",
+  "comments": "კომენტარები",
+  "navigation": {
+    "home": "მთავარი",
+    "products": "პროდუქტები",
+    "news": "სიახლეები",
+    "about": "ჩვენს შესახებ",
+    "serviceCenter": "სერვის ცენტრი",
+    "contact": "კონტაქტი"
+  },
+  "contact": {
+    "title": "კონტაქტი",
+    "subtitle": "დაგვიკავშირდით ნებისმიერ დროს - ჩვენ მზად ვართ დაგეხმაროთ",
+    "address": "მისამართი",
+    "phone": "ტელეფონი",
+    "email": "ელ.ფოსტა",
+    "followUs": "გამოგვყევით სოციალურ ქსელებში",
+    "ourLocation": "ჩვენი მდებარეობა"
+  },
+  "cart": {
+    "title": "ჩემი კალათა",
+    "empty": "კალათა ცარიელია",
+    "selectAll": "ყველას მონიშვნა",
+    "delete": "წაშლა",
+    "orderDetails": "შეკვეთის დეტალები",
+    "itemsCount": "ნივთების რაოდენობა",
+    "total": "სულ გადასახადი",
+    "buy": "ყიდვა",
+    "addToCart": "კალათაში დამატება",
+    "add": "დამატება",
+    "toCart": "კალათაში",
+    "addedToCart": "პროდუქტი წარმატებით დაემატა კალათაში"
+  },
+  "product": {
+    "brand": "ბრენდი",
+    "productCode": "პროდუქტის კოდი",
+    "category": "კატეგორია",
+    "delivery": "მიწოდება",
+    "warranty": "გარანტია",
+    "quantity": "რაოდენობა"
+  },
+  "banner": {
+    "newYearSale": "საახალწლო",
+    "discount": "ფასდაკლება",
+    "newCollection": "ახალი კოლექცია",
+    "professionalTools": "პროფესიონალური ხელსაწყოები",
+    "specialOffer": "სპეციალური შეთავაზება",
+    "bigDiscounts": "დიდი ფასდაკლებები",
+    "viewAll": "სრულად"
+  },
+  "about": {
+    "officialPartner": "DEWALT-ის ოფიციალური პარტნიორი საქართველოში",
+    "viewAll": "სრულად"
+  },
+  "benefits": {
+    "installmentPayment": "ნაწილ ნაწილ გადახდა",
+    "discountsAndPromotions": "ფასდაკლებები და აქციები",
+    "countrywideDelivery": "მიწოდება ქვეყნის მასშტაბით",
+    "fullSupport": "სრული მხარდაჭერა"
+  },
+  "footer": {
+    "followUs": "გამოგვყევით",
+    "allRightsReserved": "ყველა უფლება დაცულია",
+    "termsAndConditions": "წესები და პირობები",
+    "privacyPolicy": "კონფიდენციალურობის პოლიტიკა"
+  },
+  "products": {
+    "sortBy": "დალაგება",
+    "priceDesc": "ფასი: კლებადობით",
+    "priceAsc": "ფასი: ზრდადობით",
+    "found": "მოიძებნა",
+    "products": "პროდუქტი",
+    "similarProducts": "მსგავსი პროდუქტები",
+    "selectToCompare": "შედარებისთვის შეარჩიეთ",
+    "clearAll": "გასუფთავება"
+  },
+  "breadcrumb": {
+    "home": "მთავარი",
+    "products": "პროდუქტები",
+    "news": "სიახლეები",
+    "contact": "კონტაქტი",
+    "about": "ჩვენს შესახებ",
+    "serviceCenter": "სერვის ცენტრი",
+    "comparison": "შედარება",
+    "cart": "ჩემი კალათა"
+  }
 }

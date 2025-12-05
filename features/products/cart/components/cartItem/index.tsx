@@ -6,12 +6,14 @@ import { Checkbox } from "@/components/ui/checkbox";
 import TrashIcon from "@/components/icons/trashIcon";
 import type { CartItem as CartItemType } from "../../types";
 import { useCartContext } from "../../cartContext";
+import { useTranslations } from "next-intl";
 
 interface CartItemProps {
   item: CartItemType;
 }
 
 export default function CartItem({ item }: CartItemProps) {
+  const t = useTranslations();
   const { product, quantity, selected } = item;
   const { toggleSelect, updateQuantity, removeItem } = useCartContext();
 
@@ -137,7 +139,7 @@ export default function CartItem({ item }: CartItemProps) {
             aria-label="Delete item"
           >
             <TrashIcon />
-            <span className="hidden md:inline">წაშლა</span>
+            <span className="hidden md:inline">{t("cart.delete")}</span>
           </button>
         </div>
       </div>

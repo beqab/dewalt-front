@@ -1,10 +1,14 @@
+"use client";
+
 import { Link } from "@/i18n/navigation";
-import MenuItem, { MenuItemWithArrow } from "../menu/menuItm";
+import { MenuItemWithArrow } from "../menu/menuItm";
 import { brands } from "../menu/staticMenu";
 import { useState } from "react";
 import MenuCategories from "./menuCategories";
+import { useTranslations } from "next-intl";
 
 export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
+  const t = useTranslations();
   const [openMenuCategory, setOpenMenuCategory] = useState<number | null>(null);
 
   const handleOpenMenuCategory = (category: number | null) => {
@@ -29,13 +33,13 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
         onClick={() => onClose()}
         className="font-inter text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
-        მთავარი
+        {t("navigation.home")}
       </Link>
 
       {/* Products */}
       <MenuItemWithArrow
         isActive={!!openMenuCategory}
-        label="პროდუქტები"
+        label={t("navigation.products")}
         href="/products"
         className="text-[16px]"
         onClick={() => handleOpenMenuCategory(0)}
@@ -57,7 +61,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
         onClick={() => onClose()}
         className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
-        სიახლეები
+        {t("navigation.news")}
       </Link>
 
       {/* Service Center */}
@@ -67,7 +71,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
         onClick={() => onClose()}
         className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
-        სერვის ცენტრი
+        {t("navigation.serviceCenter")}
       </Link>
 
       {/* Contact */}
@@ -77,7 +81,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
         onClick={() => onClose()}
         className="text-dark-secondary-100 block py-3 font-medium transition-colors hover:bg-gray-100"
       >
-        კონტაქტი
+        {t("navigation.contact")}
       </Link>
     </nav>
   );

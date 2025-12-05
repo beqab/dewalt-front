@@ -7,15 +7,17 @@ import { DateIcon } from "@/components/icons/date";
 import RecentlyAddedNews from "./components/recentlyAddedNews";
 import { dummyNews } from "./data/dummyNews";
 import ShareButton from "@/components/ui/ShareButton";
+import { useTranslations } from "next-intl";
 
 export default function NewsDetail() {
+  const t = useTranslations();
   const params = useParams();
   const newsId = Number(params?.id || params?.slug || 1);
   const news = dummyNews.find((item) => item.id === newsId) || dummyNews[0];
 
   const breadcrumbItems = [
-    { label: "მთავარი", href: "/" },
-    { label: "სიახლეები", href: "/news" },
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.news"), href: "/news" },
     { label: news.name },
   ];
 

@@ -7,13 +7,15 @@ import ProductSpecsForDesktop from "./compare/components/productSpecs/productSpe
 import { useCompareContext } from "./compare/compareContext";
 import { dummyProducts } from "./data/dummyProducts";
 import { Link } from "@/i18n/navigation";
-
-const breadcrumbItems = [
-  { label: "მთავარი", href: "/" },
-  { label: "შედარება" },
-];
+import { useTranslations } from "next-intl";
 
 export default function ProductComparisonPage() {
+  const t = useTranslations();
+
+  const breadcrumbItems = [
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.comparison") },
+  ];
   const { productIds } = useCompareContext();
 
   const products = dummyProducts.filter((product) =>
@@ -30,9 +32,9 @@ export default function ProductComparisonPage() {
             <div>
               <div className="customContainer py-10 text-center">
                 <p className="text-text-secondary text-sm">
-                  შსადარებლად შეარჩიეთ{" "}
+                  {t("products.selectToCompare")}{" "}
                   <Link href="/products" className="text-primary">
-                    პროდუქი
+                    {t("navigation.products")}
                   </Link>
                 </p>
               </div>

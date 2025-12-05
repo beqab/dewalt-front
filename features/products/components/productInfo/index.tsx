@@ -10,8 +10,10 @@ import ShareButton from "@/components/ui/ShareButton";
 import { CompareButton } from "../../compare/components/compareButton";
 import AddToCart from "../../cart/components/addToCart";
 import { Product } from "../../types";
+import { useTranslations } from "next-intl";
 
 export default function ProductInfo({ product }: { product: Product }) {
+  const t = useTranslations();
   const {
     name,
     price,
@@ -47,15 +49,21 @@ export default function ProductInfo({ product }: { product: Product }) {
       {/* Product Details */}
       <div className="space-y-2 md:mb-6">
         <div className="text-dark-secondary-100 text-sm">
-          <span className="text-text-secondary text-sm">ბრენდი: </span>
+          <span className="text-text-secondary text-sm">
+            {t("product.brand")}:{" "}
+          </span>
           {brand}
         </div>
         <div className="text-dark-secondary-100 text-sm">
-          <span className="text-text-secondary text-sm">პროდუქტის კოდი: </span>
+          <span className="text-text-secondary text-sm">
+            {t("product.productCode")}:{" "}
+          </span>
           {code}
         </div>
         <div className="text-dark-secondary-100 text-sm">
-          <span className="text-text-secondary text-sm">კატეგორია: </span>
+          <span className="text-text-secondary text-sm">
+            {t("product.category")}:{" "}
+          </span>
           {category}
         </div>
       </div>
@@ -67,11 +75,15 @@ export default function ProductInfo({ product }: { product: Product }) {
       <div className="border-line-color flex flex-wrap gap-2 space-y-3 border-t pt-4 md:gap-4">
         <div className="bg-background-secondary flex h-8 items-center gap-2 rounded p-2">
           <StockIcon />
-          <span className="text-dark-secondary-100 text-sm">მიწოდება</span>
+          <span className="text-dark-secondary-100 text-sm">
+            {t("product.delivery")}
+          </span>
         </div>
         <div className="bg-background-secondary flex h-8 items-center gap-2 rounded p-2">
           <ShieldIcon />
-          <span className="text-dark-secondary-100 text-sm">გარანტია</span>
+          <span className="text-dark-secondary-100 text-sm">
+            {t("product.warranty")}
+          </span>
         </div>
         <ShareButton />
       </div>

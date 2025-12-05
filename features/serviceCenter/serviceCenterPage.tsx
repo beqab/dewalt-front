@@ -1,16 +1,19 @@
+"use client";
+
 import LocationIcon from "@/components/icons/locationIcon";
 import PhoneIcon from "@/components/icons/phoneIcon";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import Image from "next/image";
 import serviceCenterImg from "@/public/imgs/service.png";
-
-//service.png
-const breadcrumbItems = [
-  { label: "მთავარი", href: "/" },
-  { label: "სერვის ცენტრი" },
-];
+import { useTranslations } from "next-intl";
 
 export default function ServiceCenterPage() {
+  const t = useTranslations();
+
+  const breadcrumbItems = [
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.serviceCenter") },
+  ];
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />

@@ -1,3 +1,5 @@
+"use client";
+
 import { Link } from "@/i18n/navigation";
 import { brands } from "@/components/header/menu/staticMenu";
 import Image from "next/image";
@@ -6,8 +8,10 @@ import PhoneIcon from "../icons/phoneIcon";
 import EnvelopIcon from "../icons/envelopIcon";
 import LocationIcon from "../icons/locationIcon";
 import FbIcon from "../icons/fbIcon";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const t = useTranslations();
   return (
     <footer className="bg-dark-secondary-100 text-neutral">
       {/* Main Footer Content */}
@@ -27,7 +31,7 @@ export default function Footer() {
                   prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
-                  მთავარი
+                  {t("navigation.home")}
                 </Link>
               </li>
               <li>
@@ -36,7 +40,7 @@ export default function Footer() {
                   prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
-                  სიახლეები
+                  {t("navigation.news")}
                 </Link>
               </li>
               <li>
@@ -45,7 +49,7 @@ export default function Footer() {
                   prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
-                  ჩვენს შესახებ
+                  {t("navigation.about")}
                 </Link>
               </li>
               <li>
@@ -54,7 +58,7 @@ export default function Footer() {
                   prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
-                  სერვის ცენტრი
+                  {t("navigation.serviceCenter")}
                 </Link>
               </li>
               <li>
@@ -63,7 +67,7 @@ export default function Footer() {
                   prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
-                  კონტაქტი
+                  {t("navigation.contact")}
                 </Link>
               </li>
             </ul>
@@ -78,7 +82,7 @@ export default function Footer() {
                   prefetch={true}
                   className="text-neutral hover:text-primary text-xs transition-colors"
                 >
-                  პროდუქტები
+                  {t("navigation.products")}
                 </Link>
               </li>
               {brands.map((brand, index) => (
@@ -130,7 +134,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-neutral hover:text-primary text-xs transition-colors"
                 >
-                  გამოგვყევით
+                  {t("footer.followUs")}
                 </a>
               </li>
             </ul>
@@ -146,7 +150,7 @@ export default function Footer() {
             <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-center">
               <div className="text-dark-secondary-100 text-center text-xs lg:text-left">
                 <span>2020 - </span>
-                <span className="ml-2">ყველა უფლება დაცულია</span>
+                <span className="ml-2">{t("footer.allRightsReserved")}</span>
               </div>
 
               {/* Separator */}
@@ -159,7 +163,7 @@ export default function Footer() {
                   prefetch={true}
                   className="transition-colors hover:underline"
                 >
-                  წესები და პირობები
+                  {t("footer.termsAndConditions")}
                 </Link>
 
                 <Link
@@ -167,7 +171,7 @@ export default function Footer() {
                   prefetch={true}
                   className="transition-colors hover:underline"
                 >
-                  კონფიდენციალურობის პოლიტიკა
+                  {t("footer.privacyPolicy")}
                 </Link>
               </div>
             </div>

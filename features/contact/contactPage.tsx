@@ -1,15 +1,19 @@
+"use client";
+
 import LocationIcon from "@/components/icons/locationIcon";
 import PhoneIcon from "@/components/icons/phoneIcon";
 import EnvelopIcon from "@/components/icons/envelopIcon";
 import FbIcon from "@/components/icons/fbIcon";
 import Breadcrumb from "@/components/ui/breadcrumb";
-
-const breadcrumbItems = [
-  { label: "მთავარი", href: "/" },
-  { label: "კონტაქტი" },
-];
+import { useTranslations } from "next-intl";
 
 export default function ContactPage() {
+  const t = useTranslations();
+
+  const breadcrumbItems = [
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.contact") },
+  ];
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
@@ -18,10 +22,10 @@ export default function ContactPage() {
       <div className="bg-background mb-8 py-8 text-center md:mb-12 md:py-12">
         <div className="mx-auto max-w-[1080px] px-5">
           <h1 className="text-dark-secondary-100 text-2xl font-semibold md:text-4xl">
-            კონტაქტი
+            {t("contact.title")}
           </h1>
           <p className="text-dark-secondary-70 mt-4 text-sm md:text-base">
-            დაგვიკავშირდით ნებისმიერ დროს - ჩვენ მზად ვართ დაგეხმაროთ
+            {t("contact.subtitle")}
           </p>
         </div>
       </div>
@@ -35,7 +39,7 @@ export default function ContactPage() {
               <LocationIcon className="text-primary" />
             </div>
             <h3 className="text-dark-secondary-100 mb-2 text-lg font-semibold">
-              მისამართი
+              {t("contact.address")}
             </h3>
             <p className="text-dark-secondary-70 text-sm leading-relaxed">
               ქსნის ქუჩა 36 თბილისი 0141
@@ -48,7 +52,7 @@ export default function ContactPage() {
               <PhoneIcon className="text-primary" />
             </div>
             <h3 className="text-dark-secondary-100 mb-2 text-lg font-semibold">
-              ტელეფონი
+              {t("contact.phone")}
             </h3>
             <a
               href="tel:+995577955582"
@@ -66,7 +70,7 @@ export default function ContactPage() {
               </div>
             </div>
             <h3 className="text-dark-secondary-100 mb-2 text-lg font-semibold">
-              ელ.ფოსტა
+              {t("contact.email")}
             </h3>
             <a
               href="mailto:ksanisale@dewaltgeorgia.com"
@@ -80,7 +84,7 @@ export default function ContactPage() {
         {/* Social Media Section */}
         <div className="mt-12 text-center">
           <h2 className="text-dark-secondary-100 mb-6 text-xl font-semibold">
-            გამოგვყევით სოციალურ ქსელებში
+            {t("contact.followUs")}
           </h2>
           <div className="flex justify-center">
             <a
@@ -100,7 +104,7 @@ export default function ContactPage() {
         {/* Map Section */}
         <div className="mt-12">
           <h2 className="text-dark-secondary-100 mb-6 text-xl font-semibold">
-            ჩვენი მდებარეობა
+            {t("contact.ourLocation")}
           </h2>
           <div className="overflow-hidden rounded-lg border border-gray-200">
             <iframe

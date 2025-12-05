@@ -6,8 +6,10 @@ import MenuItem from "../menuItm";
 import ProductMenu from "./productMenu";
 import MainMenuItem from "./productMenu/mainMenuItem";
 import classNames from "classnames";
+import { useTranslations } from "next-intl";
 
 export default function DesktopMenu() {
+  const t = useTranslations();
   const [activeMainCategory, setActiveMainCategory] = useState<number | null>(
     null
   );
@@ -70,7 +72,7 @@ export default function DesktopMenu() {
           ))}
         </div>
         <div className="flex items-center gap-6">
-          <MenuItem label="მთავარი" href="/" />
+          <MenuItem label={t("navigation.home")} href="/" />
           <ProductMenu
             key={`products-`}
             onClose={handleProductsClose}
@@ -80,7 +82,7 @@ export default function DesktopMenu() {
             <MainMenuItem
               isOpen={activeProductsMenu}
               onToggle={handleProductsToggle}
-              label="პროდუქტები"
+              label={t("navigation.products")}
             />
             <ProductMenu.Panel width="wide" isOpen={activeProductsMenu}>
               <ProductMenu.MainCategories />
@@ -88,9 +90,12 @@ export default function DesktopMenu() {
               <ProductMenu.SubCategory />
             </ProductMenu.Panel>
           </ProductMenu>
-          <MenuItem label="სიახლეები" href="/news" />
-          <MenuItem label="სერვის ცენტრი" href="/service-center" />
-          <MenuItem label="კონტაქტი" href="/contact" />
+          <MenuItem label={t("navigation.news")} href="/news" />
+          <MenuItem
+            label={t("navigation.serviceCenter")}
+            href="/service-center"
+          />
+          <MenuItem label={t("navigation.contact")} href="/contact" />
         </div>
       </div>
     </nav>

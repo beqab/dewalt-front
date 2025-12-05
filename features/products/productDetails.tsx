@@ -1,3 +1,5 @@
+"use client";
+
 import Carousel from "@/components/carousel";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import DetailsSlider from "./components/detailsSlider";
@@ -6,14 +8,17 @@ import ProductInfoTab from "./components/productInfoTab";
 import ProductCard from "./ui/productCard";
 import { dummyProducts } from "./data/dummyProducts";
 import { Product } from "./types";
-const breadcrumbItems = [
-  { label: "მთავარი", href: "/" },
-  { label: "პროდუქტები", href: "/products" },
-  { label: "Dewalt", href: "/products?brand=dewalt" },
-  { label: "კუთხსახეხი - DW 1464131" },
-];
+import { useTranslations } from "next-intl";
 
 export default function ProductDetails({ product }: { product: Product }) {
+  const t = useTranslations();
+
+  const breadcrumbItems = [
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.products"), href: "/products" },
+    { label: "Dewalt", href: "/products?brand=dewalt" },
+    { label: product.name },
+  ];
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
@@ -29,7 +34,7 @@ export default function ProductDetails({ product }: { product: Product }) {
         <ProductInfoTab />
 
         <div className="text-dark-secondary-100 pt-10 pb-6">
-          მსგავსი პროდუქტები
+          {t("products.similarProducts")}
         </div>
 
         <Carousel>

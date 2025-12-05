@@ -1,12 +1,16 @@
+"use client";
+
 import Breadcrumb from "@/components/ui/breadcrumb";
 import Image from "next/image";
-
-const breadcrumbItems = [
-  { label: "მთავარი", href: "/" },
-  { label: "ჩვენ შესახებ" },
-];
+import { useTranslations } from "next-intl";
 
 export default function AboutPage() {
+  const t = useTranslations();
+
+  const breadcrumbItems = [
+    { label: t("breadcrumb.home"), href: "/" },
+    { label: t("breadcrumb.about") },
+  ];
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
@@ -39,7 +43,7 @@ export default function AboutPage() {
                 &quot;EAGLE POWER TOOLS&quot;
               </h1>
               <h2 className="text-primary font-bpg-web-002-caps mb-4 text-center md:text-left">
-                DEWALT-ის ოფიციალური პარტნიორი საქართველოში
+                {t("about.officialPartner")}
               </h2>
               <div className="text-white">
                 <p className="text-neutral mb-1 text-sm leading-relaxed md:text-sm">

@@ -6,6 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import classNames from "classnames";
 import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface Slide {
   id: number;
@@ -16,34 +17,35 @@ interface Slide {
   buttonLink: string;
 }
 
-const slides: Slide[] = [
-  {
-    id: 1,
-    image: "/imgs/banner.png", // You'll need to add this image
-    title: "საახალწლო",
-    subtitle: "ფასდაკლება",
-    buttonText: "სრულად",
-    buttonLink: "/products",
-  },
-  {
-    id: 2,
-    image: "/imgs/banner.png", // You'll need to add this image
-    title: "ახალი კოლექცია",
-    subtitle: "პროფესიონალური ხელსაწყოები",
-    buttonText: "სრულად",
-    buttonLink: "/products",
-  },
-  {
-    id: 3,
-    image: "/imgs/banner.png", // You'll need to add this image
-    title: "სპეციალური შეთავაზება",
-    subtitle: "დიდი ფასდაკლებები",
-    buttonText: "სრულად",
-    buttonLink: "/products",
-  },
-];
-
 export default function BannerCarousel() {
+  const t = useTranslations();
+
+  const slides: Slide[] = [
+    {
+      id: 1,
+      image: "/imgs/banner.png",
+      title: t("banner.newYearSale"),
+      subtitle: t("banner.discount"),
+      buttonText: t("banner.viewAll"),
+      buttonLink: "/products",
+    },
+    {
+      id: 2,
+      image: "/imgs/banner.png",
+      title: t("banner.newCollection"),
+      subtitle: t("banner.professionalTools"),
+      buttonText: t("banner.viewAll"),
+      buttonLink: "/products",
+    },
+    {
+      id: 3,
+      image: "/imgs/banner.png",
+      title: t("banner.specialOffer"),
+      subtitle: t("banner.bigDiscounts"),
+      buttonText: t("banner.viewAll"),
+      buttonLink: "/products",
+    },
+  ];
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, duration: 20 }, [
     Autoplay({ delay: 5000, stopOnInteraction: false }),
   ]);
