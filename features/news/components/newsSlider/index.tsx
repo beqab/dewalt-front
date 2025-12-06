@@ -3,7 +3,7 @@
 import Carusel from "@/components/carousel";
 import NewsCard from "../newsCard";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { dummyNews } from "../../data/dummyNews";
 
 export default function NewsSlider() {

@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import { useCartContext } from "../../cartContext";
 import { Link as I18nLink } from "@/i18n/navigation";

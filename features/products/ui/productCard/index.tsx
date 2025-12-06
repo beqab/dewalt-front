@@ -1,6 +1,5 @@
-import { BucketIcon } from "@/components/icons/bucketIcon";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { Product } from "../../types";
 import { cn } from "@/lib/utils";
 import { CompareButton } from "@/features/products/compare/components/compareButton";

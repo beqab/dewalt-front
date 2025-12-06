@@ -3,7 +3,7 @@
 import LanguageIcon from "@/components/icons/languageIcon";
 import { routing } from "@/i18n/routing";
 import { Locale } from "next-intl";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useParams } from "next/navigation";
 import MobileMenuNav from "./mobileMenuNav";
 import ProfileIcon from "@/components/icons/profileIcon";

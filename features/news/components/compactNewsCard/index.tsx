@@ -1,6 +1,6 @@
 import { DateIcon } from "@/components/icons/date";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { News } from "../../types";
 
 interface CompactNewsCardProps {

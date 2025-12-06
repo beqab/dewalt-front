@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import TrashIcon from "@/components/icons/trashIcon";
 import type { CartItem as CartItemType } from "../../types";
