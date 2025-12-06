@@ -59,7 +59,7 @@ export default function CompareProductCard({
 
           {/* Add to Cart Button */}
           <Button variant="default" className="h-10 w-full" size="sm">
-            <BucketIcon className="fill-dark-secondary-100" />
+            <BucketIcon className="text-dark-secondary-100" />
             <span>კალათაში</span>
           </Button>
         </div>

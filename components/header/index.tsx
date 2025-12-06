@@ -14,15 +14,16 @@ import CartPreview from "@/features/products/cart/components/cartPreview";
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   return (
-    <header className="relative z-40">
-      <div className="bg-dark-secondary-100 flex items-center justify-between px-5 py-4">
+    <header className="bg-dark-secondary-100 relative z-40">
+      <div className="customContainer flex items-center justify-between px-5 py-4">
         <Link href="/" prefetch={true}>
           <Image
             src="/logo.png"
             alt="Logo"
-            width={100}
-            height={100}
-            className="h-6 md:h-8"
+            width={132}
+            height={32}
+            quality={100}
+            className="h-6 w-auto md:h-8"
           />
         </Link>
         <div className="flex items-center gap-4 md:gap-6">
@@ -30,7 +31,7 @@ export default function Header() {
 
           <LanguageSelector className="hidden md:block" />
           <CartPreview />
-          <ProfileIcon className="hidden md:block" />
+          <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="relative z-50 flex cursor-pointer items-center justify-center transition-transform duration-300 hover:scale-110 active:scale-95 md:hidden"

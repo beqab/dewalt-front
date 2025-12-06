@@ -104,10 +104,10 @@ export default function BannerCarousel() {
               <div className="font-inter relative z-10 flex h-full flex-col items-center justify-center px-5 text-center">
                 <div className="space-y-4">
                   <div>
-                    <h1 className="text-3xl font-bold text-white md:text-5xl lg:text-6xl">
+                    <h1 className="font-bpg-web-002-caps text-3xl leading-relaxed font-bold text-white md:text-5xl lg:text-6xl">
                       {slide.title}
                     </h1>
-                    <h2 className="text-2xl font-semibold text-white md:text-4xl lg:text-3xl">
+                    <h2 className="text-2xl leading-relaxed font-semibold text-white md:text-4xl lg:text-3xl">
                       {slide.subtitle}
                     </h2>
                   </div>

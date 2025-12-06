@@ -28,7 +28,7 @@ export default function NewsCard({ news, className }: NewsCardProps) {
 
         {/* News Info */}
         <div className="flex flex-1 flex-col">
-          <h3 className="text-dark-secondary-100 mb-2 min-h-12 text-sm font-bold md:mb-4 md:text-base">
+          <h3 className="text-dark-secondary-100 mb-2 min-h-12 text-sm md:mb-4 md:text-base">
             {name}
           </h3>
           <div className="mb-4 flex items-center gap-2">
@@ -39,7 +39,7 @@ export default function NewsCard({ news, className }: NewsCardProps) {
             {description}
           </p>
         </div>
-        <Button variant="dark" className="mt-auto">
+        <Button variant="dark" className="mt-auto" asChild>
           <Link href={`/news/${id}`}>სრულად</Link>
         </Button>
       </div>

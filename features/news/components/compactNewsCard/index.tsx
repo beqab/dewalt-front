@@ -12,7 +12,7 @@ export default function CompactNewsCard({ news }: CompactNewsCardProps) {
   return (
     <Link
       href={`/news/${id}`}
-      className="group bg-background flex gap-4 rounded-sm p-4 shadow-sm transition-shadow hover:shadow-md md:bg-white"
+      className="group bg-background flex gap-4 rounded-lg p-4 shadow-sm transition-shadow hover:shadow-md md:bg-white"
     >
       <div className="relative h-20 w-20 shrink-0 overflow-hidden md:h-[112px] md:w-[152px]">
         <Image
@@ -23,7 +23,7 @@ export default function CompactNewsCard({ news }: CompactNewsCardProps) {
           sizes="(max-width: 768px) 80px, 152px"
         />
       </div>
-      <div className="flex flex-1 flex-col justify-between gap-1">
+      <div className="flex flex-1 flex-col justify-between gap-1 py-2">
         <h4 className="text-dark-secondary-100 group-hover:text-primary line-clamp-2 text-sm font-bold transition-colors">
           {name}
         </h4>

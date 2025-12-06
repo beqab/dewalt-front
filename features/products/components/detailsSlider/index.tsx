@@ -103,7 +103,7 @@ export default function DetailsSlider({
       {/* Main Image with Zoom */}
       <div
         ref={imageContainerRef}
-        className="rounded- relative mb-4 aspect-195/164 w-full overflow-hidden bg-white md:aspect-208/175"
+        className="relative mb-4 aspect-195/164 w-full overflow-hidden rounded-[6px] bg-white md:aspect-208/175"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >

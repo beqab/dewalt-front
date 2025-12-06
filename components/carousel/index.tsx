@@ -54,7 +54,7 @@ export default function Carousel({ children }: { children: React.ReactNode }) {
   return (
     <div className="">
       {/* Carousel */}
-      <div className="relative md:mr-[-6px] md:ml-[-6px]">
+      <div className="relative md:mr-[-6px] md:ml-[-8px]">
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex justify-around">{children}</div>
         </div>

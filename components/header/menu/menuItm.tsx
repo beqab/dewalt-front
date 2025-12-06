@@ -21,7 +21,7 @@ export function MenuItemWithArrow({
   return (
     <button
       className={classNames(
-        "text-dark-secondary-100 font-inter relative flex cursor-pointer items-center gap-1 py-2 text-sm transition-colors hover:text-black",
+        "text-dark-secondary-100 font-inter relative flex cursor-pointer items-center gap-2 py-2 text-sm transition-colors hover:text-black",
         className,
         {
           "text-black": isActive,

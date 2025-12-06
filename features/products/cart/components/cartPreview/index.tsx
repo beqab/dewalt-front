@@ -24,7 +24,7 @@ export default function CartPreview() {
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="relative flex items-center justify-center"
+        className="hover relative flex cursor-pointer items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95"
         aria-label="Cart"
       >
         <BucketIcon className="text-primary" />

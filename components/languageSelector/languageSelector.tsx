@@ -68,7 +68,7 @@ export default function LanguageSelector({
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={classNames(
-          "relative z-10 flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95",
+          "relative z-10 flex cursor-pointer items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95",
           isPending && "cursor-not-allowed opacity-50"
         )}
         disabled={isPending}

@@ -44,7 +44,7 @@ export default function ProductCard({
         )}
 
         {/* Compare Checkbox */}
-        <div className="absolute top-[150px] right-2 z-10">
+        <div className="absolute top-[150px] right-4 z-10">
           <CompareButton productId={_id} />
         </div>
 
@@ -55,7 +55,7 @@ export default function ProductCard({
               src={image}
               alt={name}
               fill
-              className="object-contain p-2 transition-transform hover:scale-105"
+              className="object-contain transition-transform hover:scale-105"
               sizes="(max-width: 768px) 66.666vw, 25vw"
             />
           </div>
@@ -65,7 +65,12 @@ export default function ProductCard({
         <div className="flex flex-1 flex-col">
           <Link
             href={`/products/${_id}`}
-            className="text-dark-secondary-100 hover:text-primary mb-2 h-12 text-sm font-bold transition-colors md:h-14 md:text-base"
+            className={cn(
+              "text-dark-secondary-100 hover:text-primary mb-2 h-12 text-sm transition-colors md:h-11.5 md:text-base",
+              {
+                "md:h-9.5 md:text-sm md:font-bold": size === "sm",
+              }
+            )}
           >
             {name} {code}
           </Link>
@@ -74,12 +79,16 @@ export default function ProductCard({
           {/* Price */}
           <div
             className={cn({
-              "mt-auto xl:flex xl:items-center xl:justify-between":
+              "mt-auto items-center md:flex xl:flex xl:items-center xl:justify-between":
                 size === "md",
               "mt-auto": size === "sm",
             })}
           >
-            <div className="mb-2 flex items-center gap-2">
+            <div
+              className={cn("mb-2 flex items-center gap-2 md:mb-0", {
+                "md:mb-4": size === "sm",
+              })}
+            >
               <span className="text-dark-secondary-100">{price} GEL</span>
               {originalPrice && (
                 <span className="text-text-secondary text-xs line-through">

@@ -10,7 +10,7 @@ export default function NewsSlider() {
   return (
     <div className="relative mx-auto mt-18 mb-10 w-full max-w-[1300px] pr-[15px] pl-2 md:mb-18 md:px-[15px] md:py-[15px]">
       {/* Header */}
-      <div className="mb-4 flex items-center justify-between px-2 md:px-0">
+      <div className="mb-2 flex items-center justify-between px-2 md:px-0">
         <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-2xl md:text-2xl">
           სიახლეები
         </h2>

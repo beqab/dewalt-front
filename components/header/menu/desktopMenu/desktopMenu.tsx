@@ -48,7 +48,7 @@ export default function DesktopMenu() {
           {brands.map((brand, brandIndex) => (
             <div
               key={brandIndex}
-              className={classNames("my-1 border-r border-[#D2D2D2] px-3", {
+              className={classNames("my-1 border-r border-[#D2D2D2] px-6", {
                 "border-r-0": brandIndex === brands.length - 1,
                 "pl-0": brandIndex === 0,
               })}

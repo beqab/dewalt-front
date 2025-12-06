@@ -202,7 +202,7 @@ export default function BenefitsList() {
   ];
   return (
     <div className="customContainer mt-12 w-full px-5 pb-10 md:px-0 md:pb-18">
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
         {benefits.map((benefit, index) => (
           <div
             key={index}

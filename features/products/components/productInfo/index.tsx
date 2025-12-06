@@ -28,9 +28,9 @@ export default function ProductInfo({ product }: { product: Product }) {
   } = product;
 
   return (
-    <div className="m-auto w-full max-w-[410px] space-y-4 md:max-w-none">
+    <div className="m-auto w-full max-w-[410px] space-y-4 md:m-0 md:max-w-none">
       {/* Product Title */}
-      <h1 className="text-dark-secondary-100 text-2xl font-bold md:text-3xl">
+      <h1 className="text-dark-secondary-100 font-bpg-web-002-caps text-2xl md:text-3xl">
         {name}
       </h1>
 

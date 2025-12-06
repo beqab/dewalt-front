@@ -40,7 +40,7 @@ export default function Brands() {
         {brandsData.map((brand, index) => (
           <div
             key={index}
-            className="bg-primary flex flex-col gap-8 rounded p-12 shadow-md"
+            className="bg-primary flex flex-col gap-8 rounded-lg p-12 shadow-md"
           >
             {/* Brand Logo/Name */}
             <div className="border-dark-secondary-100">

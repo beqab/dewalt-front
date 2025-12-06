@@ -106,7 +106,7 @@ export default function AddToCart({ product }: { product: Product }) {
           });
         }}
       >
-        <BucketIcon className="fill-dark-secondary-100 text-dark-secondary-100 h-6 w-6" />
+        <BucketIcon className="h-6 w-6" />
         <span>{t("cart.addToCart")}</span>
       </Button>
     </div>
@@ -147,7 +147,7 @@ export const AddSingleItemToCart = ({
       onClick={handleClick}
     >
       <BucketIcon
-        className={cn("md:fill-dark-secondary-100 fill-dark-secondary-100", {
+        className={cn("text-dark-secondary-100", {
           "xl:hidden": size === "md",
         })}
       />
