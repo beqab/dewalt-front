@@ -79,6 +79,47 @@
     "clearAll": "Clear All",
     "maxCompareReached": "Maximum 3 products can be added to the comparison list"
   },
+  "terms": {
+    "termsAndConditions": "Terms and Conditions",
+    "intro": "Please carefully read the purchase, return and delivery conditions before proceeding with your purchase!!!",
+    "greeting": "Dear customer! Thank you for your interest in our products.",
+    "purchaseConditions": "Purchase, return and delivery conditions:",
+    "paymentMethods": "You can purchase products using Visa or Mastercard cards from Georgian banks",
+    "courierService": "After payment confirmation, courier delivery service is activated",
+    "deliveryConditions": "Delivery conditions:",
+    "freeDelivery": "Free delivery within Tbilisi for purchases over 150 GEL.",
+    "paidDelivery": "In all other cases, delivery in Tbilisi is carried out by courier service (5 GEL), in other cities of Georgia by DHL (post), the price of which is determined individually based on weight and dimensions (11-35 GEL).",
+    "sameDayDelivery": "Delivery within Tbilisi is carried out on the same day if payment is made before 15:00",
+    "nextDayDelivery": "Delivery within Tbilisi is carried out the next day if payment is made after 15:00",
+    "countryDelivery": "Delivery throughout Georgia is carried out within no more than 36 hours if payment is made before 15:00",
+    "deliveryNote": "Variations are allowed during holidays/special events and during special regulations",
+    "returnConditions": "Return conditions for purchased goods:",
+    "returnPolicy": "The customer can return the goods only \"in person\" within 3 days if it turns out to be a factory defect.",
+    "returnRequirements": "Goods can be returned only if all accompanying documents are provided, the packaging (marking) is not damaged, and there are no defects.",
+    "returnExclusions": "Goods damaged by the customer due to improper operation (overload, mechanical damage, connection to incorrect power source, incorrect consumables, etc.) are not subject to return.",
+    "refundConditions": "Refund conditions in case of goods return:",
+    "refundPolicy": "The amount is refunded to the customer on the same account in case of goods return (except for incurred costs)",
+    "overpaymentRefund": "Overpaid amount is refunded to the customer on the same account (except for incurred costs)",
+    "duplicateRefund": "Duplicate paid amount is refunded to the customer on the same account (except for incurred costs)",
+    "refundTimeline": "When returning, the amount is reflected on the customer's account within the standard terms provided by Georgian banks.",
+    "contactInfo": "Contact information for additional questions:",
+    "address": "Tbilisi. Ksani Street 36",
+    "privacyPolicy": "Privacy Policy",
+    "privacyIntro": "Safely storing your personal information is our main goal.",
+    "privacyCommitment": "We recognize and respect your right to privacy. Our main goal is to protect all personal information of the customer. Its disclosure to other third parties is prohibited, unless it is the subject of interest of legislative bodies.",
+    "privacySecurity": "All types of personal information are transmitted through Secure Socket (SSL 256 bit encryption Standard) and stored in a reliable place that is strictly controlled and securely protected.",
+    "privacyContact": "If you have any questions regarding our privacy policy, please contact us: ksanisale@dewaltgeorgia.com TEL: + (995) 577 95 55 82",
+    "security": "Security",
+    "securityIntro": "dewaltgeorgia.com devotes a lot of time to customer security, we try in every way not to save time and energy so that customers feel safe using our services.",
+    "accountSecurity": "Account Security",
+    "accountSecurityDesc": "All accounts are accessible with a single username and password. Each customer must take care of their account security (keep the password and username secret). In case of forgetting or losing the password, it can be replaced with a new one.",
+    "accountRequirements": "Each customer on dewaltgeorgia.com can have only one account. Registration requires full name and surname, address, contact information and personal number. dewaltgeorgia.com offers customers the highest security measures. In case of any security-related problem, contact us so that we can respond quickly and resolve the problem. Any personal information from dewaltgeorgia.com servers is transmitted to the customer's computer with 256-bit encryption and Secure Socket Link (SSL).",
+    "accountSecurityNote": "",
+    "securityTips": "Security Tips",
+    "securityTipsDesc": "Security is extremely important to us. That's why we want to introduce you to security standards. Try to log into the system through our website and not from any other page that allows this. Check! Your browser's address field should say: https://www.dewaltgeorgia.com and only then enter your personal data.",
+    "systemSecurity": "Solid, stable and secure system:",
+    "systemSecurityDesc": "Due to the uniqueness of the system, its hacking or any kind of damage is virtually impossible. Also, all customer personal information is fully protected. We ensure strict confidentiality."
+  },
   "breadcrumb": {
     "home": "Home",
     "products": "Products",
@@ -87,6 +128,48 @@
     "about": "About",
     "serviceCenter": "Service Center",
     "comparison": "Comparison",
-    "cart": "My Cart"
+    "cart": "My Cart",
+    "login": "Login",
+    "register": "Register",
+    "resetPassword": "Reset Password",
+    "terms": "Terms and Conditions"
+  },
+  "auth": {
+    "login": {
+      "title": "Authorization",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Authorization",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account yet?",
+      "register": "Registration",
+      "agreeTerms": "I agree to the terms and conditions"
+    },
+    "register": {
+      "title": "Registration",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Repeat Password",
+      "submit": "Registration",
+      "hasAccount": "Do you already have an account?",
+      "login": "Authorization",
+      "agreeTerms": "I agree to the rules and conditions"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "email": "Email",
+      "submit": "Send Reset Link",
+      "backToLogin": "Back to Login",
+      "instructions": "Enter your email address and we'll send you a link to reset your password."
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 6 characters",
+      "confirmPasswordRequired": "Please confirm your password",
+      "passwordsMatch": "Passwords must match",
+      "termsRequired": "You must agree to the terms and conditions"
+    }
   }
 }

@@ -7,7 +7,7 @@ import { useState } from "react";
 export interface CheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   ref?: React.Ref<HTMLInputElement>;
-  label?: string;
+  label?: string | React.ReactNode;
   labelClassName?: string;
 }
 
@@ -72,13 +72,16 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             </svg>
           )}
         </div>
-        {label && (
-          <span
-            className={cn("font-dark-secondary-100 text-sm" + labelClassName)}
-          >
-            {label}
-          </span>
-        )}
+        {label &&
+          (typeof label === "string" ? (
+            <span
+              className={cn("font-dark-secondary-100 text-sm", labelClassName)}
+            >
+              {label}
+            </span>
+          ) : (
+            <span className={labelClassName}>{label}</span>
+          ))}
       </label>
     );
   }

@@ -40,16 +40,10 @@
 
 
   input:focus{
-    outline: none !important;
-    box-shadow: none !important;
-    border-color: transparent !important;
-    border-width: 0 !important;
-    border-style: none !important;
-    border-radius: 0 !important;
-    border-color: transparent !important;
-    border-width: 0 !important;
-    border-style: none !important;
-    border-radius: 0 !important;
+    outline: none ;
+    box-shadow: none ;
+
+   
   }
 
 

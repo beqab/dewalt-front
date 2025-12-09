@@ -112,7 +112,7 @@ export default function Footer() {
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <EnvelopIcon />
+                <EnvelopIcon className="text-primary" />
                 <a
                   href="mailto:ksanisale@dewalt.com"
                   className="text-neutral hover:text-primary text-xs transition-colors"
