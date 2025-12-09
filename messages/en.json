@@ -76,7 +76,8 @@
     "products": "products",
     "similarProducts": "Similar Products",
     "selectToCompare": "Select products to compare",
-    "clearAll": "Clear All"
+    "clearAll": "Clear All",
+    "maxCompareReached": "Maximum 3 products can be added to the comparison list"
   },
   "breadcrumb": {
     "home": "Home",

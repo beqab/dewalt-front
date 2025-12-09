@@ -2,6 +2,7 @@
 import { startTransition, useEffect, useRef, useState } from "react";
 import { CompareContext } from ".";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function CompareProductProvider({
   children,
@@ -10,7 +11,7 @@ export default function CompareProductProvider({
 }) {
   const [productIds, setProductIds] = useState<string[]>([]);
   const isInitialized = useRef(false);
-
+  const t = useTranslations();
   // Load from localStorage on client side only
   useEffect(() => {
     if (typeof window !== "undefined" && !isInitialized.current) {
@@ -53,11 +54,9 @@ export default function CompareProductProvider({
     }
 
     // If product doesn't exist, try to add it
-    // Check if we've reached the maximum (4 products)
+    // Check if we've reached the maximum (3 products)
     if (productIds.length >= 3) {
-      toast.error(
-        "შესადარებელ სიაში შესაძლებელია მაქსიმუმ 3 პროდუქტის დამატება"
-      );
+      toast.error(t("products.maxCompareReached"));
       return;
     }
 

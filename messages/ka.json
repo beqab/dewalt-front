@@ -76,7 +76,8 @@
     "products": "პროდუქტი",
     "similarProducts": "მსგავსი პროდუქტები",
     "selectToCompare": "შედარებისთვის შეარჩიეთ",
-    "clearAll": "გასუფთავება"
+    "clearAll": "გასუფთავება",
+    "maxCompareReached": "შესადარებელ სიაში შესაძლებელია მაქსიმუმ 3 პროდუქტის დამატება"
   },
   "breadcrumb": {
     "home": "მთავარი",
