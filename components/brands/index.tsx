@@ -6,27 +6,27 @@ import classNames from "classnames";
 const brandsData = [
   {
     name: "Dewalt",
+    slug: "dewalt",
     src: "/imgs/dewalt.png",
     description:
       "შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს",
-    href: "/",
     bg: "bg-primary",
   },
 
   {
     name: "Stanley",
+    slug: "stanley",
     src: "/imgs/stanley.png",
     description:
       "შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს",
-    href: "/",
   },
 
   {
     name: "Black&Decker",
+    slug: "black-decker",
     src: "/imgs/black-decker.svg",
     description:
       "შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს",
-    href: "/",
   },
 ];
 
@@ -38,9 +38,10 @@ export default function Brands() {
       </h2>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {brandsData.map((brand, index) => (
-          <div
+          <Link
             key={index}
-            className="bg-primary flex flex-col gap-8 rounded-lg p-12 shadow-md"
+            href={`/brands/${brand.slug}`}
+            className="bg-primary flex cursor-pointer flex-col gap-8 rounded-lg p-12 shadow-md transition-transform hover:scale-105"
           >
             {/* Brand Logo/Name */}
             <div className="border-dark-secondary-100">
@@ -63,10 +64,10 @@ export default function Brands() {
             </p>
 
             {/* Button */}
-            <Button variant="dark" className="m-auto w-[229px]" asChild>
-              <Link href={`/brands/${brand.name.toLowerCase()}`}>სრულად</Link>
+            <Button variant="dark" className="m-auto w-[229px]">
+              სრულად
             </Button>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

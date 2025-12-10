@@ -31,7 +31,9 @@ export default function Header() {
 
           <LanguageSelector className="hidden md:block" />
           <CartPreview />
-          <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />
+          <Link href="/login" className="hidden md:block">
+            <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />
+          </Link>
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="relative z-50 flex cursor-pointer items-center justify-center transition-transform duration-300 hover:scale-110 active:scale-95 md:hidden"

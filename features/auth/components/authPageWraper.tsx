@@ -19,7 +19,7 @@ export default function AuthPageWrapper({
         {/* Back Link */}
         <span
           onClick={() => router.back()}
-          className="text-text-secondary hover:text-dark-secondary-100 mb-6 inline-flex items-center gap-2 text-sm transition-colors"
+          className="text-text-secondary hover:text-dark-secondary-100 mb-6 inline-flex cursor-pointer items-center gap-2 text-sm transition-colors"
         >
           <svg
             width="16"
