@@ -27,7 +27,7 @@ export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
   }
 
   return (
-    <div className="min-h-screen py-10">
+    <div className="min-h-screen py-10 pt-15">
       <div className="customContainer">
         {/* Brand Header */}
         <div className="mb-10 flex flex-col items-center gap-6 md:mb-12">
