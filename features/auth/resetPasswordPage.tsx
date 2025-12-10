@@ -35,72 +35,67 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <AuthPageWrapper
-      title={t("auth.resetPassword.title")}
-      backLinkHref="/login"
-      backLinkText={t("auth.resetPassword.backToLogin")}
-    >
+    <AuthPageWrapper title={t("auth.resetPassword.title")}>
       <p className="text-text-secondary mb-8 text-sm">
         {t("auth.resetPassword.instructions")}
       </p>
       <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            {({ errors, touched, isSubmitting }) => (
-              <Form className="space-y-6">
-                {/* Email Field */}
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="text-dark-secondary-100 mb-2 block text-sm font-medium"
-                  >
-                    {t("auth.resetPassword.email")}
-                  </label>
-                  <Field name="email">
-                    {({ field }: FieldProps<string>) => (
-                      <Input
-                        {...field}
-                        id="email"
-                        type="email"
-                        placeholder={t("auth.resetPassword.email")}
-                        icon={<EnvelopIcon />}
-                        error={!!(errors.email && touched.email)}
-                      />
-                    )}
-                  </Field>
-                  <ErrorMessage
-                    name="email"
-                    component="div"
-                    className="text-red-500 mt-1 text-xs"
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ errors, touched, isSubmitting }) => (
+          <Form className="space-y-6">
+            {/* Email Field */}
+            <div>
+              <label
+                htmlFor="email"
+                className="text-dark-secondary-100 mb-2 block text-sm font-medium"
+              >
+                {t("auth.resetPassword.email")}
+              </label>
+              <Field name="email">
+                {({ field }: FieldProps<string>) => (
+                  <Input
+                    {...field}
+                    id="email"
+                    type="email"
+                    placeholder={t("auth.resetPassword.email")}
+                    icon={<EnvelopIcon />}
+                    error={!!(errors.email && touched.email)}
                   />
-                </div>
+                )}
+              </Field>
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="mt-1 text-xs text-red-500"
+              />
+            </div>
 
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  variant="default"
-                  size="default"
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
-                  {t("auth.resetPassword.submit")}
-                </Button>
+            {/* Submit Button */}
+            <Button
+              type="submit"
+              variant="default"
+              size="default"
+              className="w-full"
+              disabled={isSubmitting}
+            >
+              {t("auth.resetPassword.submit")}
+            </Button>
 
-                {/* Back to Login Link */}
-                <div className="text-center">
-                  <Link
-                    href="/login"
-                    className="text-text-secondary hover:text-primary text-sm transition-colors"
-                  >
-                    {t("auth.resetPassword.backToLogin")}
-                  </Link>
-                </div>
-              </Form>
-            )}
-          </Formik>
+            {/* Back to Login Link */}
+            <div className="text-center">
+              <Link
+                href="/login"
+                className="text-text-secondary hover:text-primary text-sm transition-colors"
+              >
+                {t("auth.resetPassword.backToLogin")}
+              </Link>
+            </div>
+          </Form>
+        )}
+      </Formik>
     </AuthPageWrapper>
   );
 }
-
