@@ -1,0 +1,2 @@
+export { getBannerCarousel } from "./getBannerCarousel";
+

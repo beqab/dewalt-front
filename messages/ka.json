@@ -43,6 +43,9 @@
     "warranty": "გარანტია",
     "quantity": "რაოდენობა"
   },
+  "common": {
+    "viewAll": "სრულად"
+  },
   "banner": {
     "newYearSale": "საახალწლო",
     "discount": "ფასდაკლება",

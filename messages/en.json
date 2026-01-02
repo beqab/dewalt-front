@@ -43,6 +43,9 @@
     "warranty": "Warranty",
     "quantity": "Quantity"
   },
+  "common": {
+    "viewAll": "View All"
+  },
   "banner": {
     "newYearSale": "New Year",
     "discount": "Discount",

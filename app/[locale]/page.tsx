@@ -1,8 +1,5 @@
-import Image from "next/image";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import LanguageSelector from "@/components/languageSelector/languageSelector";
-import { BucketIcon } from "@/components/icons/bucketIcon";
-import BannerCarousel from "@/features/bannerCarousel";
+import { setRequestLocale } from "next-intl/server";
+import BannerCarousel from "@/features/bannerCarousel/components";
 import ProductSlider from "@/features/products/components/productSlider";
 import MainPageAds from "@/features/ads/mainPageAds";
 import NewsSlider from "@/features/news/components/newsSlider";
@@ -18,7 +15,6 @@ export default async function Home({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations({ locale });
   return (
     <div className="">
       <BannerCarousel />
