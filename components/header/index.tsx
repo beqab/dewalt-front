@@ -10,9 +10,13 @@ import MobileMenu from "./mobileMenu";
 import CloseIcon from "../icons/closeIcon";
 import { Link } from "@/i18n/navigation";
 import CartPreview from "@/features/products/cart/components/cartPreview";
+import { useSession } from "next-auth/react";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
+  const { data: session } = useSession();
+  const profileLink = session ? "/profile" : "/login";
+
   return (
     <header className="bg-dark-secondary-100 relative z-40">
       <div className="customContainer flex items-center justify-between px-5 py-4">
@@ -31,7 +35,7 @@ export default function Header() {
 
           <LanguageSelector className="hidden md:block" />
           <CartPreview />
-          <Link href="/login" className="hidden md:block">
+          <Link href={profileLink} className="hidden md:block">
             <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />
           </Link>
           <button

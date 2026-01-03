@@ -13,6 +13,9 @@ import { Toaster } from "sonner";
 import CompareProductProvider from "@/features/products/compare/compareContext/CompareProductProvider";
 import CompareLinkButton from "@/features/products/compare/components/compareLinkButton";
 import CartProvider from "@/features/products/cart/cartContext/CartProvider";
+import { QueryProvider } from "@/lib/providers/QueryProvider";
+import { AuthProvider } from "@/features/auth";
+import { SessionProvider } from "next-auth/react";
 
 type Props = {
   children: React.ReactNode;
@@ -71,18 +74,24 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Toaster position="top-right" richColors closeButton />
+          <QueryProvider>
+            <SessionProvider>
+              <AuthProvider>
+                <Toaster position="top-right" richColors closeButton />
 
-          <CartProvider>
-            <Header />
-            <CompareProductProvider>
-              <>
-                {children}
-                <CompareLinkButton />
-              </>
-            </CompareProductProvider>
-          </CartProvider>
-          <Footer />
+                <CartProvider>
+                  <Header />
+                  <CompareProductProvider>
+                    <>
+                      {children}
+                      <CompareLinkButton />
+                    </>
+                  </CompareProductProvider>
+                </CartProvider>
+                <Footer />
+              </AuthProvider>
+            </SessionProvider>
+          </QueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -4,6 +4,7 @@ import { Formik, Form, Field, ErrorMessage, FieldProps } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,12 +14,17 @@ import KeyIcon from "@/components/icons/keyIcon";
 import EyeIcon from "@/components/icons/eyeIcon";
 import EyeOffIcon from "@/components/icons/eyeOffIcon";
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 import AuthPageWrapper from "./components/authPageWraper";
 
 export default function LoginPage() {
   const t = useTranslations();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -40,14 +46,30 @@ export default function LoginPage() {
       return;
     }
 
+    setIsLoading(true);
+    setError(null);
+
     try {
-      // TODO: Implement actual login API call
-      console.log("Login attempt:", values);
-      toast.success("Login successful!");
-      // Redirect to home or dashboard
-    } catch (error: unknown) {
-      console.error(error);
+      const result = await signIn("credentials", {
+        email: values.email.trim(),
+        password: values.password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError("Invalid credentials. Please try again.");
+        toast.error("Login failed. Please check your credentials.");
+      } else if (result?.ok) {
+        toast.success("Login successful!");
+        const callbackUrl = searchParams.get("callbackUrl") || "/";
+        router.push(callbackUrl);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An unexpected error occurred. Please try again.");
       toast.error("Login failed. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -58,8 +80,13 @@ export default function LoginPage() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, isSubmitting }) => (
+        {({ errors, touched }) => (
           <Form className="space-y-6">
+            {error && (
+              <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                {error}
+              </div>
+            )}
             {/* Email Field */}
             <div>
               <label
@@ -133,7 +160,7 @@ export default function LoginPage() {
               variant="default"
               size="default"
               className="w-full"
-              disabled={isSubmitting}
+              disabled={isLoading}
             >
               {t("auth.login.submit")}
             </Button>

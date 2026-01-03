@@ -9,6 +9,7 @@ import MobileMenuNav from "./mobileMenuNav";
 import ProfileIcon from "@/components/icons/profileIcon";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { useBodyScrollLock } from "../../../hooks/useBodyScrollLock";
+import { useSession } from "next-auth/react";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -18,6 +19,8 @@ interface MobileMenuProps {
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const params = useParams();
   const currentLocale = (params?.locale as Locale) || routing.defaultLocale;
+  const { data: session } = useSession();
+  const profileLink = session ? "/profile" : "/login";
 
   // Reactively lock body scroll when menu is open
   useBodyScrollLock(isOpen);
@@ -47,11 +50,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
           </LanguageSelector>
           <Link
-            href="/login"
+            href={profileLink}
             className="bg-primary text-dark-secondary-100 hover:bg-primary/90 flex h-12 flex-1 items-center justify-center gap-2.5 rounded-sm px-4 py-2 transition-colors"
           >
             <ProfileIcon className="" />
-            <span className="text-sm font-medium">ავტორიზაცია</span>
+            <span className="text-sm font-medium">
+              {session ? "პროფილი" : "ავტორიზაცია"}
+            </span>
           </Link>
         </div>
 

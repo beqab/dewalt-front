@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import EnvelopIcon from "@/components/icons/envelopIcon";
 import { toast } from "sonner";
 import AuthPageWrapper from "./components/authPageWraper";
+import { useRequestPasswordReset } from "./hooks";
 
 export default function ResetPasswordPage() {
   const t = useTranslations();
@@ -23,15 +24,12 @@ export default function ResetPasswordPage() {
     email: "",
   };
 
+  const requestPasswordResetMutation = useRequestPasswordReset();
+
   const handleSubmit = async (values: typeof initialValues) => {
-    try {
-      // TODO: Implement actual reset password API call
-      console.log("Reset password request:", values);
-      toast.success("Password reset link sent to your email!");
-      // Redirect to login or show success message
-    } catch (error) {
-      toast.error("Failed to send reset link. Please try again.");
-    }
+    requestPasswordResetMutation.mutate({
+      email: values.email,
+    });
   };
 
   return (
@@ -44,7 +42,7 @@ export default function ResetPasswordPage() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        {({ errors, touched, isSubmitting }) => (
+        {({ errors, touched }) => (
           <Form className="space-y-6">
             {/* Email Field */}
             <div>
@@ -79,7 +77,7 @@ export default function ResetPasswordPage() {
               variant="default"
               size="default"
               className="w-full"
-              disabled={isSubmitting}
+              disabled={requestPasswordResetMutation.isPending}
             >
               {t("auth.resetPassword.submit")}
             </Button>

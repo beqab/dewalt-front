@@ -45,23 +45,13 @@ export const authHeader = "authorization";
 
 type QueryParams = Record<string, string | number | boolean | null | undefined>;
 
-// Type for session with accessToken from module augmentation
-interface SessionWithAccessToken {
-  user?: {
-    accessToken?: string;
-  };
-}
-
 // Add interceptor to handle authorization tokens
 axiosInstance.interceptors.request.use(
   async (config) => {
-    // Only try to get session on client side
+    // Use next-auth session for authentication
     if (typeof window !== "undefined") {
       const session = await getSession();
-      // The accessToken is added via module augmentation in lib/types/next-auth.d.ts
-      // Type assertion needed because module augmentation types may not be fully inferred
-      const token = (session as SessionWithAccessToken | null)?.user
-        ?.accessToken;
+      const token = session?.user?.accessToken;
       if (token && typeof token === "string" && config.headers) {
         config.headers[authHeader] = token;
       }
@@ -70,6 +60,21 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor for token refresh
+// Token refresh is handled by NextAuth JWT callback, so we just sign out on 401
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    // If error is 401, sign out (NextAuth will handle token refresh automatically)
+    if (error.response?.status === 401 && typeof window !== "undefined") {
+      const { signOut } = await import("next-auth/react");
+      await signOut({ redirect: true, callbackUrl: "/login" });
+    }
+
     return Promise.reject(error);
   }
 );
@@ -226,8 +231,6 @@ class APIClient<TResponse = unknown> {
 
   // Error handling helper
   private handleApiError(error: IApiError): ApiErrorResponse {
-    console.log(error.response?.data.statusCode, "rrr");
-    console.log(error.response, "message");
     if (error.response?.data.statusCode === 401) {
       signOut();
       return error.response.data;

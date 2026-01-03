@@ -174,5 +174,38 @@
       "passwordsMatch": "Passwords must match",
       "termsRequired": "You must agree to the terms and conditions"
     }
+  },
+  "profile": {
+    "title": "Profile",
+    "sidebar": {
+      "profile": "Profile",
+      "orders": "My Orders",
+      "logout": "Logout"
+    },
+    "profileChanges": "Profile Changes",
+    "passwordChanges": "Password Changes",
+    "name": "Name",
+    "surname": "Surname",
+    "email": "Email",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "save": "Save",
+    "saving": "Saving...",
+    "savePassword": "Save Password",
+    "userInfo": "User Information",
+    "changePassword": "Change Password",
+    "loading": "Loading profile...",
+    "passwordChangeSuccess": "Password has been changed successfully",
+    "passwordChangeError": "Failed to change password. Please try again.",
+    "error": {
+      "title": "Error",
+      "message": "An error occurred while loading profile",
+      "retry": "Try again"
+    }
+  },
+  "orders": {
+    "title": "My Orders",
+    "empty": "No orders yet. Your orders will appear here."
   }
 }
