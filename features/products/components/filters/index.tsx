@@ -5,8 +5,9 @@ import { brands } from "@/components/header/menu/staticMenu";
 import Image from "next/image";
 import PriceRange from "@/components/ui/priceRange";
 import { Checkbox } from "@/components/ui/checkbox";
+import AsideAdd from "@/features/ads/components/asideAdd";
 
-export default function Filters() {
+export default function Filters({ children }: { children: React.ReactNode }) {
   const [priceRange, setPriceRange] = useState<[number, number]>([230, 12983]);
 
   return (
@@ -43,15 +44,7 @@ export default function Filters() {
       </div>
       <div className="hidden space-y-4 pr-6 md:block">
         <div className="bg-background-secondary relative mt-18 overflow-hidden rounded-lg">
-          <div className="relative w-full cursor-pointer">
-            <Image
-              src="/imgs/sideBanner.png"
-              alt="Tool case"
-              width={200}
-              height={400}
-              className="w-full"
-            />
-          </div>
+          <div className="relative w-full cursor-pointer">{children}</div>
         </div>
       </div>
     </div>

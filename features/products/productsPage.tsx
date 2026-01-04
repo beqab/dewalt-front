@@ -1,8 +1,7 @@
-"use client";
-
 import Filters from "./components/filters";
 import ProductGrid from "./components/productGrid";
 import { dummyProducts } from "./data/dummyProducts";
+import AsideAdd from "@/features/ads/components/asideAdd";
 
 export default function ProductsPage() {
   return (
@@ -11,7 +10,9 @@ export default function ProductsPage() {
         <div className="mt-10 flex gap-6 md:mt-0">
           {/* Desktop Filters Sidebar */}
           <aside className="hidden md:block">
-            <Filters />
+            <Filters>
+              <AsideAdd />
+            </Filters>
           </aside>
 
           {/* Main Content */}

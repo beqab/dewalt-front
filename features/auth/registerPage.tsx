@@ -79,22 +79,17 @@ export default function RegisterPage() {
       });
 
       if (result?.error) {
-        setError(
-          "Registration successful but login failed. Please try logging in."
-        );
-        toast.error(
-          "Registration successful but login failed. Please try logging in."
-        );
+        const errorMsg = t("auth.register.successButLoginFailed");
+        setError(errorMsg);
+        toast.error(errorMsg);
       } else if (result?.ok) {
-        toast.success("Registration successful!");
+        toast.success(t("auth.register.success"));
         router.push("/");
       }
     } catch (error: unknown) {
       console.error("Registration error:", error);
       const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Registration failed. Please try again.";
+        error instanceof Error ? error.message : t("auth.register.error");
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {

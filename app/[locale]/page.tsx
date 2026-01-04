@@ -1,11 +1,12 @@
 import { setRequestLocale } from "next-intl/server";
 import BannerCarousel from "@/features/bannerCarousel/components";
 import ProductSlider from "@/features/products/components/productSlider";
-import MainPageAds from "@/features/ads/mainPageAds";
+import MainAdd from "@/features/ads/components/mainAdd";
 import NewsSlider from "@/features/news/components/newsSlider";
 import AboutBanner from "@/features/about/aboutBanner";
 import Brands from "@/components/brands";
 import BenefitsList from "@/components/benefitsList";
+import SecundAd from "@/features/ads/components/secundAd";
 
 export default async function Home({
   params,
@@ -20,8 +21,9 @@ export default async function Home({
       <BannerCarousel />
 
       <ProductSlider />
-      <MainPageAds />
+      <MainAdd />
       <NewsSlider />
+      <SecundAd />
       <AboutBanner />
       <Brands />
       <BenefitsList />
