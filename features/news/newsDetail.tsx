@@ -9,15 +9,41 @@ import { transformNewsApiToNews } from "./utils/transformNews";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/components/ui/loading";
+import { Metadata } from "next";
+import { extractIdFromSlug } from "./utils/extractIdFromSlug";
 
-export default async function NewsDetail({
+export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
-}) {
-  const t = await getTranslations();
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+
+  const id = await extractIdFromSlug(slug);
+  if (!id) {
+    return { title: "News not found" };
+  }
+  const newsApi = await getNewsById(id);
   const locale = (await getLocale()) as "ka" | "en";
-  const { id } = await params;
+  if (!newsApi) {
+    return { title: "News not found" };
+  }
+  return {
+    title: newsApi.title[locale],
+    description: newsApi.summary[locale],
+    openGraph: {
+      title: newsApi.title[locale],
+      description: newsApi.summary[locale],
+      images: [newsApi.imageUrl],
+    },
+  };
+}
+
+export default async function NewsDetail({ id }: { id: string }) {
+  const t = await getTranslations();
+
+  console.log("id", id);
+  const locale = (await getLocale()) as "ka" | "en";
 
   const newsApi = await getNewsById(id);
   if (!newsApi) {
@@ -68,8 +94,10 @@ export default async function NewsDetail({
 
               {/* Article Content */}
               <div className="text-text-secondary mb-6 space-y-4 border-b border-[#D2D2D2] pb-4 text-sm leading-relaxed">
-                <p>{news.description}</p>
-                {news.fullContent && <p>{news.fullContent}</p>}
+                {/* <p>{news.description}</p> */}
+                {news.fullContent && (
+                  <div dangerouslySetInnerHTML={{ __html: news.fullContent }} />
+                )}
               </div>
 
               <ShareButton />

@@ -13,7 +13,7 @@ interface NewsCardProps {
 
 export default function NewsCard({ news, className }: NewsCardProps) {
   const t = useTranslations();
-  const { image, name, date, description, _id } = news;
+  const { image, name, date, description, slug } = news;
   return (
     <div className={cn("relative h-full", className)}>
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-[#EEE] p-4 shadow-sm transition-shadow hover:shadow-md">
@@ -42,7 +42,7 @@ export default function NewsCard({ news, className }: NewsCardProps) {
           </p>
         </div>
         <Button variant="dark" className="mt-auto" asChild>
-          <Link href={`/news/${_id}`}>{t("news.readMore")}</Link>
+          <Link href={`/news/${slug}`}>{t("news.readMore")}</Link>
         </Button>
       </div>
     </div>

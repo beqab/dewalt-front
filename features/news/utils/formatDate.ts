@@ -7,23 +7,19 @@ export function formatNewsDate(
 ): string {
   try {
     const date = new Date(dateString);
-    
+
     // Validate date
     if (isNaN(date.getTime())) {
       return dateString; // Return original if invalid
     }
 
-    return date.toLocaleDateString(
-      locale === "ka" ? "ka-GE" : "en-US",
-      {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      }
-    );
-  } catch (error) {
+    return date.toLocaleDateString(locale === "ka" ? "ka-GE" : "en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  } catch {
     // Fallback to original string if formatting fails
     return dateString;
   }
 }
-
