@@ -1,29 +1,36 @@
-"use client";
-
-import { useParams } from "next/navigation";
 import Image from "next/image";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import { DateIcon } from "@/components/icons/date";
 import RecentlyAddedNews from "./components/recentlyAddedNews";
-import { dummyNews } from "./data/dummyNews";
 import ShareButton from "@/components/ui/ShareButton";
-import { useTranslations } from "next-intl";
+import { getTranslations, getLocale } from "next-intl/server";
+import { getNewsById } from "./server/getNews";
+import { transformNewsApiToNews } from "./utils/transformNews";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+import Loading from "@/components/ui/loading";
 
-export default function NewsDetail() {
-  const t = useTranslations();
-  const params = useParams();
-  const newsId = Number(params?.id || params?.slug || 1);
-  const news = dummyNews.find((item) => item.id === newsId) || dummyNews[0];
+export default async function NewsDetail({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const t = await getTranslations();
+  const locale = (await getLocale()) as "ka" | "en";
+  const { id } = await params;
+
+  const newsApi = await getNewsById(id);
+  if (!newsApi) {
+    notFound();
+  }
+
+  const news = transformNewsApiToNews(newsApi, locale);
 
   const breadcrumbItems = [
     { label: t("breadcrumb.home"), href: "/" },
     { label: t("breadcrumb.news"), href: "/news" },
     { label: news.name },
   ];
-
-  const fullContent =
-    news.fullContent ||
-    `ახალი, ინოვაციური ტექნოლოგიით დამზადებული ბატარეები, რომლებიც გამოირჩევიან მაღალი სიმძლავრით და კომპაქტური ზომით. ეს ბატარეები შექმნილია პროფესიონალებისთვის, რომლებიც საჭიროებენ საიმედო და გრძელვადიან მუშაობას ყველა პირობაში. ჩვენი ბატარეები გამოირჩევიან გაუმჯობესებული ტექნოლოგიით, რომელიც უზრუნველყოფს უფრო მეტ სიმძლავრეს და ხანგრძლივობას.`;
 
   return (
     <div>
@@ -62,17 +69,21 @@ export default function NewsDetail() {
               {/* Article Content */}
               <div className="text-text-secondary mb-6 space-y-4 border-b border-[#D2D2D2] pb-4 text-sm leading-relaxed">
                 <p>{news.description}</p>
-                <p>{fullContent}</p>
+                {news.fullContent && <p>{news.fullContent}</p>}
               </div>
-
-              {/* Read More Button */}
 
               <ShareButton />
             </article>
 
             {/* Sidebar */}
             <aside className="w-full lg:sticky lg:top-8 lg:h-fit">
-              <RecentlyAddedNews news={dummyNews} currentNewsId={news.id} />
+              <Suspense
+                fallback={
+                  <Loading message="სიახლეები იტვირთება..." minHeight="60vh" />
+                }
+              >
+                <RecentlyAddedNews currentNewsId={news._id} />
+              </Suspense>
             </aside>
           </div>
         </div>

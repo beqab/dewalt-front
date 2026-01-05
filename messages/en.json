@@ -216,5 +216,17 @@
   "orders": {
     "title": "My Orders",
     "empty": "No orders yet. Your orders will appear here."
+  },
+  "news": {
+    "title": "News",
+    "readMore": "Read more",
+    "viewAll": "View All",
+    "notFound": "No news found",
+    "recentlyAddedNews": "Recently Added News",
+    "error": {
+      "title": "Error",
+      "message": "An error occurred while loading news",
+      "retry": "Try Again"
+    }
   }
 }

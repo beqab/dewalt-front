@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import type { News } from "../types";
+import { useTranslations } from "next-intl";
 
 interface NewsCardProps {
   news: News;
@@ -11,7 +12,8 @@ interface NewsCardProps {
 }
 
 export default function NewsCard({ news, className }: NewsCardProps) {
-  const { image, name, date, description, id } = news;
+  const t = useTranslations();
+  const { image, name, date, description, _id } = news;
   return (
     <div className={cn("relative h-full", className)}>
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-[#EEE] p-4 shadow-sm transition-shadow hover:shadow-md">
@@ -40,7 +42,7 @@ export default function NewsCard({ news, className }: NewsCardProps) {
           </p>
         </div>
         <Button variant="dark" className="mt-auto" asChild>
-          <Link href={`/news/${id}`}>სრულად</Link>
+          <Link href={`/news/${_id}`}>{t("news.readMore")}</Link>
         </Button>
       </div>
     </div>

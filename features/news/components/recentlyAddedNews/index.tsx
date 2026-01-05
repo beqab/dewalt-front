@@ -1,30 +1,35 @@
 import CompactNewsCard from "../compactNewsCard";
-import type { News } from "../../types";
+import { getLatestNews } from "../../server";
+import { transformNewsApiToNews } from "../../utils/transformNews";
+import { getLocale, getTranslations } from "next-intl/server";
 
 interface RecentlyAddedNewsProps {
-  news: News[];
-  currentNewsId?: number;
+  currentNewsId?: string;
 }
 
-export default function RecentlyAddedNews({
-  news,
+export default async function RecentlyAddedNews({
   currentNewsId,
 }: RecentlyAddedNewsProps) {
-  // Filter out current news and get first 4
-  const recentNews = news
-    .filter((item) => item.id !== currentNewsId)
-    .slice(0, 4);
+  // Get recently added news (excluding current)
+  const latestNewsApi = await getLatestNews(5);
+  const locale = (await getLocale()) as "ka" | "en";
+  const t = await getTranslations();
+
+  const recentNews = latestNewsApi
+    .filter((item) => item._id !== currentNewsId)
+    .slice(0, 4)
+    .map((item) => transformNewsApiToNews(item, locale));
 
   if (recentNews.length === 0) return null;
 
   return (
     <div className="w-full md:w-[390px]">
       <h3 className="text-dark-secondary-100 mb-4 md:mb-6">
-        ბოლოს დამატებული სიახლეები
+        {t("news.recentlyAddedNews")}
       </h3>
       <div className="space-y-4">
         {recentNews.map((item) => (
-          <CompactNewsCard key={item.id} news={item} />
+          <CompactNewsCard key={item._id} news={item} />
         ))}
       </div>
     </div>

@@ -1,41 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import NewsCard from "../newsCard";
 import Pagination from "@/features/products/components/pagination";
 import type { News } from "../../types";
 
 interface NewsGridProps {
   news: News[];
+  pagination?: {
+    currentPage: number;
+    totalPages: number;
+    total: number;
+  };
 }
 
-export default function NewsGrid({ news }: NewsGridProps) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
+export default function NewsGrid({ news, pagination }: NewsGridProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const params = useParams();
+  const t = useTranslations();
+  const locale = params.locale as string;
 
-  const totalPages = Math.ceil(news.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentNews = news.slice(startIndex, endIndex);
+  const handlePageChange = (page: number) => {
+    const urlParams = new URLSearchParams(searchParams.toString());
+    urlParams.set("page", page.toString());
+    router.push(`/${locale}/news?${urlParams.toString()}`);
+  };
+
+  if (news.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16">
+        <p className="text-text-secondary text-lg">{t("news.notFound")}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1">
       {/* News Grid */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {currentNews.map((item) => (
-          <NewsCard key={item.id} news={item} />
+        {news.map((item) => (
+          <NewsCard key={item._id} news={item} />
         ))}
       </div>
 
       {/* Pagination */}
-      {totalPages > 1 && (
+      {pagination && pagination.totalPages > 1 && (
         <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          onPageChange={handlePageChange}
         />
       )}
     </div>
   );
 }
-
