@@ -1,6 +1,6 @@
 import { useState } from "react";
 import MenuItem, { MenuSubItem } from "../menu/menuItm";
-import { brands } from "../menu/staticMenu";
+import { useMenuBrands } from "../menu/hooks/useMenuBrands";
 import SubCategorySelector from "./subCategorySelector";
 
 export default function MenuCategories({
@@ -12,6 +12,7 @@ export default function MenuCategories({
   onClose: () => void;
   onchangeCategory: (category: number | null) => void;
 }) {
+  const { data: brands } = useMenuBrands();
   const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(
     null
   );
@@ -24,7 +25,7 @@ export default function MenuCategories({
     }
   };
 
-  const selectedCategory = brands[category];
+  const selectedCategory = brands?.[category];
 
   const handleCategoryChange = (newCategoryIndex: number) => {
     if (newCategoryIndex !== category) {
@@ -68,11 +69,11 @@ export default function MenuCategories({
       <div>
         {selectedSubCategory === null && (
           <ul className="ml-1 flex flex-col gap-2">
-            {brands[category].categories.map((category, index) => (
+            {brands?.[category].categories.map((category, index) => (
               <MenuSubItem
                 key={index}
                 onClick={() => setSelectedSubCategory(index)}
-                parentId={selectedCategory.name}
+                parentId={selectedCategory?.name || ""}
                 id={category.toString()}
                 displayName={category.name}
                 hasSubCategories={category.subCategories.length > 0}
@@ -83,20 +84,20 @@ export default function MenuCategories({
         )}
         {selectedSubCategory !== null && (
           <ul className="ml-5 flex flex-col gap-2">
-            {brands[category].categories[selectedSubCategory].subCategories.map(
-              (subCategory, index) => (
-                <MenuItem
-                  key={index}
-                  label={subCategory.name}
-                  href={`/products?category=${subCategory.slug}`}
-                  onClick={() => {
-                    onClose();
-                    onchangeCategory(null);
-                    setSelectedSubCategory(null);
-                  }}
-                />
-              )
-            )}
+            {brands?.[category].categories[
+              selectedSubCategory
+            ].subCategories.map((subCategory, index) => (
+              <MenuItem
+                key={index}
+                label={subCategory.name}
+                href={`/products?category=${subCategory.slug}`}
+                onClick={() => {
+                  onClose();
+                  onchangeCategory(null);
+                  setSelectedSubCategory(null);
+                }}
+              />
+            ))}
           </ul>
         )}
       </div>

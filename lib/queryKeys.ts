@@ -13,6 +13,9 @@ const QUERY_KEYS = {
     ALL: ["products"] as const,
     DETAIL: (id: string) => ["products", id] as const,
   },
+  CATEGORIES: {
+    MENU: (lang: string) => ["categories", "menu", lang] as const,
+  },
 } as const;
 
 export default QUERY_KEYS;

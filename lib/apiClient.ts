@@ -79,6 +79,32 @@ axiosInstance.interceptors.response.use(
   }
 );
 
+let languageInterceptorId: number | null = null;
+
+export const axiosInterceptorAddLanguage = (lang: string) => {
+  console.log(lang, "axiosInterceptorAddLanguage");
+
+  // Remove the previous language interceptor if it exists
+  if (languageInterceptorId !== null) {
+    axiosInstance.interceptors.request.eject(languageInterceptorId);
+  }
+
+  // Add the new interceptor with the updated language
+  languageInterceptorId = axiosInstance.interceptors.request.use(
+    (config) => {
+      if (lang) {
+        config.headers["x-custom-lang"] = `${lang}`;
+      }
+
+      return config;
+    },
+    (error) => {
+      console.error(error, "Error in language interceptor");
+      return Promise.reject(error);
+    }
+  );
+};
+
 class APIClient<TResponse = unknown> {
   private endpoint: string;
 

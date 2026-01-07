@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { brands } from "../staticMenu";
 import MenuItem from "../menuItm";
 import ProductMenu from "./productMenu";
 import MainMenuItem from "./productMenu/mainMenuItem";
 import classNames from "classnames";
 import { useTranslations } from "next-intl";
+import { useMenuBrands } from "../hooks/useMenuBrands";
 
 export default function DesktopMenu() {
   const t = useTranslations();
+  const { data: menuBrands } = useMenuBrands();
   const [activeMainCategory, setActiveMainCategory] = useState<number | null>(
     null
   );
@@ -45,11 +46,11 @@ export default function DesktopMenu() {
     <nav className="bg-background hidden md:block">
       <div className="customContainer mx-auto flex items-center justify-between px-5">
         <div className="relative flex items-center">
-          {brands.map((brand, brandIndex) => (
+          {menuBrands?.map((brand, brandIndex) => (
             <div
               key={brandIndex}
               className={classNames("my-1 border-r border-[#D2D2D2] px-6", {
-                "border-r-0": brandIndex === brands.length - 1,
+                "border-r-0": brandIndex === menuBrands?.length - 1,
                 "pl-0": brandIndex === 0,
               })}
             >
@@ -77,7 +78,7 @@ export default function DesktopMenu() {
             key={`products-`}
             onClose={handleProductsClose}
             isOpen={activeProductsMenu}
-            productCategories={brands}
+            productCategories={menuBrands ?? []}
           >
             <MainMenuItem
               isOpen={activeProductsMenu}

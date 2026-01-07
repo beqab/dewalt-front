@@ -2,10 +2,10 @@
 
 import { createContext, useContext } from "react";
 
-import type { MenuData } from "./types";
+import { MenuBrand } from "@/features/categories/types";
 
 const initialValue: {
-  categories: MenuData[] | null;
+  categories: MenuBrand[] | null;
   openMenuId: string;
   activeCategory: number;
   activeMainCategory: number;

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { useState, useRef, useEffect } from "react";
-import { brands } from "../menu/staticMenu";
+import { useMenuBrands } from "../menu/hooks/useMenuBrands";
 
 export default function SubCategorySelector({
   selectedCategory,
@@ -9,6 +9,7 @@ export default function SubCategorySelector({
   selectedCategory: number;
   onchangeCategory: (category: number) => void;
 }) {
+  const { data: brands, isLoading } = useMenuBrands();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 
@@ -42,7 +43,7 @@ export default function SubCategorySelector({
         )}
       >
         <span className="text-dark-secondary-100">
-          {brands[selectedCategory].name}
+          {brands?.[selectedCategory].name}
         </span>
         <svg
           width="16"
@@ -78,7 +79,7 @@ export default function SubCategorySelector({
         style={{ pointerEvents: isSelectOpen ? "auto" : "none" }}
       >
         <div className="max-h-[200px] overflow-y-auto">
-          {brands.map((brand, index) => (
+          {brands?.map((brand, index) => (
             <button
               type="button"
               key={index}

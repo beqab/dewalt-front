@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { ProductMenuContext } from "./context";
-import { MenuData } from "./types";
+
 import MainMenuItem from "./mainMenuItem";
 import ProductMenuPanel from "./panel";
 import DropDownMenuCategories from "./categoriesGroups/categories";
 import DropDownMenuSubcategories from "./categoriesGroups/subCategory";
 import DropDownMenuBrands from "./categoriesGroups/mainCategories";
+import { MenuBrand } from "@/features/categories/types";
 
 export default function ProductMenu({
   productCategories,
@@ -13,7 +14,7 @@ export default function ProductMenu({
   isOpen,
   onClose,
 }: {
-  productCategories: MenuData[];
+  productCategories: MenuBrand[];
   children: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
