@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/components/ui/loading";
 import { Metadata } from "next";
-import { extractIdFromSlug } from "./utils/extractIdFromSlug";
+import { extractIdFromSlug } from "../../lib/utils/extractIdFromSlug";
 
 export async function generateMetadata({
   params,

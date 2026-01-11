@@ -6,6 +6,6 @@ const options: Parameters<typeof slugify>[1] = {
   remove: /[*+~.()'"!:@]/g,
 };
 
-export function generateHybridSlug(title: string, id: string): string {
-  return `${slugify(title, options)}-${id}`;
+export function generateSlug(title: string, id?: string): string {
+  return id ? `${slugify(title, options)}-${id}` : slugify(title, options);
 }

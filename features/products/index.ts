@@ -11,7 +11,7 @@ export { default as Pagination } from "./components/pagination";
 
 // Types
 export type { Product } from "./types";
+export type { PaginatedProductsResponse } from "./types/api";
 
 // Data
 export { dummyProducts } from "./data/dummyProducts";
-

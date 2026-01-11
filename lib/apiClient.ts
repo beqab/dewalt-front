@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { getSession, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 export interface ErrorResponse<T> {
   data: T;
@@ -257,11 +257,6 @@ class APIClient<TResponse = unknown> {
 
   // Error handling helper
   private handleApiError(error: IApiError): ApiErrorResponse {
-    if (error.response?.data.statusCode === 401) {
-      signOut();
-      return error.response.data;
-    }
-
     if (error.response) {
       return error.response.data;
     }

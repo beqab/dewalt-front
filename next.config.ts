@@ -7,6 +7,21 @@ const nextConfig: NextConfig = {
       "www.dewaltgeorgia.com",
       "mgxuc2sd6bc4ygmd.public.blob.vercel-storage.com",
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
+
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+      },
+    ],
   },
   /* config options here */
 };

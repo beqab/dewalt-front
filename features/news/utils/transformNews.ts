@@ -1,7 +1,7 @@
 import { NewsApi } from "../types/api";
 import { News } from "../types";
 import { formatNewsDate } from "./formatDate";
-import { generateHybridSlug } from "./slugify";
+import { generateSlug } from "../../../lib/utils/slugify";
 
 /**
  * Transforms API news to frontend news format
@@ -14,7 +14,7 @@ export function transformNewsApiToNews(
 
   return {
     _id: apiNews._id,
-    slug: generateHybridSlug(title, apiNews._id),
+    slug: generateSlug(title, apiNews._id),
     image: apiNews.imageUrl,
     name: title,
     date: formatNewsDate(apiNews.createdAt, locale),

@@ -14,20 +14,72 @@ export default function AddToCart({ product }: { product: Product }) {
   const { addItem } = useCartContext();
 
   const [quantity, setQuantity] = useState(1);
+  const maxQuantity = product.quantity || 0;
 
   const handleQuantityChange = (delta: number) => {
-    setQuantity((prev) => Math.max(1, prev + delta));
+    setQuantity((prev) => {
+      const newQuantity = prev + delta;
+      // Ensure quantity is between 1 and available stock
+      return Math.max(1, Math.min(newQuantity, maxQuantity));
+    });
   };
 
   const handleQuantityInputChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const value = parseInt(e.target.value, 10);
+    const inputValue = e.target.value;
+
+    // Allow empty string for better UX (user can clear and type new number)
+    if (inputValue === "") {
+      setQuantity(0); // Use 0 as placeholder to allow empty input
+      return;
+    }
+
+    const value = parseInt(inputValue, 10);
     if (!isNaN(value) && value > 0) {
-      setQuantity(value);
-    } else if (e.target.value === "") {
+      // Cap the quantity at available stock
+      const cappedValue = Math.min(value, maxQuantity);
+      setQuantity(cappedValue);
+
+      // Show warning if user tried to exceed stock
+      if (value > maxQuantity && maxQuantity > 0) {
+        toast.warning(
+          t("cart.maxQuantityReached", {
+            defaultValue: `Maximum available quantity is ${maxQuantity}`,
+            maxQuantity,
+          }),
+          {
+            duration: 2000,
+          }
+        );
+      }
+    }
+  };
+
+  const handleQuantityBlur = () => {
+    // If input is empty or 0, set to 1
+    if (quantity === 0 || quantity < 1) {
       setQuantity(1);
     }
+  };
+
+  const handleQuantityFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Select all text when input is focused for easy replacement
+    e.target.select();
+  };
+
+  const handleAddToCart = () => {
+    const finalQuantity = Math.min(quantity, maxQuantity);
+
+    addItem(product, finalQuantity);
+    toast.success(t("cart.addedToCart"), {
+      style: {
+        background: "#FFBA00",
+        color: "#1A1A1A",
+        border: "1px solid #E5A500",
+      },
+      duration: 1000,
+    });
   };
   return (
     <div className="flex flex-row items-end gap-4">
@@ -62,14 +114,18 @@ export default function AddToCart({ product }: { product: Product }) {
             id="quantity"
             type="number"
             min="1"
-            value={quantity}
+            max={maxQuantity || undefined}
+            value={quantity === 0 ? "" : quantity}
             onChange={handleQuantityInputChange}
+            onBlur={handleQuantityBlur}
+            onFocus={handleQuantityFocus}
             className="w-16 border-0 text-center text-sm focus:ring-0 focus:outline-none"
           />
           <button
             type="button"
             onClick={() => handleQuantityChange(1)}
-            className="px-2 py-2 hover:bg-gray-50"
+            disabled={quantity >= maxQuantity || maxQuantity === 0}
+            className="px-2 py-2 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
             aria-label="Increase quantity"
           >
             <svg
@@ -94,17 +150,8 @@ export default function AddToCart({ product }: { product: Product }) {
       <Button
         size="md"
         className="w-full flex-1 sm:flex-initial md:w-auto"
-        onClick={() => {
-          addItem(product, quantity);
-          toast.success(t("cart.addedToCart"), {
-            style: {
-              background: "#FFBA00",
-              color: "#1A1A1A",
-              border: "1px solid #E5A500",
-            },
-            duration: 1000,
-          });
-        }}
+        disabled={!product.inStock || maxQuantity === 0}
+        onClick={handleAddToCart}
       >
         <BucketIcon className="h-6 w-6" />
         <span>{t("cart.addToCart")}</span>

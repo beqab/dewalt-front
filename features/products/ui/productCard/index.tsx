@@ -4,6 +4,7 @@ import type { Product } from "../../types";
 import { cn } from "@/lib/utils";
 import { CompareButton } from "@/features/products/compare/components/compareButton";
 import { AddSingleItemToCart } from "../../cart/components/addToCart";
+import { generateSlug } from "@/lib/utils/slugify";
 
 export default function ProductCard({
   product,
@@ -22,9 +23,9 @@ export default function ProductCard({
     price,
     originalPrice,
     discount,
-
     _id,
   } = product;
+
   return (
     <div
       className={cn(
@@ -49,7 +50,7 @@ export default function ProductCard({
         </div>
 
         {/* Product Image */}
-        <Link href={`/products/${_id}`} className="block">
+        <Link href={`/products/${generateSlug(name, _id)}`} className="block">
           <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
             <Image
               src={image}
@@ -64,13 +65,14 @@ export default function ProductCard({
         {/* Product Info */}
         <div className="flex flex-1 flex-col">
           <Link
-            href={`/products/${_id}`}
+            href={`/products/${generateSlug(name, _id)}`}
             className={cn(
-              "text-dark-secondary-100 hover:text-primary mb-2 h-12 text-sm transition-colors md:h-11.5 md:text-base",
+              "text-dark-secondary-100 hover:text-primary mb-2 [display:-webkit-box] h-12 overflow-hidden text-sm wrap-break-word text-ellipsis transition-colors [-webkit-box-orient:vertical] [-webkit-line-clamp:2] md:h-11.5 md:text-base",
               {
                 "md:h-9.5 md:text-sm md:font-bold": size === "sm",
               }
             )}
+            title={`${name} ${code}`}
           >
             {name} {code}
           </Link>

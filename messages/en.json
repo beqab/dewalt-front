@@ -33,7 +33,9 @@
     "addToCart": "Add to Cart",
     "add": "Add",
     "toCart": "To Cart",
-    "addedToCart": "Product successfully added to cart"
+    "addedToCart": "Product successfully added to cart",
+    "maxQuantityReached": "Maximum available quantity is {maxQuantity}",
+    "insufficientStock": "Insufficient stock available"
   },
   "product": {
     "brand": "Brand",
@@ -44,7 +46,8 @@
     "quantity": "Quantity"
   },
   "common": {
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "backToProducts": "Back to Products"
   },
   "banner": {
     "newYearSale": "New Year",
@@ -80,7 +83,9 @@
     "similarProducts": "Similar Products",
     "selectToCompare": "Select products to compare",
     "clearAll": "Clear All",
-    "maxCompareReached": "Maximum 3 products can be added to the comparison list"
+    "maxCompareReached": "Maximum 3 products can be added to the comparison list",
+    "noSpecs": "No specifications available",
+    "commentsComingSoon": "Comments section coming soon"
   },
   "terms": {
     "termsAndConditions": "Terms and Conditions",
@@ -228,5 +233,9 @@
       "message": "An error occurred while loading news",
       "retry": "Try Again"
     }
+  },
+  "errors": {
+    "productNotFound": "Product not found",
+    "productNotFoundDescription": "The product you are looking for does not exist or has been removed."
   }
 }

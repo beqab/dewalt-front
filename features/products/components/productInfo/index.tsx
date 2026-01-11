@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { BucketIcon } from "@/components/icons/bucketIcon";
 import Rating from "@/components/rating";
 import StockIcon from "@/components/icons/stockIcon";
 import ShieldIcon from "@/components/icons/shieldIcon";
@@ -14,18 +11,8 @@ import { useTranslations } from "next-intl";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const t = useTranslations();
-  const {
-    name,
-    price,
-    code,
-    _id,
-    rating,
-    reviewCount,
-    brand,
-    category,
-    image,
-    id,
-  } = product;
+  const { name, price, code, _id, rating, reviewCount, brandId, categoryId } =
+    product;
 
   return (
     <div className="m-auto w-full max-w-[410px] space-y-4 md:m-0 md:max-w-none">
@@ -52,7 +39,7 @@ export default function ProductInfo({ product }: { product: Product }) {
           <span className="text-text-secondary text-sm">
             {t("product.brand")}:{" "}
           </span>
-          {brand}
+          {brandId.name}
         </div>
         <div className="text-dark-secondary-100 text-sm">
           <span className="text-text-secondary text-sm">
@@ -64,7 +51,7 @@ export default function ProductInfo({ product }: { product: Product }) {
           <span className="text-text-secondary text-sm">
             {t("product.category")}:{" "}
           </span>
-          {category}
+          {categoryId.name}
         </div>
       </div>
 

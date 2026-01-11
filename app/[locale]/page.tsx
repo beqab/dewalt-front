@@ -7,6 +7,8 @@ import AboutBanner from "@/features/about/aboutBanner";
 import Brands from "@/components/brands";
 import BenefitsList from "@/components/benefitsList";
 import SecundAd from "@/features/ads/components/secundAd";
+import { Suspense } from "react";
+import ProductSliderLoader from "@/features/products/components/productSlider/productSliderLoader";
 
 export default async function Home({
   params,
@@ -20,7 +22,9 @@ export default async function Home({
     <div className="">
       <BannerCarousel />
 
-      <ProductSlider />
+      <Suspense fallback={<ProductSliderLoader />}>
+        <ProductSlider />
+      </Suspense>
       <MainAdd />
       <NewsSlider />
       <SecundAd />

@@ -1,6 +1,6 @@
 import NewsDetail from "@/features/news/newsDetail";
 import { NewsErrorBoundary } from "@/features/news/components/errorBoundary";
-import { extractIdFromSlug } from "@/features/news/utils/extractIdFromSlug";
+import { extractIdFromSlug } from "@/lib/utils/extractIdFromSlug";
 import { notFound } from "next/navigation";
 
 export default async function Page({
