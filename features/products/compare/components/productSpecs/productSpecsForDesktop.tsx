@@ -11,9 +11,6 @@ interface ProductSpecsProps {
 export default function ProductSpecsForDesktop({
   products,
 }: ProductSpecsProps) {
-  // Get all unique spec labels from all products
-  const allSpecLabels = products[0]?.specs.map((spec) => spec.label) || [];
-
   return (
     <div className="w-full">
       {/* <h3 className="text-text-secondary mb-6 text-sm">დეტალები</h3> */}
@@ -42,7 +39,7 @@ export default function ProductSpecsForDesktop({
             return (
               <div
                 key={
-                  product ? `product-${product.id}` : `empty-product-${index}`
+                  product ? `product-${product._id}` : `empty-product-${index}`
                 }
                 className="bg-white p-4 pt-0"
               >
@@ -64,30 +61,22 @@ export default function ProductSpecsForDesktop({
             const product = products[index];
             return (
               <div
-                key={product ? `specs-${product.id}` : `empty-specs-${index}`}
+                key={product ? `specs-${product._id}` : `empty-specs-${index}`}
                 className="bg-white p-4"
               >
                 {product ? (
                   <div className="space-y-3">
-                    {allSpecLabels.map((label, labelIndex) => {
-                      const spec = product.specs.find((s) => s.label === label);
-                      if (!spec) return null;
-
+                    {product.specs.map(({ label, value }, index) => {
                       return (
                         <div
-                          key={labelIndex}
+                          key={` ${label}+${value}+${index}`}
                           className="border-line-color border-b pb-3 last:border-0"
                         >
                           <div className="text-text-secondary mb-1 text-sm">
-                            {spec.label}:
+                            {label}:
                           </div>
                           <div className="text-dark-secondary-100 flex items-baseline gap-1 text-sm">
-                            <span>{spec.value}</span>
-                            {spec.unit && (
-                              <span className="text-text-secondary text-xs">
-                                {spec.unit}
-                              </span>
-                            )}
+                            <span>{value}</span>
                           </div>
                         </div>
                       );

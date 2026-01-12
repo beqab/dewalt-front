@@ -2,13 +2,13 @@
 import { createContext, useContext } from "react";
 
 interface CompareContextType {
-  productIds: string[];
+  productIds: string[] | null;
   setProductIds: (productIds: string) => void;
   deleteProductId: (productId: string) => void;
 }
 
 export const CompareContext = createContext<CompareContextType>({
-  productIds: [],
+  productIds: null,
   setProductIds: () => {},
   deleteProductId: () => {},
 });

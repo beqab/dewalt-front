@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 export default function CompareLinkButton() {
   const t = useTranslations();
   const { productIds } = useCompareContext();
+  const count = productIds?.length ?? 0;
 
   return (
     <Button
@@ -19,7 +20,7 @@ export default function CompareLinkButton() {
       <Link href="/compare">
         <CompareIcon />
         <span className="hidden md:inline">{t("breadcrumb.comparison")}</span> (
-        {productIds.length})
+        {count})
       </Link>
     </Button>
   );

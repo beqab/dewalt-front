@@ -9,9 +9,11 @@ export default function CompareProductProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [productIds, setProductIds] = useState<string[]>([]);
+  // Initialize as null to indicate localStorage hasn't been checked yet
+  const [productIds, setProductIds] = useState<string[] | null>(null);
   const isInitialized = useRef(false);
   const t = useTranslations();
+
   // Load from localStorage on client side only
   useEffect(() => {
     if (typeof window !== "undefined" && !isInitialized.current) {
@@ -28,40 +30,51 @@ export default function CompareProductProvider({
             "Failed to parse compareProductIds from localStorage",
             error
           );
+          // Set to empty array on parse error
+          startTransition(() => {
+            setProductIds([]);
+          });
+          isInitialized.current = true;
         }
       } else {
+        // No data in localStorage, set to empty array
+        startTransition(() => {
+          setProductIds([]);
+        });
         isInitialized.current = true;
       }
     }
   }, []);
 
-  // Sync to localStorage whenever productIds changes
+  // Sync to localStorage whenever productIds changes (only if not null)
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && productIds !== null) {
       localStorage.setItem("compareProductIds", JSON.stringify(productIds));
     }
   }, [productIds]);
 
   function handleProductId(id: string) {
-    const exist = productIds.includes(id);
+    // If productIds is null, initialize to empty array first
+    const currentIds = productIds ?? [];
+    const exist = currentIds.includes(id);
 
     // If product exists, remove it (toggle off)
     if (exist) {
       setProductIds((prev) => {
-        return prev.filter((productId) => productId !== id);
+        return (prev ?? []).filter((productId) => productId !== id);
       });
       return;
     }
 
     // If product doesn't exist, try to add it
     // Check if we've reached the maximum (3 products)
-    if (productIds.length >= 3) {
+    if (currentIds.length >= 3) {
       toast.error(t("products.maxCompareReached"));
       return;
     }
 
     // Add the product
-    setProductIds((prev) => [...prev, id]);
+    setProductIds((prev) => [...(prev ?? []), id]);
   }
 
   function handleDeleteProductId(id: string) {
@@ -69,7 +82,9 @@ export default function CompareProductProvider({
       setProductIds([]);
       return;
     }
-    setProductIds((prev) => prev.filter((productId) => productId !== id));
+    setProductIds((prev) =>
+      (prev ?? []).filter((productId) => productId !== id)
+    );
   }
 
   return (

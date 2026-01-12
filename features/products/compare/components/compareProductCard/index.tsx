@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import type { CompareProductWithSpecs } from "../../types";
 
 import DeleteProductByIdButton from "../deleteProductByIdButton";
+import { generateSlug } from "@/lib/utils/slugify";
 
 interface CompareProductCardProps {
   product: CompareProductWithSpecs;
@@ -24,7 +25,7 @@ export default function CompareProductCard({
         <DeleteProductByIdButton id={_id} />
 
         {/* Product Image */}
-        <Link href={`/products/${_id}`} className="block">
+        <Link href={`/products/${generateSlug(name, _id)}`} className="block">
           <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
             <Image
               src={image}
@@ -39,7 +40,7 @@ export default function CompareProductCard({
         {/* Product Info */}
         <div className="flex flex-1 flex-col">
           <Link
-            href={`/products/${_id}`}
+            href={`/products/${generateSlug(name, _id)}`}
             className="text-dark-secondary-100 hover:text-primary mb-2 h-12 text-sm font-bold transition-colors"
           >
             {name} {code}

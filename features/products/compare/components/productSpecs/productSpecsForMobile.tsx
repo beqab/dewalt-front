@@ -26,7 +26,7 @@ export default function ProductSpecsForMobile({
         <div className="flex flex-col">
           <div className="flex">
             {products.map((product) => (
-              <div key={product.id} className="mr-4">
+              <div key={product._id} className="mr-4">
                 <CompareProductCard product={product} />
               </div>
             ))}
@@ -37,7 +37,7 @@ export default function ProductSpecsForMobile({
           <div className="flex">
             {products.map((product) => (
               <div
-                key={product.id}
+                key={product._id}
                 className="border-line-color mr-2 min-w-[228px] border-r pr-2 last:border-r-0"
               >
                 <div>
