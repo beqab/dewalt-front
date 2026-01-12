@@ -3,7 +3,11 @@
 import { useProductMenuContext } from "../context";
 import { MenuSubItem } from "../../../menuItm";
 
-export default function DropDownMenuBrands() {
+export default function DropDownMenuBrands({
+  onClose,
+}: {
+  onClose: () => void;
+}) {
   const {
     categories: allCategories,
     activeMainCategory,
@@ -13,8 +17,9 @@ export default function DropDownMenuBrands() {
 
   if (!allCategories || allCategories?.length === 0) return null;
 
+  const brandSlug = allCategories?.[activeMainCategory]?.slug;
   return (
-    <div className="w-1/3 bg-background-secondary border-r border-gray-200">
+    <div className="bg-background-secondary w-1/3 border-r border-gray-200">
       <ul className="py-2">
         {allCategories.map((category, categoryIndex) => (
           <MenuSubItem
@@ -28,6 +33,9 @@ export default function DropDownMenuBrands() {
             displayName={category.name}
             hasSubCategories={true}
             isActive={activeMainCategory === categoryIndex}
+            slug={category.slug}
+            brandSlug={brandSlug}
+            closeMenu={onClose}
           />
         ))}
       </ul>

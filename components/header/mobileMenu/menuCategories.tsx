@@ -34,6 +34,8 @@ export default function MenuCategories({
     }
   };
 
+  const brandSlug = brands?.[category]?.slug;
+
   return (
     <div>
       <div className="bg-background mb-4 flex items-center gap-4 pl-5">
@@ -78,6 +80,9 @@ export default function MenuCategories({
                 displayName={category.name}
                 hasSubCategories={category.subCategories.length > 0}
                 isActive={false}
+                slug={category.slug}
+                brandSlug={brandSlug || ""}
+                closeMenu={handleClose}
               />
             ))}
           </ul>

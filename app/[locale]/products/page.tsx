@@ -16,11 +16,5 @@ interface PageProps {
 }
 
 export default async function ProductPage({ searchParams }: PageProps) {
-  return (
-    <Suspense
-      fallback={<Loading message="პროდუქტები იტვირთება..." minHeight="60vh" />}
-    >
-      <ProductsPage searchParams={searchParams} />
-    </Suspense>
-  );
+  return <ProductsPage searchParams={searchParams} />;
 }

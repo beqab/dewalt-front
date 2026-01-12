@@ -65,7 +65,7 @@ export default function DesktopMenu() {
                   label={brand.name}
                 />
                 <ProductMenu.Panel isOpen={activeMainCategory === brandIndex}>
-                  <ProductMenu.Categories />
+                  <ProductMenu.Categories onClose={handleBrandClose} />
                   <ProductMenu.SubCategory onClose={() => handleBrandClose()} />
                 </ProductMenu.Panel>
               </ProductMenu>
@@ -86,8 +86,8 @@ export default function DesktopMenu() {
               label={t("navigation.products")}
             />
             <ProductMenu.Panel width="wide" isOpen={activeProductsMenu}>
-              <ProductMenu.MainCategories />
-              <ProductMenu.Categories />
+              <ProductMenu.MainCategories onClose={handleProductsClose} />
+              <ProductMenu.Categories onClose={handleProductsClose} />
               <ProductMenu.SubCategory onClose={() => handleProductsClose()} />
             </ProductMenu.Panel>
           </ProductMenu>

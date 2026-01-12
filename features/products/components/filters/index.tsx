@@ -33,11 +33,11 @@ export default function Filters({
     : 0;
   const initialMaxPrice = initialFilters?.maxPrice
     ? parseFloat(initialFilters.maxPrice)
-    : 12983;
+    : 20000;
 
   const [priceRange, setPriceRange] = useState<[number, number]>([
-    isNaN(initialMinPrice) ? 230 : initialMinPrice,
-    isNaN(initialMaxPrice) ? 12983 : initialMaxPrice,
+    isNaN(initialMinPrice) ? 0 : initialMinPrice,
+    isNaN(initialMaxPrice) ? 20000 : initialMaxPrice,
   ]);
 
   const handlePriceChange = (values: [number, number]) => {

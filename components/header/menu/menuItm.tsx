@@ -62,37 +62,66 @@ export const MenuSubItem = ({
   parentId,
   id,
   displayName,
+  slug,
   hasSubCategories,
   isActive,
+  brandSlug,
+  closeMenu,
 }: {
   onClick: (parentId: string, id: string) => void;
   parentId: string;
   id: string;
   displayName: string;
+  slug: string;
   hasSubCategories: boolean;
   isActive: boolean;
+  brandSlug: string;
+  closeMenu: () => void;
 }) => {
   return (
     <li
       onClick={() => onClick(parentId, id)}
       className="cursor-pointer transition-colors hover:bg-gray-50"
     >
-      <div className="flex items-start justify-between px-4 py-2">
-        <span
-          className={classNames("font-roboto text-dark-secondary-70 text-sm", {
-            "text-dark-secondary-100 font-bold": isActive,
-          })}
+      {!hasSubCategories ? (
+        <Link
+          className="flex items-start justify-between px-4 py-2"
+          href={`/products?category=${slug}&brand=${brandSlug}`}
+          onNavigate={closeMenu}
         >
-          {displayName}
-        </span>
-        {hasSubCategories && (
-          <MenuArrowRight
-            className={`text-dark-secondary-70 mt-1.5 shrink-0 transition-transform duration-200 ${
-              isActive ? "rotate-90" : ""
-            }`}
-          />
-        )}
-      </div>
+          <span
+            className={classNames(
+              "font-roboto text-dark-secondary-70 block text-sm",
+              {
+                "text-dark-secondary-100 font-bold": isActive,
+              }
+            )}
+          >
+            {displayName}
+          </span>
+        </Link>
+      ) : (
+        <div className="flex items-start justify-between px-4 py-2">
+          <span
+            className={classNames(
+              "font-roboto text-dark-secondary-70 text-sm",
+              {
+                "text-dark-secondary-100 font-bold": isActive,
+              }
+            )}
+          >
+            {displayName}
+          </span>
+
+          {hasSubCategories && (
+            <MenuArrowRight
+              className={`text-dark-secondary-70 mt-1.5 shrink-0 transition-transform duration-200 ${
+                isActive ? "rotate-90" : ""
+              }`}
+            />
+          )}
+        </div>
+      )}
     </li>
   );
 };

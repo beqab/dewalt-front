@@ -17,6 +17,8 @@ export async function getProducts(
   limit: number = 10,
   filters?: {
     brandSlug?: string; // Can be comma-separated for multiple brands
+    categorySlug?: string;
+    childCategorySlug?: string;
     brandId?: string;
     categoryId?: string;
     childCategoryId?: string;
@@ -34,6 +36,9 @@ export async function getProducts(
     };
 
     if (filters?.brandSlug) params.brandSlug = filters.brandSlug;
+    if (filters?.categorySlug) params.categorySlug = filters.categorySlug;
+    if (filters?.childCategorySlug)
+      params.childCategorySlug = filters.childCategorySlug;
     if (filters?.brandId) params.brandId = filters.brandId;
     if (filters?.categoryId) params.categoryId = filters.categoryId;
     if (filters?.childCategoryId)

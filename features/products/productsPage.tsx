@@ -1,17 +1,16 @@
-import Filters from "./components/filters";
-import ProductGrid from "./components/productGrid";
-import AsideAdd from "@/features/ads/components/asideAdd";
 import { getProducts } from "./server/getProucts";
-import { getBrands } from "@/features/categories/server/getBrands";
 import { getLocale } from "next-intl/server";
-import MobileFilter from "./components/filters/mobileFilter";
+import FilterWrapper from "./components/filters/filtereWrapper";
+import { Suspense } from "react";
+import FilterSkeleton from "./components/filters/filterSkeleton";
+import ProductGridWrapper from "./components/productGrid/productGreedWraper";
 
 interface ProductsPageProps {
   searchParams: Promise<{
     page?: string;
     brand?: string;
-    categoryId?: string;
-    childCategoryId?: string;
+    category?: string;
+    childCategory?: string;
     minPrice?: string;
     maxPrice?: string;
     search?: string;
@@ -33,8 +32,8 @@ export default async function ProductsPage({
   // Build filters object
   const filters: {
     brandSlug?: string;
-    categoryId?: string;
-    childCategoryId?: string;
+    categorySlug?: string;
+    childCategorySlug?: string;
     inStock?: boolean;
     minPrice?: number;
     maxPrice?: number;
@@ -45,8 +44,8 @@ export default async function ProductsPage({
   };
 
   if (params.brand) filters.brandSlug = params.brand;
-  if (params.categoryId) filters.categoryId = params.categoryId;
-  if (params.childCategoryId) filters.childCategoryId = params.childCategoryId;
+  if (params.category) filters.categorySlug = params.category;
+  if (params.childCategory) filters.childCategorySlug = params.childCategory;
   if (params.minPrice) {
     const minPrice = parseFloat(params.minPrice);
     if (!isNaN(minPrice)) filters.minPrice = minPrice;
@@ -60,35 +59,22 @@ export default async function ProductsPage({
     filters.inStock = params.inStock === "true" || params.inStock === "1";
   }
 
-  // Fetch products and brands in parallel
-  const [productsResponse, brands] = await Promise.all([
-    getProducts(currentPage, itemsPerPage, filters),
-    getBrands(locale).catch(() => []),
-  ]);
+  // Create products promise for Suspense
+  const productsPromise = getProducts(currentPage, itemsPerPage, filters);
 
   return (
     <div className="min-h-screen py-10">
       <div className="customContainer">
         <div className="mt-10 flex gap-6 md:mt-0">
           {/* Desktop Filters Sidebar */}
-          <aside className="hidden md:block">
-            <Filters brands={brands} initialFilters={params}>
-              <AsideAdd />
-            </Filters>
-          </aside>
-          <MobileFilter brands={brands} initialFilters={params} />
+          <Suspense fallback={<FilterSkeleton />}>
+            <FilterWrapper searchParams={searchParams} />
+          </Suspense>
 
           {/* Main Content */}
           <main className="min-w-0 flex-1">
             <div className="md:px-0">
-              <ProductGrid
-                products={productsResponse.data}
-                pagination={{
-                  currentPage: productsResponse.page,
-                  totalPages: productsResponse.totalPages,
-                  total: productsResponse.total,
-                }}
-              />
+              <ProductGridWrapper productsPromise={productsPromise} />
             </div>
           </main>
         </div>

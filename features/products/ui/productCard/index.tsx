@@ -51,12 +51,12 @@ export default function ProductCard({
 
         {/* Product Image */}
         <Link href={`/products/${generateSlug(name, _id)}`} className="block">
-          <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden rounded-lg">
+          <div className="relative mb-3 aspect-square h-[190px] w-full overflow-hidden">
             <Image
               src={image}
               alt={name}
               fill
-              className="object-contain transition-transform hover:scale-105"
+              className="object-cover transition-transform hover:scale-105"
               sizes="(max-width: 768px) 66.666vw, 25vw"
             />
           </div>

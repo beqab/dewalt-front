@@ -12,7 +12,7 @@ interface PriceRangeProps {
 
 export default function PriceRange({
   min = 0,
-  max = 12983,
+  max = 20000,
   values: controlledValues,
   onChange,
 }: PriceRangeProps) {

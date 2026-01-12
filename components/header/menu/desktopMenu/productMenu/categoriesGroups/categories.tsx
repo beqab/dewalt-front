@@ -3,7 +3,11 @@
 import { useProductMenuContext } from "../context";
 import { MenuSubItem } from "../../../menuItm";
 
-export default function DropDownMenuCategories() {
+export default function DropDownMenuCategories({
+  onClose,
+}: {
+  onClose: () => void;
+}) {
   const {
     categories: allCategories,
     activeCategory,
@@ -13,6 +17,8 @@ export default function DropDownMenuCategories() {
 
   if (!allCategories || allCategories?.length === 0) return null;
 
+  const brandSlug = allCategories?.[activeMainCategory]?.slug;
+
   const categories =
     allCategories?.length > 0
       ? allCategories?.[activeMainCategory]?.categories
@@ -21,7 +27,7 @@ export default function DropDownMenuCategories() {
   if (!categories || categories?.length === 0) return null;
 
   return (
-    <div className="w-1/2 bg-background-secondary border-r border-gray-200">
+    <div className="bg-background-secondary w-1/2 border-r border-gray-200">
       <ul className="py-2">
         {categories.map((category, categoryIndex) => {
           const hasSubCategories = category.subCategories.length > 0;
@@ -35,6 +41,9 @@ export default function DropDownMenuCategories() {
               displayName={category.name}
               hasSubCategories={hasSubCategories}
               isActive={activeCategory === categoryIndex}
+              slug={category.slug}
+              brandSlug={brandSlug}
+              closeMenu={onClose}
             />
           );
         })}

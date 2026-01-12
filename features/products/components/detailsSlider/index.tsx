@@ -115,7 +115,7 @@ export default function DetailsSlider({
             src={images[selectedIndex] || images[0]}
             alt={productName}
             fill
-            className="object-contain p-4"
+            className="object-cover p-4"
             sizes="(max-width: 768px) 100vw, 50vw"
             priority
           />
@@ -145,7 +145,7 @@ export default function DetailsSlider({
                   src={image}
                   alt={`${productName} ${index + 1}`}
                   fill
-                  className="object-contain p-1"
+                  className="object-cover p-1"
                   sizes="(max-width: 768px) 25vw, 12.5vw"
                 />
               </button>

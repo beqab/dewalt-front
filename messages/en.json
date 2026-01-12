@@ -85,13 +85,15 @@
     "clearAll": "Clear All",
     "maxCompareReached": "Maximum 3 products can be added to the comparison list",
     "noSpecs": "No specifications available",
-    "commentsComingSoon": "Comments section coming soon"
+    "commentsComingSoon": "Comments section coming soon",
+    "noProductsFound": "No products found matching your criteria",
+    "viewAllProducts": "View All Products"
+
   },
   "filters": {
     "priceFilter": "Filter by Price",
-    "manufacturers": "Manufacturers",
-    "noProductsFound": "No products found matching your criteria.",
-    "viewAllProducts": "View All Products"
+    "manufacturers": "Manufacturers"
+  
   },
   "terms": {
     "termsAndConditions": "Terms and Conditions",
