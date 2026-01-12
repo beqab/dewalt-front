@@ -87,6 +87,12 @@
     "noSpecs": "No specifications available",
     "commentsComingSoon": "Comments section coming soon"
   },
+  "filters": {
+    "priceFilter": "Filter by Price",
+    "manufacturers": "Manufacturers",
+    "noProductsFound": "No products found matching your criteria.",
+    "viewAllProducts": "View All Products"
+  },
   "terms": {
     "termsAndConditions": "Terms and Conditions",
     "intro": "Please carefully read the purchase, return and delivery conditions before proceeding with your purchase!!!",

@@ -1,49 +1,73 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ProductCard from "../../ui/productCard";
 import Pagination from "../pagination";
 import type { Product } from "../../types";
-import MobileFilter from "../filters/mobileFilter";
 import GridHeader from "./gridHeader";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 
 interface ProductGridProps {
   products: Product[];
+  pagination: {
+    currentPage: number;
+    totalPages: number;
+    total: number;
+  };
 }
 
-export default function ProductGrid({ products }: ProductGridProps) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 16;
+export default function ProductGrid({
+  products,
+  pagination,
+}: ProductGridProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const t = useTranslations();
 
-  const totalPages = Math.ceil(products.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentProducts = products.slice(startIndex, endIndex);
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (page === 1) {
+      params.delete("page");
+    } else {
+      params.set("page", page.toString());
+    }
+    router.push(`?${params.toString()}`);
+  };
 
   return (
     <div className="flex-1">
       {/* Header with Sorting and Product Count */}
-      <MobileFilter />
-      <GridHeader productsCount={products.length} />
+      <GridHeader productsCount={pagination.total} />
       {/* Product Grid */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {currentProducts.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            size="sm"
-            className="px-0 md:px-0"
-          />
-        ))}
+        {products.length === 0 ? (
+          <div className="col-span-full py-12 text-center">
+            <p className="text-text-secondary text-sm">
+              {t("products.noProductsFound")}
+            </p>
+            <Button variant="outline" onClick={() => router.push("/products")}>
+              {t("products.viewAllProducts")}
+            </Button>
+          </div>
+        ) : (
+          products.map((product) => (
+            <ProductCard
+              key={product._id}
+              product={product}
+              size="sm"
+              className="px-0 md:px-0"
+            />
+          ))
+        )}
       </div>
 
       {/* Pagination */}
-
-      {totalPages > 1 && (
+      {pagination.totalPages > 1 && (
         <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={setCurrentPage}
+          currentPage={pagination.currentPage}
+          totalPages={pagination.totalPages}
+          onPageChange={handlePageChange}
         />
       )}
     </div>

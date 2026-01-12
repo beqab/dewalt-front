@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 import FilterIcon from "@/components/icons/filterIcon";
@@ -7,8 +9,21 @@ import { useBodyScrollLock } from "@/hooks/useBodyScrollLock";
 import { Button } from "@/components/ui/button";
 import Filters from ".";
 import { cn } from "@/lib/utils";
+import { BrandApi } from "@/features/categories/server/getBrands";
 
-export default function MobileFilter() {
+interface MobileFilterProps {
+  brands: BrandApi[];
+  initialFilters: {
+    brand?: string;
+    minPrice?: string;
+    maxPrice?: string;
+  };
+}
+
+export default function MobileFilter({
+  brands,
+  initialFilters,
+}: MobileFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
@@ -48,7 +63,8 @@ export default function MobileFilter() {
             onClick={handleClose}
             className="absolute top-4 right-4 min-h-6.5 min-w-6.5 cursor-pointer"
           />
-          <Filters />
+          <Filters brands={brands} initialFilters={initialFilters} />
+
           <div className="mt-4 border-t border-[#D2D2D2] pt-4 pb-10">
             <Button
               onClick={handleClose}
