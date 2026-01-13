@@ -1,5 +1,11 @@
-import Loading from "@/components/ui/loading";
+import ProductDetailsSkeleton from "@/features/products/components/productDetails/productDetailsSkeleton";
+import ProductCardSliderLoader from "@/features/products/ui/productCard/productCardSkileton";
 
 export default function LoadingPage() {
-  return <Loading message="პროდუქტი იტვირთება..." minHeight="60vh" />;
+  return (
+    <>
+      <ProductDetailsSkeleton />
+      <ProductCardSliderLoader />
+    </>
+  );
 }

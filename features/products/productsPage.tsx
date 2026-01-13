@@ -4,6 +4,7 @@ import FilterWrapper from "./components/filters/filtereWrapper";
 import { Suspense } from "react";
 import FilterSkeleton from "./components/filters/filterSkeleton";
 import ProductGridWrapper from "./components/productGrid/productGreedWraper";
+import ActiveFilters from "./components/filters/activeFilters";
 
 interface ProductsPageProps {
   searchParams: Promise<{
@@ -65,7 +66,7 @@ export default async function ProductsPage({
   return (
     <div className="min-h-screen py-10">
       <div className="customContainer">
-        <div className="mt-10 flex gap-6 md:mt-0">
+        <div className="mt-10 block gap-6 md:mt-0 md:flex">
           {/* Desktop Filters Sidebar */}
           <Suspense fallback={<FilterSkeleton />}>
             <FilterWrapper searchParams={searchParams} />
@@ -74,6 +75,7 @@ export default async function ProductsPage({
           {/* Main Content */}
           <main className="min-w-0 flex-1">
             <div className="md:px-0">
+              <ActiveFilters />
               <ProductGridWrapper productsPromise={productsPromise} />
             </div>
           </main>

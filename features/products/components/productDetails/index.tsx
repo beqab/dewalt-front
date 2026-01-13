@@ -1,15 +1,29 @@
 import Breadcrumb from "@/components/ui/breadcrumb";
-import DetailsSlider from "./components/detailsSlider";
-import ProductInfo from "./components/productInfo";
-import ProductInfoTab from "./components/productInfoTab";
-import { Product } from "./types";
+import DetailsSlider from "../detailsSlider";
+import ProductInfo from "../productInfo";
+import ProductInfoTab from "../productInfoTab";
+import { Product } from "../../types";
 import { useTranslations } from "next-intl";
-import SimilarProductsSlider from "./components/similarProductsSlider";
+import SimilarProductsSlider from "../similarProductsSlider";
 import { Suspense } from "react";
-import ProductCardSliderLoader from "./ui/productCard/productCardSkileton";
+import ProductCardSliderLoader from "../../ui/productCard/productCardSkileton";
+import { notFound } from "next/navigation";
+import { getProductById } from "../../server";
+import { getTranslations } from "next-intl/server";
 
-export default function ProductDetails({ product }: { product: Product }) {
-  const t = useTranslations();
+export default async function ProductDetails({
+  productId,
+  language,
+}: {
+  productId: string;
+  language: "ka" | "en";
+}) {
+  const t = await getTranslations();
+
+  const product = await getProductById(productId, language);
+  if (!product) {
+    return notFound();
+  }
 
   const breadcrumbItems = [
     { label: t("breadcrumb.home"), href: "/" },
@@ -22,7 +36,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   ];
 
   return (
-    <div>
+    <>
       <Breadcrumb items={breadcrumbItems} />
       <div className="bg-neutral md:bg-background">
         <div className="mx-auto max-w-[1070px] px-[15px] py-8 pt-0 md:pt-8">
@@ -35,18 +49,9 @@ export default function ProductDetails({ product }: { product: Product }) {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-[1070px] px-[15px] py-8">
+      <div className="mx-auto max-w-[1070px] px-[15px]">
         <ProductInfoTab product={product} />
-
-        <div className="text-dark-secondary-100 pt-10 pb-6 text-sm">
-          {t("products.similarProducts")}
-        </div>
-        <div className="ml-[-10px] md:ml-[-5px]">
-          <Suspense fallback={<ProductCardSliderLoader />}>
-            <SimilarProductsSlider productId={product._id} />
-          </Suspense>
-        </div>
       </div>
-    </div>
+    </>
   );
 }

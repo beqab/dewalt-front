@@ -1,5 +1,6 @@
 // Public exports for the products feature
-export { default as ProductDetails } from "./productDetails";
+export { default as ProductDetails } from "./components/productDetails/index";
+export { default as ProductDetailsPage } from "./productDetailsPage";
 export { default as ProductsPage } from "./productsPage";
 export { default as ProductSlider } from "./components/productSlider";
 export { default as ProductGrid } from "./components/productGrid";
