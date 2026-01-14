@@ -12,6 +12,7 @@ interface PageProps {
     maxPrice?: string;
     search?: string;
     inStock?: string;
+    sort?: string;
   }>;
 }
 

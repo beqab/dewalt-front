@@ -1,29 +1,20 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { useTransition, useMemo } from "react";
-import { useTranslations } from "next-intl";
 import CloseIcon from "@/components/icons/closeIcon";
-import { categoriesService } from "@/features/categories/services/categoriesService";
-import { useGetLocale } from "@/lib/utils/useGetLocale";
-import { useQuery } from "@tanstack/react-query";
-import QUERY_KEYS from "@/lib/queryKeys";
+import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo, useTransition } from "react";
 
-import type { MenuBrand } from "@/features/categories/types";
+import { useMenuBrands } from "@/components/header/menu/hooks/useMenuBrands";
 
 export default function ActiveFilters() {
   const t = useTranslations();
-  const locale = useGetLocale() as "ka" | "en";
   const router = useRouter();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
 
   // Fetch menu data to get category names
-  const { data: menuData } = useQuery<MenuBrand[]>({
-    queryKey: [...QUERY_KEYS.CATEGORIES.MENU(locale)],
-    queryFn: () => categoriesService.getMenu(locale),
-    staleTime: 5 * 60 * 1000, // 5 minutes
-  });
+  const { data: menuData } = useMenuBrands();
 
   // Get active filters from URL
   const activeFilters = useMemo(() => {

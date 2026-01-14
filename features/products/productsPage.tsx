@@ -16,6 +16,7 @@ interface ProductsPageProps {
     maxPrice?: string;
     search?: string;
     inStock?: string;
+    sort?: string;
   }>;
 }
 
@@ -39,6 +40,7 @@ export default async function ProductsPage({
     minPrice?: number;
     maxPrice?: number;
     search?: string;
+    sort?: string;
     language?: "ka" | "en";
   } = {
     language: locale,
@@ -56,6 +58,7 @@ export default async function ProductsPage({
     if (!isNaN(maxPrice)) filters.maxPrice = maxPrice;
   }
   if (params.search) filters.search = params.search;
+  if (params.sort) filters.sort = params.sort;
   if (params.inStock !== undefined) {
     filters.inStock = params.inStock === "true" || params.inStock === "1";
   }

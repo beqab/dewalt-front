@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTransition } from "react";
 import { useTranslations } from "next-intl";
 
 export default function GridHeader({
@@ -9,28 +10,37 @@ export default function GridHeader({
   productsCount: number;
 }) {
   const t = useTranslations();
-  const [sortBy, setSortBy] = useState("price-desc");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [, startTransition] = useTransition();
+
+  const sortBy = searchParams.get("sort") || "";
 
   const handleSortBy = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    setSortBy(value);
+    startTransition(() => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value === "" || value === "default") {
+        // Default/placeholder option, remove from URL
+        params.delete("sort");
+      } else {
+        params.set("sort", value);
+      }
+      params.delete("page"); // Reset to page 1 when sort changes
+      router.replace(`?${params.toString()}`, { scroll: false });
+    });
   };
 
   return (
     <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div className="flex items-center gap-2">
-        <label
-          htmlFor="sort"
-          className="text-text-secondary text-sm font-medium"
-        >
-          {t("products.sortBy")}
-        </label>
         <select
           id="sort"
           value={sortBy}
           onChange={handleSortBy}
           className="text-dark-secondary-100 focus:ring-primary rounded border border-transparent bg-white px-3 text-sm focus:ring-2 focus:outline-none"
         >
+          <option value="">{t("products.sortBy")}</option>
           <option value="price-desc">{t("products.priceDesc")}</option>
           <option value="price-asc">{t("products.priceAsc")}</option>
         </select>

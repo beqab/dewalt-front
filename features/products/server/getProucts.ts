@@ -26,6 +26,7 @@ export async function getProducts(
     minPrice?: number;
     maxPrice?: number;
     search?: string;
+    sort?: string;
     language?: "ka" | "en";
   }
 ): Promise<PaginatedProductsResponse> {
@@ -50,6 +51,7 @@ export async function getProducts(
     if (filters?.maxPrice !== undefined)
       params.maxPrice = filters.maxPrice.toString();
     if (filters?.search) params.search = filters.search;
+    if (filters?.sort) params.sort = filters.sort;
     if (filters?.language) params.language = filters.language;
 
     return await fetchApi<PaginatedProductsResponse>(API_ROUTES.PRODUCTS, {
