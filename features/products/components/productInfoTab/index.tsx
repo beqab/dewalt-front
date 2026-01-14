@@ -4,8 +4,15 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useTranslations } from "next-intl";
 import { Product } from "../../types";
+import FacebookComments from "@/components/facebook/FacebookComments";
 
-export default function ProductInfoTab({ product }: { product: Product }) {
+export default function ProductInfoTab({
+  product,
+  productUrl,
+}: {
+  product: Product;
+  productUrl: string;
+}) {
   const { specs, description } = product;
   const t = useTranslations("");
   const tabs = [
@@ -72,11 +79,7 @@ export default function ProductInfoTab({ product }: { product: Product }) {
       case 3: // Comments
         return (
           <div className="bg-background rounded-lg p-4 md:min-h-[160px]">
-            <p className="text-text-secondary text-center">
-              {t("products.commentsComingSoon", {
-                defaultValue: "Comments section coming soon",
-              })}
-            </p>
+            <FacebookComments href={productUrl} />
           </div>
         );
 

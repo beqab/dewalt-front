@@ -1,15 +1,12 @@
 import Breadcrumb from "@/components/ui/breadcrumb";
+import { generateSlug } from "@/lib/utils/slugify";
+import { getTranslations } from "next-intl/server";
+import { headers } from "next/headers";
+import { notFound } from "next/navigation";
+import { getProductById } from "../../server";
 import DetailsSlider from "../detailsSlider";
 import ProductInfo from "../productInfo";
 import ProductInfoTab from "../productInfoTab";
-import { Product } from "../../types";
-import { useTranslations } from "next-intl";
-import SimilarProductsSlider from "../similarProductsSlider";
-import { Suspense } from "react";
-import ProductCardSliderLoader from "../../ui/productCard/productCardSkileton";
-import { notFound } from "next/navigation";
-import { getProductById } from "../../server";
-import { getTranslations } from "next-intl/server";
 
 export default async function ProductDetails({
   productId,
@@ -34,6 +31,12 @@ export default async function ProductDetails({
     },
     { label: product.name },
   ];
+  // Get base URL for Facebook comments
+  const headersList = await headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+  const baseUrl = `${protocol}://${host}`;
+  const productUrl = `${baseUrl}/${language}/products/${generateSlug(product.name, product._id)}`;
 
   return (
     <>
@@ -50,7 +53,7 @@ export default async function ProductDetails({
         </div>
       </div>
       <div className="mx-auto max-w-[1070px] px-[15px]">
-        <ProductInfoTab product={product} />
+        <ProductInfoTab product={product} productUrl={productUrl} />
       </div>
     </>
   );

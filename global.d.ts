@@ -1,4 +1,3 @@
-
 import en from "./messages/en.json";
 
 type Messages = typeof en;
@@ -6,4 +5,18 @@ type Messages = typeof en;
 declare global {
   // Use type safe message keys with `next-intl`
   type IntlMessages = Messages;
+
+  // Facebook SDK types
+  interface Window {
+    FB: {
+      init: (config: {
+        appId: string;
+        xfbml: boolean;
+        version: string;
+      }) => void;
+      XFBML: {
+        parse: (element: HTMLElement) => void;
+      };
+    };
+  }
 }
