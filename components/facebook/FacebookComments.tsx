@@ -29,36 +29,45 @@ export default function FacebookComments({
   };
 
   const handleSDKLoad = () => {
+    console.log("Facebook SDK loaded, window.FB:", window.FB);
+
     // SDK loaded, initialize Facebook (only once globally)
     if (typeof window !== "undefined" && window.FB && !isSDKInitialized) {
+      console.log("Initializing Facebook SDK with App ID:", FACEBOOK_APP_ID);
       window.FB.init({
         appId: FACEBOOK_APP_ID,
         xfbml: true,
         version: "v21.0",
       });
       isSDKInitialized = true;
+      console.log("Facebook SDK initialized successfully");
     }
 
     setIsSDKLoaded(true);
 
     // Parse comments after a short delay to ensure DOM is ready
     setTimeout(() => {
+      console.log("Parsing Facebook comments, window.FB:", window.FB);
       initializeComments();
     }, 100);
   };
 
   useEffect(() => {
     // Re-parse comments when href changes or if SDK is already loaded
-    if (isSDKLoaded && window.FB) {
+    // Note: window.FB will be undefined initially - this is normal!
+    // The SDK loads asynchronously via Script component
+    if (isSDKLoaded && typeof window !== "undefined" && window.FB) {
+      console.log("Re-parsing Facebook comments for href:", href);
       initializeComments();
+    } else {
+      console.log(
+        "Facebook SDK not ready yet. isSDKLoaded:",
+        isSDKLoaded,
+        "window.FB:",
+        typeof window !== "undefined" ? window.FB : "N/A"
+      );
     }
   }, [href, isSDKLoaded]);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      console.log(window.FB, "window.FB");
-    }
-  }, []);
   return (
     <>
       <Script
