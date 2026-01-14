@@ -139,7 +139,7 @@ class APIClient<TResponse = unknown> {
   async getAll<TData = TResponse[]>(
     page = 1,
     limit = 10,
-    params?: Record<string, QueryParams>
+    params?: Record<string, string | number | boolean | null | undefined>
   ): Promise<ApiResponse<TData>> {
     try {
       const response = await axiosInstance.get<ApiResponse<TData>>(

@@ -6,17 +6,19 @@ import { Link } from "@/i18n/navigation";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import { useCartContext } from "../../cartContext";
 import { Link as I18nLink } from "@/i18n/navigation";
-import useOnclicOutside from "@/hooks/useOnclicOutside";
+import useOnClickOutside from "@/hooks/useOnClickOutside";
 import TrashIcon from "@/components/icons/trashIcon";
+import { useTranslations } from "next-intl";
 
 export default function CartPreview() {
+  const t = useTranslations();
   const { items, getTotalItems, getTotalPrice, removeItem } = useCartContext();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const totalItems = getTotalItems();
   const totalPrice = getTotalPrice();
 
-  useOnclicOutside(dropdownRef, () => setIsOpen(false));
+  useOnClickOutside(dropdownRef, () => setIsOpen(false));
 
   return (
     <div className="relative" ref={dropdownRef}>
@@ -41,7 +43,7 @@ export default function CartPreview() {
           <div className="max-h-[500px] overflow-y-auto p-4">
             {items.length === 0 ? (
               <div className="py-8 text-center">
-                <p className="text-text-secondary text-sm">კალათა ცარიელია</p>
+                <p className="text-text-secondary text-sm">{t("cart.empty")}</p>
               </div>
             ) : (
               <>
@@ -104,7 +106,9 @@ export default function CartPreview() {
                 {/* Total and View Cart Button */}
                 <div className="border-line-color mt-4 border-t pt-4">
                   <div className="mb-3 flex items-center justify-between">
-                    <span className="text-text-secondary text-sm">სულ:</span>
+                    <span className="text-text-secondary text-sm">
+                      {t("cart.total")}:
+                    </span>
                     <span className="text-dark-secondary-100 text-lg font-bold">
                       {totalPrice.toLocaleString("ka-GE")} GEL
                     </span>
@@ -114,7 +118,7 @@ export default function CartPreview() {
                     onClick={() => setIsOpen(false)}
                     className="bg-primary hover:bg-primary/90 text-dark-secondary-100 block w-full rounded px-4 py-2 text-center text-sm font-medium transition-colors"
                   >
-                    კალათაში გადასვლა
+                    {t("cart.viewCart")}
                   </I18nLink>
                 </div>
               </>

@@ -35,7 +35,10 @@
     "toCart": "კალათაში",
     "addedToCart": "პროდუქტი წარმატებით დაემატა კალათაში",
     "maxQuantityReached": "მაქსიმალური ხელმისაწვდომი რაოდენობაა {maxQuantity}",
-    "insufficientStock": "არასაკმარისი მარაგი"
+    "insufficientStock": "არასაკმარისი მარაგი",
+    "viewCart": "კალათაში გადასვლა",
+    "emptyCart": "კალათა ცარიელია",
+    "totalPrice": "სულ"
   },
   "product": {
     "brand": "ბრენდი",
@@ -91,7 +94,8 @@
   },
   "filters": {
     "priceFilter": "ფასით გაფილტვრა",
-    "manufacturers": "მწარმოებლები"
+    "manufacturers": "მწარმოებლები",
+    "search":"ძებნა"
     
   },
   "terms": {
