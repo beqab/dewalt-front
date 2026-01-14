@@ -5,6 +5,7 @@ import Script from "next/script";
 
 interface FacebookCommentsProps {
   href: string; // Unique URL for this product/page
+  locale?: "ka" | "en"; // Language for Facebook comments
   width?: string;
   numPosts?: number;
 }
@@ -14,17 +15,27 @@ const FACEBOOK_APP_ID = "660683246621860";
 // Global flag to track if SDK is initialized
 let isSDKInitialized = false;
 
+// Map locale to Facebook locale code
+const getFacebookLocale = (locale?: "ka" | "en"): string => {
+  return locale === "ka" ? "ka_GE" : "en_US";
+};
+
 export default function FacebookComments({
   href,
+  locale = "en",
   width = "100%",
   numPosts = 10,
 }: FacebookCommentsProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const prevHrefRef = useRef<string>(href);
   const [isSDKLoaded, setIsSDKLoaded] = useState(false);
+  const [isCommentsReady, setIsCommentsReady] = useState(false);
+  const facebookLocale = getFacebookLocale(locale);
 
   const initializeComments = () => {
     if (containerRef.current && window.FB) {
       window.FB.XFBML.parse(containerRef.current);
+      setIsCommentsReady(true);
     }
   };
 
@@ -53,12 +64,24 @@ export default function FacebookComments({
   };
 
   useEffect(() => {
+    // Reset loading state when href changes
+    if (prevHrefRef.current !== href) {
+      prevHrefRef.current = href;
+      // Use setTimeout to avoid setState in effect warning
+      setTimeout(() => {
+        setIsCommentsReady(false);
+      }, 0);
+    }
+
     // Re-parse comments when href changes or if SDK is already loaded
     // Note: window.FB will be undefined initially - this is normal!
     // The SDK loads asynchronously via Script component
     if (isSDKLoaded && typeof window !== "undefined" && window.FB) {
       console.log("Re-parsing Facebook comments for href:", href);
-      initializeComments();
+      // Use setTimeout to avoid setState in effect warning
+      setTimeout(() => {
+        initializeComments();
+      }, 0);
     } else {
       console.log(
         "Facebook SDK not ready yet. isSDKLoaded:",
@@ -71,18 +94,27 @@ export default function FacebookComments({
   return (
     <>
       <Script
-        src="https://connect.facebook.net/en_US/sdk.js"
+        src={`https://connect.facebook.net/${facebookLocale}/sdk.js`}
         strategy="lazyOnload"
         onLoad={handleSDKLoad}
       />
       <div className="w-full">
+        {!isCommentsReady && (
+          <div className="flex min-h-[200px] items-center justify-center">
+            <div className="flex flex-col items-center gap-3">
+              <div className="border-t-primary h-8 w-8 animate-spin rounded-full border-4 border-gray-200" />
+              <p className="text-text-secondary text-sm">Loading comments...</p>
+            </div>
+          </div>
+        )}
         <div
           ref={containerRef}
-          className="fb-comments"
+          className={`fb-comments ${!isCommentsReady ? "hidden" : ""}`}
           data-href={href}
           data-width={width}
           data-numposts={numPosts}
           data-colorscheme="light"
+          data-locale={facebookLocale}
         />
       </div>
     </>

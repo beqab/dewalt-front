@@ -52,7 +52,7 @@ export default async function ProductDetails({
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-[1070px] px-[15px]">
+      <div className="mx-auto mt-5 max-w-[1070px] px-[15px]">
         <ProductInfoTab product={product} productUrl={productUrl} />
       </div>
     </>
