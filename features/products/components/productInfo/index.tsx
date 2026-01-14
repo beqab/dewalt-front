@@ -1,13 +1,13 @@
 "use client";
 
-import Rating from "@/components/rating";
-import StockIcon from "@/components/icons/stockIcon";
 import ShieldIcon from "@/components/icons/shieldIcon";
+import StockIcon from "@/components/icons/stockIcon";
 import ShareButton from "@/components/ui/ShareButton";
-import { CompareButton } from "../../compare/components/compareButton";
-import AddToCart from "../../cart/components/addToCart";
-import { Product } from "../../types";
 import { useTranslations } from "next-intl";
+import AddToCart from "../../cart/components/addToCart";
+import { CompareButton } from "../../compare/components/compareButton";
+import { Product } from "../../types";
+import ProductRating from "../productRating";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const t = useTranslations();
@@ -22,9 +22,12 @@ export default function ProductInfo({ product }: { product: Product }) {
       </h1>
 
       {/* Rating and Compare */}
-
       <div className="flex items-center gap-2 md:mb-6">
-        <Rating rating={rating} interactive={true} reviewCount={reviewCount} />
+        <ProductRating
+          productId={_id}
+          initialRating={rating}
+          initialReviewCount={reviewCount}
+        />
       </div>
 
       {/* Price and Checkbox */}

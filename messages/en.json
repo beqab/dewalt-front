@@ -48,6 +48,10 @@
     "warranty": "Warranty",
     "quantity": "Quantity"
   },
+  "rating": {
+    "submitSuccess": "Rating submitted successfully!",
+    "submitError": "Failed to submit rating. Please try again."
+  },
   "common": {
     "viewAll": "View All",
     "backToProducts": "Back to Products"

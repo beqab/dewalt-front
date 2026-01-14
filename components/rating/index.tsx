@@ -3,45 +3,47 @@
 import { useState } from "react";
 
 interface RatingProps {
-  rating?: number;
-  onRatingChange?: (rating: number) => void;
+  rating: number;
+  onStarClick?: (starIndex: number) => void;
+  onStarHover?: (starIndex: number) => void;
+  onMouseLeave?: () => void;
   interactive?: boolean;
   reviewCount?: number;
+  disabled?: boolean;
+  ratingDisplay?: string; // Custom display text like "3.8 (123)"
 }
 
 export default function Rating({
-  rating: initialRating = 0,
-  onRatingChange,
+  rating,
+  onStarClick,
+  onStarHover,
+  onMouseLeave,
   interactive = false,
   reviewCount = 0,
+  disabled = false,
+  ratingDisplay,
 }: RatingProps) {
-  const [selectedRating, setSelectedRating] = useState(initialRating);
   const [hoveredRating, setHoveredRating] = useState(0);
 
-  // Use controlled rating if provided, otherwise use internal state
-  const displayRating = interactive
-    ? hoveredRating || selectedRating
-    : initialRating;
-
-  const handleStarClick = (starIndex: number) => {
-    if (!interactive) return;
-
-    const newRating = starIndex + 1;
-    setSelectedRating(newRating);
-    console.log("Rating:", newRating);
-    onRatingChange?.(newRating);
-  };
-
   const handleStarHover = (starIndex: number) => {
-    if (!interactive) return;
+    if (!interactive || disabled) return;
     setHoveredRating(starIndex + 1);
+    onStarHover?.(starIndex);
   };
 
   const handleMouseLeave = () => {
-    if (!interactive) return;
+    if (!interactive || disabled) return;
     setHoveredRating(0);
+    onMouseLeave?.();
   };
 
+  const handleStarClick = (starIndex: number) => {
+    if (!interactive || disabled) return;
+    onStarClick?.(starIndex + 1);
+  };
+
+  // Use hovered rating if hovering, otherwise use provided rating
+  const displayRating = hoveredRating || rating;
   const fullStars = Math.floor(displayRating);
   const hasHalfStar = displayRating % 1 >= 0.5;
 
@@ -59,12 +61,13 @@ export default function Rating({
               onClick={() => handleStarClick(i)}
               onMouseEnter={() => handleStarHover(i)}
               className={`transition-transform ${
-                interactive
+                interactive && !disabled
                   ? "cursor-pointer hover:scale-110 active:scale-95"
                   : "cursor-default"
-              }`}
-              disabled={!interactive}
+              } ${disabled ? "opacity-50" : ""}`}
+              disabled={!interactive || disabled}
               aria-label={`Rate ${starValue} out of 5`}
+              aria-disabled={disabled}
             >
               {isFilled ? (
                 <svg
@@ -132,7 +135,7 @@ export default function Rating({
         })}
       </div>
       <span className="text-text-secondary text-sm md:text-base">
-        {reviewCount}
+        {ratingDisplay || reviewCount}
       </span>
     </div>
   );

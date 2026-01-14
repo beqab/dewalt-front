@@ -24,4 +24,7 @@ export const API_ROUTES = {
 
   // Products
   PRODUCTS: "/products",
+
+  // Ratings
+  RATINGS: "/ratings",
 };

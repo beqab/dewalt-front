@@ -15,6 +15,11 @@ const QUERY_KEYS = {
     BY_IDS: (ids: string[]) => ["products", "ids", ...ids] as const,
     SEARCH: (query: string, language: string) =>
       ["products", "search", query, language] as const,
+    RATING_ALL: ["products", "rating"] as const,
+    RATING_STATS: (productId: string) =>
+      ["products", "rating", "ratingStats", productId] as const,
+    MY_RATING: (productId: string, anonymousUserId: string) =>
+      ["products", "rating", "myRating", productId, anonymousUserId] as const,
   },
   CATEGORIES: {
     MENU: (lang: string) => ["categories", "menu", lang] as const,
