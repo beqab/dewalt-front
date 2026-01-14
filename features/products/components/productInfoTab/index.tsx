@@ -36,59 +36,74 @@ export default function ProductInfoTab({
   ];
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case 1: // Description
-        return (
-          <div className="bg-background rounded-lg p-4 md:min-h-[160px]">
-            <p className="text-dark-secondary-100 whitespace-pre-line">
-              {description}
-            </p>
-          </div>
-        );
+  // Render all tabs but show/hide based on activeTab
+  const renderDescriptionTab = () => (
+    <div
+      className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
+        hidden: activeTab !== 1,
+      })}
+    >
+      <p className="text-dark-secondary-100 whitespace-pre-line">
+        {description}
+      </p>
+    </div>
+  );
 
-      case 2: // Specs/Details
-        if (!specs || specs.length === 0) {
-          return (
-            <div className="bg-background rounded-lg p-4 md:min-h-[160px]">
-              <p className="text-text-secondary text-center">
-                {t("products.noSpecs", {
-                  defaultValue: "No specifications available",
-                })}
-              </p>
-            </div>
-          );
-        }
-
-        return (
-          <div className="bg-background overflow-hidden rounded-lg md:min-h-[160px]">
-            <div className="divide-y divide-gray-200 p-2">
-              {specs.map((spec, index) => (
-                <div
-                  key={index}
-                  className="grid grid-cols-1 gap-4 p-2 transition-colors hover:bg-gray-50/50 md:grid-cols-[200px_1fr]"
-                >
-                  <div className="text-text-secondary font-medium md:font-normal">
-                    {spec.label}
-                  </div>
-                  <div className="text-dark-secondary-100">{spec.value}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 3: // Comments
-        return (
-          <div className="bg-background rounded-lg p-4 md:min-h-[160px]">
-            <FacebookComments href={productUrl} locale={locale} />
-          </div>
-        );
-
-      default:
-        return null;
+  const renderSpecsTab = () => {
+    if (!specs || specs.length === 0) {
+      return (
+        <div
+          className={classNames(
+            "bg-background rounded-lg p-4 md:min-h-[160px]",
+            {
+              hidden: activeTab !== 2,
+            }
+          )}
+        >
+          <p className="text-text-secondary text-center">
+            {t("products.noSpecs", {
+              defaultValue: "No specifications available",
+            })}
+          </p>
+        </div>
+      );
     }
+
+    return (
+      <div
+        className={classNames(
+          "bg-background overflow-hidden rounded-lg md:min-h-[160px]",
+          {
+            hidden: activeTab !== 2,
+          }
+        )}
+      >
+        <div className="divide-y divide-gray-200 p-2">
+          {specs.map((spec, index) => (
+            <div
+              key={index}
+              className="grid grid-cols-1 gap-4 p-2 transition-colors hover:bg-gray-50/50 md:grid-cols-[200px_1fr]"
+            >
+              <div className="text-text-secondary font-medium md:font-normal">
+                {spec.label}
+              </div>
+              <div className="text-dark-secondary-100">{spec.value}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
+
+  const renderCommentsTab = () => (
+    <div
+      className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
+        hidden: activeTab !== 3,
+      })}
+    >
+      <FacebookComments href={productUrl} locale={locale} />
+    </div>
+  );
 
   return (
     <div>
@@ -109,7 +124,11 @@ export default function ProductInfoTab({
           </button>
         ))}
       </div>
-      <div className="mt-4">{renderTabContent()}</div>
+      <div className="mt-4">
+        {renderDescriptionTab()}
+        {renderSpecsTab()}
+        {renderCommentsTab()}
+      </div>
     </div>
   );
 }

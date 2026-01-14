@@ -10,8 +10,11 @@ interface FacebookCommentsProps {
   numPosts?: number;
 }
 
-const FACEBOOK_APP_ID = "660683246621860";
+const FACEBOOK_APP_ID = process.env.NEXT_PUBLIC_FACEBOOK_APP_ID || "";
 
+if (!FACEBOOK_APP_ID) {
+  console.log("NEXT_PUBLIC_FACEBOOK_APP_ID is not set");
+}
 // Global flag to track if SDK is initialized
 let isSDKInitialized = false;
 
