@@ -36,7 +36,7 @@ export default async function ProductDetails({
   const host = headersList.get("host") || "localhost:3000";
   const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
   const baseUrl = `${protocol}://${host}`;
-  const productUrl = `${baseUrl}/${language}/products/${generateSlug(product.name, product._id)}`;
+  const productUrl = `${baseUrl}/${language}/products/${product._id}`;
 
   return (
     <>

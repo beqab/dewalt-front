@@ -97,15 +97,12 @@ export default function ProductInfoTab({
 
   const renderCommentsTab = () => (
     <div
+      key={productUrl}
       className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
         hidden: activeTab !== 3,
       })}
     >
-      <FacebookComments
-        key={product._id}
-        href={`products/${product._id}`}
-        locale={locale}
-      />
+      <FacebookComments href={productUrl} locale={locale} />
     </div>
   );
 
