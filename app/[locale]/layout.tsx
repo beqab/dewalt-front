@@ -17,6 +17,7 @@ import { QueryProvider } from "@/lib/providers/QueryProvider";
 import { AuthProvider } from "@/features/auth";
 import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import { Suspense } from "react";
 
 type Props = {
   children: React.ReactNode;
@@ -82,7 +83,10 @@ export default async function RootLayout({ children, params }: Props) {
 
                 <CartProvider>
                   <Header />
-                  <ScrollToTop />
+                  <Suspense fallback={null}>
+                    <ScrollToTop />
+                  </Suspense>
+
                   <CompareProductProvider>
                     <>
                       {children}
