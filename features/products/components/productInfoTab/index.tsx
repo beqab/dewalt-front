@@ -7,6 +7,25 @@ import { Product } from "../../types";
 import FacebookComments from "@/components/facebook/FacebookComments";
 import { useGetLocale } from "@/lib/utils/useGetLocale";
 
+const RenderCommentsTab = ({
+  productUrl,
+  locale,
+  activeTab,
+}: {
+  productUrl: string;
+  locale: "ka" | "en";
+  activeTab: number;
+}) => (
+  <div
+    key={productUrl}
+    className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
+      hidden: activeTab !== 3,
+    })}
+  >
+    <FacebookComments href={productUrl} locale={locale} />
+  </div>
+);
+
 export default function ProductInfoTab({
   product,
   productUrl,
@@ -95,21 +114,6 @@ export default function ProductInfoTab({
     );
   };
 
-  const renderCommentsTab = () => (
-    <div
-      key={productUrl}
-      className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
-        hidden: activeTab !== 3,
-      })}
-    >
-      <FacebookComments
-        href={productUrl}
-        locale={locale}
-        isActive={activeTab === 3}
-      />
-    </div>
-  );
-
   return (
     <div>
       <div className="border-b border-gray-200">
@@ -132,7 +136,12 @@ export default function ProductInfoTab({
       <div className="mt-4">
         {renderDescriptionTab()}
         {renderSpecsTab()}
-        {renderCommentsTab()}
+        <RenderCommentsTab
+          key={productUrl}
+          productUrl={productUrl}
+          locale={locale}
+          activeTab={activeTab}
+        />
       </div>
     </div>
   );

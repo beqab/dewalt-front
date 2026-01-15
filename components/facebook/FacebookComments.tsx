@@ -6,7 +6,7 @@ import Script from "next/script";
 interface FacebookCommentsProps {
   href: string; // Unique URL for this product/page
   locale?: "ka" | "en"; // Language for Facebook comments
-  isActive?: boolean;
+
   width?: string;
   numPosts?: number;
 }
@@ -27,7 +27,6 @@ const getFacebookLocale = (locale?: "ka" | "en"): string => {
 export default function FacebookComments({
   href,
   locale = "en",
-  isActive = true,
   width = "100%",
   numPosts = 10,
 }: FacebookCommentsProps) {
@@ -88,7 +87,7 @@ export default function FacebookComments({
     // Re-parse comments when href changes or if SDK is already loaded
     // Note: window.FB will be undefined initially - this is normal!
     // The SDK loads asynchronously via Script component
-    if (isActive && isSDKLoaded && typeof window !== "undefined" && window.FB) {
+    if (isSDKLoaded && typeof window !== "undefined" && window.FB) {
       console.log("Re-parsing Facebook comments for href:", href);
       // Use setTimeout to avoid setState in effect warning
       setTimeout(() => {
@@ -102,7 +101,7 @@ export default function FacebookComments({
         typeof window !== "undefined" ? window.FB : "N/A"
       );
     }
-  }, [href, isSDKLoaded, isActive]);
+  }, [href, isSDKLoaded]);
   return (
     <>
       <Script
@@ -111,7 +110,7 @@ export default function FacebookComments({
         onLoad={handleSDKLoad}
       />
       <div className="w-full">
-        {isActive && !isCommentsReady && (
+        {!isCommentsReady && (
           <div className="flex min-h-[200px] items-center justify-center">
             <div className="flex flex-col items-center gap-3">
               <div className="border-t-primary h-8 w-8 animate-spin rounded-full border-4 border-gray-200" />
@@ -121,7 +120,7 @@ export default function FacebookComments({
         )}
         <div
           ref={containerRef}
-          className={`fb-comments ${!isActive || !isCommentsReady ? "hidden" : ""}`}
+          className={`fb-comments ${!isCommentsReady ? "hidden" : ""}`}
           data-href={href}
           data-width={width}
           data-numposts={numPosts}
