@@ -4,8 +4,10 @@ import ProductCardSliderLoader from "@/features/products/ui/productCard/productC
 export default function LoadingPage() {
   return (
     <>
-      <ProductDetailsSkeleton />
-      <ProductCardSliderLoader />
+      <section className="min-h-screen">
+        <ProductDetailsSkeleton />
+        <ProductCardSliderLoader />
+      </section>
     </>
   );
 }

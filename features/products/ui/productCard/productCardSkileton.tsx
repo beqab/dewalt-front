@@ -34,10 +34,12 @@ export const ProductCardSkeleton = () => {
 
 export default function ProductCardSliderLoader() {
   return (
-    <Carousel>
-      {Array.from({ length: 4 }).map((_, index) => (
-        <ProductCardSkeleton key={`skeleton-${index}`} />
-      ))}
-    </Carousel>
+    <div className="relative mx-auto mt-18 w-full max-w-[1300px] pr-[15px] pl-2 md:px-[15px] md:py-[15px]">
+      <Carousel>
+        {Array.from({ length: 4 }).map((_, index) => (
+          <ProductCardSkeleton key={`skeleton-${index}`} />
+        ))}
+      </Carousel>
+    </div>
   );
 }
