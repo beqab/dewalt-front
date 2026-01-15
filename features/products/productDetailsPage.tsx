@@ -22,7 +22,7 @@ export default async function ProductDetailsPage({
   }
 
   return (
-    <div>
+    <section>
       <Suspense fallback={<ProductDetailsSkeleton />}>
         <ProductDetails productId={id} language={language} />
       </Suspense>
@@ -36,6 +36,6 @@ export default async function ProductDetailsPage({
           </Suspense>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
