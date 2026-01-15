@@ -59,7 +59,7 @@ export default function BannerCarousel({
   );
 
   return (
-    <div className="relative mt-16 aspect-39/40 w-full overflow-hidden md:mt-0 md:aspect-3/1">
+    <div className="relative mt-16 aspect-60/40 w-full overflow-hidden md:mt-0 md:aspect-3/1">
       <div className="h-full overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
           {slider.length === 0 ? (

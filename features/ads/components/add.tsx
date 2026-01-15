@@ -58,26 +58,28 @@ function AdImage({ ad, sizes, priority = false, className }: AdImageProps) {
 export default function Add({ ad, className }: { ad: Ad; className?: string }) {
   const t = useTranslations();
   return (
-    <div
-      className={cn(
-        "relative mx-auto mt-10 flex w-full max-w-[1270px] justify-between gap-6 overflow-hidden rounded-lg bg-[#D9D9D9] px-0 pr-0 pl-0 md:mt-18",
-        className
-      )}
-    >
-      {/* First Ad */}
-      <div className="w-full overflow-hidden rounded-lg bg-[#D9D9D9]">
-        {ad ? (
-          <AdImage
-            ad={ad}
-            sizes="(max-width: 768px) 100vw, 224px"
-            priority
-            className="rounded-lg"
-          />
-        ) : (
-          <div className="flex min-h-[152px] w-full items-center justify-center md:min-h-[252px]">
-            <p className="text-2xl text-gray-500">{t("ads.add")}</p>
-          </div>
+    <div className="px-3 md:px-0">
+      <div
+        className={cn(
+          "relative mx-auto mt-10 flex w-full max-w-[1270px] justify-between gap-6 overflow-hidden rounded-lg bg-[#D9D9D9] pr-0 pl-0 md:mt-18",
+          className
         )}
+      >
+        {/* First Ad */}
+        <div className="w-full overflow-hidden rounded-lg bg-[#D9D9D9]">
+          {ad ? (
+            <AdImage
+              ad={ad}
+              sizes="(max-width: 768px) 100vw, 224px"
+              priority
+              className="rounded-lg"
+            />
+          ) : (
+            <div className="flex min-h-[152px] w-full items-center justify-center md:min-h-[252px]">
+              <p className="text-2xl text-gray-500">{t("ads.add")}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

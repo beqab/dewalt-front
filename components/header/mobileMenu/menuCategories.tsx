@@ -22,6 +22,7 @@ export default function MenuCategories({
       setSelectedSubCategory(null);
     } else {
       onchangeCategory(null);
+      onClose();
     }
   };
 
@@ -35,6 +36,7 @@ export default function MenuCategories({
   };
 
   const brandSlug = brands?.[category]?.slug;
+  const categorySlug = brands?.[category]?.categories?.[category]?.slug;
 
   return (
     <div>
@@ -95,7 +97,7 @@ export default function MenuCategories({
               <MenuItem
                 key={index}
                 label={subCategory.name}
-                href={`/products?category=${subCategory.slug}`}
+                href={`/products?category=${categorySlug}&brand=${brandSlug}&childCategory=${subCategory.slug}`}
                 onClick={() => {
                   onClose();
                   onchangeCategory(null);

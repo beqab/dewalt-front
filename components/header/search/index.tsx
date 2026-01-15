@@ -72,9 +72,9 @@ export const SearchWithoutWrapper = () => {
   };
 
   return (
-    <div className="bg-background md:block md:bg-transparent">
+    <div className="bg-transparent md:block">
       <div className="relative w-full md:w-auto" ref={searchRef}>
-        <div className="text-dark-secondary-70 md:text-primary md:border-primary border-dark-secondary-70 bg-dark-secondary-100 flex h-10 items-center gap-2 rounded-sm border p-3 md:h-8 md:min-w-86 md:bg-transparent md:p-2">
+        <div className="text-primary border-primary flex h-10 items-center gap-2 rounded-sm border border-solid bg-transparent p-3 md:h-8 md:min-w-86 md:p-2">
           <SearchIcon className="max-h-4 min-h-4 max-w-4 min-w-4 shrink-0" />
           <input
             ref={inputRef}
@@ -84,7 +84,7 @@ export const SearchWithoutWrapper = () => {
             onChange={handleInputChange}
             onFocus={handleInputFocus}
             onKeyDown={handleInputKeyDown}
-            className="font-inter dark-secondary-70 md:placeholder:text-primary placeholder:text-dark-secondary-70 w-full bg-transparent text-sm outline-none"
+            className="font-inter dark-secondary-70 placeholder:text-primary w-full bg-transparent text-sm outline-none"
           />
         </div>
 
