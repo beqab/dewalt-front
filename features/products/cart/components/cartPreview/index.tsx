@@ -5,10 +5,10 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { BucketIcon } from "@/components/icons/bucketIcon";
 import { useCartContext } from "../../cartContext";
-import { Link as I18nLink } from "@/i18n/navigation";
 import useOnClickOutside from "@/hooks/useOnClickOutside";
 import TrashIcon from "@/components/icons/trashIcon";
 import { useTranslations } from "next-intl";
+import { generateSlug } from "@/lib/utils/slugify";
 
 export default function CartPreview() {
   const t = useTranslations();
@@ -56,7 +56,7 @@ export default function CartPreview() {
                     >
                       {/* Product Image */}
                       <Link
-                        href={`/products/${item.product._id}`}
+                        href={`/products/${generateSlug(item.product.name, item.product._id)}`}
                         onClick={() => setIsOpen(false)}
                         className="shrink-0"
                       >
@@ -74,7 +74,7 @@ export default function CartPreview() {
                       {/* Product Info */}
                       <div className="flex flex-1 flex-col gap-1">
                         <Link
-                          href={`/products/${item.product._id}`}
+                          href={`/products/${generateSlug(item.product.name, item.product._id)}`}
                           onClick={() => setIsOpen(false)}
                           className="text-dark-secondary-100 hover:text-primary line-clamp-2 text-xs font-semibold transition-colors"
                         >
@@ -113,13 +113,13 @@ export default function CartPreview() {
                       {totalPrice.toLocaleString("ka-GE")} GEL
                     </span>
                   </div>
-                  <I18nLink
+                  <Link
                     href="/cart"
-                    onClick={() => setIsOpen(false)}
+                    onNavigate={() => setIsOpen(false)}
                     className="bg-primary hover:bg-primary/90 text-dark-secondary-100 block w-full rounded px-4 py-2 text-center text-sm font-medium transition-colors"
                   >
                     {t("cart.viewCart")}
-                  </I18nLink>
+                  </Link>
                 </div>
               </>
             )}

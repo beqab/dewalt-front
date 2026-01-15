@@ -8,6 +8,7 @@ import type { CartItem as CartItemType } from "../../types";
 import { useCartContext } from "../../cartContext";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { generateSlug } from "@/lib/utils/slugify";
 
 interface CartItemProps {
   item: CartItemType;
@@ -43,7 +44,10 @@ export default function CartItem({ item }: CartItemProps) {
         </div>
 
         {/* Product Image */}
-        <Link href={`/products/${product._id}`} className="shrink-0">
+        <Link
+          href={`/products/${generateSlug(product.name, product._id)}`}
+          className="shrink-0"
+        >
           <div className="relative h-24 w-24 overflow-hidden rounded-lg md:h-40 md:w-40">
             <Image
               src={product.image}
@@ -60,7 +64,7 @@ export default function CartItem({ item }: CartItemProps) {
       <div className="flex flex-1 flex-col gap-2 md:flex-col md:items-start md:justify-between md:py-2">
         <div className="w-full flex-1 md:flex md:flex-row md:justify-between">
           <Link
-            href={`/products/${product._id}`}
+            href={`/products/${generateSlug(product.name, product._id)}`}
             className="text-dark-secondary-100 hover:text-primary mb-1 block text-sm font-bold transition-colors md:max-w-[200px] md:text-sm"
           >
             {product.name} {product.code}

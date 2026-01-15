@@ -102,7 +102,11 @@ export default function ProductInfoTab({
         hidden: activeTab !== 3,
       })}
     >
-      <FacebookComments href={productUrl} locale={locale} />
+      <FacebookComments
+        href={productUrl}
+        locale={locale}
+        isActive={activeTab === 3}
+      />
     </div>
   );
 
