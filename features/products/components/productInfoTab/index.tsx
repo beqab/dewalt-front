@@ -7,25 +7,6 @@ import { Product } from "../../types";
 import FacebookComments from "@/components/facebook/FacebookComments";
 import { useGetLocale } from "@/lib/utils/useGetLocale";
 
-const RenderCommentsTab = ({
-  productUrl,
-  locale,
-  activeTab,
-}: {
-  productUrl: string;
-  locale: "ka" | "en";
-  activeTab: number;
-}) => (
-  <div
-    key={productUrl}
-    className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
-      hidden: activeTab !== 3,
-    })}
-  >
-    <FacebookComments href={productUrl} locale={locale} />
-  </div>
-);
-
 export default function ProductInfoTab({
   product,
   productUrl,
@@ -55,63 +36,58 @@ export default function ProductInfoTab({
   ];
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
-  // Render all tabs but show/hide based on activeTab
-  const renderDescriptionTab = () => (
-    <div
-      className={classNames("bg-background rounded-lg p-4 md:min-h-[160px]", {
-        hidden: activeTab !== 1,
-      })}
-    >
-      <p className="text-dark-secondary-100 whitespace-pre-line">
-        {description}
-      </p>
-    </div>
-  );
-
-  const renderSpecsTab = () => {
-    if (!specs || specs.length === 0) {
-      return (
-        <div
-          className={classNames(
-            "bg-background rounded-lg p-4 md:min-h-[160px]",
-            {
-              hidden: activeTab !== 2,
-            }
-          )}
-        >
-          <p className="text-text-secondary text-center">
-            {t("products.noSpecs", {
-              defaultValue: "No specifications available",
-            })}
-          </p>
-        </div>
-      );
-    }
-
-    return (
-      <div
-        className={classNames(
-          "bg-background overflow-hidden rounded-lg md:min-h-[160px]",
-          {
-            hidden: activeTab !== 2,
-          }
-        )}
-      >
-        <div className="divide-y divide-gray-200 p-2">
-          {specs.map((spec, index) => (
-            <div
-              key={index}
-              className="grid grid-cols-1 gap-4 p-2 transition-colors hover:bg-gray-50/50 md:grid-cols-[200px_1fr]"
-            >
-              <div className="text-text-secondary font-medium md:font-normal">
-                {spec.label}
-              </div>
-              <div className="text-dark-secondary-100">{spec.value}</div>
+  const renderActiveTab = () => {
+    switch (activeTab) {
+      case 1:
+        return (
+          <div className="bg-background rounded-lg p-4 md:min-h-[160px]">
+            <p className="text-dark-secondary-100 whitespace-pre-line">
+              {description}
+            </p>
+          </div>
+        );
+      case 2:
+        if (!specs || specs.length === 0) {
+          return (
+            <div className="bg-background rounded-lg p-4 md:min-h-[160px]">
+              <p className="text-text-secondary text-center">
+                {t("products.noSpecs", {
+                  defaultValue: "No specifications available",
+                })}
+              </p>
             </div>
-          ))}
-        </div>
-      </div>
-    );
+          );
+        }
+
+        return (
+          <div className="bg-background overflow-hidden rounded-lg md:min-h-[160px]">
+            <div className="divide-y divide-gray-200 p-2">
+              {specs.map((spec, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-1 gap-4 p-2 transition-colors hover:bg-gray-50/50 md:grid-cols-[200px_1fr]"
+                >
+                  <div className="text-text-secondary font-medium md:font-normal">
+                    {spec.label}
+                  </div>
+                  <div className="text-dark-secondary-100">{spec.value}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div
+            key={productUrl}
+            className="bg-background rounded-lg p-4 md:min-h-[160px]"
+          >
+            <FacebookComments href={productUrl} locale={locale} />
+          </div>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
@@ -133,16 +109,7 @@ export default function ProductInfoTab({
           </button>
         ))}
       </div>
-      <div className="mt-4">
-        {renderDescriptionTab()}
-        {renderSpecsTab()}
-        <RenderCommentsTab
-          key={productUrl}
-          productUrl={productUrl}
-          locale={locale}
-          activeTab={activeTab}
-        />
-      </div>
+      <div className="mt-4">{renderActiveTab()}</div>
     </div>
   );
 }
