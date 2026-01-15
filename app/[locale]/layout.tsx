@@ -16,6 +16,7 @@ import CartProvider from "@/features/products/cart/cartContext/CartProvider";
 import { QueryProvider } from "@/lib/providers/QueryProvider";
 import { AuthProvider } from "@/features/auth";
 import { SessionProvider } from "next-auth/react";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 
 type Props = {
   children: React.ReactNode;
@@ -81,6 +82,7 @@ export default async function RootLayout({ children, params }: Props) {
 
                 <CartProvider>
                   <Header />
+                  <ScrollToTop />
                   <CompareProductProvider>
                     <>
                       {children}
