@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import ProductSpecsForMobile from "./compare/components/productSpecs/productSpecsForMobile";
 import ProductSpecsForDesktop from "./compare/components/productSpecs/productSpecsForDesktop";
@@ -13,13 +13,19 @@ import { useGetProductsByIds } from "./hooks/useGetProductsByIds";
 export default function ProductComparisonPage() {
   const t = useTranslations();
   const { productIds } = useCompareContext();
-  const { products, isLoading } = useGetProductsByIds(productIds);
+  const { products, isLoading, isError, error } =
+    useGetProductsByIds(productIds);
 
   const breadcrumbItems = [
     { label: t("breadcrumb.home"), href: "/" },
     { label: t("breadcrumb.comparison") },
   ];
 
+  useEffect(() => {
+    if (isError) {
+      localStorage.removeItem("compareProductIds");
+    }
+  }, [isError, error]);
   // Show loading if:
   // 1. productIds is null (still initializing from localStorage)
   // 2. React Query is loading/fetching
@@ -37,6 +43,9 @@ export default function ProductComparisonPage() {
     return false;
   }, [isLoading, productIds, products.length]);
 
+  if (isError) {
+    return <div>Error: {error?.message || "Something went wrong"}</div>;
+  }
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />

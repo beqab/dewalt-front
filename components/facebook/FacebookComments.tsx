@@ -101,7 +101,24 @@ export default function FacebookComments({
         typeof window !== "undefined" ? window.FB : "N/A"
       );
     }
+    return () => {
+      console.log("Unmounting Facebook Comments");
+      isSDKInitialized = false;
+      setIsSDKLoaded(false);
+      setIsCommentsReady(false);
+    };
   }, [href, isSDKLoaded]);
+
+  useEffect(() => {
+    return () => {
+      if (containerRef.current) {
+        window.FB.XFBML.parse(containerRef.current);
+      }
+      isSDKInitialized = false;
+      setIsSDKLoaded(false);
+      setIsCommentsReady(true);
+    };
+  }, [containerRef]);
   return (
     <>
       <Script
