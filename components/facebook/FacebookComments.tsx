@@ -67,6 +67,13 @@ export default function FacebookComments({
   };
 
   useEffect(() => {
+    // If SDK is already available (client-side navigation), mark it as loaded
+    if (!isSDKLoaded && typeof window !== "undefined" && window.FB) {
+      setTimeout(() => {
+        setIsSDKLoaded(true);
+      }, 0);
+    }
+
     // Reset loading state when href changes
     if (prevHrefRef.current !== href) {
       prevHrefRef.current = href;
