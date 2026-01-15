@@ -103,16 +103,22 @@ export default function FacebookComments({
     }
   }, [href, isSDKLoaded]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    return () => {
-      if (containerRef.current) {
-        window.FB.XFBML.parse(containerRef.current);
-      }
-      isSDKInitialized = false;
-      setIsSDKLoaded(false);
+    setIsCommentsReady(false);
+
+    if (typeof window === "undefined" || !window.FB) return;
+
+    const id = setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      window.FB.XFBML.parse();
       setIsCommentsReady(true);
-    };
-  }, [containerRef]);
+    }, 100);
+
+    return () => clearTimeout(id);
+  }, [href]);
+
   return (
     <>
       <Script
@@ -130,6 +136,7 @@ export default function FacebookComments({
           </div>
         )}
         <div
+          key={href}
           ref={containerRef}
           className={`fb-comments ${!isCommentsReady ? "hidden" : ""}`}
           data-href={href}
