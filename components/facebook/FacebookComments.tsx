@@ -101,12 +101,6 @@ export default function FacebookComments({
         typeof window !== "undefined" ? window.FB : "N/A"
       );
     }
-    return () => {
-      console.log("Unmounting Facebook Comments");
-      isSDKInitialized = false;
-      setIsSDKLoaded(false);
-      setIsCommentsReady(false);
-    };
   }, [href, isSDKLoaded]);
 
   useEffect(() => {
