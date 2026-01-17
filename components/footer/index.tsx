@@ -9,6 +9,8 @@ import EnvelopIcon from "../icons/envelopIcon";
 import LocationIcon from "../icons/locationIcon";
 import FbIcon from "../icons/fbIcon";
 import { useTranslations } from "next-intl";
+import MastercardLogo from "@/public/mastercard.png";
+import VisaLogo from "@/public/visa.png";
 
 export default function Footer() {
   const t = useTranslations();
@@ -147,9 +149,14 @@ export default function Footer() {
         <div className="customContainer">
           <div className="lgitems-center flex flex-col justify-between gap-4 lg:flex-row">
             {/* Copyright */}
+            <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-end">
+              <Image height={30} src={MastercardLogo} alt="Logo" />
+              <Image height={30} src={VisaLogo} alt="Logo" />
+            </div>
+
             <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-center">
               <div className="text-dark-secondary-100 text-center text-xs lg:text-left">
-                <span>2020 - </span>
+                <span>2026 - </span>
                 <span className="ml-2">{t("footer.allRightsReserved")}</span>
               </div>
 
@@ -177,14 +184,6 @@ export default function Footer() {
             </div>
 
             {/* Payment Methods */}
-            <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-end">
-              <span className="text-dark-secondary-100 text-xs font-semibold">
-                Mastercard
-              </span>
-              <span className="text-dark-secondary-100 text-xs font-semibold">
-                VISA
-              </span>
-            </div>
           </div>
         </div>
       </div>
