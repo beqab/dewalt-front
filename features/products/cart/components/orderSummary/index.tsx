@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { useCartContext } from "../../cartContext";
 import { useTranslations } from "next-intl";
 import PayIcon from "@/components/icons/payIcon";
+import { useRouter } from "@/i18n/navigation";
 
 export default function OrderSummary() {
   const t = useTranslations();
+  const router = useRouter();
   const { getSelectedItems } = useCartContext();
   const selectedItems = getSelectedItems();
   const totalItems = selectedItems.reduce(
@@ -48,6 +50,7 @@ export default function OrderSummary() {
           size="md"
           className="bg-primary hover:bg-primary/90 text-dark-secondary-100 w-full"
           disabled={selectedItems.length === 0}
+          onClick={() => router.push("/checkout")}
         >
           <PayIcon />
           <span>{t("cart.buy")}</span>
