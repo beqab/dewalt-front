@@ -24,6 +24,7 @@
   "cart": {
     "title": "My Cart",
     "empty": "Cart is empty",
+    "loading": "Loading cart...",
     "selectAll": "Select All",
     "delete": "Delete",
     "orderDetails": "Order Details",
@@ -65,6 +66,7 @@
     "placeOrder": "Place order",
     "emptySelection": "No selected items to checkout.",
     "backToCart": "Back to cart",
+    "loadingMessage": "Loading checkout...",
     "validation": {
       "name": "Name is required",
       "surname": "Surname is required",

@@ -4,6 +4,7 @@ import type { CartContextType } from "../types";
 
 export const CartContext = createContext<CartContextType>({
   items: [],
+  isLoading: true,
   addItem: () => {},
   removeItem: () => {},
   updateQuantity: () => {},
@@ -23,4 +24,3 @@ export function useCartContext() {
   }
   return context;
 }
-

@@ -9,7 +9,7 @@ import { useRouter } from "@/i18n/navigation";
 export default function OrderSummary() {
   const t = useTranslations();
   const router = useRouter();
-  const { getSelectedItems } = useCartContext();
+  const { getSelectedItems, isLoading } = useCartContext();
   const selectedItems = getSelectedItems();
   const totalItems = selectedItems.reduce(
     (total, item) => total + item.quantity,
@@ -49,7 +49,7 @@ export default function OrderSummary() {
           variant="default"
           size="md"
           className="bg-primary hover:bg-primary/90 text-dark-secondary-100 w-full"
-          disabled={selectedItems.length === 0}
+          disabled={selectedItems.length === 0 || isLoading}
           onClick={() => router.push("/checkout")}
         >
           <PayIcon />

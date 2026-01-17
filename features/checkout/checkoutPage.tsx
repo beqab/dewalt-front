@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { useCartContext } from "@/features/products/cart/cartContext";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
+import Loading from "@/components/ui/loading";
 
 type DeliveryType = "tbilisi" | "region";
 
@@ -19,7 +20,7 @@ const DELIVERY_PRICES: Record<DeliveryType, number> = {
 
 export default function CheckoutPage() {
   const t = useTranslations();
-  const { getSelectedItems } = useCartContext();
+  const { getSelectedItems, isLoading } = useCartContext();
   const selectedItems = getSelectedItems();
 
   const subtotal = useMemo(
@@ -54,6 +55,15 @@ export default function CheckoutPage() {
     { label: t("breadcrumb.cart"), href: "/cart" },
     { label: t("breadcrumb.checkout") },
   ];
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[60vh]">
+        <Breadcrumb items={breadcrumbItems} />
+        <Loading minHeight="60vh" message={t("checkout.loadingMessage")} />
+      </div>
+    );
+  }
 
   if (selectedItems.length === 0) {
     return (

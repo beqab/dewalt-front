@@ -8,6 +8,7 @@ import { useCartContext } from "./cart/cartContext";
 import CartItem from "./cart/components/cartItem";
 import OrderSummary from "./cart/components/orderSummary";
 import { useTranslations } from "next-intl";
+import Loading from "@/components/ui/loading";
 
 export default function CartPage() {
   const t = useTranslations();
@@ -16,15 +17,29 @@ export default function CartPage() {
     { label: t("breadcrumb.home"), href: "/" },
     { label: t("breadcrumb.cart") },
   ];
-  const { items, toggleSelectAll, removeSelected, getSelectedItems } =
-    useCartContext();
+  const {
+    items,
+    isLoading,
+    toggleSelectAll,
+    removeSelected,
+    getSelectedItems,
+  } = useCartContext();
 
   const allSelected = items.length > 0 && items.every((item) => item.selected);
   const hasSelectedItems = getSelectedItems().length > 0;
 
+  if (isLoading) {
+    return (
+      <div className="min-h-[60vh]">
+        <Breadcrumb items={breadcrumbItems} />
+        <Loading minHeight="60vh" message={t("cart.loading")} />
+      </div>
+    );
+  }
+
   if (items.length === 0) {
     return (
-      <div>
+      <div className="min-h-[60vh]">
         <Breadcrumb items={breadcrumbItems} />
         <div className="customContainer py-10 text-center">
           <p className="text-text-secondary text-lg">{t("cart.empty")}</p>

@@ -6,8 +6,15 @@ export interface CartItem {
   selected?: boolean;
 }
 
+export interface StoredCartItem {
+  productId: string;
+  quantity: number;
+  selected?: boolean;
+}
+
 export interface CartContextType {
   items: CartItem[];
+  isLoading: boolean;
   addItem: (product: Product, quantity?: number) => void;
   removeItem: (productId: string) => void;
   updateQuantity: (productId: string, quantity: number) => void;

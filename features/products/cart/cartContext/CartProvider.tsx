@@ -1,15 +1,18 @@
 "use client";
-import { startTransition, useEffect, useRef, useState } from "react";
+import { startTransition, useEffect, useMemo, useRef, useState } from "react";
 import { CartContext } from ".";
-import type { CartItem, CartContextType } from "../types";
+import type { CartContextType, StoredCartItem } from "../types";
 import type { Product } from "../../types";
+import { useGetProductsByIds } from "../../hooks/useGetProductsByIds";
 
 export default function CartProvider({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [storedItems, setStoredItems] = useState<StoredCartItem[]>([]);
+  const [isLoadingLocalStorage, setIsLoadingLocalStorage] =
+    useState<boolean>(true);
   const isInitialized = useRef(false);
 
   // Load from localStorage on client side only
@@ -20,7 +23,29 @@ export default function CartProvider({
         try {
           const parsed = JSON.parse(cartItems);
           startTransition(() => {
-            setItems(parsed);
+            const normalized: StoredCartItem[] = Array.isArray(parsed)
+              ? parsed
+                  .map((item: unknown): StoredCartItem | null => {
+                    if (
+                      item &&
+                      typeof item === "object" &&
+                      "productId" in item
+                    ) {
+                      const storedItem = item as StoredCartItem;
+                      return {
+                        productId: String(storedItem.productId),
+                        quantity: Number(storedItem.quantity) || 1,
+                        selected: storedItem.selected ?? true,
+                      };
+                    }
+
+                    return null;
+                  })
+                  .filter((item): item is StoredCartItem => item !== null)
+              : [];
+
+            setStoredItems(normalized);
+            setIsLoadingLocalStorage(false);
           });
           isInitialized.current = true;
         } catch (error) {
@@ -35,26 +60,57 @@ export default function CartProvider({
   // Sync to localStorage whenever items change
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.setItem("cartItems", JSON.stringify(items));
+      localStorage.setItem("cartItems", JSON.stringify(storedItems));
     }
-  }, [items]);
+  }, [storedItems]);
+
+  const productIds = useMemo(
+    () => storedItems.map((item) => item.productId),
+    [storedItems]
+  );
+
+  const { products, isLoading } = useGetProductsByIds(productIds);
+
+  const productsById = useMemo(() => {
+    return new Map(products.map((product) => [product._id, product]));
+  }, [products]);
+
+  const items = useMemo(() => {
+    return storedItems
+      .map((item) => {
+        const product = productsById.get(item.productId);
+        if (!product) return null;
+        return {
+          product,
+          quantity: item.quantity,
+          selected: item.selected ?? true,
+        };
+      })
+      .filter(Boolean) as {
+      product: Product;
+      quantity: number;
+      selected: boolean;
+    }[];
+  }, [storedItems, productsById]);
 
   const addItem = (product: Product, quantity: number = 1) => {
-    setItems((prev) => {
-      const existingItem = prev.find((item) => item.product._id === product._id);
+    setStoredItems((prev) => {
+      const existingItem = prev.find((item) => item.productId === product._id);
       if (existingItem) {
         return prev.map((item) =>
-          item.product._id === product._id
+          item.productId === product._id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
-      return [...prev, { product, quantity, selected: true }];
+      return [...prev, { productId: product._id, quantity, selected: true }];
     });
   };
 
   const removeItem = (productId: string) => {
-    setItems((prev) => prev.filter((item) => item.product._id !== productId));
+    setStoredItems((prev) =>
+      prev.filter((item) => item.productId !== productId)
+    );
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
@@ -62,17 +118,17 @@ export default function CartProvider({
       removeItem(productId);
       return;
     }
-    setItems((prev) =>
+    setStoredItems((prev) =>
       prev.map((item) =>
-        item.product._id === productId ? { ...item, quantity } : item
+        item.productId === productId ? { ...item, quantity } : item
       )
     );
   };
 
   const toggleSelect = (productId: string) => {
-    setItems((prev) =>
+    setStoredItems((prev) =>
       prev.map((item) =>
-        item.product._id === productId
+        item.productId === productId
           ? { ...item, selected: !item.selected }
           : item
       )
@@ -80,18 +136,19 @@ export default function CartProvider({
   };
 
   const toggleSelectAll = () => {
-    const allSelected = items.every((item) => item.selected);
-    setItems((prev) =>
+    const allSelected =
+      storedItems.length > 0 && storedItems.every((item) => item.selected);
+    setStoredItems((prev) =>
       prev.map((item) => ({ ...item, selected: !allSelected }))
     );
   };
 
   const removeSelected = () => {
-    setItems((prev) => prev.filter((item) => !item.selected));
+    setStoredItems((prev) => prev.filter((item) => !item.selected));
   };
 
   const clearCart = () => {
-    setItems([]);
+    setStoredItems([]);
   };
 
   const getTotalItems = () => {
@@ -111,6 +168,7 @@ export default function CartProvider({
 
   const value: CartContextType = {
     items,
+    isLoading: isLoading || isLoadingLocalStorage,
     addItem,
     removeItem,
     updateQuantity,
@@ -125,4 +183,3 @@ export default function CartProvider({
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
-
