@@ -33,5 +33,14 @@ export interface CreatePaymentResponse {
 
 export interface OrderStatusResponse {
   status: "pending" | "failed" | "paid";
+  orderId?: string;
+  total?: number;
+  subtotal?: number;
+  deliveryPrice?: number;
+  deliveryType?: DeliveryType;
+  name?: string;
+  surname?: string;
+  phone?: string;
+  address?: string;
 }
 
