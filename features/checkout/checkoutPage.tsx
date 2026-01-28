@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import FormField from "@/components/formField";
@@ -10,6 +10,8 @@ import { useCartContext } from "@/features/products/cart/cartContext";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Loading from "@/components/ui/loading";
+import { ordersService } from "@/features/orders/services/ordersService";
+import { useSession } from "next-auth/react";
 
 type DeliveryType = "tbilisi" | "region";
 
@@ -22,6 +24,8 @@ export default function CheckoutPage() {
   const t = useTranslations();
   const { getSelectedItems, isLoading } = useCartContext();
   const selectedItems = getSelectedItems();
+  const { data: session } = useSession();
+  const [paymentError, setPaymentError] = useState<string | null>(null);
 
   const subtotal = useMemo(
     () =>
@@ -100,9 +104,50 @@ export default function CheckoutPage() {
             }}
             validationSchema={validationSchema}
             validateOnMount
-            onSubmit={() => {}}
+            onSubmit={async (values, { setSubmitting }) => {
+              if (selectedItems.length === 0) {
+                setSubmitting(false);
+                return;
+              }
+
+              try {
+                setPaymentError(null);
+                const createdOrder = await ordersService.create({
+                  name: values.name.trim(),
+                  surname: values.surname.trim(),
+                  personalId: values.personalId.trim(),
+                  phone: values.phone.trim(),
+                  address: values.address.trim(),
+                  deliveryType: values.deliveryType,
+                  items: selectedItems.map((item) => ({
+                    productId: item.product._id,
+                    quantity: item.quantity,
+                  })),
+                  userId: session?.user?._id,
+                });
+                const payment = await ordersService.createPayment(
+                  createdOrder._id
+                );
+                const paymentUrl =
+                  payment.response?.checkout_url ||
+                  payment.checkout_url ||
+                  payment.response?.url ||
+                  payment.url ||
+                  "";
+                if (!paymentUrl) {
+                  throw new Error("Missing payment URL");
+                }
+                if (typeof window !== "undefined") {
+                  window.location.assign(paymentUrl);
+                }
+              } catch {
+                setPaymentError(t("checkout.paymentError"));
+              } finally {
+                setSubmitting(false);
+              }
+            }}
           >
-            {({ values, handleChange, isValid }) => {
+            {({ values, handleChange, isValid, isSubmitting }) => {
               const deliveryPrice = selectedItems.length
                 ? DELIVERY_PRICES[values.deliveryType]
                 : 0;
@@ -198,14 +243,22 @@ export default function CheckoutPage() {
                       </div>
                     </div>
 
+                    {paymentError && (
+                      <p className="mt-3 text-sm text-red-500">
+                        {paymentError}
+                      </p>
+                    )}
+
                     <Button
                       type="submit"
                       variant="default"
                       size="md"
                       className="bg-primary hover:bg-primary/90 text-dark-secondary-100 mt-6 w-full"
-                      disabled={!isValid}
+                      disabled={!isValid || isSubmitting}
                     >
-                      {t("checkout.placeOrder")}
+                      {isSubmitting
+                        ? t("checkout.submitting")
+                        : t("checkout.placeOrder")}
                     </Button>
                   </div>
 

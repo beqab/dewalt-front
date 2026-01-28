@@ -64,9 +64,11 @@
     "deliveryPrice": "Delivery price",
     "total": "Total",
     "placeOrder": "Place order",
+    "submitting": "Submitting order...",
     "emptySelection": "No selected items to checkout.",
     "backToCart": "Back to cart",
     "loadingMessage": "Loading checkout...",
+    "paymentError": "Failed to start payment. Please try again.",
     "validation": {
       "name": "Name is required",
       "surname": "Surname is required",
@@ -74,6 +76,17 @@
       "phone": "Phone number is required",
       "address": "Address is required"
     }
+  },
+  "paymentStatus": {
+    "title": "Payment status",
+    "description": "We are checking the payment status for your order.",
+    "loading": "Checking payment status...",
+    "paid": "Paid",
+    "pending": "Pending",
+    "failed": "Failed",
+    "error": "We couldn't find this order or the payment failed.",
+    "goHome": "Go to home",
+    "viewOrders": "View orders"
   },
   "product": {
     "brand": "Brand",

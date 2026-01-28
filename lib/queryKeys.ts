@@ -24,6 +24,9 @@ const QUERY_KEYS = {
   CATEGORIES: {
     MENU: (lang: string) => ["categories", "menu", lang] as const,
   },
+  ORDERS: {
+    STATUS: (orderId: string) => ["orders", "status", orderId] as const,
+  },
 } as const;
 
 export default QUERY_KEYS;

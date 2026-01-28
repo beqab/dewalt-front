@@ -27,4 +27,7 @@ export const API_ROUTES = {
 
   // Ratings
   RATINGS: "/ratings",
+
+  // Orders
+  ORDERS: "/orders",
 };
