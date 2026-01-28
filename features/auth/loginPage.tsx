@@ -8,7 +8,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import EnvelopIcon from "@/components/icons/envelopIcon";
 import KeyIcon from "@/components/icons/keyIcon";
 import EyeIcon from "@/components/icons/eyeIcon";
@@ -22,7 +21,6 @@ export default function LoginPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
-  const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,11 +39,6 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
-    if (!agreeToTerms) {
-      toast.error(t("auth.validation.termsRequired"));
-      return;
-    }
-
     setIsLoading(true);
     setError(null);
 
@@ -57,17 +50,17 @@ export default function LoginPage() {
       });
 
       if (result?.error) {
-        setError("Invalid credentials. Please try again.");
-        toast.error("Login failed. Please check your credentials.");
+        setError(t("auth.login.invalidCredentials"));
+        toast.error(t("auth.login.loginFailed"));
       } else if (result?.ok) {
-        toast.success("Login successful!");
+        toast.success(t("auth.login.success"));
         const callbackUrl = searchParams.get("callbackUrl") || "/";
         router.push(callbackUrl);
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("An unexpected error occurred. Please try again.");
-      toast.error("Login failed. Please try again.");
+      setError(t("auth.login.unexpectedError"));
+      toast.error(t("auth.login.loginFailed"));
     } finally {
       setIsLoading(false);
     }
@@ -188,23 +181,6 @@ export default function LoginPage() {
               </Link>
             </div>
 
-            {/* Terms Checkbox */}
-            <div className="bg-background p-4 pt-4">
-              <Checkbox
-                checked={agreeToTerms}
-                onChange={(e) => setAgreeToTerms(e.target.checked)}
-                label={
-                  <Link
-                    href="/terms"
-                    className="text-text-secondary text-xs hover:underline"
-                  >
-                    {t("auth.login.agreeTerms")}
-                  </Link>
-                }
-                labelClassName="text-text-secondary text-xs pl-2"
-                className="gap-2"
-              />
-            </div>
           </Form>
         )}
       </Formik>

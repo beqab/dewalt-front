@@ -91,12 +91,13 @@
     "total": "Total",
     "subtotal": "Subtotal",
     "deliveryPrice": "Delivery price",
-    "deliveryType": "Delivery type",
     "customer": "Customer",
     "phone": "Phone",
     "address": "Address",
-    "deliveryType.tbilisi": "Delivery in Tbilisi",
-    "deliveryType.region": "Delivery in Region",
+    "deliveryType": {
+      "tbilisi": "Delivery in Tbilisi",
+      "region": "Delivery in Region"
+    },
     "error": "We couldn't find this order or the payment failed.",
     "goHome": "Go to home",
     "viewOrders": "View orders"
@@ -230,7 +231,11 @@
       "forgotPassword": "Forgot password?",
       "noAccount": "Don't have an account yet?",
       "register": "Registration",
-      "agreeTerms": "I agree to the terms and conditions"
+      "agreeTerms": "I agree to the terms and conditions",
+      "invalidCredentials": "Invalid credentials. Please try again.",
+      "loginFailed": "Login failed. Please try again.",
+      "success": "Login successful!",
+      "unexpectedError": "An unexpected error occurred. Please try again."
     },
     "register": {
       "title": "Registration",
