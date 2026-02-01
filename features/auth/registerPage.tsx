@@ -14,9 +14,9 @@ import EyeIcon from "@/components/icons/eyeIcon";
 import EyeOffIcon from "@/components/icons/eyeOffIcon";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
 import AuthPageWrapper from "./components/authPageWraper";
 import { authService } from "./services/authService";
+import type { ApiErrorResponse } from "@/lib/apiClient";
 
 export default function RegisterPage() {
   const t = useTranslations();
@@ -71,27 +71,15 @@ export default function RegisterPage() {
         password: values.password,
       });
 
-      // After successful registration, automatically sign in
-      const result = await signIn("credentials", {
-        email: values.email.trim(),
-        password: values.password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        const errorMsg = t("auth.register.successButLoginFailed");
-        setError(errorMsg);
-        toast.error(errorMsg);
-      } else if (result?.ok) {
-        toast.success(t("auth.register.success"));
-        router.push("/");
-      }
+      toast.success(t("auth.register.verifyEmailSent"));
+      router.push("/login");
     } catch (error: unknown) {
-      console.error("Registration error:", error);
+      console.log("Registration error:", error);
+      const apiError = error as ApiErrorResponse | undefined;
       const errorMessage =
-        error instanceof Error ? error.message : t("auth.register.error");
+        apiError?.message || t("auth.register.error");
       setError(errorMessage);
-      toast.error(errorMessage);
+      toast.error(errorMessage);  
     } finally {
       setIsLoading(false);
     }

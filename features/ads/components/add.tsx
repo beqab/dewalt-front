@@ -76,7 +76,7 @@ export default function Add({ ad, className }: { ad: Ad; className?: string }) {
             />
           ) : (
             <div className="flex min-h-[152px] w-full items-center justify-center md:min-h-[252px]">
-              <p className="text-2xl text-gray-500">{t("ads.add")}</p>
+              {/* <p className="text-2xl text-gray-500">{t("ads.add")}</p> */}
             </div>
           )}
         </div>

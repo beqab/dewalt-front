@@ -9,6 +9,7 @@ export const API_ROUTES = {
   AUTH_REQUEST_PASSWORD_RESET: "/auth/request-password-reset",
   AUTH_RESET_PASSWORD: "/auth/reset-password",
   AUTH_CHANGE_PASSWORD: "/auth/change-password",
+  AUTH_VERIFY_EMAIL: "/auth/verify-email",
 
   // Banner Slider
   BANNER_SLIDER: "/banner-slider",

@@ -118,7 +118,6 @@
     "viewAll": "View All",
     "backToProducts": "Back to Products"
   },
- 
   "banner": {
     "newYearSale": "New Year",
     "discount": "Discount",
@@ -158,13 +157,11 @@
     "commentsComingSoon": "Comments section coming soon",
     "noProductsFound": "No products found matching your criteria",
     "viewAllProducts": "View All Products"
-
   },
   "filters": {
     "priceFilter": "Filter by Price",
     "manufacturers": "Manufacturers",
     "search": "Search"
-  
   },
   "terms": {
     "termsAndConditions": "Terms and Conditions",
@@ -249,15 +246,36 @@
       "login": "Authorization",
       "agreeTerms": "I agree to the rules and conditions",
       "success": "Registration successful!",
+      "verifyEmailSent": "Registration successful! Please check your email to verify your account.",
       "successButLoginFailed": "Registration successful but login failed. Please try logging in.",
       "error": "Registration failed. Please try again."
     },
+    "verifyEmail": {
+      "title": "Email verification",
+      "titleSuccess": "Email verified",
+      "titleError": "Verification failed",
+      "loading": "Verifying your email...",
+      "success": "Your email has been verified successfully.",
+      "error": "Verification link is invalid or expired.",
+      "missingToken": "Verification token is missing.",
+      "goToLogin": "Go to login",
+      "goHome": "Go to home"
+    },
     "resetPassword": {
       "title": "Reset Password",
+      "setTitle": "Set new password",
       "email": "Email",
+      "newPassword": "New password",
+      "confirmPassword": "Confirm password",
       "submit": "Send Reset Link",
+      "submitNewPassword": "Reset password",
       "backToLogin": "Back to Login",
-      "instructions": "Enter your email address and we'll send you a link to reset your password."
+      "instructions": "Enter your email address and we'll send you a link to reset your password.",
+      "setInstructions": "Enter your new password below.",
+      "requestSuccess": "If an account with that email exists, a password reset link has been sent.",
+      "requestError": "Failed to request password reset. Please try again.",
+      "resetSuccess": "Password has been reset successfully.",
+      "resetError": "Failed to reset password. Please try again."
     },
     "validation": {
       "nameRequired": "Name is required",
@@ -280,7 +298,7 @@
       "orders": "My Orders",
       "logout": "Logout"
     },
-    "profileChanges": "Profile Changes",
+    "profileChanges": "Personal Information",
     "passwordChanges": "Password Changes",
     "name": "Name",
     "surname": "Surname",

@@ -29,6 +29,9 @@ const resetPasswordClient = createApiClient<{ message: string }>(
 const changePasswordClient = createApiClient<{ message: string }>(
   API_ROUTES.AUTH_CHANGE_PASSWORD
 );
+const verifyEmailClient = createApiClient<{ message: string }>(
+  API_ROUTES.AUTH_VERIFY_EMAIL
+);
 
 export const authService = {
   register: {
@@ -63,5 +66,9 @@ export const authService = {
   changePassword: {
     patch: (data: ChangePasswordDto) =>
       changePasswordClient.patch<ChangePasswordDto, { message: string }>(data),
+  },
+  verifyEmail: {
+    get: (token: string) =>
+      verifyEmailClient.get<{ message: string }>({ token }),
   },
 };
