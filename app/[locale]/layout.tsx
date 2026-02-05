@@ -18,6 +18,7 @@ import { AuthProvider } from "@/features/auth";
 import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import { Suspense } from "react";
+import LanguageInterceptor from "@/components/providers/LanguageInterceptor";
 
 type Props = {
   children: React.ReactNode;
@@ -76,6 +77,7 @@ export default async function RootLayout({ children, params }: Props) {
         className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
+          <LanguageInterceptor />
           <QueryProvider>
             <SessionProvider>
               <AuthProvider>

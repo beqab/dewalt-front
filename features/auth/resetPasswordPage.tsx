@@ -36,6 +36,14 @@ export default function ResetPasswordPage() {
   const requestPasswordResetMutation = useRequestPasswordReset();
   const resetPasswordMutation = useResetPassword();
 
+  const handleSubmitReset = async (
+    values: { email: string },
+    { resetForm }: { resetForm: () => void },
+  ) => {
+    await requestPasswordResetMutation.mutateAsync({ email: values.email });
+    resetForm();
+  };
+
   return (
     <AuthPageWrapper
       title={
@@ -140,9 +148,7 @@ export default function ResetPasswordPage() {
         <Formik
           initialValues={{ email: "" }}
           validationSchema={requestValidationSchema}
-          onSubmit={(values) => {
-            requestPasswordResetMutation.mutate({ email: values.email });
-          }}
+          onSubmit={handleSubmitReset}
         >
           {({ errors, touched }) => (
             <Form className="space-y-6">
@@ -158,7 +164,7 @@ export default function ResetPasswordPage() {
                     <Input
                       {...field}
                       id="email"
-                      type="email"
+                      type="text"
                       placeholder={t("auth.resetPassword.email")}
                       icon={<EnvelopIcon />}
                       error={!!(errors.email && touched.email)}

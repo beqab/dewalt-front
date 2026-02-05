@@ -29,7 +29,7 @@ export async function getBrands(language?: "ka" | "en"): Promise<BrandApi[]> {
     });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
-      console.error("Failed to fetch brands on server:", error);
+      console.log("Failed to fetch brands on server:", error);
     }
     return [];
   }

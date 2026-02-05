@@ -168,6 +168,10 @@ export default function RegisterPage() {
                     placeholder={t("auth.register.email")}
                     icon={<EnvelopIcon />}
                     error={!!(errors.email && touched.email)}
+                    onChange={(event) => {
+                      setError(null);
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
@@ -201,9 +205,13 @@ export default function RegisterPage() {
                         className="text-text-secondary hover:text-dark-secondary-100"
                       >
                         {showPassword ? (
-                          <EyeOffIcon className="h-5 w-5" />
+                            <EyeIcon className="h-5 w-5" />
+                        
+
+
+
                         ) : (
-                          <EyeIcon className="h-5 w-5" />
+                          <EyeOffIcon className="h-5 w-5" />
                         )}
                       </button>
                     }
@@ -243,9 +251,10 @@ export default function RegisterPage() {
                         className="text-text-secondary hover:text-dark-secondary-100"
                       >
                         {showConfirmPassword ? (
-                          <EyeOffIcon className="h-5 w-5" />
+                           <EyeIcon className="h-5 w-5" />
+                        
                         ) : (
-                          <EyeIcon className="h-5 w-5" />
+                          <EyeOffIcon className="h-5 w-5" />
                         )}
                       </button>
                     }

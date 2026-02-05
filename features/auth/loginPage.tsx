@@ -28,9 +28,7 @@ export default function LoginPage() {
     email: Yup.string()
       .email(t("auth.validation.emailInvalid"))
       .required(t("auth.validation.emailRequired")),
-    password: Yup.string()
-      .min(6, t("auth.validation.passwordMin"))
-      .required(t("auth.validation.passwordRequired")),
+    password: Yup.string().required(t("auth.validation.passwordRequired")),
   });
 
   const initialValues = {
@@ -93,10 +91,14 @@ export default function LoginPage() {
                   <Input
                     {...field}
                     id="email"
-                    type="email"
+                    type="text"
                     placeholder={t("auth.login.email")}
                     icon={<EnvelopIcon />}
                     error={!!(errors.email && touched.email)}
+                    onChange={(event) => {
+                      setError(null);
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
@@ -137,6 +139,10 @@ export default function LoginPage() {
                       </button>
                     }
                     error={!!(errors.password && touched.password)}
+                    onChange={(event) => {
+                      setError(null);
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
