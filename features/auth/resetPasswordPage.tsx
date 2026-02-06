@@ -33,14 +33,18 @@ export default function ResetPasswordPage() {
       .required(t("auth.validation.confirmPasswordRequired")),
   });
 
-  const requestPasswordResetMutation = useRequestPasswordReset();
-  const resetPasswordMutation = useResetPassword();
+  const requestPasswordReset = useRequestPasswordReset();
+  const resetPassword = useResetPassword();
+
+  const apiError = isResetFlow
+    ? resetPassword.error
+    : requestPasswordReset.error;
 
   const handleSubmitReset = async (
     values: { email: string },
-    { resetForm }: { resetForm: () => void },
+    { resetForm }: { resetForm: () => void }
   ) => {
-    await requestPasswordResetMutation.mutateAsync({ email: values.email });
+    await requestPasswordReset.requestAsync({ email: values.email });
     resetForm();
   };
 
@@ -63,14 +67,19 @@ export default function ResetPasswordPage() {
           initialValues={{ password: "", confirmPassword: "" }}
           validationSchema={resetValidationSchema}
           onSubmit={(values) => {
-            resetPasswordMutation.mutate({
+            resetPassword.reset({
               token,
               password: values.password,
             });
           }}
         >
           {({ errors, touched }) => (
-            <Form className="space-y-6">
+            <Form className="space-y-6" noValidate>
+              {apiError && (
+                <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                  {apiError}
+                </div>
+              )}
               <div>
                 <label
                   htmlFor="password"
@@ -87,6 +96,10 @@ export default function ResetPasswordPage() {
                       placeholder={t("auth.resetPassword.newPassword")}
                       icon={<KeyIcon />}
                       error={!!(errors.password && touched.password)}
+                      onChange={(event) => {
+                        resetPassword.clearError();
+                        field.onChange(event);
+                      }}
                     />
                   )}
                 </Field>
@@ -112,7 +125,13 @@ export default function ResetPasswordPage() {
                       type="password"
                       placeholder={t("auth.resetPassword.confirmPassword")}
                       icon={<KeyIcon />}
-                      error={!!(errors.confirmPassword && touched.confirmPassword)}
+                      error={
+                        !!(errors.confirmPassword && touched.confirmPassword)
+                      }
+                      onChange={(event) => {
+                        resetPassword.clearError();
+                        field.onChange(event);
+                      }}
                     />
                   )}
                 </Field>
@@ -128,7 +147,7 @@ export default function ResetPasswordPage() {
                 variant="default"
                 size="default"
                 className="w-full"
-                disabled={resetPasswordMutation.isPending}
+                disabled={resetPassword.isLoading}
               >
                 {t("auth.resetPassword.submitNewPassword")}
               </Button>
@@ -151,7 +170,12 @@ export default function ResetPasswordPage() {
           onSubmit={handleSubmitReset}
         >
           {({ errors, touched }) => (
-            <Form className="space-y-6">
+            <Form className="space-y-6" noValidate>
+              {apiError && (
+                <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                  {apiError}
+                </div>
+              )}
               <div>
                 <label
                   htmlFor="email"
@@ -164,10 +188,14 @@ export default function ResetPasswordPage() {
                     <Input
                       {...field}
                       id="email"
-                      type="text"
+                      type="email"
                       placeholder={t("auth.resetPassword.email")}
                       icon={<EnvelopIcon />}
                       error={!!(errors.email && touched.email)}
+                      onChange={(event) => {
+                        requestPasswordReset.clearError();
+                        field.onChange(event);
+                      }}
                     />
                   )}
                 </Field>
@@ -183,7 +211,7 @@ export default function ResetPasswordPage() {
                 variant="default"
                 size="default"
                 className="w-full"
-                disabled={requestPasswordResetMutation.isPending}
+                disabled={requestPasswordReset.isLoading}
               >
                 {t("auth.resetPassword.submit")}
               </Button>

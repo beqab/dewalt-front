@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/navigation";
 
 interface AuthPageWrapperProps {
   children: React.ReactNode;
@@ -12,14 +13,17 @@ export default function AuthPageWrapper({
   title,
 }: AuthPageWrapperProps) {
   const router = useRouter();
+  const t = useTranslations();
 
   return (
     <div className="min-h-screen w-full bg-white py-8 md:py-16">
       <div className="customContainer mx-auto w-full max-w-md px-5">
         {/* Back Link */}
-        <span
+        <button
+          type="button"
           onClick={() => router.back()}
-          className="text-text-secondary hover:text-dark-secondary-100 mb-6 inline-flex cursor-pointer items-center gap-2 text-sm transition-colors"
+          className="text-text-secondary hover:text-dark-secondary-100 mb-6 inline-flex items-center gap-2 text-sm transition-colors"
+          aria-label={t("auth.common.back")}
         >
           <svg
             width="16"
@@ -36,8 +40,8 @@ export default function AuthPageWrapper({
               strokeLinejoin="round"
             />
           </svg>
-          უკან
-        </span>
+          {t("auth.common.back")}
+        </button>
 
         {/* Form Container */}
         <div className="bg-neutral border-line-color mx-auto w-full max-w-[640px] rounded-lg border p-6 md:p-8">

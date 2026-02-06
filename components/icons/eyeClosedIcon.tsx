@@ -1,4 +1,4 @@
-export default function EyeOffIcon({ className }: { className?: string }) {
+export default function EyeClosedIcon({ className }: { className?: string }) {
   return (
     <svg
       width="20"
@@ -18,4 +18,3 @@ export default function EyeOffIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-

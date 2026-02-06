@@ -4,25 +4,20 @@ import { Formik, Form, Field, ErrorMessage, FieldProps } from "formik";
 import * as Yup from "yup";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter, useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import EnvelopIcon from "@/components/icons/envelopIcon";
 import KeyIcon from "@/components/icons/keyIcon";
-import EyeIcon from "@/components/icons/eyeIcon";
-import EyeOffIcon from "@/components/icons/eyeOffIcon";
-import { toast } from "sonner";
-import { signIn } from "next-auth/react";
+import EyeOpenIcon from "@/components/icons/eyeOpenIcon";
+import EyeClosedIcon from "@/components/icons/eyeClosedIcon";
 import AuthPageWrapper from "./components/authPageWraper";
+import { useLogin } from "./hooks/useLogin";
 
 export default function LoginPage() {
   const t = useTranslations();
-  const router = useRouter();
-  const searchParams = useSearchParams();
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const { login, error, isLoading, clearError } = useLogin();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -37,31 +32,7 @@ export default function LoginPage() {
   };
 
   const handleSubmit = async (values: typeof initialValues) => {
-    setIsLoading(true);
-    setError(null);
-
-    try {
-      const result = await signIn("credentials", {
-        email: values.email.trim(),
-        password: values.password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        setError(t("auth.login.invalidCredentials"));
-        toast.error(t("auth.login.loginFailed"));
-      } else if (result?.ok) {
-        toast.success(t("auth.login.success"));
-        const callbackUrl = searchParams.get("callbackUrl") || "/";
-        router.push(callbackUrl);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      setError(t("auth.login.unexpectedError"));
-      toast.error(t("auth.login.loginFailed"));
-    } finally {
-      setIsLoading(false);
-    }
+    login(values);
   };
 
   return (
@@ -72,7 +43,7 @@ export default function LoginPage() {
         onSubmit={handleSubmit}
       >
         {({ errors, touched }) => (
-          <Form className="space-y-6">
+          <Form className="space-y-6" noValidate>
             {error && (
               <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
                 {error}
@@ -91,12 +62,12 @@ export default function LoginPage() {
                   <Input
                     {...field}
                     id="email"
-                    type="text"
+                    type="email"
                     placeholder={t("auth.login.email")}
                     icon={<EnvelopIcon />}
                     error={!!(errors.email && touched.email)}
                     onChange={(event) => {
-                      setError(null);
+                      clearError();
                       field.onChange(event);
                     }}
                   />
@@ -130,17 +101,23 @@ export default function LoginPage() {
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-text-secondary hover:text-dark-secondary-100"
+                        aria-label={
+                          showPassword
+                            ? t("auth.common.hidePassword")
+                            : t("auth.common.showPassword")
+                        }
+                        aria-pressed={showPassword}
                       >
-                        {showPassword ? (
-                          <EyeOffIcon className="h-5 w-5" />
+                        {!showPassword ? (
+                          <EyeClosedIcon className="h-5 w-5" />
                         ) : (
-                          <EyeIcon className="h-5 w-5" />
+                          <EyeOpenIcon className="h-5 w-5" />
                         )}
                       </button>
                     }
                     error={!!(errors.password && touched.password)}
                     onChange={(event) => {
-                      setError(null);
+                      clearError();
                       field.onChange(event);
                     }}
                   />
@@ -186,7 +163,6 @@ export default function LoginPage() {
                 {t("auth.login.register")}
               </Link>
             </div>
-
           </Form>
         )}
       </Formik>

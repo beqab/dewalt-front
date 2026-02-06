@@ -1,30 +1,40 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+"use client";
+
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "@/i18n/navigation";
 import { toast } from "sonner";
 import { authService } from "../services/authService";
 import { RegisterDto } from "../types";
-import QUERY_KEYS from "@/lib/queryKeys";
+import { useTranslations } from "next-intl";
+import { getErrorMessage } from "@/lib/getErrorMessage";
+import { useState } from "react";
 
 export const useRegister = () => {
   const router = useRouter();
-  const queryClient = useQueryClient();
+  const t = useTranslations();
+  const [error, setError] = useState<string | null>(null);
 
-  return useMutation({
+  const mutation = useMutation({
     mutationFn: (data: RegisterDto) => authService.register.post(data),
     onSuccess: () => {
-      // Invalidate and refetch current user
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.AUTH.CURRENT_USER,
-      });
-      toast.success("Registration successful!");
-      router.push("/");
+      setError(null);
+      toast.success(t("auth.register.verifyEmailSent"));
+      router.push("/login");
     },
     onError: (error: unknown) => {
-      const errorMessage =
-        error instanceof Error
-          ? error.message
-          : "Registration failed. Please try again.";
-      toast.error(errorMessage);
+      const msg = getErrorMessage(error, t("auth.register.error"));
+      setError(msg);
+      toast.error(msg);
     },
   });
+
+  return {
+    register: (data: RegisterDto) => {
+      setError(null);
+      mutation.mutate(data);
+    },
+    error,
+    isLoading: mutation.isPending,
+    clearError: () => setError(null),
+  };
 };

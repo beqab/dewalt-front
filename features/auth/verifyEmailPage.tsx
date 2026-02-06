@@ -1,55 +1,54 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { authService } from "./services/authService";
-
-type Status = "idle" | "loading" | "success" | "error";
+import { useVerifyEmail } from "./hooks";
 
 export default function VerifyEmailPage() {
   const t = useTranslations();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") || "";
-  const [status, setStatus] = useState<Status>("idle");
-  const [message, setMessage] = useState<string>("");
+  const verifyEmailMutation = useVerifyEmail();
+  const {
+    mutate,
+    reset,
+    data,
+    isPending,
+    isSuccess,
+    status: mutationStatus,
+  } = verifyEmailMutation;
 
-
-  
-  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
-    if (!token) {
-      setStatus("error");
-      setMessage(t("auth.verifyEmail.missingToken"));
-      return;
-    }
+    if (!token) return;
+    reset();
+    mutate(token);
+  }, [token, mutate, reset]);
 
-    let isMounted = true;
-    setStatus("loading");
-    authService.verifyEmail
-      .get(token)
-      .then((response) => {
-        if (!isMounted) return;
-        setStatus("success");
-        setMessage(response.message || t("auth.verifyEmail.success"));
-      })
-      .catch(() => {
-        if (!isMounted) return;
-        setStatus("error");
-        setMessage(t("auth.verifyEmail.error"));
-      });
+  const status: "loading" | "success" | "error" = !token
+    ? "error"
+    : isPending || mutationStatus === "idle"
+      ? "loading"
+      : isSuccess
+        ? "success"
+        : "error";
 
-    return () => {
-      isMounted = false;
-    };
-  }, [token, t]);
+  const title =
+    status === "success"
+      ? t("auth.verifyEmail.titleSuccess")
+      : status === "error"
+        ? t("auth.verifyEmail.titleError")
+        : t("auth.verifyEmail.title");
 
-  const title = useMemo(() => {
-    if (status === "success") return t("auth.verifyEmail.titleSuccess");
-    if (status === "error") return t("auth.verifyEmail.titleError");
-    return t("auth.verifyEmail.title");
-  }, [status, t]);
+  const description =
+    status === "loading"
+      ? t("auth.verifyEmail.loading")
+      : status === "success"
+        ? data?.message || t("auth.verifyEmail.success")
+        : !token
+          ? t("auth.verifyEmail.missingToken")
+          : t("auth.verifyEmail.error");
 
   return (
     <div className="customContainer flex min-h-[70vh] items-center justify-center px-5 py-10 text-center lg:px-0">
@@ -57,9 +56,7 @@ export default function VerifyEmailPage() {
         <h1 className="text-dark-secondary-100 text-2xl font-semibold">
           {title}
         </h1>
-        <p className="text-text-secondary mt-3 text-sm">
-          {status === "loading" ? t("auth.verifyEmail.loading") : message}
-        </p>
+        <p className="text-text-secondary mt-3 text-sm">{description}</p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
             href="/login"

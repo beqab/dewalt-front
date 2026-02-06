@@ -10,22 +10,19 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import EnvelopIcon from "@/components/icons/envelopIcon";
 import KeyIcon from "@/components/icons/keyIcon";
-import EyeIcon from "@/components/icons/eyeIcon";
-import EyeOffIcon from "@/components/icons/eyeOffIcon";
+import EyeOpenIcon from "@/components/icons/eyeOpenIcon";
+import EyeClosedIcon from "@/components/icons/eyeClosedIcon";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
+import { useRegister } from "./hooks";
 import AuthPageWrapper from "./components/authPageWraper";
-import { authService } from "./services/authService";
-import type { ApiErrorResponse } from "@/lib/apiClient";
 
 export default function RegisterPage() {
   const t = useTranslations();
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [agreeToTerms, setAgreeToTerms] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [termsError, setTermsError] = useState(false);
+  const { register, error, isLoading, clearError } = useRegister();
 
   const validationSchema = Yup.object({
     name: Yup.string()
@@ -55,34 +52,19 @@ export default function RegisterPage() {
 
   const handleSubmit = async (values: typeof initialValues) => {
     if (!agreeToTerms) {
+      setTermsError(true);
       toast.error(t("auth.validation.termsRequired"));
       return;
     }
 
-    setIsLoading(true);
-    setError(null);
+    setTermsError(false);
 
-    try {
-      // Register the user
-      await authService.register.post({
-        name: values.name,
-        surname: values.surname,
-        email: values.email,
-        password: values.password,
-      });
-
-      toast.success(t("auth.register.verifyEmailSent"));
-      router.push("/login");
-    } catch (error: unknown) {
-      console.log("Registration error:", error);
-      const apiError = error as ApiErrorResponse | undefined;
-      const errorMessage =
-        apiError?.message || t("auth.register.error");
-      setError(errorMessage);
-      toast.error(errorMessage);  
-    } finally {
-      setIsLoading(false);
-    }
+    register({
+      name: values.name,
+      surname: values.surname,
+      email: values.email,
+      password: values.password,
+    });
   };
 
   return (
@@ -115,6 +97,10 @@ export default function RegisterPage() {
                     type="text"
                     placeholder={t("auth.register.name")}
                     error={!!(errors.name && touched.name)}
+                    onChange={(event) => {
+                      clearError();
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
@@ -141,6 +127,10 @@ export default function RegisterPage() {
                     type="text"
                     placeholder={t("auth.register.surname")}
                     error={!!(errors.surname && touched.surname)}
+                    onChange={(event) => {
+                      clearError();
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
@@ -169,7 +159,7 @@ export default function RegisterPage() {
                     icon={<EnvelopIcon />}
                     error={!!(errors.email && touched.email)}
                     onChange={(event) => {
-                      setError(null);
+                      clearError();
                       field.onChange(event);
                     }}
                   />
@@ -203,19 +193,25 @@ export default function RegisterPage() {
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         className="text-text-secondary hover:text-dark-secondary-100"
+                        aria-label={
+                          showPassword
+                            ? t("auth.common.hidePassword")
+                            : t("auth.common.showPassword")
+                        }
+                        aria-pressed={showPassword}
                       >
-                        {showPassword ? (
-                            <EyeIcon className="h-5 w-5" />
-                        
-
-
-
+                        {!showPassword ? (
+                          <EyeClosedIcon className="h-5 w-5" />
                         ) : (
-                          <EyeOffIcon className="h-5 w-5" />
+                          <EyeOpenIcon className="h-5 w-5" />
                         )}
                       </button>
                     }
                     error={!!(errors.password && touched.password)}
+                    onChange={(event) => {
+                      clearError();
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
@@ -249,18 +245,27 @@ export default function RegisterPage() {
                           setShowConfirmPassword(!showConfirmPassword)
                         }
                         className="text-text-secondary hover:text-dark-secondary-100"
+                        aria-label={
+                          showConfirmPassword
+                            ? t("auth.common.hidePassword")
+                            : t("auth.common.showPassword")
+                        }
+                        aria-pressed={showConfirmPassword}
                       >
-                        {showConfirmPassword ? (
-                           <EyeIcon className="h-5 w-5" />
-                        
+                        {!showConfirmPassword ? (
+                          <EyeClosedIcon className="h-5 w-5" />
                         ) : (
-                          <EyeOffIcon className="h-5 w-5" />
+                          <EyeOpenIcon className="h-5 w-5" />
                         )}
                       </button>
                     }
                     error={
                       !!(errors.confirmPassword && touched.confirmPassword)
                     }
+                    onChange={(event) => {
+                      clearError();
+                      field.onChange(event);
+                    }}
                   />
                 )}
               </Field>
@@ -299,7 +304,10 @@ export default function RegisterPage() {
             <div className="bg-background p-4 pt-4">
               <Checkbox
                 checked={agreeToTerms}
-                onChange={(e) => setAgreeToTerms(e.target.checked)}
+                onChange={(e) => {
+                  setAgreeToTerms(e.target.checked);
+                  setTermsError(false);
+                }}
                 label={
                   <Link
                     href="/terms"
@@ -311,6 +319,11 @@ export default function RegisterPage() {
                 labelClassName="text-text-secondary text-xs pl-2"
                 className="gap-2"
               />
+              {termsError && (
+                <div className="mt-2 text-xs text-red-500">
+                  {t("auth.validation.termsRequired")}
+                </div>
+              )}
             </div>
           </Form>
         )}

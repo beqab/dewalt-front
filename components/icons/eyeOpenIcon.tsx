@@ -1,4 +1,4 @@
-export default function EyeIcon({ className }: { className?: string }) {
+export default function EyeOpenIcon({ className }: { className?: string }) {
   return (
     <svg
       width="20"
@@ -25,4 +25,3 @@ export default function EyeIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-

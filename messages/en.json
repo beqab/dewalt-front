@@ -220,6 +220,11 @@
     "terms": "Terms and Conditions"
   },
   "auth": {
+    "common": {
+      "back": "Back",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
     "login": {
       "title": "Authorization",
       "email": "Email",
@@ -337,6 +342,11 @@
     }
   },
   "errors": {
+    "generic": {
+      "title": "Something went wrong",
+      "message": "We ran into a problem. Please try again.",
+      "retry": "Try again"
+    },
     "notFound": {
       "code": "404",
       "title": "Page not found",

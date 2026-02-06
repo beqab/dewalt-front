@@ -8,8 +8,8 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import KeyIcon from "@/components/icons/keyIcon";
-import EyeIcon from "@/components/icons/eyeIcon";
-import EyeOffIcon from "@/components/icons/eyeOffIcon";
+import EyeOpenIcon from "@/components/icons/eyeOpenIcon";
+import EyeClosedIcon from "@/components/icons/eyeClosedIcon";
 import { useChangePassword } from "@/features/auth/hooks";
 import Loading from "@/components/ui/loading";
 
@@ -159,11 +159,17 @@ export default function ProfilePage() {
                                     setShowCurrentPassword(!showCurrentPassword)
                                   }
                                   className="text-text-secondary hover:text-dark-secondary-100"
+                                  aria-label={
+                                    showCurrentPassword
+                                      ? t("auth.common.hidePassword")
+                                      : t("auth.common.showPassword")
+                                  }
+                                  aria-pressed={showCurrentPassword}
                                 >
-                                  {showCurrentPassword ? (
-                                    <EyeOffIcon className="h-5 w-5" />
+                                  {!showCurrentPassword ? (
+                                    <EyeClosedIcon className="h-5 w-5" />
                                   ) : (
-                                    <EyeIcon className="h-5 w-5" />
+                                    <EyeOpenIcon className="h-5 w-5" />
                                   )}
                                 </button>
                               }
@@ -206,11 +212,17 @@ export default function ProfilePage() {
                                     setShowNewPassword(!showNewPassword)
                                   }
                                   className="text-text-secondary hover:text-dark-secondary-100"
+                                  aria-label={
+                                    showNewPassword
+                                      ? t("auth.common.hidePassword")
+                                      : t("auth.common.showPassword")
+                                  }
+                                  aria-pressed={showNewPassword}
                                 >
-                                  {showNewPassword ? (
-                                    <EyeOffIcon className="h-5 w-5" />
+                                  {!showNewPassword ? (
+                                    <EyeClosedIcon className="h-5 w-5" />
                                   ) : (
-                                    <EyeIcon className="h-5 w-5" />
+                                    <EyeOpenIcon className="h-5 w-5" />
                                   )}
                                 </button>
                               }
@@ -250,11 +262,17 @@ export default function ProfilePage() {
                                     setShowConfirmPassword(!showConfirmPassword)
                                   }
                                   className="text-text-secondary hover:text-dark-secondary-100"
+                                  aria-label={
+                                    showConfirmPassword
+                                      ? t("auth.common.hidePassword")
+                                      : t("auth.common.showPassword")
+                                  }
+                                  aria-pressed={showConfirmPassword}
                                 >
-                                  {showConfirmPassword ? (
-                                    <EyeOffIcon className="h-5 w-5" />
+                                  {!showConfirmPassword ? (
+                                    <EyeClosedIcon className="h-5 w-5" />
                                   ) : (
-                                    <EyeIcon className="h-5 w-5" />
+                                    <EyeOpenIcon className="h-5 w-5" />
                                   )}
                                 </button>
                               }

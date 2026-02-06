@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { getSession } from "next-auth/react";
+import { devLogger } from "@/lib/devLogger";
 
 export interface ErrorResponse<T> {
   data: T;
@@ -82,7 +83,7 @@ axiosInstance.interceptors.response.use(
 let languageInterceptorId: number | null = null;
 
 export const axiosInterceptorAddLanguage = (lang: string) => {
-  console.log(lang, "axiosInterceptorAddLanguage");
+  devLogger.log(lang, "axiosInterceptorAddLanguage");
 
   // Remove the previous language interceptor if it exists
   if (languageInterceptorId !== null) {
@@ -99,7 +100,7 @@ export const axiosInterceptorAddLanguage = (lang: string) => {
       return config;
     },
     (error) => {
-      console.error(error, "Error in language interceptor");
+      devLogger.error(error, "Error in language interceptor");
       return Promise.reject(error);
     }
   );
