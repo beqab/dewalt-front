@@ -2,13 +2,14 @@
 
 import { Link } from "@/i18n/navigation";
 import { MenuItemWithArrow } from "../menu/menuItm";
-import { brands } from "../menu/staticMenu";
 import { useState } from "react";
 import MenuCategories from "./menuCategories";
 import { useTranslations } from "next-intl";
+import { useMenuBrands } from "../menu/hooks/useMenuBrands";
 
 export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
   const t = useTranslations();
+  const { data: brands } = useMenuBrands();
   const [openMenuCategory, setOpenMenuCategory] = useState<number | null>(null);
 
   const handleOpenMenuCategory = (category: number | null) => {
@@ -46,7 +47,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
         onClick={() => handleOpenMenuCategory(0)}
       />
       {/* Brands */}
-      {brands.map((brand, index) => (
+      {brands?.map((brand, index) => (
         <MenuItemWithArrow
           key={index}
           isActive={!!openMenuCategory}

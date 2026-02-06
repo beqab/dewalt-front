@@ -1,5 +1,9 @@
 {
   "title": "Dewalt",
+  "meta": {
+    "siteTitle": "DEWALT Georgia",
+    "siteDescription": "Official DEWALT products in Georgia — tools, accessories, news, and service support."
+  },
   "search": "Search",
   "description": "Description",
   "details": "Details",
@@ -139,9 +143,18 @@
   },
   "footer": {
     "followUs": "Follow Us",
+    "address": "36 Ksani St, Tbilisi 0141, Georgia",
     "allRightsReserved": "All rights reserved",
     "termsAndConditions": "Terms and Conditions",
     "privacyPolicy": "Privacy Policy"
+  },
+  "header": {
+    "toggleMenu": "Toggle menu"
+  },
+  "language": {
+    "select": "Select language",
+    "enShort": "ENG",
+    "kaShort": "GEO"
   },
   "products": {
     "sortBy": "Sort By",

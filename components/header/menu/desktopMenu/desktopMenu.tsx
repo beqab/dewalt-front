@@ -19,7 +19,7 @@ export default function DesktopMenu() {
   const handleBrandToggle = (brandIndex: number) => {
     if (activeMainCategory === brandIndex) {
       // Close menu if clicking the same main category
-      setActiveMainCategory(0);
+      setActiveMainCategory(null);
     } else {
       // Open menu for the clicked main category
       setActiveMainCategory(brandIndex);

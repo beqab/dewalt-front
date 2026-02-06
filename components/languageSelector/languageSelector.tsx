@@ -7,6 +7,7 @@ import { useTransition, useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import LanguageIcon from "../icons/languageIcon";
 import { routing } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 
 export default function LanguageSelector({
   className,
@@ -22,6 +23,7 @@ export default function LanguageSelector({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const currentLocale = (params?.locale as Locale) || routing.defaultLocale;
+  const t = useTranslations();
 
   const locales = routing.locales;
 
@@ -72,7 +74,7 @@ export default function LanguageSelector({
           isPending && "cursor-not-allowed opacity-50"
         )}
         disabled={isPending}
-        aria-label="Select language"
+        aria-label={t("language.select")}
         aria-expanded={isOpen}
       >
         {children || <LanguageIcon />}
@@ -103,7 +105,11 @@ export default function LanguageSelector({
                 disabled={isPending}
               >
                 <div className="flex items-center justify-between">
-                  <span>{locale === "ka" ? "Geo" : "Eng"}</span>
+                  <span>
+                    {locale === "ka"
+                      ? t("language.kaShort")
+                      : t("language.enShort")}
+                  </span>
                   {isActive && <span className="text-primary text-xs">✓</span>}
                 </div>
               </button>

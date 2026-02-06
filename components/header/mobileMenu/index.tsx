@@ -10,6 +10,7 @@ import ProfileIcon from "@/components/icons/profileIcon";
 import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { useBodyScrollLock } from "../../../hooks/useBodyScrollLock";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -21,15 +22,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const currentLocale = (params?.locale as Locale) || routing.defaultLocale;
   const { data: session } = useSession();
   const profileLink = session ? "/profile" : "/login";
+  const t = useTranslations();
 
   // Reactively lock body scroll when menu is open
   useBodyScrollLock(isOpen);
 
   return (
     <>
-      {/* Backdrop Overlay */}
-      <div />
-
       {/* Mobile Menu Panel */}
       <div
         className={
@@ -45,7 +44,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <LanguageIcon className="stroke-text-secondary" />
 
               <span className="font-inter text-dark-secondary-70 text-sm font-medium uppercase">
-                {currentLocale === "en" ? "ENG" : "GEO"}
+                {currentLocale === "en"
+                  ? t("language.enShort")
+                  : t("language.kaShort")}
               </span>
             </div>
           </LanguageSelector>
@@ -55,7 +56,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             <ProfileIcon className="" />
             <span className="text-sm font-medium">
-              {session ? "პროფილი" : "ავტორიზაცია"}
+              {session ? t("profile.title") : t("breadcrumb.login")}
             </span>
           </Link>
         </div>

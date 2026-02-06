@@ -1,5 +1,9 @@
 {
   "title": "დეულატი",
+  "meta": {
+    "siteTitle": "DEWALT საქართველო",
+    "siteDescription": "DEWALT-ის ოფიციალური პროდუქტები საქართველოში — ხელსაწყოები, აქსესუარები, სიახლეები და სერვის მხარდაჭერა."
+  },
   "search": "ძებნა",
   "description": "აღწერა",
   "details": "დეტალები",
@@ -139,9 +143,18 @@
   },
   "footer": {
     "followUs": "გამოგვყევით",
+    "address": "ქსნის ქუჩა 36. თბილისი 0141, საქართველო",
     "allRightsReserved": "ყველა უფლება დაცულია",
     "termsAndConditions": "წესები და პირობები",
     "privacyPolicy": "კონფიდენციალურობის პოლიტიკა"
+  },
+  "header": {
+    "toggleMenu": "მენიუს გადართვა"
+  },
+  "language": {
+    "select": "ენის არჩევა",
+    "enShort": "ENG",
+    "kaShort": "GEO"
   },
   "products": {
     "sortBy": "დალაგება",

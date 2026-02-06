@@ -11,11 +11,13 @@ import CloseIcon from "../icons/closeIcon";
 import { Link } from "@/i18n/navigation";
 import CartPreview from "@/features/products/cart/components/cartPreview";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const { data: session } = useSession();
   const profileLink = session ? "/profile" : "/login";
+  const t = useTranslations();
 
   return (
     <header className="bg-dark-secondary-100 relative z-40">
@@ -41,7 +43,7 @@ export default function Header() {
           <button
             onClick={() => setOpenMenu(!openMenu)}
             className="relative z-50 flex cursor-pointer items-center justify-center transition-transform duration-300 hover:scale-110 active:scale-95 md:hidden"
-            aria-label="Toggle menu"
+            aria-label={t("header.toggleMenu")}
           >
             <div className="relative h-6 w-6">
               <div

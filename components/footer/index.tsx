@@ -1,7 +1,6 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { brands } from "@/components/header/menu/staticMenu";
 import Image from "next/image";
 import footerImg from "@/public/imgs/footerImg.jpg";
 import PhoneIcon from "../icons/phoneIcon";
@@ -11,9 +10,13 @@ import FbIcon from "../icons/fbIcon";
 import { useTranslations } from "next-intl";
 import MastercardLogo from "@/public/mastercard.png";
 import VisaLogo from "@/public/visa.png";
+import { useMenuBrands } from "../header/menu/hooks/useMenuBrands";
 
 export default function Footer() {
+  const { data: brands } = useMenuBrands();
+
   const t = useTranslations();
+  const year = new Date().getFullYear();
   return (
     <footer className="bg-dark-secondary-100 text-neutral">
       {/* Main Footer Content */}
@@ -30,7 +33,6 @@ export default function Footer() {
               <li>
                 <Link
                   href="/"
-                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   {t("navigation.home")}
@@ -39,7 +41,6 @@ export default function Footer() {
               <li>
                 <Link
                   href="/news"
-                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   {t("navigation.news")}
@@ -48,7 +49,6 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   {t("navigation.about")}
@@ -57,7 +57,6 @@ export default function Footer() {
               <li>
                 <Link
                   href="/service-center"
-                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   {t("navigation.serviceCenter")}
@@ -66,7 +65,6 @@ export default function Footer() {
               <li>
                 <Link
                   href="/contact"
-                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs whitespace-nowrap transition-colors"
                 >
                   {t("navigation.contact")}
@@ -81,17 +79,15 @@ export default function Footer() {
               <li>
                 <Link
                   href="/products"
-                  prefetch={true}
                   className="text-neutral hover:text-primary text-xs transition-colors"
                 >
                   {t("navigation.products")}
                 </Link>
               </li>
-              {brands.map((brand, index) => (
+              {brands?.map((brand, index) => (
                 <li key={index}>
                   <Link
                     href={`/products?brand=${brand.name.toLowerCase()}`}
-                    prefetch={true}
                     className="text-neutral hover:text-primary text-xs transition-colors"
                   >
                     {brand.name}
@@ -124,9 +120,9 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2">
                 <LocationIcon />
-                <span className="text-neutral hover:text-primary text-xs transition-colors">
-                  ქსნის ქუჩა 36. თბილისი 0141, საქართველო
-                </span>
+                <address className="text-neutral hover:text-primary text-xs not-italic transition-colors">
+                  {t("footer.address")}
+                </address>
               </li>
               <li className="flex items-center gap-2">
                 <FbIcon />
@@ -147,7 +143,7 @@ export default function Footer() {
       {/* Yellow Bar - Copyright & Payment Methods */}
       <div className="bg-primary px-5 py-4 lg:px-0">
         <div className="customContainer">
-          <div className="lgitems-center flex flex-col justify-between gap-4 lg:flex-row">
+          <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
             {/* Copyright */}
             <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-end">
               <Image height={30} src={MastercardLogo} alt="Logo" />
@@ -156,7 +152,7 @@ export default function Footer() {
 
             <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-center">
               <div className="text-dark-secondary-100 text-center text-xs lg:text-left">
-                <span>2026 - </span>
+                <span>{year} - </span>
                 <span className="ml-2">{t("footer.allRightsReserved")}</span>
               </div>
 
@@ -167,7 +163,6 @@ export default function Footer() {
               <div className="text-dark-secondary-100 flex flex-wrap items-center justify-center gap-2 text-xs lg:justify-start">
                 <Link
                   href="/terms"
-                  prefetch={true}
                   className="transition-colors hover:underline"
                 >
                   {t("footer.termsAndConditions")}
@@ -175,7 +170,6 @@ export default function Footer() {
 
                 <Link
                   href="/privacy"
-                  prefetch={true}
                   className="transition-colors hover:underline"
                 >
                   {t("footer.privacyPolicy")}
