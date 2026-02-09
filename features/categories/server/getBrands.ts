@@ -5,10 +5,11 @@
 
 import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
+import { devLogger } from "@/lib/devLogger";
 
 export interface BrandApi {
   _id: string;
-  name: { ka: string; en: string };
+  name: string;
   slug: string;
   createdAt: string;
   updatedAt: string;
@@ -21,11 +22,14 @@ export interface BrandApi {
 export async function getBrands(language?: "ka" | "en"): Promise<BrandApi[]> {
   try {
     const params: Record<string, string> = {};
-    if (language) params.language = language;
+    devLogger.log(language, "language++");
 
     return await fetchApi<BrandApi[]>(`${API_ROUTES.CATEGORIES}/brands`, {
       params,
-      revalidate: 60, // ISR revalidation every 60 seconds
+      revalidate: 60 * 60 * 24 * 24, // ISR revalidation every 30 days
+      headers: {
+        "x-custom-lang": language || "ka",
+      },
     });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {

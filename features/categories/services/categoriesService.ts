@@ -7,7 +7,7 @@ const menuClient = createApiClient<MenuBrand[]>(
 );
 
 export const categoriesService = {
-  async getMenu(lang: string) {
-    return menuClient.get<MenuBrand[]>({ lang });
+  async getMenu() {
+    return menuClient.get<MenuBrand[]>();
   },
 };

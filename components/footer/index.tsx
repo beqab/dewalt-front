@@ -1,5 +1,3 @@
-"use client";
-
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import footerImg from "@/public/imgs/footerImg.jpg";
@@ -7,16 +5,17 @@ import PhoneIcon from "../icons/phoneIcon";
 import EnvelopIcon from "../icons/envelopIcon";
 import LocationIcon from "../icons/locationIcon";
 import FbIcon from "../icons/fbIcon";
-import { useTranslations } from "next-intl";
 import MastercardLogo from "@/public/mastercard.png";
 import VisaLogo from "@/public/visa.png";
-import { useMenuBrands } from "../header/menu/hooks/useMenuBrands";
+import { BrandApi } from "@/features/categories/server/getBrands";
+import { devLogger } from "@/lib/devLogger";
+import { getTranslations } from "next-intl/server";
 
-export default function Footer() {
-  const { data: brands } = useMenuBrands();
-
-  const t = useTranslations();
+export default async function Footer({ brands }: { brands: BrandApi[] }) {
+  devLogger.log(brands, "brands from footer");
+  const t = await getTranslations();
   const year = new Date().getFullYear();
+
   return (
     <footer className="bg-dark-secondary-100 text-neutral">
       {/* Main Footer Content */}
@@ -87,10 +86,10 @@ export default function Footer() {
               {brands?.map((brand, index) => (
                 <li key={index}>
                   <Link
-                    href={`/products?brand=${brand.name.toLowerCase()}`}
+                    href={`/products?brand=${brand?.name?.toLowerCase()}`}
                     className="text-neutral hover:text-primary text-xs transition-colors"
                   >
-                    {brand.name}
+                    {brand?.name}
                   </Link>
                 </li>
               ))}

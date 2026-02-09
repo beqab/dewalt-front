@@ -57,7 +57,7 @@ export default async function ProductSlider() {
             {/* Header */}
             <div className="mb-4 flex items-center justify-between px-2 md:px-0">
               <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-2xl md:text-2xl">
-                {brand.name[locale]}
+                {brand.name}
               </h2>
             </div>
 

@@ -19,6 +19,8 @@ import { SessionProvider } from "next-auth/react";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import { Suspense } from "react";
 import LanguageInterceptor from "@/components/providers/LanguageInterceptor";
+import { getMenuBrands } from "@/features/categories/server/getMenuBrands";
+import { getBrands } from "@/features/categories/server/getBrands";
 
 type Props = {
   children: React.ReactNode;
@@ -106,6 +108,9 @@ export default async function RootLayout({ children, params }: Props) {
     notFound();
   }
 
+  const menuBrands = await getMenuBrands(locale);
+  const brands = await getBrands(locale);
+
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
@@ -133,7 +138,7 @@ export default async function RootLayout({ children, params }: Props) {
                     </>
                   </CompareProductProvider>
                 </CartProvider>
-                <Footer />
+                <Footer brands={brands} />
               </AuthProvider>
             </SessionProvider>
           </QueryProvider>

@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import type { BrandApi } from "@/features/categories/server/getBrands";
 import { useTranslations } from "next-intl";
-import { useGetLocale } from "@/lib/utils/useGetLocale";
 import { cn } from "@/lib/utils";
 
 interface BrandFilterProps {
@@ -18,7 +17,6 @@ export default function BrandFilter({
   initialBrandParam,
 }: BrandFilterProps) {
   const t = useTranslations();
-  const locale = useGetLocale();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
@@ -91,7 +89,7 @@ export default function BrandFilter({
       </h3>
       <div className="space-y-3">
         {brands?.map((brand) => {
-          const brandName = brand.name[locale];
+          const brandName = brand.name;
           // Use optimistic state for immediate UI feedback
           const isSelected = optimisticBrands.includes(brand.slug);
 
