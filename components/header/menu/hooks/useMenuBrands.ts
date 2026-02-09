@@ -30,7 +30,7 @@ export function useMenuBrands() {
 
   const queryResult = useQuery<MenuBrand[]>({
     queryKey: QUERY_KEYS.CATEGORIES.MENU(locale),
-    queryFn: () => categoriesService.getMenu(locale),
+    queryFn: () => categoriesService.getMenu(),
     placeholderData: staticMenuBrands,
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
