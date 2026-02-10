@@ -21,14 +21,16 @@ export interface BrandApi {
  */
 export async function getBrands(language?: "ka" | "en"): Promise<BrandApi[]> {
   try {
+    const lang = language || "ka";
     const params: Record<string, string> = {};
-    devLogger.log(language, "language++");
+    devLogger.log(lang, "language++");
 
     return await fetchApi<BrandApi[]>(`${API_ROUTES.CATEGORIES}/brands`, {
       params,
       revalidate: 60 * 60 * 24 * 24, // ISR revalidation every 30 days
+      tags: ["brands"],
       headers: {
-        "x-custom-lang": language || "ka",
+        "x-custom-lang": lang,
       },
     });
   } catch (error) {

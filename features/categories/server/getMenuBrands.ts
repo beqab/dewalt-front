@@ -11,9 +11,7 @@ import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
 import type { MenuBrand } from "@/features/categories/types";
 
-export async function getMenuBrands(
-  lang: "ka" | "en"
-): Promise<MenuBrand[]> {
+export async function getMenuBrands(lang: "ka" | "en"): Promise<MenuBrand[]> {
   try {
     return await fetchApi<MenuBrand[]>(`${API_ROUTES.CATEGORIES}/menu`, {
       params: { lang },
@@ -21,7 +19,7 @@ export async function getMenuBrands(
         "x-custom-lang": lang,
       },
       revalidate: 60 * 5, // 5 minutes
-      tags: [`menu-brands:${lang}`],
+      tags: [`brands`],
     });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
@@ -31,4 +29,3 @@ export async function getMenuBrands(
     return [];
   }
 }
-
