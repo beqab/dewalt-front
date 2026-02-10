@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
   }
 
   for (const tag of tags) {
-    revalidateTag(tag, "tag");
+    revalidateTag(tag, "max");
   }
 
   return NextResponse.json({ revalidated: true, tags, at: Date.now() });
