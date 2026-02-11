@@ -6,6 +6,7 @@
 import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
 import { devLogger } from "@/lib/devLogger";
+import { CACHE_TAGS } from "@/lib/cacheTags";
 
 export interface BrandApi {
   _id: string;
@@ -28,7 +29,7 @@ export async function getBrands(language?: "ka" | "en"): Promise<BrandApi[]> {
     return await fetchApi<BrandApi[]>(`${API_ROUTES.CATEGORIES}/brands`, {
       params,
       revalidate: 60 * 60 * 24 * 24, // ISR revalidation every 30 days
-      tags: ["brands"],
+      tags: [...CACHE_TAGS.menu.all],
       headers: {
         "x-custom-lang": lang,
       },

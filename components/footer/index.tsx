@@ -8,11 +8,9 @@ import FbIcon from "../icons/fbIcon";
 import MastercardLogo from "@/public/mastercard.png";
 import VisaLogo from "@/public/visa.png";
 import { BrandApi } from "@/features/categories/server/getBrands";
-import { devLogger } from "@/lib/devLogger";
 import { getTranslations } from "next-intl/server";
 
 export default async function Footer({ brands }: { brands: BrandApi[] }) {
-  devLogger.log(brands, "brands from footer");
   const t = await getTranslations();
   const year = new Date().getFullYear();
 
@@ -83,13 +81,13 @@ export default async function Footer({ brands }: { brands: BrandApi[] }) {
                   {t("navigation.products")}
                 </Link>
               </li>
-              {brands?.map((brand, index) => (
-                <li key={index}>
+              {brands?.map((brand) => (
+                <li key={brand._id}>
                   <Link
-                    href={`/products?brand=${brand?.name?.toLowerCase()}`}
+                    href={`/products?brand=${brand.slug}`}
                     className="text-neutral hover:text-primary text-xs transition-colors"
                   >
-                    {brand?.name}
+                    {brand.name}
                   </Link>
                 </li>
               ))}

@@ -10,6 +10,7 @@
 import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
 import type { MenuBrand } from "@/features/categories/types";
+import { CACHE_TAGS } from "@/lib/cacheTags";
 
 export async function getMenuBrands(lang: "ka" | "en"): Promise<MenuBrand[]> {
   try {
@@ -19,7 +20,7 @@ export async function getMenuBrands(lang: "ka" | "en"): Promise<MenuBrand[]> {
         "x-custom-lang": lang,
       },
       revalidate: 60 * 5, // 5 minutes
-      tags: [`brands`],
+      tags: [...CACHE_TAGS.menu.all],
     });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {
