@@ -2,8 +2,8 @@ import { Link } from "@/i18n/navigation";
 import { isExternalUrl } from "@/lib/utils/isExternalUrl";
 import Image from "next/image";
 import { Ad } from "../types";
-import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
+import { getTranslations } from "next-intl/server";
 
 interface AdImageProps {
   ad: {
@@ -55,8 +55,13 @@ function AdImage({ ad, sizes, priority = false, className }: AdImageProps) {
   );
 }
 
-export default function Add({ ad, className }: { ad: Ad; className?: string }) {
-  const t = useTranslations();
+export default function Add({
+  ad,
+  className,
+}: {
+  ad: Ad | null;
+  className?: string;
+}) {
   return (
     <div className="px-3 md:px-0">
       <div
@@ -76,11 +81,16 @@ export default function Add({ ad, className }: { ad: Ad; className?: string }) {
             />
           ) : (
             <div className="flex min-h-[152px] w-full items-center justify-center md:min-h-[252px]">
-              {/* <p className="text-2xl text-gray-500">{t("ads.add")}</p> */}
+              <AdFallback />
             </div>
           )}
         </div>
       </div>
     </div>
   );
+}
+
+async function AdFallback() {
+  const t = await getTranslations();
+  return <p className="text-2xl text-gray-500">{t("ads.add")}</p>;
 }

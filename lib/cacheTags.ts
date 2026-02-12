@@ -13,4 +13,7 @@ export const CACHE_TAGS = {
   bannerCarousel: {
     all: ["banner-carousel"] as const,
   },
+  ads: {
+    all: ["ads"] as const,
+  },
 } as const;

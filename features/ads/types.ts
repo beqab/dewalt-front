@@ -14,4 +14,3 @@ export interface Ad {
 }
 
 export type AdsResponse = Ad[];
-

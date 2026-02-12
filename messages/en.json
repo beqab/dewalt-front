@@ -16,6 +16,9 @@
     "serviceCenter": "Service Center",
     "contact": "Contact"
   },
+  "ads": {
+    "add": "Advertisement"
+  },
   "contact": {
     "title": "Contact",
     "subtitle": "Contact us anytime - we are ready to help you",
