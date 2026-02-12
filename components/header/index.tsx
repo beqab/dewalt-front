@@ -38,7 +38,7 @@ export default async function Header({
           <Link href={profileLink} className="hidden md:block">
             <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />
           </Link>
-          <MobileMenuToggle />
+          <MobileMenuToggle menuBrands={menuBrands} />
         </div>
       </div>
       <DesktopMenu menuBrands={menuBrands} />
