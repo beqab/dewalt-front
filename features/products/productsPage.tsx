@@ -1,10 +1,11 @@
-import { getProducts } from "./server/getProucts";
+import { getProducts } from "./server/getProducts";
 import { getLocale } from "next-intl/server";
-import FilterWrapper from "./components/filters/filtereWrapper";
+import FilterWrapper from "./components/filters/filterWrapper";
 import { Suspense } from "react";
 import FilterSkeleton from "./components/filters/filterSkeleton";
-import ProductGridWrapper from "./components/productGrid/productGreedWraper";
+import ProductGridWrapper from "./components/productGrid/productGreedWrapper";
 import ActiveFilters from "./components/filters/activeFilters";
+import { getMenuBrands } from "../categories/server/getMenuBrands";
 
 interface ProductsPageProps {
   searchParams: Promise<{
@@ -65,6 +66,7 @@ export default async function ProductsPage({
 
   // Create products promise for Suspense
   const productsPromise = getProducts(currentPage, itemsPerPage, filters);
+  const menuBrands = await getMenuBrands(locale).catch(() => []);
 
   return (
     <div className="min-h-screen py-10">
@@ -78,7 +80,7 @@ export default async function ProductsPage({
           {/* Main Content */}
           <main className="min-w-0 flex-1">
             <div className="md:px-0">
-              <ActiveFilters />
+              <ActiveFilters menuData={menuBrands} />
               <ProductGridWrapper productsPromise={productsPromise} />
             </div>
           </main>

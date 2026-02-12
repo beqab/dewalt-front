@@ -11,13 +11,19 @@ import LanguageSelector from "@/components/languageSelector/languageSelector";
 import { useBodyScrollLock } from "../../../hooks/useBodyScrollLock";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import { MenuBrand } from "@/features/categories/types";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  menuBrands: MenuBrand[];
 }
 
-export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export default function MobileMenu({
+  isOpen,
+  onClose,
+  menuBrands,
+}: MobileMenuProps) {
   const params = useParams();
   const currentLocale = (params?.locale as Locale) || routing.defaultLocale;
   const { data: session } = useSession();
@@ -63,7 +69,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Menu Items */}
         <div className="flex-1 overflow-y-auto">
-          <MobileMenuNav onClose={onClose} />
+          <MobileMenuNav menuBrands={menuBrands} onClose={onClose} />
         </div>
       </div>
     </>

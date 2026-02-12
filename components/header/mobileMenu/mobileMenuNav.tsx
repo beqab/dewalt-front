@@ -5,11 +5,17 @@ import { MenuItemWithArrow } from "../menu/menuItm";
 import { useState } from "react";
 import MenuCategories from "./menuCategories";
 import { useTranslations } from "next-intl";
-import { useMenuBrands } from "../menu/hooks/useMenuBrands";
+import { MenuBrand } from "@/features/categories/types";
 
-export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
+export default function MobileMenuNav({
+  menuBrands,
+  onClose,
+}: {
+  menuBrands: MenuBrand[];
+  onClose: () => void;
+}) {
   const t = useTranslations();
-  const { data: brands } = useMenuBrands();
+
   const [openMenuCategory, setOpenMenuCategory] = useState<number | null>(null);
 
   const handleOpenMenuCategory = (category: number | null) => {
@@ -19,6 +25,7 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
   if (openMenuCategory !== null) {
     return (
       <MenuCategories
+        brands={menuBrands}
         onClose={onClose}
         category={openMenuCategory}
         onchangeCategory={handleOpenMenuCategory}
@@ -47,9 +54,9 @@ export default function MobileMenuNav({ onClose }: { onClose: () => void }) {
         onClick={() => handleOpenMenuCategory(0)}
       />
       {/* Brands */}
-      {brands?.map((brand, index) => (
+      {menuBrands?.map((brand, index) => (
         <MenuItemWithArrow
-          key={index}
+          key={brand.id || brand.slug}
           isActive={!!openMenuCategory}
           label={brand.name}
           className="text-[16px]"

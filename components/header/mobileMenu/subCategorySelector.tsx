@@ -1,15 +1,17 @@
+import { MenuBrand } from "@/features/categories/types";
 import classNames from "classnames";
 import { useState, useRef, useEffect } from "react";
-import { useMenuBrands } from "../menu/hooks/useMenuBrands";
 
 export default function SubCategorySelector({
   selectedCategory,
   onchangeCategory,
+  brands,
 }: {
   selectedCategory: number;
   onchangeCategory: (category: number) => void;
+
+  brands: MenuBrand[];
 }) {
-  const { data: brands, isLoading } = useMenuBrands();
   const [isSelectOpen, setIsSelectOpen] = useState(false);
   const selectRef = useRef<HTMLDivElement>(null);
 

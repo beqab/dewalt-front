@@ -1,18 +1,19 @@
 import { useState } from "react";
 import MenuItem, { MenuSubItem } from "../menu/menuItm";
-import { useMenuBrands } from "../menu/hooks/useMenuBrands";
 import SubCategorySelector from "./subCategorySelector";
+import { MenuBrand } from "@/features/categories/types";
 
 export default function MenuCategories({
   category,
   onClose,
   onchangeCategory,
+  brands,
 }: {
   category: number;
   onClose: () => void;
   onchangeCategory: (category: number | null) => void;
+  brands: MenuBrand[];
 }) {
-  const { data: brands } = useMenuBrands();
   const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(
     null
   );
@@ -66,6 +67,7 @@ export default function MenuCategories({
 
         {/* Custom Select Dropdown */}
         <SubCategorySelector
+          brands={brands}
           selectedCategory={category}
           onchangeCategory={handleCategoryChange}
         />

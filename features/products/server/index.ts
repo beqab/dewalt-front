@@ -4,5 +4,4 @@ export {
   getProductBySlug,
   getLatestProducts,
   getSimilarProducts,
-} from "./getProucts";
-
+} from "./getProducts";

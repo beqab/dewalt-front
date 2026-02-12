@@ -6,11 +6,14 @@ import ProductMenu from "./productMenu";
 import MainMenuItem from "./productMenu/mainMenuItem";
 import classNames from "classnames";
 import { useTranslations } from "next-intl";
-import { useMenuBrands } from "../hooks/useMenuBrands";
+import { MenuBrand } from "@/features/categories/types";
 
-export default function DesktopMenu() {
+export default function DesktopMenu({
+  menuBrands,
+}: {
+  menuBrands: MenuBrand[];
+}) {
   const t = useTranslations();
-  const { data: menuBrands } = useMenuBrands();
   const [activeMainCategory, setActiveMainCategory] = useState<number | null>(
     null
   );
@@ -48,7 +51,7 @@ export default function DesktopMenu() {
         <div className="relative flex items-center">
           {menuBrands?.map((brand, brandIndex) => (
             <div
-              key={brandIndex}
+              key={brand.id || brand.slug}
               className={classNames("my-1 border-r border-[#D2D2D2] px-6", {
                 "border-r-0": brandIndex === menuBrands?.length - 1,
                 "pl-0": brandIndex === 0,

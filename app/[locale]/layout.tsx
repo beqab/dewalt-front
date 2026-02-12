@@ -108,8 +108,10 @@ export default async function RootLayout({ children, params }: Props) {
     notFound();
   }
 
-  const menuBrands = await getMenuBrands(locale);
-  const brands = await getBrands(locale);
+  const [menuBrandsData, brandsData] = await Promise.all([
+    getMenuBrands(locale),
+    getBrands(locale),
+  ]);
 
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
@@ -126,7 +128,7 @@ export default async function RootLayout({ children, params }: Props) {
                 <Toaster position="top-right" richColors closeButton />
 
                 <CartProvider>
-                  <Header />
+                  <Header menuBrands={menuBrandsData} />
                   <Suspense fallback={null}>
                     <ScrollToTop />
                   </Suspense>
@@ -138,7 +140,7 @@ export default async function RootLayout({ children, params }: Props) {
                     </>
                   </CompareProductProvider>
                 </CartProvider>
-                <Footer brands={brands} />
+                <Footer brands={brandsData} />
               </AuthProvider>
             </SessionProvider>
           </QueryProvider>

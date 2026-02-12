@@ -2,7 +2,7 @@ import Carousel from "@/components/carousel";
 import ProductCard from "../../ui/productCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { getProducts } from "../../server/getProucts";
+import { getProducts } from "../../server/getProducts";
 import { getBrands } from "@/features/categories/server/getBrands";
 import { getLocale, getTranslations } from "next-intl/server";
 

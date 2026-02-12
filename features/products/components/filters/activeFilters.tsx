@@ -4,17 +4,13 @@ import CloseIcon from "@/components/icons/closeIcon";
 import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo, useTransition } from "react";
+import { MenuBrand } from "@/features/categories/types";
 
-import { useMenuBrands } from "@/components/header/menu/hooks/useMenuBrands";
-
-export default function ActiveFilters() {
+export default function ActiveFilters({ menuData }: { menuData: MenuBrand[] }) {
   const t = useTranslations();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
-
-  // Fetch menu data to get category names
-  const { data: menuData } = useMenuBrands();
 
   // Get active filters from URL
   const activeFilters = useMemo(() => {
