@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
 import classNames from "classnames";
@@ -19,6 +19,9 @@ export default function BannerCarousel({
 }) {
   const locale = useGetLocale();
   const t = useTranslations();
+  const [failedImages, setFailedImages] = useState<Set<string>>(
+    () => new Set()
+  );
 
   // Memoize slider transformation to avoid recalculating on every render
   const slider = useMemo(
@@ -74,22 +77,28 @@ export default function BannerCarousel({
               >
                 {/* Background Image */}
                 <div className="absolute inset-0">
-                  <Image
-                    src={slide.image}
-                    alt={slide.title}
-                    fill
-                    className="object-cover"
-                    priority={index === 0}
-                    sizes="100vw"
-                    style={{ height: "100%" }}
-                    onError={(e) => {
-                      // Fallback to a gradient background if image fails to load
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                    }}
-                  />
+                  {!failedImages.has(slide.id) ? (
+                    <Image
+                      src={slide.image}
+                      alt={slide.title || "Banner"}
+                      fill
+                      className="object-cover"
+                      priority={index === 0}
+                      sizes="100vw"
+                      style={{ height: "100%" }}
+                      onError={() => {
+                        setFailedImages((prev) => {
+                          const next = new Set(prev);
+                          next.add(slide.id);
+                          return next;
+                        });
+                      }}
+                    />
+                  ) : (
+                    <div className="from-dark-secondary-100 to-dark-secondary-100/70 absolute inset-0 bg-linear-to-br" />
+                  )}
                   {/* Overlay for better text readability */}
-                  {/* <div className="absolute inset-0 bg-gradient-to-br from-dark-secondary-100/80 to-dark-secondary-100/60" /> */}
+                  <div className="from-dark-secondary-100/70 to-dark-secondary-100/30 absolute inset-0 bg-linear-to-br" />
                 </div>
 
                 {/* Content Overlay */}
