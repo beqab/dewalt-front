@@ -122,6 +122,8 @@
     "submitError": "Failed to submit rating. Please try again."
   },
   "common": {
+    "share": "Share",
+    "popupBlocked": "Popup was blocked. Please allow popups and try again.",
     "viewAll": "View All",
     "backToProducts": "Back to Products"
   },
@@ -350,6 +352,7 @@
     "readMore": "Read more",
     "viewAll": "View All",
     "notFound": "No news found",
+    "loading": "Loading news...",
     "recentlyAddedNews": "Recently Added News",
     "error": {
       "title": "Error",

@@ -13,7 +13,6 @@ export default async function Page({
   // Extract ID from hybrid slug
   const id = await extractIdFromSlug(slug);
 
-  console.log("id", id);
   if (!id) {
     notFound();
   }

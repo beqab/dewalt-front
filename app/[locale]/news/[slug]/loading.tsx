@@ -1,5 +1,9 @@
+"use client";
+
 import Loading from "@/components/ui/loading";
+import { useTranslations } from "next-intl";
 
 export default function LoadingPage() {
-  return <Loading message="სიახლე იტვირთება..." minHeight="60vh" />;
+  const t = useTranslations();
+  return <Loading message={t("news.loading")} minHeight="60vh" />;
 }

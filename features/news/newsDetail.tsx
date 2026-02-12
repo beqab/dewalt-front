@@ -41,7 +41,6 @@ export async function generateMetadata({
 export default async function NewsDetail({ id }: { id: string }) {
   const t = await getTranslations();
 
-  console.log("id", id);
   const locale = (await getLocale()) as "ka" | "en";
 
   const newsApi = await getNewsById(id);
@@ -99,14 +98,14 @@ export default async function NewsDetail({ id }: { id: string }) {
                 )}
               </div>
 
-              <ShareButton />
+              <ShareButton url={`/${locale}/news/${news.slug}-${news._id}`} />
             </article>
 
             {/* Sidebar */}
             <aside className="w-full lg:sticky lg:top-8 lg:h-fit">
               <Suspense
                 fallback={
-                  <Loading message="სიახლეები იტვირთება..." minHeight="60vh" />
+                  <Loading message={t("news.loading")} minHeight="60vh" />
                 }
               >
                 <RecentlyAddedNews currentNewsId={news._id} />
