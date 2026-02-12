@@ -1,4 +1,4 @@
-import Carusel from "@/components/carousel";
+import Carousel from "@/components/carousel";
 import NewsCard from "../newsCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
@@ -23,7 +23,7 @@ export default async function NewsSlider() {
 
       {news.length > 0 ? (
         <>
-          <Carusel>
+          <Carousel>
             {news.map((newsItem) => (
               <NewsCard
                 key={newsItem._id}
@@ -31,7 +31,7 @@ export default async function NewsSlider() {
                 className="min-w-0 flex-[0_0_calc(66.666%-0.5rem)] px-2 md:flex-[0_0_calc(33.333%)] md:p-3"
               />
             ))}
-          </Carusel>
+          </Carousel>
 
           <div className="end flex justify-end md:mt-3">
             <Button variant="outline" asChild>

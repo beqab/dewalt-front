@@ -37,7 +37,7 @@ export default function NewsCard({ news, className }: NewsCardProps) {
             <DateIcon />
             <span className="text-text-secondary text-xs">{date}</span>
           </div>
-          <p className="text-text-secondary mb-4 line-clamp-3 flex-1 text-sm">
+          <p className="text-text-secondary mb-4 line-clamp-3 min-h-[60px] flex-1 text-sm">
             {description}
           </p>
         </div>

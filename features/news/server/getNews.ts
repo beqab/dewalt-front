@@ -6,6 +6,9 @@
 import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
 import { PaginatedNewsResponse, NewsApi } from "../types/api";
+import { CACHE_TAGS } from "@/lib/cacheTags";
+import { devLogger } from "@/lib/devLogger";
+import { getLocale } from "next-intl/server";
 
 /**
  * Fetches paginated news
@@ -16,17 +19,21 @@ export async function getNews(
   limit: number = 10
 ): Promise<PaginatedNewsResponse> {
   try {
-    return await fetchApi<PaginatedNewsResponse>(API_ROUTES.NEWS, {
+    const locale = (await getLocale()) as "ka" | "en";
+    return await fetchApi<PaginatedNewsResponse>(API_ROUTES.NEWS_PUBLIC, {
       params: {
         page: page.toString(),
         limit: limit.toString(),
       },
-      revalidate: 60, // ISR revalidation every 60 seconds
+      revalidate: 60 * 60 * 24, // 1 day
+      tags: [...CACHE_TAGS.news.all],
+      headers: {
+        "x-custom-lang": locale,
+      },
     });
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("Failed to fetch news on server:", error);
-    }
+    devLogger.log("Failed to fetch news on server:", error);
+
     return {
       data: [],
       page: 1,
@@ -42,15 +49,18 @@ export async function getNews(
  */
 export async function getNewsById(id: string): Promise<NewsApi | null> {
   try {
-    return await fetchApi<NewsApi>(API_ROUTES.NEWS, {
+    const locale = (await getLocale()) as "ka" | "en";
+    return await fetchApi<NewsApi>(API_ROUTES.NEWS_PUBLIC, {
       id,
-      revalidate: 60, // ISR revalidation every 60 seconds
+      revalidate: 60 * 60 * 24, // 1 day
+      tags: [...CACHE_TAGS.news.all],
+      headers: {
+        "x-custom-lang": locale,
+      },
     });
   } catch (error) {
     // In production, consider logging to a monitoring service
-    if (process.env.NODE_ENV === "development") {
-      console.error(`Failed to fetch news by ID (${id}) on server:`, error);
-    }
+    devLogger.log(`Failed to fetch news by ID (${id}) on server:`, error);
     return null;
   }
 }
@@ -64,9 +74,8 @@ export async function getLatestNews(limit: number = 6): Promise<NewsApi[]> {
     return response.data;
   } catch (error) {
     // In production, consider logging to a monitoring service
-    if (process.env.NODE_ENV === "development") {
-      console.error("Failed to fetch latest news on server:", error);
-    }
+    devLogger.log("Failed to fetch latest news on server:", error);
+
     return [];
   }
 }

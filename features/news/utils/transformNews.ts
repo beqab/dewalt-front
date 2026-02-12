@@ -10,7 +10,7 @@ export function transformNewsApiToNews(
   apiNews: NewsApi,
   locale: "ka" | "en" = "ka"
 ): News {
-  const title = apiNews.title[locale] || apiNews.title.ka || "";
+  const title = apiNews.title || "";
 
   return {
     _id: apiNews._id,
@@ -18,7 +18,7 @@ export function transformNewsApiToNews(
     image: apiNews.imageUrl,
     name: title,
     date: formatNewsDate(apiNews.createdAt, locale),
-    description: apiNews.summary[locale] || apiNews.summary.ka || "",
-    fullContent: apiNews.content[locale] || apiNews.content.ka || "",
+    description: apiNews.summary || "",
+    fullContent: apiNews.content || "",
   };
 }

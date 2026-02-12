@@ -1,14 +1,9 @@
-export interface LocalizedText {
-  ka: string;
-  en: string;
-}
-
 export interface NewsApi {
   _id: string;
   imageUrl: string;
-  title: LocalizedText;
-  summary: LocalizedText;
-  content: LocalizedText;
+  title: string;
+  summary: string;
+  content: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -20,4 +15,3 @@ export interface PaginatedNewsResponse {
   total: number;
   totalPages: number;
 }
-

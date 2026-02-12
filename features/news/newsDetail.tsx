@@ -24,16 +24,15 @@ export async function generateMetadata({
     return { title: "News not found" };
   }
   const newsApi = await getNewsById(id);
-  const locale = (await getLocale()) as "ka" | "en";
   if (!newsApi) {
     return { title: "News not found" };
   }
   return {
-    title: newsApi.title[locale],
-    description: newsApi.summary[locale],
+    title: newsApi.title,
+    description: newsApi.summary,
     openGraph: {
-      title: newsApi.title[locale],
-      description: newsApi.summary[locale],
+      title: newsApi.title,
+      description: newsApi.summary,
       images: [newsApi.imageUrl],
     },
   };

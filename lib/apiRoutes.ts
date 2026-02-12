@@ -16,6 +16,7 @@ export const API_ROUTES = {
 
   // News
   NEWS: "/news",
+  NEWS_PUBLIC: "/news/public",
 
   // Ads
   ADS: "/ads",
