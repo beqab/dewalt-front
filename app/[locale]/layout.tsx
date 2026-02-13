@@ -4,7 +4,7 @@ import localfont from "next/font/local";
 
 import "./globals.css";
 
-import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/header";
@@ -21,6 +21,7 @@ import { Suspense } from "react";
 import LanguageInterceptor from "@/components/providers/LanguageInterceptor";
 import { getMenuBrands } from "@/features/categories/server/getMenuBrands";
 import { getBrands } from "@/features/categories/server/getBrands";
+import { AppIntlProvider } from "./providers";
 
 type Props = {
   children: React.ReactNode;
@@ -113,14 +114,15 @@ export default async function RootLayout({ children, params }: Props) {
     getBrands(locale),
   ]);
 
-  const messages = (await import(`@/messages/${locale}.json`)).default;
+  const messages = (await import(`@/messages/${locale}.json`))
+    .default as unknown as Parameters<typeof AppIntlProvider>[0]["messages"];
 
   return (
     <html lang={locale}>
       <body
         className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <AppIntlProvider locale={locale} messages={messages}>
           <LanguageInterceptor />
           <QueryProvider>
             <SessionProvider>
@@ -144,7 +146,7 @@ export default async function RootLayout({ children, params }: Props) {
               </AuthProvider>
             </SessionProvider>
           </QueryProvider>
-        </NextIntlClientProvider>
+        </AppIntlProvider>
       </body>
     </html>
   );

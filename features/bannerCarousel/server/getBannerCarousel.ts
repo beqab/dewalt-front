@@ -12,11 +12,16 @@ import { CACHE_TAGS } from "@/lib/cacheTags";
  * Fetches banner carousel data
  * Next.js automatically deduplicates identical fetch requests
  */
-export async function getBannerCarousel(): Promise<BannerCarouselResponse> {
+export async function getBannerCarousel(
+  locale: "ka" | "en"
+): Promise<BannerCarouselResponse> {
   try {
     return await fetchApi<BannerCarouselResponse>(API_ROUTES.BANNER_SLIDER, {
       revalidate: 60 * 60 * 24 * 2, // ISR revalidation every 7 days (60 sec * 60 min * 24 hr * 7 days)
       tags: [...CACHE_TAGS.bannerCarousel.all],
+      headers: {
+        "x-custom-lang": locale,
+      },
     });
   } catch (error) {
     console.error("Failed to fetch banner carousel on server:", error);

@@ -1,4 +1,5 @@
 "use client";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { useCompareContext } from "../compareContext";
 import { useTranslations } from "next-intl";

@@ -9,15 +9,15 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { BannerCarouselResponse } from "../types";
-import { useGetLocale } from "@/lib/utils/useGetLocale";
 import { isExternalUrl } from "@/lib/utils/isExternalUrl";
 
 export default function BannerCarousel({
   bannerCarouselResponse,
+  locale,
 }: {
+  locale: "ka" | "en";
   bannerCarouselResponse: BannerCarouselResponse;
 }) {
-  const locale = useGetLocale();
   const t = useTranslations();
   const [failedImages, setFailedImages] = useState<Set<string>>(
     () => new Set()
