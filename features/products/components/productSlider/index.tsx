@@ -2,46 +2,15 @@ import Carousel from "@/components/carousel";
 import ProductCard from "../../ui/productCard";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
-import { getProducts } from "../../server/getProducts";
-import { getBrands } from "@/features/categories/server/getBrands";
 import { getLocale, getTranslations } from "next-intl/server";
+import { getHomepageBrandSliders } from "../../server/getHomepageBrandSliders";
 
 export default async function ProductSlider() {
   const locale = (await getLocale()) as "ka" | "en";
   const t = await getTranslations();
 
-  // Fetch brands (first 3)
-  const brands = await getBrands(locale).catch(() => []);
-  const firstThreeBrands = brands.slice(0, 3);
-
-  if (firstThreeBrands.length === 0) {
-    return null;
-  }
-
-  // Fetch products for each brand using Promise.all
-  const brandProductsList = await Promise.all(
-    firstThreeBrands.map(async (brand) => {
-      try {
-        const response = await getProducts(1, 10, {
-          brandId: brand._id,
-          language: locale,
-        });
-        return {
-          brand,
-          products: response.data,
-        };
-      } catch {
-        return {
-          brand,
-          products: [] as Awaited<ReturnType<typeof getProducts>>["data"],
-        };
-      }
-    })
-  );
-
-  // Filter out brands with no products
-  const brandsWithProducts = brandProductsList.filter(
-    ({ products }) => products.length > 0
+  const brandsWithProducts = await getHomepageBrandSliders(locale).catch(
+    () => []
   );
 
   if (brandsWithProducts.length === 0) {

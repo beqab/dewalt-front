@@ -7,6 +7,7 @@ import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
 import { PaginatedProductsResponse } from "../types/api";
 import { Product } from "../types";
+import { CACHE_TAGS } from "@/lib/cacheTags";
 
 /**
  * Fetches paginated products
@@ -52,11 +53,14 @@ export async function getProducts(
       params.maxPrice = filters.maxPrice.toString();
     if (filters?.search) params.search = filters.search;
     if (filters?.sort) params.sort = filters.sort;
-    if (filters?.language) params.language = filters.language;
 
     return await fetchApi<PaginatedProductsResponse>(API_ROUTES.PRODUCTS, {
       params,
       revalidate: 60, // ISR revalidation every 60 seconds
+      tags: [...CACHE_TAGS.products.all],
+      headers: {
+        "x-custom-lang": filters?.language || "ka",
+      },
     });
   } catch (error) {
     if (process.env.NODE_ENV === "development") {

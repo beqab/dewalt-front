@@ -19,4 +19,7 @@ export const CACHE_TAGS = {
   news: {
     all: ["news"] as const,
   },
+  products: {
+    all: ["products"] as const,
+  },
 } as const;
