@@ -8,6 +8,7 @@ import { API_ROUTES } from "@/lib/apiRoutes";
 import { PaginatedProductsResponse } from "../types/api";
 import { Product } from "../types";
 import { CACHE_TAGS } from "@/lib/cacheTags";
+import { devLogger } from "@/lib/devLogger";
 
 /**
  * Fetches paginated products
@@ -56,16 +57,15 @@ export async function getProducts(
 
     return await fetchApi<PaginatedProductsResponse>(API_ROUTES.PRODUCTS, {
       params,
-      revalidate: 60, // ISR revalidation every 60 seconds
+      revalidate: 60 * 60 * 24 * 2, // 2 days
       tags: [...CACHE_TAGS.products.all],
       headers: {
         "x-custom-lang": filters?.language || "ka",
       },
     });
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.error("Failed to fetch products on server:", error);
-    }
+    devLogger.log("Failed to fetch products on server:", error);
+
     return {
       data: [],
       page: 1,
@@ -101,9 +101,8 @@ export async function getProductById(
       }
     }
 
-    if (process.env.NODE_ENV === "development") {
-      console.error(`Failed to fetch product by ID (${id}) on server:`, error);
-    }
+    devLogger.log(`Failed to fetch product by ID (${id}) on server:`, error);
+
     return null;
   }
 }

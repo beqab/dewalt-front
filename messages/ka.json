@@ -179,7 +179,9 @@
   "filters": {
     "priceFilter": "ფასით გაფილტვრა",
     "manufacturers": "მწარმოებლები",
-    "search": "ძებნა"
+    "search": "ძებნა",
+    "filter": "ფილტრი",
+    "apply": "გამოყენება"
   },
   "terms": {
     "termsAndConditions": "წესები და პირობები",

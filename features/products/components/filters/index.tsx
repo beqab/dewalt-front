@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import PriceRange from "@/components/ui/priceRange";
 import type { BrandApi } from "@/features/categories/server/getBrands";
 import { useTranslations } from "next-intl";
 import BrandFilter from "./brandFilter";
+import { useDebounce } from "@/hooks/useDebounce";
 
 interface FiltersProps {
   children?: React.ReactNode;
@@ -40,19 +41,24 @@ export default function Filters({
     isNaN(initialMaxPrice) ? 20000 : initialMaxPrice,
   ]);
 
+  const debouncedPriceRange = useDebounce(priceRange, 250);
+
   const handlePriceChange = (values: [number, number]) => {
     // Optimistic update - update UI immediately
     setPriceRange(values);
+  };
 
-    // Update URL in background (non-blocking)
+  // Debounced URL update to avoid spamming route changes while dragging.
+  useEffect(() => {
     startTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
-      params.set("minPrice", values[0].toString());
-      params.set("maxPrice", values[1].toString());
+      params.set("minPrice", debouncedPriceRange[0].toString());
+      params.set("maxPrice", debouncedPriceRange[1].toString());
       params.delete("page"); // Reset to page 1 when filter changes
       router.replace(`?${params.toString()}`, { scroll: false });
     });
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedPriceRange[0], debouncedPriceRange[1]]);
 
   return (
     <div className="w-full shrink-0 md:w-56">

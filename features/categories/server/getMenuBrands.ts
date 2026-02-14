@@ -11,6 +11,7 @@ import { fetchApi } from "@/lib/apiClient.server";
 import { API_ROUTES } from "@/lib/apiRoutes";
 import type { MenuBrand } from "@/features/categories/types";
 import { CACHE_TAGS } from "@/lib/cacheTags";
+import { devLogger } from "@/lib/devLogger";
 
 export async function getMenuBrands(lang: "ka" | "en"): Promise<MenuBrand[]> {
   try {
@@ -23,10 +24,8 @@ export async function getMenuBrands(lang: "ka" | "en"): Promise<MenuBrand[]> {
       tags: [...CACHE_TAGS.menu.all],
     });
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      // Keep dev-only logging (matches other server fetchers style)
-      console.error("Failed to fetch menu brands on server:", error);
-    }
+    devLogger.log("Failed to fetch menu brands on server:", error);
+
     return [];
   }
 }

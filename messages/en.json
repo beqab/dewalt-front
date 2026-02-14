@@ -179,7 +179,9 @@
   "filters": {
     "priceFilter": "Filter by Price",
     "manufacturers": "Manufacturers",
-    "search": "Search"
+    "search": "Search",
+    "filter": "Filter",
+    "apply": "Apply"
   },
   "terms": {
     "termsAndConditions": "Terms and Conditions",

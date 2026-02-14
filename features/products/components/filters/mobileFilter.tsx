@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 import FilterIcon from "@/components/icons/filterIcon";
 import CloseIcon from "@/components/icons/closeIcon";
@@ -24,6 +25,7 @@ export default function MobileFilter({
   brands,
   initialFilters,
 }: MobileFilterProps) {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => {
@@ -40,7 +42,7 @@ export default function MobileFilter({
   return (
     <div className="relative z-20 md:hidden">
       <Button variant="dark" className="mb-4 w-full gap-2" onClick={handleOpen}>
-        <FilterIcon /> <span>ფილტრი</span>
+        <FilterIcon /> <span>{t("filters.filter")}</span>
       </Button>
       {/* Animated mobile drawer */}
       <div
@@ -70,7 +72,7 @@ export default function MobileFilter({
               onClick={handleClose}
               className="w-full gap-2 transition-transform duration-200 ease-out hover:-translate-y-px"
             >
-              <SearchIcon /> <span>ძებნა</span>
+              <SearchIcon /> <span>{t("filters.apply")}</span>
             </Button>
           </div>
         </div>
