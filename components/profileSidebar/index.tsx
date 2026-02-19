@@ -34,7 +34,7 @@ export default function ProfileSidebar({ onItemClick }: ProfileSidebarProps) {
     {
       icon: <BucketIcon className="h-5 w-5" />,
       label: t("profile.sidebar.orders"),
-      href: "/orders",
+      href: "/profile/orders",
     },
     {
       icon: <LogoutIcon className="h-5 w-5" />,

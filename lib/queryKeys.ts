@@ -26,6 +26,8 @@ const QUERY_KEYS = {
   },
   ORDERS: {
     STATUS: (orderId: string) => ["orders", "status", orderId] as const,
+    MY: (page: number, limit: number, status?: string) =>
+      ["orders", "my", page, limit, status ?? "all"] as const,
   },
 } as const;
 

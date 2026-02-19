@@ -5,6 +5,7 @@ import type {
   CreatePaymentResponse,
   OrderResponse,
   OrderStatusResponse,
+  PaginatedOrdersResponse,
 } from "../types";
 
 const ordersClient = createApiClient<OrderResponse>(API_ROUTES.ORDERS);
@@ -20,4 +21,13 @@ export const ordersService = {
     ),
   checkStatus: (orderId: string) =>
     ordersClient.get<OrderStatusResponse>({ orderId }, "status"),
+  getMyOrders: (params?: { page?: number; limit?: number; status?: string }) =>
+    ordersClient.get<PaginatedOrdersResponse>(
+      {
+        page: params?.page ?? 1,
+        limit: params?.limit ?? 10,
+        status: params?.status,
+      },
+      "my"
+    ),
 };

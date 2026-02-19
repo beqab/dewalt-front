@@ -1,12 +1,11 @@
-"use client";
-
-import { useTranslations } from "next-intl";
 import ProfileSidebar from "@/components/profileSidebar";
 import MobileProfileMenu from "@/components/profileSidebar/mobileProfileMenu";
 
-export default function OrdersPage() {
-  const t = useTranslations();
-
+export default async function ProfileLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className="min-h-screen py-10">
       <div className="customContainer">
@@ -22,10 +21,7 @@ export default function OrdersPage() {
               {/* Mobile Profile Menu */}
               <MobileProfileMenu />
 
-              <h1 className="mb-8 text-2xl font-bold">{t("orders.title")}</h1>
-              <div className="rounded-lg border bg-white p-6 shadow-sm">
-                <p className="text-gray-600">{t("orders.empty")}</p>
-              </div>
+              {children}
             </div>
           </main>
         </div>

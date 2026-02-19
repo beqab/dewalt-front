@@ -91,16 +91,22 @@
     "paid": "Paid",
     "pending": "Pending",
     "failed": "Failed",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
     "successTitle": "Payment successful",
     "successMessage": "Your payment has been confirmed. We are preparing your order.",
     "detailsTitle": "Order details",
+    "orderCode": "Order code",
     "orderId": "Order ID",
+    "orderDate": "Order date",
     "total": "Total",
     "subtotal": "Subtotal",
+    "delivery": "Delivery",
     "deliveryPrice": "Delivery price",
     "customer": "Customer",
     "phone": "Phone",
     "address": "Address",
+    "notAvailable": "N/A",
     "deliveryType": {
       "tbilisi": "Delivery in Tbilisi",
       "region": "Delivery in Region"
@@ -330,6 +336,7 @@
     "name": "Name",
     "surname": "Surname",
     "email": "Email",
+    "phone": "Phone",
     "currentPassword": "Current Password",
     "newPassword": "New Password",
     "confirmPassword": "Confirm Password",
@@ -349,7 +356,25 @@
   },
   "orders": {
     "title": "My Orders",
-    "empty": "No orders yet. Your orders will appear here."
+    "empty": "No orders yet. Your orders will appear here.",
+    "orderCode": "Order ID",
+    "loading": "Loading orders...",
+    "error": "Failed to load orders. Please try again.",
+    "orderPrice": "Subtotal",
+    "deliveryPrice": "Delivery price",
+    "deliveryType": {
+      "label": "Delivery",
+      "tbilisi": "Delivery in Tbilisi",
+      "region": "Delivery in Region"
+    },
+    "address": "Address",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "total": "Total",
+    "hideDetails": "Hide Details",
+    "viewDetails": "View Details"
   },
   "news": {
     "title": "News",
