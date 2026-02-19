@@ -114,6 +114,8 @@
     "productCode": "Product Code",
     "category": "Category",
     "delivery": "Delivery",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock",
     "warranty": "Warranty",
     "quantity": "Quantity"
   },

@@ -26,4 +26,6 @@ export interface Product {
   specs: ProductSpec[];
   createdAt?: string;
   updatedAt?: string;
+  finaId?: number;
+  finaCode?: string;
 }

@@ -113,6 +113,8 @@
     "brand": "ბრენდი",
     "productCode": "პროდუქტის კოდი",
     "category": "კატეგორია",
+    "inStock": "მარაგშია",
+    "outOfStock": "მარაგში არ არის",
     "delivery": "მიწოდება",
     "warranty": "გარანტია",
     "quantity": "რაოდენობა"

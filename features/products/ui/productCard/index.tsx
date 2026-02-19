@@ -38,11 +38,11 @@ export default function ProductCard({
     >
       <div className="border-line-color relative flex h-full flex-col rounded-lg border bg-white p-3 shadow-sm transition-shadow hover:shadow-md md:p-4">
         {/* Discount Badge */}
-        {discount && (
+        {discount ? (
           <div className="bg-discount-BG text-discount-text absolute top-2 left-2 z-10 rounded px-1 py-2 text-xs font-normal">
             {discount}%
           </div>
-        )}
+        ) : null}
 
         {/* Compare Checkbox */}
         <div className="absolute top-[150px] right-4 z-10">
@@ -76,7 +76,7 @@ export default function ProductCard({
           >
             {name} {code}
           </Link>
-          <p className="text-text-secondary mb-4 text-xs">{description}</p>
+          <p className="text-text-secondary mb-1 text-xs">{description}</p>
 
           {/* Price */}
           <div

@@ -12,7 +12,7 @@ export const brandsInfo: Record<string, BrandInfo> = {
   DeWalt: {
     name: "DeWalt",
     slug: "dewalt",
-    logo: "/imgs/dewalt.png",
+    logo: "/imgs/dwalt.png",
     description:
       "DEWALT, established in 1924 by Raymond DeWalt, has been a trusted name among professionals for a century. The brand's journey began with the invention of the adjustable radial arm saw, known as the 'Wonder-Worker,' which revolutionized jobsite productivity.",
     history:

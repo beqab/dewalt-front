@@ -11,8 +11,18 @@ import ProductRating from "../productRating";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const t = useTranslations();
-  const { name, price, code, _id, rating, reviewCount, brandId, categoryId } =
-    product;
+  const {
+    name,
+    price,
+    code,
+    _id,
+    rating,
+    reviewCount,
+    brandId,
+    categoryId,
+    finaCode,
+    quantity,
+  } = product;
 
   return (
     <div className="m-auto w-full max-w-[410px] space-y-4 md:m-0 md:max-w-none">
@@ -48,7 +58,7 @@ export default function ProductInfo({ product }: { product: Product }) {
           <span className="text-text-secondary text-sm">
             {t("product.productCode")}:{" "}
           </span>
-          {code}
+          {finaCode || code}
         </div>
         <div className="text-dark-secondary-100 text-sm">
           <span className="text-text-secondary text-sm">
@@ -63,12 +73,17 @@ export default function ProductInfo({ product }: { product: Product }) {
 
       {/* Additional Information */}
       <div className="border-line-color flex flex-wrap gap-2 space-y-3 border-t pt-4 md:gap-4">
-        <div className="bg-background-secondary flex h-8 items-center gap-2 rounded p-2">
-          <StockIcon />
-          <span className="text-dark-secondary-100 text-sm">
-            {t("product.delivery")}
-          </span>
-        </div>
+        {quantity > 0 ? (
+          <div className="flex h-8 items-center gap-2 rounded bg-[#E1EFE1] p-2 text-[#539653]">
+            <StockIcon />
+            <span className="text-sm">{t("product.inStock")}</span>
+          </div>
+        ) : (
+          <div className="flex h-8 items-center gap-2 rounded bg-[#f1d5ce] p-2 text-[#ce1d26]">
+            <StockIcon />
+            <span className="text-sm">{t("product.outOfStock")}</span>
+          </div>
+        )}
         <div className="bg-background-secondary flex h-8 items-center gap-2 rounded p-2">
           <ShieldIcon />
           <span className="text-dark-secondary-100 text-sm">

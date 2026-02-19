@@ -7,7 +7,7 @@ const brandsData = [
   {
     name: "Dewalt",
     slug: "dewalt",
-    src: "/imgs/dewalt.png",
+    src: "/imgs/dwalt.png",
     description:
       "შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს",
     bg: "bg-primary",
@@ -16,7 +16,7 @@ const brandsData = [
   {
     name: "Stanley",
     slug: "stanley",
-    src: "/imgs/stanley.png",
+    src: "/imgs/stanley@2x 1.png",
     description:
       "შემთხვევითად გენერირებული ტექსტი ეხმარება დიზაინერებს და ტიპოგრაფიული ნაწარმის შემქმნელებს",
   },
@@ -48,12 +48,9 @@ export default function Brands() {
               <Image
                 src={brand.src}
                 alt={brand.name}
-                width={100}
-                height={46}
-                className={classNames("m-auto h-10 w-auto", {
-                  "brightness-100 grayscale invert filter":
-                    brand.name === "Dewalt",
-                })}
+                width={400}
+                height={184}
+                className={classNames("m-auto h-10 w-auto")}
               />
             </div>
 
