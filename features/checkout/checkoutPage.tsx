@@ -44,10 +44,14 @@ export default function CheckoutPage() {
   const validationSchema = Yup.object({
     name: Yup.string().trim().required(t("checkout.validation.name")),
     surname: Yup.string().trim().required(t("checkout.validation.surname")),
+    email: Yup.string().trim().optional(),
     personalId: Yup.string()
       .matches(/^\d{11}$/, t("checkout.personalIdHint"))
       .required(t("checkout.validation.personalId")),
-    phone: Yup.string().trim().required(t("checkout.validation.phone")),
+    phone: Yup.string()
+      .trim()
+      .matches(/^\d{9,}$/, t("checkout.validation.phoneInvalid"))
+      .required(t("checkout.validation.phone")),
     address: Yup.string().trim().required(t("checkout.validation.address")),
     deliveryType: Yup.mixed<DeliveryType>()
       .oneOf(["tbilisi", "region"])
@@ -97,6 +101,7 @@ export default function CheckoutPage() {
             initialValues={{
               name: "",
               surname: "",
+              email: "",
               personalId: "",
               phone: "",
               address: "",
@@ -115,6 +120,7 @@ export default function CheckoutPage() {
                 const createdOrder = await ordersService.create({
                   name: values.name.trim(),
                   surname: values.surname.trim(),
+                  email: values.email.trim(),
                   personalId: values.personalId.trim(),
                   phone: values.phone.trim(),
                   address: values.address.trim(),
@@ -138,7 +144,7 @@ export default function CheckoutPage() {
                   throw new Error("Missing payment URL");
                 }
                 if (typeof window !== "undefined") {
-                  window.location.assign(paymentUrl);
+                  window.location.assign(paymentUrl as string);
                 }
               } catch {
                 setPaymentError(t("checkout.paymentError"));
@@ -177,6 +183,12 @@ export default function CheckoutPage() {
                         required
                       />
                       <FormField
+                        name="email"
+                        label={t("checkout.email")}
+                        placeholder={t("checkout.emailPlaceholder")}
+                        inputMode="email"
+                      />
+                      <FormField
                         name="personalId"
                         label={t("checkout.personalId")}
                         placeholder={t("checkout.personalIdPlaceholder")}
@@ -190,6 +202,7 @@ export default function CheckoutPage() {
                         label={t("checkout.phone")}
                         placeholder={t("checkout.phonePlaceholder")}
                         inputMode="tel"
+                        transform={(value) => value.replace(/\D/g, "")}
                         required
                       />
                     </div>

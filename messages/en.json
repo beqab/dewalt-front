@@ -53,11 +53,13 @@
     "subtitle": "Fill in your details to finish the purchase.",
     "name": "Name",
     "surname": "Surname",
+    "email": "Email (optional)",
     "personalId": "Personal ID (11 digits)",
     "phone": "Phone number",
     "address": "Address details",
     "namePlaceholder": "Enter your name",
     "surnamePlaceholder": "Enter your surname",
+    "emailPlaceholder": "Enter your email",
     "personalIdPlaceholder": "11-digit ID",
     "personalIdHint": "ID must be exactly 11 digits",
     "phonePlaceholder": "Enter your phone number",
@@ -79,8 +81,11 @@
     "validation": {
       "name": "Name is required",
       "surname": "Surname is required",
+      "email": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
       "personalId": "Personal ID is required",
       "phone": "Phone number is required",
+      "phoneInvalid": "Phone number must be at least 9 digits",
       "address": "Address is required"
     }
   },

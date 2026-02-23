@@ -8,6 +8,7 @@ export interface CreateOrderItemPayload {
 export interface CreateOrderPayload {
   name: string;
   surname: string;
+  email: string;
   personalId: string;
   phone: string;
   address: string;
@@ -21,6 +22,7 @@ export interface OrderDetails {
   uuid: string;
   name: string;
   surname: string;
+  email: string;
   personalId: string;
   phone: string;
   address: string;
