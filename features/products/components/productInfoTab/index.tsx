@@ -4,7 +4,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useTranslations } from "next-intl";
 import { Product } from "../../types";
-import { FacebookComments2 as FacebookComments } from "@/components/facebook/FacebookComments";
+import FacebookComments from "@/components/facebook/FacebookComments";
 import { useGetLocale } from "@/lib/utils/useGetLocale";
 
 export default function ProductInfoTab({
