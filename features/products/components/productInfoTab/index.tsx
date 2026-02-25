@@ -4,7 +4,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useTranslations } from "next-intl";
 import { Product } from "../../types";
-import FacebookComments from "@/components/facebook/FacebookComments";
+import { FacebookComments2 as FacebookComments } from "@/components/facebook/FacebookComments";
 import { useGetLocale } from "@/lib/utils/useGetLocale";
 
 export default function ProductInfoTab({
@@ -82,7 +82,7 @@ export default function ProductInfoTab({
             key={productUrl}
             className="bg-background rounded-lg p-4 md:min-h-[160px]"
           >
-            <FacebookComments href={productUrl} locale={locale} />
+            <FacebookComments href={productUrl} />
           </div>
         );
       default:

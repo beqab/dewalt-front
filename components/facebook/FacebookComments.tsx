@@ -149,3 +149,28 @@ export default function FacebookComments({
     </>
   );
 }
+
+export function FacebookComments2({ href }: { href: string }) {
+  useEffect(() => {
+    if (window.FB) {
+      window.FB.XFBML.parse(
+        document.getElementById("facebook-comments") as HTMLElement
+      );
+    }
+  }, []);
+
+  return (
+    <>
+      <Script
+        src={`https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v21.0&appId=${process.env.NEXT_PUBLIC_FACEBOOK_APP_ID}`}
+        strategy="afterInteractive"
+      />
+      <div
+        className="fb-comments"
+        data-href={href}
+        data-width="100%"
+        data-numposts="10"
+      />
+    </>
+  );
+}
