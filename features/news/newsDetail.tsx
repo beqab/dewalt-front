@@ -9,49 +9,6 @@ import { transformNewsApiToNews } from "./utils/transformNews";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import Loading from "@/components/ui/loading";
-import { Metadata } from "next";
-import { extractIdFromSlug } from "../../lib/utils/extractIdFromSlug";
-
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
-  const { slug } = params;
-
-  const id = extractIdFromSlug(slug);
-  if (!id) {
-    return { title: "News not found" };
-  }
-  const newsApi = await getNewsById(id);
-
-  if (!newsApi) {
-    return { title: "News not found" };
-  }
-  return {
-    title: newsApi.title,
-    description: newsApi.summary,
-    openGraph: {
-      title: newsApi.title,
-      type: "article",
-      description: newsApi.summary.substring(0, 160),
-      images: [
-        {
-          url: newsApi.imageUrl,
-          width: 1200,
-          height: 630,
-          alt: newsApi.title,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: newsApi.title,
-      description: newsApi.summary.substring(0, 160),
-      images: [newsApi.imageUrl],
-    },
-  };
-}
 
 export default async function NewsDetail({ id }: { id: string }) {
   const t = await getTranslations();
