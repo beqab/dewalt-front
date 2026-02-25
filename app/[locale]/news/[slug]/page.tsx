@@ -13,7 +13,7 @@ export default async function Page({
   const { slug } = await params;
 
   // Extract ID from hybrid slug
-  const id = extractIdFromSlug(slug);
+  const id = await extractIdFromSlug(slug);
 
   if (!id) {
     notFound();
@@ -33,7 +33,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
 
-  const id = extractIdFromSlug(slug);
+  const id = await extractIdFromSlug(slug);
   if (!id) {
     return { title: "News not found" };
   }
