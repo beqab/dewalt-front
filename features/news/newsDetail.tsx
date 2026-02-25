@@ -15,11 +15,11 @@ import { extractIdFromSlug } from "../../lib/utils/extractIdFromSlug";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
 
-  const id = await extractIdFromSlug(slug);
+  const id = extractIdFromSlug(slug);
   if (!id) {
     return { title: "News not found" };
   }
@@ -70,7 +70,7 @@ export default async function NewsDetail({ id }: { id: string }) {
     { label: t("breadcrumb.news"), href: "/news" },
     { label: news.name },
   ];
-
+  console.log(newsApi, "news from newsDetail");
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
