@@ -8,9 +8,11 @@ import AddToCart from "../../cart/components/addToCart";
 import { CompareButton } from "../../compare/components/compareButton";
 import { Product } from "../../types";
 import ProductRating from "../productRating";
+import { useGetLocale } from "@/lib/utils/useGetLocale";
 
 export default function ProductInfo({ product }: { product: Product }) {
   const t = useTranslations();
+  const locale = useGetLocale();
   const {
     name,
     price,
@@ -22,6 +24,7 @@ export default function ProductInfo({ product }: { product: Product }) {
     categoryId,
     finaCode,
     quantity,
+    slug,
   } = product;
 
   return (
@@ -90,7 +93,7 @@ export default function ProductInfo({ product }: { product: Product }) {
             {t("product.warranty")}
           </span>
         </div>
-        <ShareButton />
+        <ShareButton url={`/${locale}/products/${slug}-${_id}`} />
       </div>
     </div>
   );

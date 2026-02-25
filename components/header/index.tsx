@@ -7,6 +7,7 @@ import CartPreview from "@/features/products/cart/components/cartPreview";
 import MobileMenuToggle from "./mobileMenuToggle";
 import { MenuBrand } from "@/features/categories/types";
 import ProfileLink from "./profileLink";
+import logo from "@/public/logo.png";
 
 export default async function Header({
   menuBrands,
@@ -18,10 +19,8 @@ export default async function Header({
       <div className="customContainer flex items-center justify-between px-5 py-4">
         <Link href="/" prefetch={true}>
           <Image
-            src="/logo.png"
+            src={logo}
             alt="Logo"
-            width={132}
-            height={32}
             quality={100}
             className="h-6 w-auto md:h-8"
           />
