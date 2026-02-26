@@ -187,7 +187,8 @@
     "noSpecs": "No specifications available",
     "commentsComingSoon": "Comments section coming soon",
     "noProductsFound": "No products found matching your criteria",
-    "viewAllProducts": "View All Products"
+    "viewAllProducts": "View All Products",
+    "specs": "Specs"
   },
   "filters": {
     "priceFilter": "Filter by Price",

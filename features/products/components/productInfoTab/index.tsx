@@ -4,7 +4,7 @@ import { useState } from "react";
 import classNames from "classnames";
 import { useTranslations } from "next-intl";
 import { Product } from "../../types";
-import FacebookComments from "@/components/facebook/FacebookComments";
+import HyvorTalk from "@/components/facebook/HyvorTalk";
 import { useGetLocale } from "@/lib/utils/useGetLocale";
 
 export default function ProductInfoTab({
@@ -17,6 +17,7 @@ export default function ProductInfoTab({
   const { specs, description } = product;
   const t = useTranslations("");
   const locale = useGetLocale() as "ka" | "en";
+  const hyvorLanguage = locale === "ka" ? "ka" : "en-us";
   const tabs = [
     {
       id: 1,
@@ -82,7 +83,7 @@ export default function ProductInfoTab({
             key={productUrl}
             className="bg-background rounded-lg p-4 md:min-h-[160px]"
           >
-            <FacebookComments href={productUrl} />
+            <HyvorTalk href={productUrl} pageLanguage={hyvorLanguage} />
           </div>
         );
       default:

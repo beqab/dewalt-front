@@ -3,6 +3,7 @@
 import type { CompareProductWithSpecs } from "../../types";
 import ClearAllProductsButton from "../clearAllProductsButton";
 import CompareProductCard from "../compareProductCard";
+import { useTranslations } from "next-intl";
 
 interface ProductSpecsProps {
   products: CompareProductWithSpecs[];
@@ -11,6 +12,7 @@ interface ProductSpecsProps {
 export default function ProductSpecsForDesktop({
   products,
 }: ProductSpecsProps) {
+  const t = useTranslations();
   return (
     <div className="w-full">
       {/* <h3 className="text-text-secondary mb-6 text-sm">დეტალები</h3> */}
@@ -27,7 +29,9 @@ export default function ProductSpecsForDesktop({
           {/* Label Column - პროდუქტი */}
           <div className="flex items-center justify-between bg-white p-4 pt-0">
             <div className="flex w-full flex-col items-center justify-center gap-6">
-              <div className="text-text-secondary text-sm">პროდუქტი</div>
+              <div className="text-text-secondary text-sm">
+                {t("products.products")}
+              </div>
               <div>
                 <ClearAllProductsButton />
               </div>
@@ -54,7 +58,9 @@ export default function ProductSpecsForDesktop({
 
           {/* Label Column - სპეციფიკაციები */}
           <div className="flex w-full justify-center bg-white p-4">
-            <div className="text-text-secondary text-sm">დეტალები</div>
+            <div className="text-text-secondary text-sm">
+              {t("products.specs")}
+            </div>
           </div>
           {/* Always render 3 spec columns */}
           {Array.from({ length: 3 }).map((_, index) => {

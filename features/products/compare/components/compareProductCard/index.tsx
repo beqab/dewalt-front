@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
-import { BucketIcon } from "@/components/icons/bucketIcon";
-import { Button } from "@/components/ui/button";
 import type { CompareProductWithSpecs } from "../../types";
 
 import DeleteProductByIdButton from "../deleteProductByIdButton";
 import { generateSlug } from "@/lib/utils/slugify";
+import { AddSingleItemToCart } from "@/features/products/cart/components/addToCart";
 
 interface CompareProductCardProps {
   product: CompareProductWithSpecs;
@@ -59,10 +58,7 @@ export default function CompareProductCard({
           </div>
 
           {/* Add to Cart Button */}
-          <Button variant="default" className="h-10 w-full" size="sm">
-            <BucketIcon className="text-dark-secondary-100" />
-            <span>კალათაში</span>
-          </Button>
+          <AddSingleItemToCart product={product} size="sm" />
         </div>
       </div>
     </div>

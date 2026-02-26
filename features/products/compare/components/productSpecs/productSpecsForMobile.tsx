@@ -1,18 +1,23 @@
+"use client";
 import { CompareProductWithSpecs } from "../../types";
 
 import CompareProductCard from "../compareProductCard";
 import ClearAllProductsButton from "../clearAllProductsButton";
+import { useTranslations } from "next-intl";
 
 export default function ProductSpecsForMobile({
   products,
 }: {
   products: CompareProductWithSpecs[];
 }) {
+  const t = useTranslations();
   return (
     <div className="w-full">
       <div className="mb-4 overflow-visible">
         <div className="flex items-center justify-between">
-          <div className="text-text-secondary text-sm">პროდუქტი</div>
+          <div className="text-text-secondary text-sm">
+            {t("products.products")}
+          </div>
 
           <div>
             {/* <Button variant="outline" className="border text-sm">
@@ -32,7 +37,7 @@ export default function ProductSpecsForMobile({
             ))}
           </div>
           <div className="text-text-secondary py-6 text-sm md:hidden">
-            დეტალები
+            {t("products.specs")}
           </div>
           <div className="flex">
             {products.map((product) => (
