@@ -92,11 +92,11 @@ export default function ProductCard({
               })}
             >
               <span className="text-dark-secondary-100">{price} GEL</span>
-              {originalPrice && (
+              {originalPrice ? (
                 <span className="text-text-secondary text-xs line-through">
                   {product.originalPrice} GEL
                 </span>
-              )}
+              ) : null}
             </div>
 
             {/* Add to Cart Button */}

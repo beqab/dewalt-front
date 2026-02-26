@@ -12,7 +12,7 @@ import { useGetProductsByIds } from "./hooks/useGetProductsByIds";
 
 export default function ProductComparisonPage() {
   const t = useTranslations();
-  const { productIds } = useCompareContext();
+  const { productIds, clearAllProducts } = useCompareContext();
   const { products, isLoading, isError, error } =
     useGetProductsByIds(productIds);
 
@@ -23,7 +23,7 @@ export default function ProductComparisonPage() {
 
   useEffect(() => {
     if (isError) {
-      localStorage.removeItem("compareProductIds");
+      clearAllProducts();
     }
   }, [isError, error]);
   // Show loading if:
@@ -44,7 +44,11 @@ export default function ProductComparisonPage() {
   }, [isLoading, productIds, products.length]);
 
   if (isError) {
-    return <div>Error: {error?.message || "Something went wrong"}</div>;
+    return (
+      <div className="text-text-secondary min-h-[60vh] py-10 text-center text-sm">
+        Error: {error?.message || "Something went wrong"}
+      </div>
+    );
   }
   return (
     <div>

@@ -87,12 +87,18 @@ export default function CompareProductProvider({
     );
   }
 
+  function clearAllProducts() {
+    localStorage.removeItem("compareProductIds");
+    setProductIds(null);
+  }
+
   return (
     <CompareContext
       value={{
         productIds,
         setProductIds: handleProductId,
         deleteProductId: handleDeleteProductId,
+        clearAllProducts,
       }}
     >
       {children}

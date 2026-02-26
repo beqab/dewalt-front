@@ -5,12 +5,14 @@ interface CompareContextType {
   productIds: string[] | null;
   setProductIds: (productIds: string) => void;
   deleteProductId: (productId: string) => void;
+  clearAllProducts: () => void;
 }
 
 export const CompareContext = createContext<CompareContextType>({
   productIds: null,
   setProductIds: () => {},
   deleteProductId: () => {},
+  clearAllProducts: () => {},
 });
 
 export function useCompareContext() {
