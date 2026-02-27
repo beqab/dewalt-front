@@ -32,15 +32,20 @@ export default function PaymentStatusPage() {
   }
 
   const hasError = isError || !orderId || !data?.status;
-  const isPaid = data?.status === "paid";
-  const isFailed = data?.status === "failed";
-  const isPending = data?.status === "pending";
+  const status = data?.status ?? "";
+  const isPaid = status === "paid";
+  const isFailed = status === "failed";
+  const isPending = status === "pending";
 
-  const displayStatusLabel = isPaid
-    ? t("paymentStatus.paid")
-    : isFailed
-      ? t("paymentStatus.failed")
-      : t("paymentStatus.pending");
+  const statusLabels: Record<string, string> = {
+    paid: t("paymentStatus.paid"),
+    shipped: t("paymentStatus.shipped"),
+    delivered: t("paymentStatus.delivered"),
+    failed: t("paymentStatus.failed"),
+    pending: t("paymentStatus.pending"),
+  };
+
+  const displayStatusLabel = statusLabels[status] || t("paymentStatus.pending");
 
   const statusStyles = isPaid
     ? {
