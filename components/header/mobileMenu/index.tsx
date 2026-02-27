@@ -58,6 +58,9 @@ export default function MobileMenu({
           </LanguageSelector>
           <Link
             href={profileLink}
+            onNavigate={() => {
+              onClose();
+            }}
             className="bg-primary text-dark-secondary-100 hover:bg-primary/90 flex h-12 flex-1 items-center justify-center gap-2.5 rounded-sm px-4 py-2 transition-colors"
           >
             <ProfileIcon className="" />

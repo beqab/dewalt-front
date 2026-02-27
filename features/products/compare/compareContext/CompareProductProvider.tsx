@@ -89,7 +89,7 @@ export default function CompareProductProvider({
 
   function clearAllProducts() {
     localStorage.removeItem("compareProductIds");
-    setProductIds(null);
+    setProductIds([]);
   }
 
   return (

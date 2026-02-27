@@ -13,6 +13,7 @@ import { useGetProductsByIds } from "./hooks/useGetProductsByIds";
 export default function ProductComparisonPage() {
   const t = useTranslations();
   const { productIds, clearAllProducts } = useCompareContext();
+
   const { products, isLoading, isError, error } =
     useGetProductsByIds(productIds);
 

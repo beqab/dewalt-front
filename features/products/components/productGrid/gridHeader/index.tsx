@@ -38,7 +38,7 @@ export default function GridHeader({
           id="sort"
           value={sortBy}
           onChange={handleSortBy}
-          className="text-dark-secondary-100 focus:ring-primary rounded border border-transparent bg-white px-3 text-sm focus:ring-2 focus:outline-none"
+          className="text-dark-secondary-100 focus:ring-primary border-line-transparent h-8 max-w-[150px] rounded rounded-b-sm border border-transparent bg-white px-3 text-sm focus:ring-2 focus:outline-none"
         >
           <option value="">{t("products.sortBy")}</option>
           <option value="price-desc">{t("products.priceDesc")}</option>

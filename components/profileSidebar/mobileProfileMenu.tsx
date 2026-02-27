@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import ProfileSidebar from ".";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
+import MenuIcon from "../icons/menuIcon";
 
 export default function MobileProfileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ export default function MobileProfileMenu() {
   return (
     <div className="relative z-20 md:hidden">
       <Button variant="dark" className="mb-4 w-full gap-2" onClick={handleOpen}>
-        <ProfileIcon /> <span>{t("profile.sidebar.profile")}</span>
+        <MenuIcon /> <span>{t("profile.sidebar.profile")}</span>
       </Button>
 
       {/* Animated mobile drawer */}
