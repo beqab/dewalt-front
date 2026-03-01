@@ -8,12 +8,15 @@ import { Link } from "@/i18n/navigation";
 import useGetOrderStatus from "./hooks/useGetOrderStatus";
 import moment from "moment";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
+import { useCartContext } from "@/features/products/cart/cartContext";
 
 export default function PaymentStatusPage() {
   const t = useTranslations();
   const session = useSession();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId") || "";
+  const { removeItem } = useCartContext();
 
   const { data, isLoading, isError } = useGetOrderStatus(orderId);
   const order = data?.order;
@@ -21,6 +24,15 @@ export default function PaymentStatusPage() {
     { label: t("breadcrumb.home"), href: "/" },
     { label: t("paymentStatus.title") },
   ];
+
+  // remove items from cart if order is paid
+  useEffect(() => {
+    if (order?.items && data?.status === "paid") {
+      order?.items.forEach((item) => {
+        removeItem(item.productId);
+      });
+    }
+  }, [order, data?.status]);
 
   if (isLoading) {
     return (
@@ -80,6 +92,7 @@ export default function PaymentStatusPage() {
           <>
             {(isPending || isFailed) && (
               <p className="text-text-secondary mt-3">
+                items
                 {t("paymentStatus.description")}
               </p>
             )}

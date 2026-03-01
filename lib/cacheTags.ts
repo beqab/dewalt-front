@@ -10,6 +10,9 @@ export const CACHE_TAGS = {
   menu: {
     all: ["menu"] as const,
   },
+  settings: {
+    all: ["settings"] as const,
+  },
   bannerCarousel: {
     all: ["banner-carousel"] as const,
   },

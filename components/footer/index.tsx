@@ -8,11 +8,25 @@ import FbIcon from "../icons/fbIcon";
 import MastercardLogo from "@/public/mastercard.png";
 import VisaLogo from "@/public/visa.png";
 import { BrandApi } from "@/features/categories/server/getBrands";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
+import { getSettings } from "@/features/settings/server/getSettings";
 
 export default async function Footer({ brands }: { brands: BrandApi[] }) {
-  const t = await getTranslations();
+  const localePromise = getLocale();
+  const settingsPromise = getSettings();
+
+  const locale = (await localePromise) as "ka" | "en";
+  const t = await getTranslations({ locale });
+  const settings = await settingsPromise;
+
   const year = new Date().getFullYear();
+
+  const phone1 = settings?.contactPhone?.trim() || "+995 577 95 55 82";
+  // const phone2 = settings?.contactPhone2?.trim();
+  const email = settings?.contactEmail?.trim() || "ksanisale@dewalt.com";
+  const facebook = settings?.contactFacebook?.trim() || "https://facebook.com";
+  const address =
+    settings?.contactAddress?.[locale]?.trim() || t("footer.address");
 
   return (
     <footer className="bg-dark-secondary-100 text-neutral">
@@ -100,31 +114,42 @@ export default async function Footer({ brands }: { brands: BrandApi[] }) {
               <li className="flex items-center gap-2">
                 <PhoneIcon />
                 <a
-                  href="tel:+995577955582"
+                  href={`tel:${phone1.replace(/\s+/g, "")}`}
                   className="text-neutral hover:text-primary text-xs transition-colors"
                 >
-                  +995 577 95 55 82
+                  {phone1}
                 </a>
               </li>
+              {/* {phone2 ? (
+                <li className="flex items-center gap-2">
+                  <PhoneIcon />
+                  <a
+                    href={`tel:${phone2.replace(/\s+/g, "")}`}
+                    className="text-neutral hover:text-primary text-xs transition-colors"
+                  >
+                    {phone2}
+                  </a>
+                </li>
+              ) : null} */}
               <li className="flex items-center gap-2">
                 <EnvelopIcon className="text-primary" />
                 <a
-                  href="mailto:ksanisale@dewalt.com"
+                  href={`mailto:${email}`}
                   className="text-neutral hover:text-primary text-xs transition-colors"
                 >
-                  ksanisale@dewalt.com
+                  {email}
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <LocationIcon />
                 <address className="text-neutral hover:text-primary text-xs not-italic transition-colors">
-                  {t("footer.address")}
+                  {address}
                 </address>
               </li>
               <li className="flex items-center gap-2">
                 <FbIcon />
                 <a
-                  href="https://facebook.com"
+                  href={facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-neutral hover:text-primary text-xs transition-colors"

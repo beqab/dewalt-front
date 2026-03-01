@@ -33,7 +33,6 @@ export interface OrderDetails {
   status: "pending" | "failed" | "paid" | "shipped" | "delivered";
   createdAt: string; // ISO 8601 date string
   updatedAt: string; // ISO 8601 date string
-  __v: number;
 }
 
 export interface OrderResponse {
@@ -51,9 +50,12 @@ export interface CreatePaymentResponse {
   checkout_url?: OrderDetails;
 }
 
+export interface OrderDetailsWithItems extends OrderDetails {
+  items: { productId: string; quantity: number }[];
+}
 export interface OrderStatusResponse {
   status: "pending" | "failed" | "paid" | "shipped" | "delivered";
-  order: OrderDetails;
+  order: OrderDetailsWithItems;
 }
 
 export type LocalizedText = {

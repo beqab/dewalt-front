@@ -11,6 +11,9 @@ export const API_ROUTES = {
   AUTH_CHANGE_PASSWORD: "/auth/change-password",
   AUTH_VERIFY_EMAIL: "/auth/verify-email",
 
+  // Settings
+  SETTINGS: "/settings",
+
   // Banner Slider
   BANNER_SLIDER: "/banner-slider",
 

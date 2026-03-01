@@ -7,13 +7,28 @@ import FbIcon from "@/components/icons/fbIcon";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import { useTranslations } from "next-intl";
 
-export default function ContactPage() {
+type ContactInfo = {
+  phone1: string;
+  phone2?: string | null;
+  email: string;
+  facebookUrl: string;
+  address: string;
+};
+
+export default function ContactPage({ contact }: { contact: ContactInfo }) {
   const t = useTranslations();
 
   const breadcrumbItems = [
     { label: t("breadcrumb.home"), href: "/" },
     { label: t("breadcrumb.contact") },
   ];
+
+  const phone1 = contact.phone1?.trim();
+  const phone2 = contact.phone2?.trim();
+  const email = contact.email?.trim();
+  const facebookUrl = contact.facebookUrl?.trim();
+  const address = contact.address?.trim();
+
   return (
     <div>
       <Breadcrumb items={breadcrumbItems} />
@@ -42,7 +57,7 @@ export default function ContactPage() {
               {t("contact.address")}
             </h3>
             <p className="text-dark-secondary-70 text-sm leading-relaxed">
-              ქსნის ქუჩა 36 თბილისი 0141
+              {address}
             </p>
           </div>
 
@@ -55,11 +70,19 @@ export default function ContactPage() {
               {t("contact.phone")}
             </h3>
             <a
-              href="tel:+995577955582"
+              href={`tel:${phone1.replace(/\s+/g, "")}`}
               className="text-dark-secondary-70 hover:text-primary text-sm transition-colors"
             >
-              +995 577 95 55 82
+              {phone1}
             </a>
+            {phone2 ? (
+              <a
+                href={`tel:${phone2.replace(/\s+/g, "")}`}
+                className="text-dark-secondary-70 hover:text-primary mt-2 block text-sm transition-colors"
+              >
+                {phone2}
+              </a>
+            ) : null}
           </div>
 
           {/* Email Card */}
@@ -73,10 +96,10 @@ export default function ContactPage() {
               {t("contact.email")}
             </h3>
             <a
-              href="mailto:ksanisale@dewaltgeorgia.com"
+              href={`mailto:${email}`}
               className="text-dark-secondary-70 hover:text-primary text-sm break-all transition-colors"
             >
-              ksanisale@dewaltgeorgia.com
+              {email}
             </a>
           </div>
         </div>
@@ -88,7 +111,7 @@ export default function ContactPage() {
           </h2>
           <div className="flex justify-center">
             <a
-              href="https://facebook.com"
+              href={facebookUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group bg-background hover:border-primary flex items-center gap-3 rounded-lg border border-gray-200 px-6 py-4 transition-all hover:shadow-lg"
@@ -120,7 +143,7 @@ export default function ContactPage() {
             ></iframe>
           </div>
           <p className="text-dark-secondary-70 mt-4 text-center text-sm">
-            ქსნის ქუჩა 36, თბილისი 0141, საქართველო
+            {address}
           </p>
         </div>
       </div>
