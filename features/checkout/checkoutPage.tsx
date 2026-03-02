@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Breadcrumb from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import FormField from "@/components/formField";
@@ -10,22 +10,48 @@ import { useCartContext } from "@/features/products/cart/cartContext";
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import Loading from "@/components/ui/loading";
-import { ordersService } from "@/features/orders/services/ordersService";
 import { useSession } from "next-auth/react";
+import OrderSummary from "./components/orderSummary";
+import OrderDeliveryOptions from "./components/orderDeliveryOptions";
+import { getAvailableDeliveryTypes } from "./utils/delivery";
+import { useCreateOrderPayment } from "@/features/orders/hooks/useCreateOrderPayment";
 
 type DeliveryType = "tbilisi" | "region";
 
-const DELIVERY_PRICES: Record<DeliveryType, number> = {
-  tbilisi: 5,
-  region: 15,
+export type DeliveryInformation = {
+  tbilisi: {
+    price: number;
+    freeOver: number;
+    freeEnabled?: boolean;
+  };
+  region: {
+    price: number;
+    freeOver: number;
+    freeEnabled?: boolean;
+  };
 };
 
-export default function CheckoutPage() {
+export default function CheckoutPage({
+  deliveryInformation,
+}: {
+  deliveryInformation?: DeliveryInformation | null;
+}) {
   const t = useTranslations();
   const { getSelectedItems, isLoading } = useCartContext();
   const selectedItems = getSelectedItems();
   const { data: session } = useSession();
-  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const { startPayment, error: paymentError } = useCreateOrderPayment({
+    fallbackErrorMessage: t("checkout.paymentError"),
+  });
+
+  const availableDeliveryTypes = useMemo(
+    () => getAvailableDeliveryTypes(deliveryInformation),
+    [deliveryInformation]
+  );
+
+  const hasDeliveryOptions = availableDeliveryTypes.length > 0;
+  const defaultDeliveryType: DeliveryType =
+    availableDeliveryTypes[0] ?? "tbilisi";
 
   const subtotal = useMemo(
     () =>
@@ -41,6 +67,26 @@ export default function CheckoutPage() {
     [selectedItems]
   );
 
+  const getDeliveryPrice = (type: DeliveryType) => {
+    if (!selectedItems.length) return 0;
+    const info = deliveryInformation?.[type];
+    const price = info?.price ?? 0;
+    if (typeof price !== "number" || price <= 0) return 0;
+
+    const freeOver = info?.freeOver;
+    const freeEnabled = info?.freeEnabled ?? true;
+    if (
+      freeEnabled &&
+      typeof freeOver === "number" &&
+      freeOver > 0 &&
+      subtotal >= freeOver
+    ) {
+      return 0;
+    }
+
+    return price;
+  };
+
   const validationSchema = Yup.object({
     name: Yup.string().trim().required(t("checkout.validation.name")),
     surname: Yup.string().trim().required(t("checkout.validation.surname")),
@@ -53,9 +99,9 @@ export default function CheckoutPage() {
       .matches(/^\d{9,}$/, t("checkout.validation.phoneInvalid"))
       .required(t("checkout.validation.phone")),
     address: Yup.string().trim().required(t("checkout.validation.address")),
-    deliveryType: Yup.mixed<DeliveryType>()
-      .oneOf(["tbilisi", "region"])
-      .required(),
+    deliveryType: hasDeliveryOptions
+      ? Yup.mixed<DeliveryType>().oneOf(availableDeliveryTypes).required()
+      : Yup.mixed<DeliveryType>().optional(),
   });
 
   const breadcrumbItems = [
@@ -99,13 +145,13 @@ export default function CheckoutPage() {
         <div className="customContainer px-5 py-8 lg:px-0">
           <Formik
             initialValues={{
-              name: "",
-              surname: "",
-              email: "",
+              name: session?.user?.name ?? "",
+              surname: session?.user?.surname ?? "",
+              email: session?.user?.email ?? "",
               personalId: "",
               phone: "",
               address: "",
-              deliveryType: "tbilisi" as DeliveryType,
+              deliveryType: defaultDeliveryType as DeliveryType,
             }}
             validationSchema={validationSchema}
             validateOnMount
@@ -116,47 +162,41 @@ export default function CheckoutPage() {
               }
 
               try {
-                setPaymentError(null);
-                const createdOrder = await ordersService.create({
-                  name: values.name.trim(),
-                  surname: values.surname.trim(),
-                  email: values.email.trim(),
-                  personalId: values.personalId.trim(),
-                  phone: values.phone.trim(),
-                  address: values.address.trim(),
-                  deliveryType: values.deliveryType,
-                  items: selectedItems.map((item) => ({
-                    productId: item.product._id,
-                    quantity: item.quantity,
-                  })),
-                  userId: session?.user?._id,
-                });
-                const payment = await ordersService.createPayment(
-                  createdOrder._id
+                const effectiveDeliveryType = hasDeliveryOptions
+                  ? values.deliveryType
+                  : defaultDeliveryType;
+
+                await startPayment(
+                  {
+                    name: values.name.trim(),
+                    surname: values.surname.trim(),
+                    email: values.email.trim(),
+                    personalId: values.personalId.trim(),
+                    phone: values.phone.trim(),
+                    address: values.address.trim(),
+                    deliveryType: effectiveDeliveryType,
+                    items: selectedItems.map((item) => ({
+                      productId: item.product._id,
+                      quantity: item.quantity,
+                    })),
+                    userId: session?.user?._id,
+                  },
+                  { redirect: true }
                 );
-                const paymentUrl =
-                  payment.response?.checkout_url ||
-                  payment.checkout_url ||
-                  payment.response?.url ||
-                  payment.url ||
-                  "";
-                if (!paymentUrl) {
-                  throw new Error("Missing payment URL");
-                }
-                if (typeof window !== "undefined") {
-                  window.location.assign(paymentUrl as string);
-                }
               } catch {
-                setPaymentError(t("checkout.paymentError"));
+                // Error message is handled by the mutation hook
               } finally {
                 setSubmitting(false);
               }
             }}
           >
             {({ values, handleChange, isValid, isSubmitting }) => {
-              const deliveryPrice = selectedItems.length
-                ? DELIVERY_PRICES[values.deliveryType]
-                : 0;
+              const effectiveDeliveryType =
+                hasDeliveryOptions &&
+                availableDeliveryTypes.includes(values.deliveryType)
+                  ? values.deliveryType
+                  : defaultDeliveryType;
+              const deliveryPrice = getDeliveryPrice(effectiveDeliveryType);
               const totalPrice = subtotal + deliveryPrice;
 
               return (
@@ -218,43 +258,13 @@ export default function CheckoutPage() {
                       />
                     </div>
 
-                    <div className="mt-6">
-                      <p className="text-dark-secondary-100 mb-3 text-sm font-semibold">
-                        {t("checkout.deliveryTitle")}
-                      </p>
-                      <div className="space-y-3">
-                        <label className="flex cursor-pointer items-center justify-between rounded-lg border border-gray-200 px-3 py-2 text-sm">
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="deliveryType"
-                              value="tbilisi"
-                              checked={values.deliveryType === "tbilisi"}
-                              onChange={handleChange}
-                            />
-                            <span>{t("checkout.deliveryTbilisi")}</span>
-                          </div>
-                          <span className="text-text-secondary">
-                            +{DELIVERY_PRICES.tbilisi} GEL
-                          </span>
-                        </label>
-                        <label className="flex cursor-pointer items-center justify-between rounded-lg border border-gray-200 px-3 py-2 text-sm">
-                          <div className="flex items-center gap-2">
-                            <input
-                              type="radio"
-                              name="deliveryType"
-                              value="region"
-                              checked={values.deliveryType === "region"}
-                              onChange={handleChange}
-                            />
-                            <span>{t("checkout.deliveryRegion")}</span>
-                          </div>
-                          <span className="text-text-secondary">
-                            +{DELIVERY_PRICES.region} GEL
-                          </span>
-                        </label>
-                      </div>
-                    </div>
+                    <OrderDeliveryOptions
+                      deliveryInformation={deliveryInformation}
+                      subtotal={subtotal}
+                      value={effectiveDeliveryType}
+                      onChange={handleChange}
+                      availableDeliveryTypes={availableDeliveryTypes}
+                    />
 
                     {paymentError && (
                       <p className="mt-3 text-sm text-red-500">
@@ -275,47 +285,12 @@ export default function CheckoutPage() {
                     </Button>
                   </div>
 
-                  <div className="lg:sticky lg:top-4 lg:h-fit">
-                    <div className="border-line-color rounded-lg border bg-white p-4 md:p-6">
-                      <h3 className="text-dark-secondary-100 mb-4 text-sm">
-                        {t("checkout.summaryTitle")}
-                      </h3>
-                      <div className="space-y-2">
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-text-secondary">
-                            {t("checkout.itemsCount")}
-                          </span>
-                          <span className="text-dark-secondary-100">
-                            {totalItems}
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-text-secondary">
-                            {t("checkout.subtotal")}
-                          </span>
-                          <span className="text-dark-secondary-100">
-                            {subtotal.toLocaleString("ka-GE")} GEL
-                          </span>
-                        </div>
-                        <div className="flex items-center justify-between text-xs">
-                          <span className="text-text-secondary">
-                            {t("checkout.deliveryPrice")}
-                          </span>
-                          <span className="text-dark-secondary-100">
-                            {deliveryPrice.toLocaleString("ka-GE")} GEL
-                          </span>
-                        </div>
-                      </div>
-                      <div className="mt-4 flex items-center justify-between border-t border-gray-200 pt-4 text-sm font-semibold">
-                        <span className="text-dark-secondary-100">
-                          {t("checkout.total")}
-                        </span>
-                        <span className="text-dark-secondary-100">
-                          {totalPrice.toLocaleString("ka-GE")} GEL
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+                  <OrderSummary
+                    totalItems={totalItems}
+                    subtotal={subtotal}
+                    deliveryPrice={deliveryPrice}
+                    totalPrice={totalPrice}
+                  />
                 </Form>
               );
             }}

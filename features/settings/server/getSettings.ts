@@ -17,6 +17,11 @@ export interface SettingsApi {
   contactEmail?: string;
   contactFacebook?: string;
   contactAddress?: LocalizedText;
+  freeDeliveryEnabled: boolean;
+  deliveryRegionFreeOver: number;
+  deliveryRegionPrice: number;
+  deliveryTbilisiFreeOver: number;
+  deliveryTbilisiPrice: number;
 }
 
 export async function getSettings(): Promise<SettingsApi | null> {

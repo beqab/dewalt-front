@@ -49,6 +49,9 @@
     "totalPrice": "Total Price"
   },
   "checkout": {
+    "free": "Free",
+    "min": "Min",
+    "freeOver": "Free over",
     "title": "Complete your order",
     "subtitle": "Fill in your details to finish the purchase.",
     "name": "Name",

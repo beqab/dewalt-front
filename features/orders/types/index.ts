@@ -44,10 +44,8 @@ export interface OrderResponse {
 export interface CreatePaymentResponse {
   response?: {
     url?: string;
-    checkout_url?: string;
+    checkout_url: string;
   };
-  url?: string;
-  checkout_url?: OrderDetails;
 }
 
 export interface OrderDetailsWithItems extends OrderDetails {
