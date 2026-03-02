@@ -36,4 +36,7 @@ export const API_ROUTES = {
 
   // Orders
   ORDERS: "/orders",
+
+  // Fina (FINA proxy endpoints)
+  FINA: "/fina",
 };

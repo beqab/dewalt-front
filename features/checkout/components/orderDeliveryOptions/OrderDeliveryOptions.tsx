@@ -14,7 +14,6 @@ type Props = {
   name?: string;
   locale?: string;
   className?: string;
-
   availableDeliveryTypes: DeliveryType[];
 };
 
@@ -24,7 +23,6 @@ export default function OrderDeliveryOptions({
   value,
   onChange,
   name = "deliveryType",
-  locale = "ka-GE",
   className,
   availableDeliveryTypes,
 }: Props) {

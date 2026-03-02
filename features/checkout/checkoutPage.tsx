@@ -15,6 +15,8 @@ import OrderSummary from "./components/orderSummary";
 import OrderDeliveryOptions from "./components/orderDeliveryOptions";
 import { getAvailableDeliveryTypes } from "./utils/delivery";
 import { useCreateOrderPayment } from "@/features/orders/hooks/useCreateOrderPayment";
+import { useFinaProductsRestArray } from "@/features/fina/hooks/useFinaProductsRestArray";
+import { toast } from "sonner";
 
 type DeliveryType = "tbilisi" | "region";
 
@@ -43,6 +45,49 @@ export default function CheckoutPage({
   const { startPayment, error: paymentError } = useCreateOrderPayment({
     fallbackErrorMessage: t("checkout.paymentError"),
   });
+
+  const finaIdsToCheck = useMemo(
+    () =>
+      selectedItems
+        .map((item) => item.product.finaId)
+        .filter(
+          (id): id is number => typeof id === "number" && Number.isFinite(id)
+        ),
+    [selectedItems]
+  );
+
+  const {
+    data: finaRestMap,
+    isLoading: isFinaRestLoading,
+    isFetching: isFinaRestFetching,
+    isError: isFinaRestError,
+    refetch: refetchFinaRest,
+  } = useFinaProductsRestArray(finaIdsToCheck);
+
+  const insufficientItems = useMemo(() => {
+    return selectedItems
+      .map((item) => {
+        const finaId = item.product.finaId;
+        const available =
+          typeof finaId === "number" && finaRestMap
+            ? (finaRestMap[finaId] ?? 0)
+            : (item.product.quantity ?? 0);
+
+        return {
+          productId: item.product._id,
+          name: item.product.name,
+          requested: item.quantity,
+          available,
+        };
+      })
+      .filter((x) => x.requested > x.available);
+  }, [selectedItems, finaRestMap]);
+
+  const isStockCheckBlocking =
+    (finaIdsToCheck.length > 0 && (isFinaRestLoading || isFinaRestFetching)) ||
+    (finaIdsToCheck.length > 0 && isFinaRestError);
+
+  const canPlaceOrder = insufficientItems.length === 0 && !isStockCheckBlocking;
 
   const availableDeliveryTypes = useMemo(
     () => getAvailableDeliveryTypes(deliveryInformation),
@@ -166,6 +211,47 @@ export default function CheckoutPage({
                   ? values.deliveryType
                   : defaultDeliveryType;
 
+                // Verify the freshest stock before starting payment
+                let restMapToUse = finaRestMap ?? null;
+                if (finaIdsToCheck.length > 0) {
+                  const refreshed = await refetchFinaRest();
+                  if (!refreshed.data || refreshed.isError) {
+                    toast.error(t("checkout.stock.failed"));
+                    return;
+                  }
+                  restMapToUse = refreshed.data;
+                }
+
+                const latestInsufficient = selectedItems
+                  .map((item) => {
+                    const finaId = item.product.finaId;
+                    const available =
+                      typeof finaId === "number" && restMapToUse
+                        ? (restMapToUse[finaId] ?? 0)
+                        : (item.product.quantity ?? 0);
+
+                    return {
+                      name: item.product.name,
+                      requested: item.quantity,
+                      available,
+                    };
+                  })
+                  .filter((x) => x.requested > x.available);
+
+                if (latestInsufficient.length > 0) {
+                  latestInsufficient.forEach((item) => {
+                    toast.error(
+                      t("checkout.stock.insufficient", {
+                        name: item.name,
+                        requestedQuantity: item.requested,
+                        availableQuantity: item.available,
+                      })
+                    );
+                  });
+
+                  return;
+                }
+
                 await startPayment(
                   {
                     name: values.name.trim(),
@@ -214,13 +300,11 @@ export default function CheckoutPage({
                         name="name"
                         label={t("checkout.name")}
                         placeholder={t("checkout.namePlaceholder")}
-                        required
                       />
                       <FormField
                         name="surname"
                         label={t("checkout.surname")}
                         placeholder={t("checkout.surnamePlaceholder")}
-                        required
                       />
                       <FormField
                         name="email"
@@ -235,7 +319,6 @@ export default function CheckoutPage({
                         inputMode="numeric"
                         maxLength={11}
                         transform={(value) => value.replace(/\D/g, "")}
-                        required
                       />
                       <FormField
                         name="phone"
@@ -243,7 +326,6 @@ export default function CheckoutPage({
                         placeholder={t("checkout.phonePlaceholder")}
                         inputMode="tel"
                         transform={(value) => value.replace(/\D/g, "")}
-                        required
                       />
                     </div>
 
@@ -254,7 +336,6 @@ export default function CheckoutPage({
                         placeholder={t("checkout.addressPlaceholder")}
                         as="textarea"
                         rows={4}
-                        required
                       />
                     </div>
 
@@ -277,12 +358,30 @@ export default function CheckoutPage({
                       variant="default"
                       size="md"
                       className="bg-primary hover:bg-primary/90 text-dark-secondary-100 mt-6 w-full"
-                      disabled={!isValid || isSubmitting}
+                      disabled={isSubmitting || !isValid || !canPlaceOrder}
                     >
                       {isSubmitting
                         ? t("checkout.submitting")
                         : t("checkout.placeOrder")}
                     </Button>
+                    {!canPlaceOrder && (
+                      <div className="mt-3 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-600">
+                        {finaIdsToCheck.length > 0 &&
+                        (isFinaRestLoading || isFinaRestFetching)
+                          ? t("checkout.stock.checking")
+                          : isFinaRestError
+                            ? t("checkout.stock.failed")
+                            : insufficientItems.map((item) => (
+                                <div key={item.productId}>
+                                  {t("checkout.stock.insufficient", {
+                                    name: item.name,
+                                    requestedQuantity: item.requested,
+                                    availableQuantity: item.available,
+                                  })}
+                                </div>
+                              ))}
+                      </div>
+                    )}
                   </div>
 
                   <OrderSummary

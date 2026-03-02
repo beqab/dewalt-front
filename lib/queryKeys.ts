@@ -29,6 +29,10 @@ const QUERY_KEYS = {
     MY: (page: number, limit: number, status?: string) =>
       ["orders", "my", page, limit, status ?? "all"] as const,
   },
+  FINA: {
+    PRODUCTS_REST_ARRAY: (finaIds: number[]) =>
+      ["fina", "products", "rest-array", ...finaIds] as const,
+  },
 } as const;
 
 export default QUERY_KEYS;
