@@ -5,6 +5,7 @@ import Image from "next/image";
 import classNames from "classnames";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
+import { useLocale } from "next-intl";
 
 interface BrandPageProps {
   brandName: string;
@@ -12,6 +13,8 @@ interface BrandPageProps {
 }
 
 export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
+  const locale = useLocale();
+  const lang = locale === "ka" ? "ka" : "en";
   const brandInfo = brandsInfo[brandName];
 
   if (!brandInfo) {
@@ -19,7 +22,9 @@ export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
       <div className="min-h-screen py-20">
         <div className="customContainer">
           <div className="text-dark-secondary-100 text-center">
-            <p className="text-lg">ბრენდი ვერ მოიძებნა.</p>
+            <p className="text-lg">
+              {lang === "ka" ? "ბრენდი ვერ მოიძებნა." : "Brand not found."}
+            </p>
           </div>
         </div>
       </div>
@@ -31,15 +36,14 @@ export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
       <div className="customContainer">
         {/* Brand Header */}
         <div className="mb-10 flex flex-col items-center gap-6 md:mb-12">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center pt-8">
             <Image
               src={brandInfo.logo}
               alt={brandInfo.name}
               width={200}
               height={92}
               className={classNames("h-16 w-auto md:h-24", {
-                "brightness-100 grayscale invert filter":
-                  brandInfo.name === "DeWalt",
+                "brightness-100 grayscale": brandInfo.name === "DeWalt",
               })}
             />
           </div>
@@ -53,33 +57,33 @@ export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
           {/* Description */}
           <div className="space-y-4">
             <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-xl md:text-2xl">
-              ბრენდის შესახებ
+              {lang === "ka" ? "ბრენდის შესახებ" : "About the brand"}
             </h2>
             <p className="text-dark-secondary-100 leading-7 md:text-base">
-              {brandInfo.description}
+              {brandInfo.description[lang]}
             </p>
           </div>
 
           {/* History */}
           <div className="space-y-4">
             <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-xl md:text-2xl">
-              ისტორია
+              {lang === "ka" ? "ისტორია" : "History"}
             </h2>
             <p className="text-dark-secondary-100 leading-7 md:text-base">
-              {brandInfo.history}
+              {brandInfo.history[lang]}
             </p>
           </div>
 
           {/* Key Features */}
           <div className="space-y-4">
             <h2 className="font-bpg-web-002-caps text-dark-secondary-100 text-xl md:text-2xl">
-              ძირითადი მახასიათებლები
+              {lang === "ka" ? "ძირითადი მახასიათებლები" : "Key features"}
             </h2>
             <ul className="text-dark-secondary-100 space-y-2 md:text-base">
               {brandInfo.keyFeatures.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2">
                   <span className="text-primary mt-1.5">•</span>
-                  <span className="leading-7">{feature}</span>
+                  <span className="leading-7">{feature[lang]}</span>
                 </li>
               ))}
             </ul>
@@ -94,7 +98,9 @@ export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
               asChild
             >
               <Link href={`/products?brand=${brandSlug}`}>
-                იხილეთ {brandInfo.name} პროდუქტები
+                {lang === "ka"
+                  ? `იხილეთ ${brandInfo.name} პროდუქტები`
+                  : `View ${brandInfo.name} products`}
               </Link>
             </Button>
           </div>
@@ -108,7 +114,7 @@ export default function BrandPage({ brandName, brandSlug }: BrandPageProps) {
                 rel="noopener noreferrer"
                 className="text-primary text-sm hover:underline md:text-base"
               >
-                ოფიციალური ვებ-გვერდი →
+                {lang === "ka" ? "ოფიციალური ვებ-გვერდი →" : "Official website →"}
               </Link>
             </div>
           )}

@@ -10,14 +10,14 @@ export function CompareButton({ productId }: { productId: string }) {
   const isChecked = productIds?.includes(productId) ?? false;
 
   return (
-    <label className="text-dark-secondary-70 bg-line-color/70 flex cursor-pointer items-center gap-1 rounded p-2 text-xs">
+    <label className="text-dark-secondary-70 bg-line-color/80 flex cursor-pointer items-center gap-1 rounded p-2 text-xs">
       <Checkbox
         type="checkbox"
         checked={isChecked}
         onChange={() => setProductIds(productId)}
         className="text-primary focus:ring-primary h-4 w-4 rounded border-gray-300"
       />
-      <span>{t("breadcrumb.comparison")}</span>
+      <span className="border-gray-700">{t("breadcrumb.comparison")}</span>
     </label>
   );
 }

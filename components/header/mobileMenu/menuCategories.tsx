@@ -23,7 +23,7 @@ export default function MenuCategories({
       setSelectedSubCategory(null);
     } else {
       onchangeCategory(null);
-      onClose();
+      // onClose();
     }
   };
 

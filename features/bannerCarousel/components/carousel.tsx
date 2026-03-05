@@ -98,7 +98,7 @@ export default function BannerCarousel({
                     <div className="from-dark-secondary-100 to-dark-secondary-100/70 absolute inset-0 bg-linear-to-br" />
                   )}
                   {/* Overlay for better text readability */}
-                  <div className="from-dark-secondary-100/70 to-dark-secondary-100/30 absolute inset-0 bg-linear-to-br" />
+                  {/* <div className="from-dark-secondary-100/70 to-dark-secondary-100/30 absolute inset-0 bg-linear-to-br" /> */}
                 </div>
 
                 {/* Content Overlay */}

@@ -53,6 +53,7 @@
     "min": "Min",
     "freeOver": "Free over",
     "title": "Complete your order",
+    "freeOverDynamic": "Free delivery over {amount} GEL on order",
     "subtitle": "Fill in your details to finish the purchase.",
     "name": "Name",
     "surname": "Surname",

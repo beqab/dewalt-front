@@ -30,14 +30,14 @@ export default function NewsCard({ news, className }: NewsCardProps) {
 
         {/* News Info */}
         <div className="flex flex-1 flex-col">
-          <h3 className="text-dark-secondary-100 mb-2 min-h-12 text-sm md:mb-4 md:text-base">
+          <h3 className="text-dark-secondary-100 mb-2 line-clamp-2 min-h-10.5 text-sm md:mb-4 md:min-h-12 md:text-base">
             {name}
           </h3>
-          <div className="mb-4 flex items-center gap-2">
+          <div className="mb-2 flex items-center gap-2 md:mb-4">
             <DateIcon />
             <span className="text-text-secondary text-xs">{date}</span>
           </div>
-          <p className="text-text-secondary mb-4 line-clamp-3 min-h-[60px] flex-1 text-sm">
+          <p className="text-text-secondary mb-4 line-clamp-3 min-h-[45px] flex-1 text-xs md:min-h-[60px] md:text-sm">
             {description}
           </p>
         </div>

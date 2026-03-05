@@ -45,7 +45,7 @@ export default function ProductCard({
         ) : null}
 
         {/* Compare Checkbox */}
-        <div className="absolute top-[150px] right-4 z-10">
+        <div className="absolute top-[165px] right-4 z-10 md:top-[170px] md:right-5">
           <CompareButton productId={_id} />
         </div>
 
@@ -67,7 +67,7 @@ export default function ProductCard({
           <Link
             href={`/products/${generateSlug(name, _id)}`}
             className={cn(
-              "text-dark-secondary-100 hover:text-primary mb-2 [display:-webkit-box] h-12 overflow-hidden text-sm wrap-break-word text-ellipsis transition-colors [-webkit-box-orient:vertical] [-webkit-line-clamp:2] md:h-11.5 md:text-base",
+              "text-dark-secondary-100 hover:text-primary mb-2 [display:-webkit-box] h-10.5 overflow-hidden text-sm wrap-break-word text-ellipsis transition-colors [-webkit-box-orient:vertical] [-webkit-line-clamp:2] md:h-11.5 md:text-base",
               {
                 "md:h-9.5 md:text-sm md:font-bold": size === "sm",
               }
@@ -76,7 +76,9 @@ export default function ProductCard({
           >
             {name} {code}
           </Link>
-          <p className="text-text-secondary mb-1 text-xs">{description}</p>
+          <p className="text-text-secondary mb-1 line-clamp-2 text-xs md:mb-3 md:line-clamp-3">
+            {description}
+          </p>
 
           {/* Price */}
           <div
