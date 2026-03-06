@@ -19,7 +19,7 @@ export default function DropDownMenuBrands({
 
   const brandSlug = allCategories?.[activeMainCategory]?.slug;
   return (
-    <div className="bg-background-secondary w-1/3 border-r border-gray-200">
+    <div className="bg-background-secondary w-1/3 max-w-[156px] min-w-[156px] border-r border-gray-200">
       <ul className="py-2">
         {allCategories.map((category, categoryIndex) => (
           <MenuSubItem

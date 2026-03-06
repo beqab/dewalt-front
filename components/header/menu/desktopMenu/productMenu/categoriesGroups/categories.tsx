@@ -27,7 +27,7 @@ export default function DropDownMenuCategories({
   if (!categories || categories?.length === 0) return null;
 
   return (
-    <div className="bg-background-secondary w-1/2 border-r border-gray-200">
+    <div className="bg-background-secondary w-[220px] max-w-[220px] min-w-[220px] border-r border-gray-200">
       <ul className="py-2">
         {categories.map((category, categoryIndex) => {
           const hasSubCategories = category.subCategories.length > 0;

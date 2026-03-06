@@ -36,7 +36,7 @@ export default function DropDownMenuSubcategories({
             <Link
               href={`/products?childCategory=${subCategory.slug}&brand=${brandSlug}&category=${categorySlug}`}
               onNavigate={onClose}
-              className="block px-4 leading-8 hover:font-bold"
+              className="block px-4 pb-1 hover:font-bold"
             >
               <span className="text-sm text-[#1E1E1E]">{subCategory.name}</span>
             </Link>
