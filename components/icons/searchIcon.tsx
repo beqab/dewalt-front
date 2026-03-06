@@ -3,11 +3,14 @@ import { cn } from "@/lib/utils";
 
 export default function SearchIcon({
   className = " md:stroke-primary",
+  onClick,
 }: {
   className?: string;
+  onClick?: () => void;
 }) {
   return (
     <svg
+      onClick={onClick}
       width="16"
       height="16"
       viewBox="0 0 16 16"

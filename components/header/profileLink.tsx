@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import ProfileIcon from "../icons/profileIcon";
 import { useSession } from "next-auth/react";
 

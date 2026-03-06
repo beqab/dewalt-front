@@ -9,7 +9,7 @@ import { useRouter } from "@/i18n/navigation";
 import useGetMyOrders from "@/features/orders/hooks/useGetMyOrders";
 import type { OrderItemDetails, UserOrder } from "@/features/orders/types";
 import moment from "moment";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { generateSlug } from "@/lib/utils/slugify";
 import Pagination from "@/features/products/components/pagination";
 
