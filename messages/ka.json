@@ -46,7 +46,8 @@
     "insufficientStock": "არასაკმარისი მარაგი",
     "viewCart": "კალათაში გადასვლა",
     "emptyCart": "კალათა ცარიელია",
-    "totalPrice": "სულ"
+    "totalPrice": "სულ",
+    "outOfStock": "პროდუქტი მარაგში არ არის"
   },
   "checkout": {
     "free": "უფასო",

@@ -9,6 +9,7 @@ import { useCartContext } from "../../cartContext";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { generateSlug } from "@/lib/utils/slugify";
+import { toast } from "sonner";
 
 interface CartItemProps {
   item: CartItemType;
@@ -19,8 +20,14 @@ export default function CartItem({ item }: CartItemProps) {
   const { product, quantity, selected } = item;
   const { toggleSelect, updateQuantity, removeItem } = useCartContext();
 
-  const handleQuantityChange = (delta: number) => {
-    updateQuantity(product._id, quantity + delta);
+  const handleQuantityChange = (data: number) => {
+    if (!product.quantity || quantity + data > product.quantity) {
+      toast.warning(t("cart.outOfStock"), {
+        duration: 3000,
+      });
+      return;
+    }
+    updateQuantity(product._id, quantity + data);
   };
 
   const handleQuantityInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +93,7 @@ export default function CartItem({ item }: CartItemProps) {
         {/* Quantity and Delete */}
         <div className="flex items-center justify-between gap-4 md:w-full">
           {/* Quantity Selector */}
+
           <div className="border-line-color flex items-center rounded border">
             <button
               type="button"

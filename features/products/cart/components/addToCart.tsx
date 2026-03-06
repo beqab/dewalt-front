@@ -168,9 +168,17 @@ export const AddSingleItemToCart = ({
   size: "sm" | "md";
 }) => {
   const t = useTranslations();
-  const { addItem } = useCartContext();
-
+  const { addItem, items } = useCartContext();
+  const productInCart = items.find((item) => item.product._id === product._id);
+  const productInCartQuantity = productInCart?.quantity || 0;
   const handleClick = () => {
+    if (!product.quantity || productInCartQuantity >= product.quantity) {
+      toast.warning(t("cart.outOfStock"), {
+        duration: 3000,
+      });
+      return;
+    }
+
     addItem(product, 1);
     toast.success(t("cart.addedToCart"), {
       style: {

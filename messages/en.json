@@ -46,7 +46,8 @@
     "insufficientStock": "Insufficient stock available",
     "viewCart": "View Cart",
     "emptyCart": "Cart is empty",
-    "totalPrice": "Total Price"
+    "totalPrice": "Total Price",
+    "outOfStock": "Product is out of stock"
   },
   "checkout": {
     "free": "Free",
