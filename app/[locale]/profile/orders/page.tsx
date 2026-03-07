@@ -292,6 +292,7 @@ export default function OrdersPage() {
               currentPage={clampedPage}
               totalPages={totalPages}
               onPageChange={(nextPage) => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
                 if (isFetching) return;
                 setExpanded({});
                 setPage(Math.min(Math.max(1, nextPage), totalPages));
