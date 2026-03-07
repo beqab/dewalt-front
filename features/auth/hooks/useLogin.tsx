@@ -41,7 +41,8 @@ export const useLogin = () => {
         setError(null);
         toast.success(t("auth.login.success"));
         const callbackUrl = searchParams.get("callbackUrl") || "/";
-        router.push(callbackUrl);
+        const urlWithoutLocale = callbackUrl.replace(/^\/(en|ka)/, "");
+        router.push(urlWithoutLocale);
       }
     },
     onError: (error) => {
