@@ -26,8 +26,9 @@ export default function MobileMenu({
 }: MobileMenuProps) {
   const params = useParams();
   const currentLocale = (params?.locale as Locale) || routing.defaultLocale;
-  const { data: session } = useSession();
-  const profileLink = session ? "/profile" : "/login";
+  const { status } = useSession();
+  const isAuthenticated = status === "authenticated";
+  const profileLink = isAuthenticated ? "/profile" : "/login";
   const t = useTranslations();
 
   // Reactively lock body scroll when menu is open
@@ -65,7 +66,7 @@ export default function MobileMenu({
           >
             <ProfileIcon className="" />
             <span className="text-sm font-medium">
-              {session ? t("profile.title") : t("breadcrumb.login")}
+              {isAuthenticated ? t("profile.title") : t("breadcrumb.login")}
             </span>
           </Link>
         </div>

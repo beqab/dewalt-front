@@ -5,15 +5,16 @@ import ProfileIcon from "../icons/profileIcon";
 import { useSession } from "next-auth/react";
 
 export default function ProfileLink() {
-  const session = useSession();
-  if (session.status === "loading") {
+  const { status } = useSession();
+  const isAuthenticated = status === "authenticated";
+  if (status === "loading") {
     return (
       <div className="hidden md:block">
         <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />
       </div>
     );
   }
-  const profileLink = session ? "/profile" : "/login";
+  const profileLink = isAuthenticated ? "/profile" : "/login";
   return (
     <Link href={profileLink} className="hidden md:block">
       <ProfileIcon className="hidden cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 md:block" />

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -19,6 +19,7 @@ export const useLogin = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
+  const { update } = useSession();
 
   const mutation = useMutation({
     mutationFn: async ({ email, password }: LoginVars) => {
@@ -30,7 +31,7 @@ export const useLogin = () => {
 
       return result;
     },
-    onSuccess: (result) => {
+    onSuccess: async (result) => {
       if (result?.error) {
         setError(t("auth.login.invalidCredentials"));
         toast.error(t("auth.login.loginFailed"));
@@ -41,7 +42,13 @@ export const useLogin = () => {
         setError(null);
         toast.success(t("auth.login.success"));
 
-        router.push("/profile");
+        await update();
+        const callbackUrl = searchParams.get("callbackUrl");
+        const targetPath =
+          callbackUrl && callbackUrl.startsWith("/")
+            ? callbackUrl.replace(/^\/(en|ka)/, "")
+            : "/profile";
+        router.push(targetPath);
       }
     },
 
