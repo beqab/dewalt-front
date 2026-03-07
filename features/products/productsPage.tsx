@@ -68,6 +68,7 @@ export default async function ProductsPage({
   const productsPromise = getProducts(currentPage, itemsPerPage, filters);
   const menuBrands = await getMenuBrands(locale).catch(() => []);
 
+  console.log(filters, "filters");
   return (
     <div className="min-h-screen py-10">
       <div className="customContainer">

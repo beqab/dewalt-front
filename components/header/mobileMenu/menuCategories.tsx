@@ -18,12 +18,14 @@ export default function MenuCategories({
     null
   );
 
-  const handleClose = () => {
+  const handleClose = (isSubCategory?: boolean) => {
     if (selectedSubCategory !== null) {
       setSelectedSubCategory(null);
     } else {
+      if (isSubCategory) {
+        onClose();
+      }
       onchangeCategory(null);
-      // onClose();
     }
   };
 
@@ -44,7 +46,7 @@ export default function MenuCategories({
       <div className="bg-background mb-4 flex items-center gap-4 pl-5">
         <button
           className="flex cursor-pointer items-center gap-2 text-[12px] transition-opacity hover:opacity-70"
-          onClick={handleClose}
+          onClick={() => handleClose(false)}
         >
           <svg
             width="16"
@@ -86,7 +88,7 @@ export default function MenuCategories({
                 isActive={false}
                 slug={category.slug}
                 brandSlug={brandSlug || ""}
-                closeMenu={handleClose}
+                closeMenu={() => handleClose(true)}
               />
             ))}
           </ul>

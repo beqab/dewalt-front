@@ -25,7 +25,7 @@ async function ProductGridContent({
   }>;
 }) {
   const productsResponse = await productsPromise;
-
+  console.log(productsResponse, "productsResponse");
   return (
     <ProductGrid
       products={productsResponse.data}

@@ -84,6 +84,28 @@ export default function ActiveFilters({ menuData }: { menuData: MenuBrand[] }) {
       });
     }
 
+    // Brand filter (comma-separated)
+    const brandParam = searchParams.get("brand");
+    if (brandParam) {
+      const brandSlugs = Array.from(
+        new Set(
+          brandParam
+            .split(",")
+            .map((slug) => slug.trim())
+            .filter(Boolean)
+        )
+      );
+
+      for (const brandSlug of brandSlugs) {
+        const brand = menuData?.find((item) => item.slug === brandSlug);
+        filters.push({
+          key: "brand",
+          label: brand?.name || brandSlug,
+          value: brandSlug,
+        });
+      }
+    }
+
     // Search filter
     const search = searchParams.get("search");
     if (search) {
@@ -108,16 +130,31 @@ export default function ActiveFilters({ menuData }: { menuData: MenuBrand[] }) {
   }, [searchParams, menuData, t]);
 
   // Remove a specific filter
-  const removeFilter = (filterKey: string) => {
+  const removeFilter = (filter: { key: string; value: string }) => {
     startTransition(() => {
       const params = new URLSearchParams(searchParams.toString());
 
-      if (filterKey === "priceRange") {
+      if (filter.key === "priceRange") {
         // Remove both minPrice and maxPrice
         params.delete("minPrice");
         params.delete("maxPrice");
+      } else if (filter.key === "brand") {
+        const currentBrands = params.get("brand");
+        if (currentBrands) {
+          const remainingBrands = currentBrands
+            .split(",")
+            .map((slug) => slug.trim())
+            .filter(Boolean)
+            .filter((slug) => slug !== filter.value);
+
+          if (remainingBrands.length === 0) {
+            params.delete("brand");
+          } else {
+            params.set("brand", remainingBrands.join(","));
+          }
+        }
       } else {
-        params.delete(filterKey);
+        params.delete(filter.key);
       }
 
       params.delete("page"); // Reset to page 1 when filter changes
@@ -142,7 +179,7 @@ export default function ActiveFilters({ menuData }: { menuData: MenuBrand[] }) {
             <span>{filter.label}</span>
             <button
               type="button"
-              onClick={() => removeFilter(filter.key)}
+              onClick={() => removeFilter(filter)}
               className="text-text-secondary hover:text-dark-secondary-100 text-sm transition-colors"
               aria-label="Remove filter"
             >
