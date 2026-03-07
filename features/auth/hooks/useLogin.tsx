@@ -40,11 +40,11 @@ export const useLogin = () => {
       if (result?.ok) {
         setError(null);
         toast.success(t("auth.login.success"));
-        const callbackUrl = searchParams.get("callbackUrl") || "/";
-        const urlWithoutLocale = callbackUrl.replace(/^\/(en|ka)/, "");
-        router.push(urlWithoutLocale);
+
+        router.push("/profile");
       }
     },
+
     onError: (error) => {
       devLogger.error("Login error:", error);
       setError(t("auth.login.unexpectedError"));
