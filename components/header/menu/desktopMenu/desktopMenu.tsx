@@ -67,7 +67,10 @@ export default function DesktopMenu({
                   onToggle={() => handleBrandToggle(brandIndex)}
                   label={brand.name}
                 />
-                <ProductMenu.Panel isOpen={activeMainCategory === brandIndex}>
+                <ProductMenu.Panel
+                  width="narrow"
+                  isOpen={activeMainCategory === brandIndex}
+                >
                   <ProductMenu.Categories onClose={handleBrandClose} />
                   <ProductMenu.SubCategory onClose={() => handleBrandClose()} />
                 </ProductMenu.Panel>

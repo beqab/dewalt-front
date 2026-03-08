@@ -15,7 +15,7 @@ export default function CompareLinkButton() {
       asChild
       variant="default"
       size="sm"
-      className="fixed right-4 bottom-4 z-50 flex h-10 items-center gap-2"
+      className="fixed right-4 bottom-[78px] z-50 flex h-10 items-center gap-2"
     >
       <Link href="/compare">
         <CompareIcon />

@@ -31,7 +31,7 @@ export default function ProductMenuPanel({
   return (
     <div
       className={classNames(
-        "absolute top-full left-0 z-50 bg-neutral rounded-lg overflow-hidden shadow-lg mt-5",
+        "bg-neutral absolute top-full left-0 z-50 mt-5 overflow-hidden rounded-lg shadow-lg",
         widthClasses[width],
         {
           "-left-40 -translate-x-1/2": isAllCategoriesMode,
