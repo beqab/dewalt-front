@@ -96,7 +96,8 @@
       "personalId": "Personal ID is required",
       "phone": "Phone number is required",
       "phoneInvalid": "Phone number must be at least 9 digits",
-      "address": "Address is required"
+      "address": "Address is required",
+      "requiredFieldsToast": "Please fill in all required fields."
     }
   },
   "paymentStatus": {

@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 
 type ShareButtonProps = {
   className?: string;
@@ -15,17 +14,9 @@ type ShareButtonProps = {
 
 export default function ShareButton({ className, url }: ShareButtonProps) {
   const t = useTranslations();
-  const [popupBlocked, setPopupBlocked] = useState(false);
-
-  useEffect(() => {
-    if (!popupBlocked) return;
-    const timeout = window.setTimeout(() => setPopupBlocked(false), 5000);
-    return () => window.clearTimeout(timeout);
-  }, [popupBlocked]);
 
   const handleShare = () => {
     if (typeof window === "undefined") return;
-    setPopupBlocked(false);
 
     const resolvedUrl = (() => {
       const target = url?.trim();
@@ -43,19 +34,15 @@ export default function ShareButton({ className, url }: ShareButtonProps) {
       resolvedUrl
     )}`;
 
-    const w = window.open(
+    window.open(
       shareUrl,
       "_blank",
       "noopener,noreferrer,width=600,height=500"
     );
-
-    if (!w) {
-      setPopupBlocked(true);
-    }
   };
 
   return (
-    <div className="inline-flex flex-col items-start gap-1">
+    <div className="inline-flex">
       <button
         type="button"
         onClick={handleShare}
@@ -77,12 +64,6 @@ export default function ShareButton({ className, url }: ShareButtonProps) {
         </svg>
         <span>{t("common.share")}</span>
       </button>
-
-      {popupBlocked && (
-        <span className="text-xs text-red-600" aria-live="polite">
-          {t("common.popupBlocked")}
-        </span>
-      )}
     </div>
   );
 }

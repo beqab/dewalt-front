@@ -276,7 +276,7 @@ export default function CheckoutPage({
               }
             }}
           >
-            {({ values, handleChange, isValid, isSubmitting }) => {
+            {({ values, handleChange, isValid, isSubmitting, setTouched }) => {
               const effectiveDeliveryType =
                 hasDeliveryOptions &&
                 availableDeliveryTypes.includes(values.deliveryType)
@@ -358,7 +358,21 @@ export default function CheckoutPage({
                       variant="default"
                       size="md"
                       className="bg-primary hover:bg-primary/90 text-dark-secondary-100 mt-6 w-full"
-                      disabled={isSubmitting || !isValid || !canPlaceOrder}
+                      disabled={isSubmitting}
+                      onClick={() => {
+                        if (isValid) return;
+
+                        setTouched({
+                          name: true,
+                          surname: true,
+                          email: true,
+                          personalId: true,
+                          phone: true,
+                          address: true,
+                          deliveryType: true,
+                        });
+                        toast.error(t("checkout.validation.requiredFieldsToast"));
+                      }}
                     >
                       {isSubmitting
                         ? t("checkout.submitting")
