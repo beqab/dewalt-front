@@ -168,9 +168,15 @@ export default async function Footer({ brands }: { brands: BrandApi[] }) {
                 </li>
                 <li className="flex items-start gap-2">
                   <LocationIcon />
-                  <address className="text-neutral hover:text-primary text-xs not-italic transition-colors">
-                    {address}
-                  </address>
+
+                  <Link
+                    href={`https://www.google.com/maps/place/0141,+36+%E1%83%A5%E1%83%A1%E1%83%90%E1%83%9C%E1%83%98%E1%83%A1+%E1%83%A5%E1%83%A3%E1%83%A9%E1%83%90,+%E1%83%97%E1%83%91%E1%83%98%E1%83%9A%E1%83%98%E1%83%A1%E1%83%98+0141/@41.7676956,44.785405,670m/data=!3m1!1e3!4m5!3m4!1s0x40446d9acbb6af6b:0x8d4d0cf5743752fa!8m2!3d41.7681114!4d44.7853867?entry=ttu&g_ep=EgoyMDI2MDMxNy4wIKXMDSoASAFQAw%3D%3D`}
+                    target="_blank"
+                  >
+                    <address className="text-neutral hover:text-primary text-xs not-italic transition-colors">
+                      {address}
+                    </address>
+                  </Link>
                 </li>
                 <li className="flex items-center gap-2">
                   <FbIcon />

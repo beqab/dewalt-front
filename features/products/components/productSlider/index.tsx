@@ -38,7 +38,13 @@ export default async function ProductSlider() {
             >
               <Carousel>
                 {products.map((product: (typeof products)[0]) => {
-                  return <ProductCard key={product._id} product={product} />;
+                  return (
+                    <ProductCard
+                      size="sm"
+                      key={product._id}
+                      product={product}
+                    />
+                  );
                 })}
               </Carousel>
             </div>

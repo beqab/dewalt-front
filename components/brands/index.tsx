@@ -41,7 +41,7 @@ export default function Brands() {
           <Link
             key={index}
             href={`/brands/${brand.slug}`}
-            className="bg-primary flex cursor-pointer flex-col gap-8 rounded-lg p-12 shadow-md transition-transform hover:scale-105"
+            className="bg-wight flex cursor-pointer flex-col gap-8 rounded-lg border-2 border-solid border-black p-12 shadow-md transition-transform hover:scale-105"
           >
             {/* Brand Logo/Name */}
             <div className="border-dark-secondary-100">

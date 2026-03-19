@@ -1,4 +1,6 @@
-import MessengerIcon from "@/components/icons/messengerIcon";
+import FbIcon from "@/public/icons/fbmessenger.svg";
+
+import Image from "next/image";
 
 export default function MessengerButton({
   href,
@@ -15,9 +17,17 @@ export default function MessengerButton({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="bg-primary text-dark-secondary-100 focus-visible:outline-primary fixed right-6 bottom-6 z-50 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2"
+      className="fixed right-6 bottom-6 z-50 flex h-16 w-16 items-center justify-center rounded-full p-2 shadow-lg transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-offset-2"
     >
-      <MessengerIcon className="h-6 w-6" />
+      <span className="relative inline-flex items-center justify-center before:absolute before:h-[30px] before:w-[30px] before:rounded-full before:bg-[#fff] before:content-['']">
+        <Image
+          src={FbIcon}
+          alt="Messenger"
+          width={56}
+          height={56}
+          className="relative z-10"
+        />
+      </span>
       <span className="sr-only">{label}</span>
     </a>
   );

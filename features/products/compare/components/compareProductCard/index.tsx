@@ -58,7 +58,7 @@ export default function CompareProductCard({
           </div>
 
           {/* Add to Cart Button */}
-          <AddSingleItemToCart product={product} size="sm" />
+          <AddSingleItemToCart product={product} size="md" />
         </div>
       </div>
     </div>
