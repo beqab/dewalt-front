@@ -25,6 +25,7 @@ export default function ProductInfo({ product }: { product: Product }) {
     finaCode,
     quantity,
     slug,
+    originalPrice,
   } = product;
 
   return (
@@ -46,6 +47,11 @@ export default function ProductInfo({ product }: { product: Product }) {
       {/* Price and Checkbox */}
       <div className="flex items-center gap-4 md:mb-6">
         <span className="text-dark-secondary-100 text-2xl">{price} GEL</span>
+        {originalPrice && originalPrice > price ? (
+          <span className="text-text-secondary text-xs line-through">
+            {product.originalPrice} GEL
+          </span>
+        ) : null}
         <CompareButton productId={_id} />
       </div>
 

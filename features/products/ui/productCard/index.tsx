@@ -94,7 +94,7 @@ export default function ProductCard({
               })}
             >
               <span className="text-dark-secondary-100">{price} GEL</span>
-              {originalPrice ? (
+              {originalPrice && originalPrice > price ? (
                 <span className="text-text-secondary text-xs line-through">
                   {product.originalPrice} GEL
                 </span>
