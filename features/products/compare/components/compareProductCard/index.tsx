@@ -30,7 +30,7 @@ export default function CompareProductCard({
               src={image}
               alt={name}
               fill
-              className="object-cover p-0 transition-transform hover:scale-105 md:p-2"
+              className="object-contain p-0 transition-transform hover:scale-105 md:p-2"
               sizes="(max-width: 768px) 280px, 240px"
             />
           </div>

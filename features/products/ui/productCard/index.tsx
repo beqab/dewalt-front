@@ -56,7 +56,7 @@ export default function ProductCard({
               src={image}
               alt={name}
               fill
-              className="object-cover transition-transform hover:scale-105"
+              className="object-contain transition-transform hover:scale-105"
               sizes="(max-width: 768px) 66.666vw, 25vw"
             />
           </div>
