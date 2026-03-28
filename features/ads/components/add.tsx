@@ -22,9 +22,10 @@ function AdImage({ ad, sizes, priority = false, className }: AdImageProps) {
       alt="Advertisement"
       width={0}
       height={0}
-      className={cn("h-auto w-full object-contain", className)}
+      className={cn("md-h-[350px] h-auto w-full object-contain", className)}
       sizes={sizes}
       priority={priority}
+      quality={100}
       style={{ width: "100%", height: "auto" }}
     />
   );
@@ -80,7 +81,7 @@ export default function Add({
               className="rounded-lg"
             />
           ) : (
-            <div className="flex min-h-[152px] w-full items-center justify-center md:min-h-[252px]">
+            <div className="flex min-h-[152px] w-full items-center justify-center md:min-h-[352px]">
               <AdFallback />
             </div>
           )}
