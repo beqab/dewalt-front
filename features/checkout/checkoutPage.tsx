@@ -25,7 +25,10 @@ type CheckoutStockItem = {
   product: { finaId?: number; quantity?: number };
 };
 
-type CheckoutPaymentMethod = "card" | "tbcInstalment";
+type CheckoutPaymentMethod = "card" | "tbcInstalment" | "distribution";
+
+// Flitt / TBC განაწილების მინიმალური თანხა (GEL)
+const FLITT_INSTALMENT_MIN_AMOUNT = 50;
 
 const OFFICE_PICKUP_ADDRESS = "ოფისიდან გატანა";
 
@@ -288,6 +291,14 @@ export default function CheckoutPage({
                   userId: session?.user?._id,
                 };
 
+                if (paymentMethodRef.current === "distribution") {
+                  await startPayment(orderPayload, {
+                    redirect: true,
+                    paymentType: "distribution",
+                  });
+                  return;
+                }
+
                 if (paymentMethodRef.current === "tbcInstalment") {
                   await startTbcInstalment(orderPayload, { redirect: true });
                   return;
@@ -502,6 +513,55 @@ export default function CheckoutPage({
                             </>
                           )}
                         </Button>
+                        <Button
+                          type="submit"
+                          variant="default"
+                          size="md"
+                          className="mt-3 flex w-full items-center justify-center gap-2 border-0 bg-[#03aeec] text-white hover:bg-[#03aeec] disabled:opacity-60"
+                          disabled={
+                            isSubmitting ||
+                            totalPrice < FLITT_INSTALMENT_MIN_AMOUNT
+                          }
+                          onClick={() => {
+                            paymentMethodRef.current = "distribution";
+                            if (isValid) return;
+
+                            setTouched({
+                              name: true,
+                              surname: true,
+                              email: true,
+                              personalId: true,
+                              phone: true,
+                              address: true,
+                              deliveryType: true,
+                            });
+                            toast.error(
+                              t("checkout.validation.requiredFieldsToast")
+                            );
+                          }}
+                        >
+                          {isSubmitting ? (
+                            t("checkout.submitting")
+                          ) : (
+                            <>
+                              <Image
+                                src="/imgs/tbcll.jpg"
+                                alt="TBC განაწილება"
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 rounded-sm object-cover"
+                              />
+                              <span>{t("checkout.payWithDistribution")}</span>
+                            </>
+                          )}
+                        </Button>
+                        {totalPrice < FLITT_INSTALMENT_MIN_AMOUNT && (
+                          <p className="text-text-secondary mt-2 text-xs">
+                            {t("checkout.distributionMinAmount", {
+                              amount: FLITT_INSTALMENT_MIN_AMOUNT,
+                            })}
+                          </p>
+                        )}
                       </>
                     }
                   />

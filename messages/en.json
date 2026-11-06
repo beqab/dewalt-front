@@ -80,6 +80,8 @@
     "total": "Total",
     "placeOrder": "Place order",
     "payWithInstalment": "Pay with TBC instalment",
+    "payWithDistribution": "Pay in instalments with TBC",
+    "distributionMinAmount": "Instalments are available from {amount} GEL",
     "instalmentPayment": "Installment payment",
     "submitting": "Submitting order...",
     "emptySelection": "No selected items to checkout.",

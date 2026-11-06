@@ -41,6 +41,8 @@ export interface OrderResponse {
   total: number;
 }
 
+export type PaymentOption = "card" | "distribution";
+
 export interface CreatePaymentResponse {
   response?: {
     url?: string;

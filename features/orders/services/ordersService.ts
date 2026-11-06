@@ -5,6 +5,7 @@ import type {
   CreatePaymentResponse,
   CreateTbcInstalmentResponse,
   OrderResponse,
+  PaymentOption,
   OrderStatusResponse,
   PaginatedOrdersResponse,
 } from "../types";
@@ -17,10 +18,18 @@ const tbcInstalmentClient = createApiClient<CreateTbcInstalmentResponse>(
 export const ordersService = {
   create: (payload: CreateOrderPayload) =>
     ordersClient.post<CreateOrderPayload, OrderResponse>(payload),
-  createPayment: (orderId: string) =>
-    ordersClient.post<{ orderId: string }, CreatePaymentResponse>(
-      { orderId },
-      undefined,
+  createPayment: (
+    orderId: string,
+    paymentType: PaymentOption = "card",
+    locale?: "ka" | "en"
+  ) =>
+    ordersClient.post<
+      { orderId: string; paymentType: PaymentOption },
+      CreatePaymentResponse
+    >(
+      { orderId, paymentType },
+      // Flitt-ის გადახდის გვერდი საიტის არჩეულ ენაზე გაიხსნება
+      locale ? { params: { locale } } : undefined,
       { url: `${API_ROUTES.ORDERS}/payment` }
     ),
   createTbcInstalment: (orderId: string) =>

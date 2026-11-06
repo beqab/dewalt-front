@@ -2,10 +2,11 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useLocale } from "next-intl";
 import QUERY_KEYS from "@/lib/queryKeys";
 import { getErrorMessage } from "@/lib/getErrorMessage";
 import { ordersService } from "../services/ordersService";
-import type { CreateOrderPayload } from "../types";
+import type { CreateOrderPayload, PaymentOption } from "../types";
 
 export function useCreateOrderPayment({
   fallbackErrorMessage = "Failed to start payment",
@@ -13,12 +14,24 @@ export function useCreateOrderPayment({
   fallbackErrorMessage?: string;
 } = {}) {
   const queryClient = useQueryClient();
+  const siteLocale = useLocale();
+  const paymentLocale: "ka" | "en" = siteLocale === "en" ? "en" : "ka";
   const [error, setError] = useState<string | null>(null);
 
   const mutation = useMutation({
-    mutationFn: async (payload: CreateOrderPayload) => {
+    mutationFn: async ({
+      payload,
+      paymentType,
+    }: {
+      payload: CreateOrderPayload;
+      paymentType: PaymentOption;
+    }) => {
       const createdOrder = await ordersService.create(payload);
-      const payment = await ordersService.createPayment(createdOrder._id);
+      const payment = await ordersService.createPayment(
+        createdOrder._id,
+        paymentType,
+        paymentLocale
+      );
       const paymentUrl = payment.response?.checkout_url;
 
       if (!paymentUrl) {
@@ -62,10 +75,13 @@ export function useCreateOrderPayment({
   return {
     startPayment: async (
       payload: CreateOrderPayload,
-      opts: { redirect?: boolean } = {}
+      opts: { redirect?: boolean; paymentType?: PaymentOption } = {}
     ) => {
       setError(null);
-      const { paymentUrl } = await mutation.mutateAsync(payload);
+      const { paymentUrl } = await mutation.mutateAsync({
+        payload,
+        paymentType: opts.paymentType ?? "card",
+      });
 
       const redirect = opts.redirect ?? true;
       if (redirect && typeof window !== "undefined") {
