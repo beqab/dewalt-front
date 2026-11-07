@@ -47,6 +47,7 @@ export default function CartItem({ item }: CartItemProps) {
           <Checkbox
             checked={selected}
             onChange={() => toggleSelect(product._id)}
+            aria-label={product.name}
           />
         </div>
 
@@ -121,6 +122,7 @@ export default function CartItem({ item }: CartItemProps) {
               min="1"
               value={quantity}
               onChange={handleQuantityInput}
+              aria-label={t("product.quantity")}
               className="w-12 border-0 text-center text-sm focus:ring-0 focus:outline-none md:w-16"
             />
             <button

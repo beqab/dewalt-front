@@ -84,6 +84,7 @@ export const SearchWithoutWrapper = () => {
             onChange={handleInputChange}
             onFocus={handleInputFocus}
             onKeyDown={handleInputKeyDown}
+            aria-label={t("search")}
             className="font-inter dark-secondary-70 placeholder:text-primary w-full bg-transparent text-sm outline-none"
           />
         </div>

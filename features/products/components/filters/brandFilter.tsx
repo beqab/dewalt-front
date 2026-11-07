@@ -104,6 +104,7 @@ export default function BrandFilter({
               <Checkbox
                 checked={isSelected}
                 onChange={() => handleBrandToggle(brand.slug)}
+                aria-label={brandName}
               />
               <span className="text-text-secondary text-sm">{brandName}</span>
             </label>

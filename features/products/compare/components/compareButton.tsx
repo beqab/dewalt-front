@@ -15,6 +15,7 @@ export function CompareButton({ productId }: { productId: string }) {
         type="checkbox"
         checked={isChecked}
         onChange={() => setProductIds(productId)}
+        aria-label={t("breadcrumb.comparison")}
         className="text-primary focus:ring-primary h-4 w-4 rounded border-gray-300"
       />
       <span className="border-gray-700">{t("breadcrumb.comparison")}</span>
