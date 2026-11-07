@@ -68,9 +68,12 @@ export async function getNews(
 /**
  * Fetches a single news article by ID
  */
-export async function getNewsById(id: string): Promise<NewsApi | null> {
+export async function getNewsById(
+  id: string,
+  localeOverride?: "ka" | "en"
+): Promise<NewsApi | null> {
   try {
-    const locale = (await getLocale()) as "ka" | "en";
+    const locale = localeOverride ?? ((await getLocale()) as "ka" | "en");
     return await getNewsByIdCached(id, locale);
   } catch (error) {
     // In production, consider logging to a monitoring service

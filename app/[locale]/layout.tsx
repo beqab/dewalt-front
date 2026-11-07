@@ -22,7 +22,16 @@ import LanguageInterceptor from "@/components/providers/LanguageInterceptor";
 import { getMenuBrands } from "@/features/categories/server/getMenuBrands";
 import { getBrands } from "@/features/categories/server/getBrands";
 import { AppIntlProvider } from "./providers";
-import { getMetadataBase } from "@/lib/seo";
+import {
+  buildAbsoluteUrl,
+  buildCanonicalUrl,
+  getAlternateOgLocales,
+  getMetadataBase,
+  getOgLocale,
+  getSafeLocale,
+} from "@/lib/seo";
+import JsonLd from "@/components/seo/JsonLd";
+import { getSettings } from "@/features/settings/server/getSettings";
 
 type Props = {
   children: React.ReactNode;
@@ -95,6 +104,10 @@ export async function generateMetadata({
       title: siteTitle,
       description: siteDescription,
       type: "website",
+      siteName: siteTitle,
+      locale: getOgLocale(safeLocale),
+      alternateLocale: getAlternateOgLocales(safeLocale),
+      images: [{ url: "/logo.png", alt: siteTitle }],
     },
     twitter: {
       card: "summary_large_image",
@@ -111,9 +124,10 @@ export default async function RootLayout({ children, params }: Props) {
     notFound();
   }
 
-  const [menuBrandsData, brandsData] = await Promise.all([
+  const [menuBrandsData, brandsData, settings] = await Promise.all([
     getMenuBrands(locale),
     getBrands(locale),
+    getSettings(),
   ]);
 
   const messages = (await import(`@/messages/${locale}.json`))
@@ -124,6 +138,7 @@ export default async function RootLayout({ children, params }: Props) {
       <body
         className={`${inter.variable} ${roboto.variable} ${bpgWeb002Caps.variable} antialiased`}
       >
+        <JsonLd data={buildSiteJsonLd(locale, settings)} />
         <AppIntlProvider locale={locale} messages={messages}>
           <LanguageInterceptor />
           <QueryProvider>
@@ -152,4 +167,47 @@ export default async function RootLayout({ children, params }: Props) {
       </body>
     </html>
   );
+}
+
+function buildSiteJsonLd(
+  routeLocale: string,
+  settings: Awaited<ReturnType<typeof getSettings>>
+) {
+  const locale = getSafeLocale(routeLocale);
+  const siteName = locale === "ka" ? "DEWALT საქართველო" : "DEWALT Georgia";
+  const homeUrl = buildCanonicalUrl(locale);
+  const sameAs = [settings?.contactFacebook, settings?.contactInstagram]
+    .map((url) => url?.trim())
+    .filter((url): url is string => Boolean(url));
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Store",
+      name: siteName,
+      url: homeUrl,
+      logo: buildAbsoluteUrl("/logo.png"),
+      image: buildAbsoluteUrl("/logo.png"),
+      telephone: settings?.contactPhone?.trim() || "+995 577 95 55 82",
+      email: settings?.contactEmail?.trim() || undefined,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress:
+          settings?.contactAddress?.[locale]?.trim() ||
+          (locale === "ka" ? "ქსნის ქუჩა 36" : "36 Ksani St"),
+        addressLocality: locale === "ka" ? "თბილისი" : "Tbilisi",
+        postalCode: "0141",
+        addressCountry: "GE",
+      },
+      currenciesAccepted: "GEL",
+      sameAs: sameAs.length ? sameAs : undefined,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteName,
+      url: homeUrl,
+      inLanguage: locale,
+    },
+  ];
 }

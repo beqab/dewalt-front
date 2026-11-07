@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 
 export type Locale = (typeof routing.locales)[number];
@@ -114,3 +115,109 @@ export function buildLanguageAlternatesByLocale(
 
   return languages;
 }
+
+const HTML_ENTITIES: Record<string, string> = {
+  "&nbsp;": " ",
+  "&amp;": "&",
+  "&quot;": '"',
+  "&#39;": "'",
+  "&apos;": "'",
+  "&lt;": "<",
+  "&gt;": ">",
+};
+
+/** HTML-ს ასუფთავებს და meta description-ისთვის ჭრის სიტყვის საზღვარზე. */
+export function toMetaDescription(html: string | undefined | null, max = 160) {
+  if (!html) return "";
+
+  const text = html
+    .replace(/<(script|style)[^>]*>[\s\S]*?<\/\1>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&[a-z#0-9]+;/gi, (entity) => HTML_ENTITIES[entity] ?? " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (text.length <= max) return text;
+
+  const cut = text.slice(0, max - 1);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > max * 0.6 ? cut.slice(0, lastSpace) : cut).trim()}…`;
+}
+
+export function getOgLocale(locale: Locale) {
+  return locale === "ka" ? "ka_GE" : "en_US";
+}
+
+export function getAlternateOgLocales(locale: Locale) {
+  return routing.locales.filter((l) => l !== locale).map(getOgLocale);
+}
+
+type StaticPageMetaKey =
+  | "about"
+  | "contact"
+  | "serviceCenter"
+  | "terms"
+  | "privacy";
+
+type PageMetaMessages = {
+  meta?: {
+    pages?: Partial<
+      Record<StaticPageMetaKey, { title?: string; description?: string }>
+    >;
+  };
+};
+
+/** title/description/canonical/hreflang საჯარო სტატიკური გვერდისთვის. */
+export async function buildStaticPageMetadata(
+  routeLocale: string,
+  key: StaticPageMetaKey,
+  path: string
+): Promise<Metadata> {
+  const locale = getSafeLocale(routeLocale);
+  const messages = (await import(`@/messages/${locale}.json`))
+    .default as PageMetaMessages;
+  const page = messages.meta?.pages?.[key];
+
+  return buildPageMetadata({
+    locale,
+    path,
+    title: page?.title,
+    description: page?.description,
+  });
+}
+
+export function buildPageMetadata({
+  locale,
+  path,
+  title,
+  description,
+}: {
+  locale: Locale;
+  path: string;
+  title?: string;
+  description?: string;
+}): Metadata {
+  const canonicalUrl = buildCanonicalUrl(locale, path);
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+      languages: buildLanguageAlternates(path),
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonicalUrl,
+      type: "website",
+      siteName: locale === "ka" ? "DEWALT საქართველო" : "DEWALT Georgia",
+      locale: getOgLocale(locale),
+    },
+  };
+}
+
+/** საძიებოში არ უნდა მოხვდეს (კალათა, checkout, ავტორიზაცია...). */
+export const NO_INDEX_METADATA: Metadata = {
+  robots: { index: false, follow: true },
+};

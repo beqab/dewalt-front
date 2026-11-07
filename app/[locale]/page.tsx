@@ -1,4 +1,4 @@
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import BannerCarousel from "@/features/bannerCarousel/components";
 import ProductSlider from "@/features/products/components/productSlider";
 import MainAdd from "@/features/ads/components/mainAdd";
@@ -12,6 +12,7 @@ import ProductSliderLoader from "@/features/products/components/productSlider/pr
 import {
   buildCanonicalUrl,
   buildLanguageAlternates,
+  getOgLocale,
   getSafeLocale,
 } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -33,6 +34,8 @@ export async function generateMetadata({
     openGraph: {
       url: canonicalUrl,
       type: "website",
+      siteName: locale === "ka" ? "DEWALT საქართველო" : "DEWALT Georgia",
+      locale: getOgLocale(locale),
     },
   };
 }
@@ -44,9 +47,13 @@ export default async function Home({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations();
 
   return (
     <div className="">
+      <h1 className="sr-only">
+        {t("meta.siteTitle")} — {t("meta.siteDescription")}
+      </h1>
       <BannerCarousel />
 
       <Suspense fallback={<ProductSliderLoader />}>

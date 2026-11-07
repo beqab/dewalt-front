@@ -20,7 +20,7 @@ export default async function Header({
         <Link href="/" prefetch={true}>
           <Image
             src={logo}
-            alt="Logo"
+            alt="DEWALT Georgia"
             quality={100}
             className="h-6 w-auto md:h-8"
           />

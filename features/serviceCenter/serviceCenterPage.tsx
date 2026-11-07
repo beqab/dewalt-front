@@ -52,7 +52,7 @@ export default function ServiceCenterPage({
       <div className="mt-8 mb-5 flex justify-center md:mt-14 md:justify-center">
         <Image
           src={imgSrc}
-          alt=""
+          alt={heroTitle?.trim() || "DEWALT Service Center"}
           width={800}
           height={480}
           className="max-h-[480px] w-auto object-contain"

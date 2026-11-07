@@ -3,6 +3,7 @@ import { NewsErrorBoundary } from "@/features/news/components/errorBoundary";
 import {
   buildCanonicalUrl,
   buildLanguageAlternates,
+  getOgLocale,
   getSafeLocale,
 } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -34,6 +35,8 @@ export async function generateMetadata({
           : "DEWALT news, articles, and updates in Georgia.",
       url: canonicalUrl,
       type: "website",
+      siteName: locale === "ka" ? "DEWALT საქართველო" : "DEWALT Georgia",
+      locale: getOgLocale(locale),
     },
   };
 }

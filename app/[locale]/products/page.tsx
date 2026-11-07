@@ -2,6 +2,7 @@ import ProductsPage from "@/features/products/productsPage";
 import {
   buildCanonicalUrl,
   buildLanguageAlternates,
+  getOgLocale,
   getSafeLocale,
 } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -33,6 +34,8 @@ export async function generateMetadata({
           : "DEWALT tools and accessories in Georgia.",
       url: canonicalUrl,
       type: "website",
+      siteName: locale === "ka" ? "DEWALT საქართველო" : "DEWALT Georgia",
+      locale: getOgLocale(locale),
     },
   };
 }

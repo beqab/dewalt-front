@@ -2,7 +2,33 @@
   "title": "Dewalt",
   "meta": {
     "siteTitle": "DEWALT Georgia",
-    "siteDescription": "Official DEWALT products in Georgia — tools, accessories, news, and service support."
+    "siteDescription": "Official DEWALT products in Georgia — tools, accessories, news, and service support.",
+    "pages": {
+      "about": {
+        "title": "About Us",
+        "description": "DEWALT Georgia — official distributor of DEWALT, Stanley and Black+Decker tools in Georgia. Learn about our company and services."
+      },
+      "contact": {
+        "title": "Contact",
+        "description": "Contact DEWALT Georgia: phone, email and store address at 36 Ksani St, Tbilisi. We're happy to help you choose the right tool."
+      },
+      "serviceCenter": {
+        "title": "Service Center",
+        "description": "Official DEWALT service center in Tbilisi — warranty and post-warranty repair of DEWALT, Stanley and Black+Decker power tools."
+      },
+      "terms": {
+        "title": "Terms and Conditions",
+        "description": "Terms and conditions for purchasing, delivery, returns and warranty at the DEWALT Georgia online store."
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "How DEWALT Georgia collects, uses and protects your personal data."
+      },
+      "brand": {
+        "title": "{brand} Tools",
+        "description": "Buy original {brand} power tools, hand tools and accessories in Georgia with official warranty and delivery."
+      }
+    }
   },
   "search": "Search",
   "description": "Description",

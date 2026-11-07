@@ -1,5 +1,8 @@
+import { NO_INDEX_METADATA } from "@/lib/seo";
 import ProfileSidebar from "@/components/profileSidebar";
 import MobileProfileMenu from "@/components/profileSidebar/mobileProfileMenu";
+
+export const metadata = NO_INDEX_METADATA;
 
 export default async function ProfileLayout({
   children,

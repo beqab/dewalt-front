@@ -1,6 +1,17 @@
+import type { Metadata } from "next";
+import { buildStaticPageMetadata } from "@/lib/seo";
 import ContactPage from "@/features/contact/contactPage";
 import { getSettings } from "@/features/settings/server/getSettings";
 import { getLocale } from "next-intl/server";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return buildStaticPageMetadata(locale, "contact", "/contact");
+}
 
 export default async function Page() {
   const locale = (await getLocale()) as "ka" | "en";

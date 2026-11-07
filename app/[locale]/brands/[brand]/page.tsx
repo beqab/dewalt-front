@@ -1,5 +1,10 @@
 import BrandPage from "@/features/brands/brandPage";
-import { BRAND_KEY_BY_SLUG } from "@/features/brands/brandInfo";
+import {
+  BRAND_KEY_BY_SLUG,
+  BRAND_STATIC_INFO,
+} from "@/features/brands/brandInfo";
+import { buildPageMetadata, getSafeLocale } from "@/lib/seo";
+import type { Metadata } from "next";
 import { getBrandContent } from "@/features/brands/server/getBrandContent";
 import { notFound } from "next/navigation";
 
@@ -8,6 +13,27 @@ interface PageProps {
     brand: string;
     locale: string;
   }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { brand, locale: routeLocale } = await params;
+  const locale = getSafeLocale(routeLocale);
+  const brandKey = BRAND_KEY_BY_SLUG[brand.toLowerCase()];
+  if (!brandKey) return {};
+
+  const { name, slug } = BRAND_STATIC_INFO[brandKey];
+  const messages = (await import(`@/messages/${locale}.json`)).default as {
+    meta?: { pages?: { brand?: { title?: string; description?: string } } };
+  };
+  const brandMeta = messages.meta?.pages?.brand;
+  const fill = (text?: string) => text?.replaceAll("{brand}", name);
+
+  return buildPageMetadata({
+    locale,
+    path: `/brands/${slug}`,
+    title: fill(brandMeta?.title) ?? name,
+    description: fill(brandMeta?.description),
+  });
 }
 
 export default async function Page({ params }: PageProps) {

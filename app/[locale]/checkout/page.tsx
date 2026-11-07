@@ -1,5 +1,8 @@
+import { NO_INDEX_METADATA } from "@/lib/seo";
 import CheckoutPage from "@/features/checkout/checkoutPage";
 import { getSettings } from "@/features/settings/server/getSettings";
+
+export const metadata = NO_INDEX_METADATA;
 
 export default async function Page() {
   const settings = await getSettings();

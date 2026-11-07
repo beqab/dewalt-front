@@ -63,7 +63,7 @@ export default async function Footer({ brands }: { brands: BrandApi[] }) {
           <div className="grid grid-cols-2 gap-8 lg:grid-cols-[1fr_120px_120px_310px] lg:gap-16">
             {/* Logo */}
             <div className="col-span-2 lg:col-span-1">
-              <Image src={footerImg} alt="Logo" />
+              <Image src={footerImg} alt="DEWALT Georgia" />
             </div>
 
             {/* Navigation Links */}
@@ -215,8 +215,8 @@ export default async function Footer({ brands }: { brands: BrandApi[] }) {
             <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-center">
               {/* Copyright */}
               <div className="flex flex-wrap items-center justify-center gap-3 lg:justify-end">
-                <Image height={30} src={MastercardLogo} alt="Logo" />
-                <Image height={30} src={VisaLogo} alt="Logo" />
+                <Image height={30} src={MastercardLogo} alt="Mastercard" />
+                <Image height={30} src={VisaLogo} alt="Visa" />
               </div>
 
               <div className="flex flex-col gap-2 lg:flex-row lg:items-center lg:justify-center">
@@ -243,6 +243,31 @@ export default async function Footer({ brands }: { brands: BrandApi[] }) {
                   >
                     {t("footer.privacyPolicy")}
                   </Link>
+                </div>
+
+                {/* Separator */}
+                <div className="bg-dark-secondary-100 mx-6 hidden h-6 w-px lg:block" />
+
+                {/* Credits */}
+                <div className="text-dark-secondary-100 text-center text-xs lg:text-left">
+                  By{" "}
+                  <a
+                    href="https://www.linkedin.com/in/beka-badagadze-83419b171/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold transition-colors hover:underline"
+                  >
+                    Beka Badagadze
+                  </a>{" "}
+                  &amp;{" "}
+                  <a
+                    href="https://www.linkedin.com/in/irakli-iremadze-363763222/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold transition-colors hover:underline"
+                  >
+                    Irakli Iremadze
+                  </a>
                 </div>
               </div>
 
